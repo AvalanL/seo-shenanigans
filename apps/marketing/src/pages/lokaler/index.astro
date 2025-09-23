@@ -1,0 +1,184 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import DirectoryCard from "~/components/directory/DirectoryCard.astro";
+import VenueMap from "~/components/directory/VenueMap.astro";
+import { getCollection } from "astro:content";
+
+const venues = await getCollection("venues");
+const cities = Array.from(new Set(venues.map((entry) => entry.data.city))).sort();
+const styles = Array.from(new Set(venues.map((entry) => entry.data.style))).sort();
+const maxPrice = Math.max(...venues.map((entry) => Number(entry.data.startPrice) || 0));
+const maxCapacity = Math.max(...venues.map((entry) => Number(entry.data.capacity) || 0));
+---
+<BaseLayout
+  title="Bröllopslokaler i Sverige"
+  description="Utforska bröllopslokaler efter stil, kapacitet och budget."
+>
+  <section class="intro">
+    <h1>Bröllopslokaler – hitta rätt plats för er dag</h1>
+    <p>
+      Använd sök och filter för att hitta lokaler som matchar ert datum, gästantal och budget. Klicka in på varje lokal för detaljerad information och kontaktuppgifter.
+    </p>
+  </section>
+
+  <section class="filters" data-filter-root>
+    <label>
+      Sök
+      <input type="search" placeholder="Sök på namn eller beskrivning" data-filter="query" />
+    </label>
+    <label>
+      Stad
+      <select data-filter="city">
+        <option value="">Alla städer</option>
+        {cities.map((city) => (
+          <option value={city}>{city}</option>
+        ))}
+      </select>
+    </label>
+    <label>
+      Stil
+      <select data-filter="style">
+        <option value="">Alla stilar</option>
+        {styles.map((style) => (
+          <option value={style}>{style}</option>
+        ))}
+      </select>
+    </label>
+    <label>
+      Max startpris (kr)
+      <input type="range" min="0" max={maxPrice} step="1000" data-filter="price" value={maxPrice} />
+      <span class="range-value" data-filter-price-value>{maxPrice.toLocaleString("sv-SE")} kr</span>
+    </label>
+    <label>
+      Min kapacitet
+      <input type="range" min="0" max={maxCapacity} step="10" data-filter="capacity" value="0" />
+      <span class="range-value" data-filter-capacity-value>Alla</span>
+    </label>
+  </section>
+
+  <VenueMap venues={venues} />
+
+  <section class="grid" data-directory-grid>
+    {venues.map((venue) => (
+      <DirectoryCard
+        title={venue.data.title}
+        summary={venue.data.summary}
+        city={venue.data.city}
+        region={venue.data.region}
+        startPrice={Number(venue.data.startPrice) || 0}
+        capacity={Number(venue.data.capacity) || 0}
+        image={venue.data.image}
+        style={venue.data.style}
+        href={`/lokaler/${venue.slug}`}
+      />
+    ))}
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const root = document.querySelector('[data-filter-root]');
+  if (root) {
+    const queryInput = root.querySelector('[data-filter="query"]');
+    const citySelect = root.querySelector('[data-filter="city"]');
+    const styleSelect = root.querySelector('[data-filter="style"]');
+    const priceRange = root.querySelector('[data-filter="price"]');
+    const capacityRange = root.querySelector('[data-filter="capacity"]');
+    const priceValueEl = root.querySelector('[data-filter-price-value]');
+    const capacityValueEl = root.querySelector('[data-filter-capacity-value]');
+    const cards = Array.from(document.querySelectorAll('[data-directory-grid] .card'));
+
+    const formatNumber = (value) => Number(value || 0).toLocaleString('sv-SE');
+
+    const applyFilters = () => {
+      const query = queryInput?.value.toLowerCase().trim() ?? '';
+      const city = citySelect?.value ?? '';
+      const style = styleSelect?.value ?? '';
+      const maxPrice = Number(priceRange?.value ?? 0) || 0;
+      const minCapacity = Number(capacityRange?.value ?? 0) || 0;
+
+      cards.forEach((card) => {
+        const title = card.dataset.title ?? card.querySelector('h3')?.textContent?.toLowerCase() ?? '';
+        const summary = card.querySelector('.summary')?.textContent?.toLowerCase() ?? '';
+        const cardCity = card.dataset.city ?? '';
+        const cardRegion = card.dataset.region ?? '';
+        const cardStyle = card.dataset.style ?? '';
+        const startPrice = Number(card.dataset.startPrice ?? 0);
+        const capacity = Number(card.dataset.capacity ?? 0);
+
+        const matchesQuery = !query || title.includes(query) || summary.includes(query);
+        const matchesCity = !city || cardCity === city || cardRegion === city;
+        const matchesStyle = !style || cardStyle === style;
+        const matchesPrice = !maxPrice || startPrice <= maxPrice;
+        const matchesCapacity = !minCapacity || capacity >= minCapacity;
+
+        card.classList.toggle('hidden', !(matchesQuery && matchesCity && matchesStyle && matchesPrice && matchesCapacity));
+      });
+    };
+
+    const updateRangeLabels = () => {
+      if (priceValueEl && priceRange) {
+        priceValueEl.textContent = `${formatNumber(priceRange.value)} kr`;
+      }
+      if (capacityValueEl && capacityRange) {
+        const value = Number(capacityRange.value || 0);
+        capacityValueEl.textContent = value > 0 ? `${value}+ gäster` : 'Alla';
+      }
+    };
+
+    [queryInput, citySelect, styleSelect, priceRange, capacityRange]
+      .filter(Boolean)
+      .forEach((input) => input.addEventListener('input', () => {
+        updateRangeLabels();
+        applyFilters();
+      }));
+
+    updateRangeLabels();
+  }
+</script>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .filters label {
+    display: grid;
+    gap: 0.4rem;
+    font-weight: 600;
+  }
+
+  .filters input,
+  .filters select {
+    padding: 0.75rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+  }
+
+  .filters input[type="range"] {
+    padding: 0;
+  }
+
+  .range-value {
+    font-size: 0.85rem;
+    color: rgba(31, 28, 20, 0.65);
+  }
+
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .card.hidden {
+    display: none;
+  }
+</style>

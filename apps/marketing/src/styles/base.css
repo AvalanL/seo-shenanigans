@@ -1,0 +1,29 @@
+:root {
+  color-scheme: light;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    sans-serif;
+  line-height: 1.6;
+  background-color: #fffdf8;
+  color: #1f1c14;
+}
+
+a {
+  color: #b26d4a;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+main a {
+  text-decoration-thickness: 2px;
+}

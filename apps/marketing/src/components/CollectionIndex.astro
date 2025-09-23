@@ -1,0 +1,80 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export interface Props {
+  collection: "guides" | "checklistor" | "budget" | "inspiration" | "leverantorer" | "traditioner";
+  title: string;
+  description: string;
+  intro?: string;
+}
+
+const { collection, title, description, intro } = Astro.props satisfies Props;
+const entries = await getCollection(collection, ({ data }) => data.status !== "draft");
+---
+<BaseLayout title={title} description={description}>
+  <section class="intro">
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    {intro && <p>{intro}</p>}
+  </section>
+
+  <section class="list">
+    {entries.length === 0 ? (
+      <p>Innehåll publiceras snart.</p>
+    ) : (
+      <ul>
+        {entries.map((entry) => (
+          <li>
+            <a href={`/${collection}/${entry.slug}`}>
+              <h2>{entry.data.title}</h2>
+              <p>{entry.data.summary}</p>
+              <span class="meta">Primärintention: {entry.data.primaryKeyword}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: 2rem;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    color: rgba(31, 28, 20, 0.75);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  li a {
+    display: block;
+    padding: 1.75rem;
+    border-radius: 1.25rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  li a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .meta {
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 0.75rem;
+    color: rgba(31, 28, 20, 0.65);
+  }
+</style>

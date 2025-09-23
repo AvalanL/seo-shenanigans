@@ -1,0 +1,6 @@
+id,name,city,region,style,capacity,start_price,website,email,phone,image,latitude,longitude,notes
+nacka-strand-moten,Nacka Strand Möten,Nacka,Stockholm,Skärgårdsutsikt,150,45000,https://nackastrand.se,info@nackastrand.se,+4681234567,/assets/directories/venues/placeholder-venue.svg,59.3197,18.1708,"Helhetslösning, lättillgänglig med båt"
+winterviken,Winterviken,Stockholm,Stockholm,Industrilokal,200,58000,https://www.winterviken.se,brollop@winterviken.se,+46850867000,/assets/directories/venues/placeholder-venue.svg,59.3164,18.0049,"Tillgång till Nobiskök, flera salar"
+hesselby-slott,Hesselby Slott,Vällingby,Stockholm,Slott/herrgård,180,98000,https://www.hesselbyslott.se,boka@hesselbyslott.se,+4684458300,/assets/directories/venues/placeholder-venue.svg,59.3656,17.8369,"Övernattning på plats, slottspark"
+fjarholmarna,Fjäderholmarna Magasinet,Lidingö,Stockholm,Skärgård,160,62000,https://fjarholmarna.se,info@fjarholmarna.se,+4681239876,/assets/directories/venues/placeholder-venue.svg,59.3305,18.1629,Kräver båtlogistik
+kollektivet-livet,Kollektivet Livet Hornstull,Stockholm,Stockholm,Urban studio,120,39000,https://kollektivetlivet.com,hej@kollektivetlivet.com,+46701234567,/assets/directories/venues/placeholder-venue.svg,59.3178,18.0315,"Passar kreativa par, flexibel planlösning"

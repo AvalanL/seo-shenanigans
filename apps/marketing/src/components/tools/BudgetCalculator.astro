@@ -1,0 +1,379 @@
+---
+import { randomUUID } from "node:crypto";
+
+const toolId = `budget-tool-${randomUUID()}`;
+
+const defaultCategories = [
+  { id: "lokal", label: "Lokal & hyra", defaultValue: 35000 },
+  { id: "mat", label: "Mat & dryck", defaultValue: 45000 },
+  { id: "klader", label: "Kläder & styling", defaultValue: 15000 },
+  { id: "foto", label: "Foto & film", defaultValue: 20000 },
+  { id: "musik", label: "Musik & underhållning", defaultValue: 12000 },
+  { id: "dekor", label: "Dekor & blommor", defaultValue: 10000 },
+  { id: "ovrigt", label: "Övrigt & buffert", defaultValue: 8000 }
+];
+---
+<section id={toolId} class="budget-tool" data-budget-tool data-defaults={JSON.stringify(defaultCategories)}>
+  <header>
+    <h2>Bygg din bröllopsbudget</h2>
+    <p>Justera posterna nedan för att se total budget, kostnad per gäst och spara din plan lokalt.</p>
+  </header>
+
+  <form class="budget-form" autocomplete="off">
+    <div class="inputs">
+      <label class="guest-input">
+        <span>Antal gäster</span>
+        <input type="number" inputmode="numeric" min="0" step="1" name="guests" value="80" />
+      </label>
+      {defaultCategories.map((category) => (
+        <label class="budget-input" for={`${toolId}-${category.id}`}>
+          <span>{category.label}</span>
+          <div class="input-group">
+            <span class="currency">kr</span>
+            <input
+              id={`${toolId}-${category.id}`}
+              type="number"
+              inputmode="decimal"
+              min="0"
+              step="100"
+              name={category.id}
+              value={category.defaultValue}
+            />
+          </div>
+        </label>
+      ))}
+    </div>
+
+    <div class="summary">
+      <div>
+        <p class="label">Total budget</p>
+        <p class="value" data-total>0 kr</p>
+      </div>
+      <div>
+        <p class="label">Kostnad per gäst</p>
+        <p class="value" data-per-guest>0 kr</p>
+      </div>
+      <div>
+        <p class="label">Buffert (10 %)</p>
+        <p class="value" data-buffer>0 kr</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" data-action="save">Spara i webbläsaren</button>
+      <button type="button" data-action="load">Återställ sparade värden</button>
+      <button type="button" data-action="reset" class="secondary">Återställ standard</button>
+      <button type="button" data-action="export" class="secondary">Exportera som CSV</button>
+      <button type="button" data-action="clear" class="ghost">Rensa sparat</button>
+    </div>
+  </form>
+</section>
+
+<script type="application/javascript" is:inline>
+  const rootId = "{toolId}";
+  const root = document.getElementById(rootId);
+  if (root) {
+    const defaults = JSON.parse(root.dataset.defaults || "[]");
+    const storageKey = "budget-calculator-v1";
+    const form = root.querySelector(".budget-form");
+    const inputs = Array.from(root.querySelectorAll("input[name]"));
+    const totalEl = root.querySelector("[data-total]");
+    const perGuestEl = root.querySelector("[data-per-guest]");
+    const bufferEl = root.querySelector("[data-buffer]");
+
+    const numberFormatter = new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 0 });
+
+    const getValues = () => {
+      const values = {};
+      inputs.forEach((input) => {
+        const { name } = input;
+        const value = parseFloat(input.value.replace(/,/g, ".")) || 0;
+        values[name] = value;
+      });
+      return values;
+    };
+
+    const applyValues = (data) => {
+      inputs.forEach((input) => {
+        if (input.name in data) {
+          input.value = data[input.name];
+        }
+      });
+      updateTotals();
+    };
+
+    const getDefaultValues = () => {
+      const map = { guests: 80 };
+      defaults.forEach((item) => {
+        map[item.id] = item.defaultValue;
+      });
+      return map;
+    };
+
+    const updateTotals = () => {
+      const values = getValues();
+      const guests = values.guests || 0;
+      const total = Object.entries(values)
+        .filter(([key]) => key !== "guests")
+        .reduce((sum, [, value]) => sum + value, 0);
+      const buffer = Math.round(total * 0.1);
+      const perGuest = guests > 0 ? Math.round(total / guests) : 0;
+
+      if (totalEl) totalEl.textContent = `${numberFormatter.format(total)} kr`;
+      if (perGuestEl) perGuestEl.textContent = perGuest ? `${numberFormatter.format(perGuest)} kr` : "–";
+      if (bufferEl) bufferEl.textContent = `${numberFormatter.format(buffer)} kr`;
+    };
+
+    const saveToStorage = () => {
+      const values = getValues();
+      localStorage.setItem(storageKey, JSON.stringify(values));
+      root.classList.add("saved");
+      setTimeout(() => root.classList.remove("saved"), 1200);
+    };
+
+    const loadFromStorage = () => {
+      const stored = localStorage.getItem(storageKey);
+      if (!stored) return;
+      try {
+        const parsed = JSON.parse(stored);
+        applyValues(parsed);
+      } catch (error) {
+        console.error("Kunde inte läsa sparade värden", error);
+      }
+    };
+
+    const clearStorage = () => {
+      localStorage.removeItem(storageKey);
+    };
+
+    const exportCsv = () => {
+      const values = getValues();
+      const guests = values.guests || 0;
+      const entries = Object.entries(values)
+        .filter(([key]) => key !== "guests");
+      const total = entries.reduce((sum, [, value]) => sum + value, 0);
+      const buffer = Math.round(total * 0.1);
+      const perGuest = guests > 0 ? Math.round(total / guests) : 0;
+
+      let csv = "Kategori;Belopp (kr)\n";
+      entries.forEach(([key, value]) => {
+        const label = defaults.find((item) => item.id === key)?.label ?? key;
+        csv += `${label};${value}\n`;
+      });
+      csv += `Antal gäster;${guests}\n`;
+      csv += `Total;${total}\n`;
+      csv += `Buffert 10%;${buffer}\n`;
+      csv += `Per gäst;${perGuest}\n`;
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "brollopsbudget-malmo.csv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    };
+
+    form?.addEventListener("input", (event) => {
+      const target = event.target;
+      if (target instanceof HTMLInputElement) {
+        if (target.value.length > 12) {
+          target.value = target.value.slice(0, 12);
+        }
+        updateTotals();
+      }
+    });
+
+    form?.addEventListener("click", (event) => {
+      const btn = event.target instanceof HTMLButtonElement ? event.target : null;
+      if (!btn) return;
+      const action = btn.dataset.action;
+      if (!action) return;
+      event.preventDefault();
+      switch (action) {
+        case "save":
+          saveToStorage();
+          break;
+        case "load":
+          loadFromStorage();
+          break;
+        case "reset":
+          applyValues(getDefaultValues());
+          break;
+        case "clear":
+          clearStorage();
+          break;
+        case "export":
+          exportCsv();
+          break;
+      }
+    });
+
+    const defaultsMap = getDefaultValues();
+    applyValues(defaultsMap);
+    loadFromStorage();
+  }
+</script>
+
+<style>
+  .budget-tool {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    background: #fff;
+    margin: 2rem 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  }
+
+  .budget-tool.saved {
+    outline: 3px solid rgba(178, 109, 74, 0.4);
+    transition: outline 0.3s ease;
+  }
+
+  .budget-tool header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+
+  .budget-tool header p {
+    margin-top: 0.5rem;
+    color: rgba(31, 28, 20, 0.75);
+  }
+
+  .budget-form {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .inputs {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .budget-input,
+  .guest-input {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .budget-input span,
+  .guest-input span {
+    font-weight: 600;
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    background: #fff;
+  }
+
+  .currency {
+    font-size: 0.95rem;
+    color: rgba(31, 28, 20, 0.6);
+    margin-right: 0.4rem;
+  }
+
+  input[type="number"] {
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.6rem;
+    border-radius: 0.75rem;
+    background: transparent;
+    outline: none;
+  }
+
+  input[type="number"]:focus {
+    border-bottom: 2px solid rgba(178, 109, 74, 0.6);
+  }
+
+  .summary {
+    display: grid;
+    gap: 1rem;
+    background: rgba(178, 109, 74, 0.08);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .summary .label {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: rgba(31, 28, 20, 0.6);
+  }
+
+  .summary .value {
+    margin: 0.4rem 0 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .actions button {
+    border: none;
+    border-radius: 999px;
+    padding: 0.65rem 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: #b26d4a;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .actions button.secondary {
+    background: rgba(178, 109, 74, 0.15);
+    color: #b26d4a;
+  }
+
+  .actions button.ghost {
+    background: transparent;
+    color: rgba(31, 28, 20, 0.7);
+    border: 1px solid rgba(31, 28, 20, 0.2);
+  }
+
+  .actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (min-width: 640px) {
+    .inputs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .guest-input {
+      grid-column: 1 / span 2;
+    }
+
+    .summary {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .budget-form {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+
+    .summary {
+      grid-template-columns: 1fr;
+    }
+
+    .actions {
+      grid-column: 1 / span 2;
+    }
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import DirectoryCard from "~/components/directory/DirectoryCard.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const suppliers = await getCollection("suppliers");
+  const categories = new Set(suppliers.map((entry) => entry.data.category ?? "ovrigt"));
+  return Array.from(categories).map((category) => ({ params: { category } }));
+}
+
+const category = Astro.params.category;
+const entries = await getCollection("suppliers", ({ data }) => (data.category ?? "ovrigt") === category);
+
+const supplierCards = entries.map((entry) => ({
+  entry,
+  slug: entry.slug.split("/").pop() ?? entry.slug
+}));
+
+if (!entries.length) {
+  throw new Error(`Hittade inga leverantörer för kategorin ${category}`);
+}
+
+const title = `Bröllops${category} i Sverige`;
+const description = `Filtrera och hitta ${category} för ert bröllop.`;
+---
+<BaseLayout title={title} description={description}>
+  <section class="intro">
+    <p class="breadcrumbs"><a href="/leverantorer">← Alla kategorier</a></p>
+    <h1>{title}</h1>
+    <p>
+      Filtrera på stad och startpris för att hitta rätt leverantör. Klicka för detaljer och kontakta dem direkt via webb eller e-post.
+    </p>
+    <div class="filters" data-filter-root>
+      <label>
+        Stad
+        <input type="text" placeholder="Ex. Stockholm" data-filter="city" />
+      </label>
+      <label>
+        Max startpris (kr)
+        <input type="number" min="0" step="500" placeholder="Ex. 10000" data-filter="price" />
+      </label>
+    </div>
+  </section>
+
+  <section class="grid" data-directory-grid>
+    {supplierCards.map(({ entry, slug }) => (
+      <DirectoryCard
+        title={entry.data.title}
+        summary={entry.data.summary}
+        city={entry.data.city}
+        startPrice={entry.data.startPrice}
+        image={entry.data.image}
+        href={`/leverantorer/${category}/${slug}`}
+        categoryLabel={entry.data.serviceArea}
+      />
+    ))}
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const root = document.querySelector('[data-filter-root]');
+  if (root) {
+    const cards = Array.from(document.querySelectorAll('[data-directory-grid] .card'));
+    const cityInput = root.querySelector('[data-filter="city"]');
+    const priceInput = root.querySelector('[data-filter="price"]');
+
+    const filter = () => {
+      const city = cityInput?.value.toLowerCase().trim() ?? '';
+      const price = parseInt(priceInput?.value ?? '0', 10) || 0;
+
+      cards.forEach((card) => {
+        const cardCity = card.dataset.city?.toLowerCase() ?? '';
+        const cardPrice = parseInt(card.dataset.startPrice ?? '0', 10) || 0;
+        const matchesCity = !city || cardCity.includes(city);
+        const matchesPrice = !price || cardPrice <= price;
+        card.classList.toggle('hidden', !(matchesCity && matchesPrice));
+      });
+    };
+
+    cityInput?.addEventListener('input', filter);
+    priceInput?.addEventListener('input', filter);
+  }
+</script>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .filters label {
+    display: grid;
+    gap: 0.4rem;
+    font-weight: 600;
+  }
+
+  .filters input {
+    padding: 0.75rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+  }
+
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .card.hidden {
+    display: none;
+  }
+</style>

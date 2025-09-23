@@ -1,0 +1,202 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const collections = await Promise.all([
+  getCollection("guides"),
+  getCollection("checklistor"),
+  getCollection("budget"),
+  getCollection("inspiration"),
+  getCollection("leverantorer"),
+  getCollection("traditioner"),
+  getCollection("venues"),
+  getCollection("suppliers")
+]);
+
+const typeLabels = {
+  guides: "Guide",
+  checklistor: "Checklista",
+  budget: "Budget",
+  inspiration: "Inspiration",
+  leverantorer: "Leverantörsguide",
+  traditioner: "Tradition",
+  venues: "Lokal",
+  suppliers: "Leverantör"
+};
+
+const entries = collections
+  .flat()
+  .map((entry) => {
+    const data = entry.data as Record<string, unknown>;
+    const updated =
+      ("updatedAt" in data ? data.updatedAt : undefined) ||
+      ("publishedAt" in data ? data.publishedAt : undefined) ||
+      ("updated" in data ? data.updated : undefined) ||
+      null;
+    const tags = Array.isArray((data as any).secondaryKeywords) ? (data as any).secondaryKeywords : [];
+    const category = (data as any).category ?? entry.collection;
+    const url = entry.collection === "venues"
+      ? `/lokaler/${entry.slug}`
+      : entry.collection === "suppliers"
+      ? `/leverantorer/${category}/${entry.slug.split("/").pop() ?? entry.slug}`
+      : `/${entry.collection}/${entry.slug}`;
+    return {
+      title: data.title as string,
+      summary: ((data as any).summary ?? data.description ?? "") as string,
+      url,
+      collection: entry.collection,
+      updatedAt: updated ? new Date(updated as string).toISOString() : "",
+      tags,
+      badge: typeLabels[entry.collection] ?? entry.collection
+    };
+  });
+---
+<BaseLayout title="Sök" description="Sök bland artiklar, guider, leverantörer och lokaler.">
+  <section class="search">
+    <h1>Hitta svar, leverantörer och verktyg</h1>
+    <p>
+      Skriv ett sökord (t.ex. "budget", "fotograf", "vigsel"). Resultaten uppdateras direkt. Filtrera även på typ och sortera efter nyast.
+    </p>
+    <div class="search-controls" data-search-root>
+      <input type="search" placeholder="Sök efter ämne eller leverantör" data-search="query" />
+      <select data-search="type">
+        <option value="">Alla typer</option>
+        {Object.entries(typeLabels).map(([key, label]) => (
+          <option value={key}>{label}</option>
+        ))}
+      </select>
+      <select data-search="sort">
+        <option value="relevance">Sortera: relevans</option>
+        <option value="latest">Senast uppdaterad</option>
+        <option value="az">A–Ö</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="results" data-search-results>
+    {entries.map((entry) => (
+      <article class="result" data-title={entry.title.toLowerCase()} data-summary={entry.summary.toLowerCase()} data-collection={entry.collection} data-updated={entry.updatedAt}>
+        <span class="badge">{entry.badge}</span>
+        <h2><a href={entry.url}>{entry.title}</a></h2>
+        <p>{entry.summary}</p>
+        {entry.tags && entry.tags.length > 0 && (
+          <ul class="tags">
+            {entry.tags.map((tag: string) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))}
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const root = document.querySelector('[data-search-root]');
+  if (root) {
+    const queryInput = root.querySelector('[data-search="query"]');
+    const typeSelect = root.querySelector('[data-search="type"]');
+    const sortSelect = root.querySelector('[data-search="sort"]');
+    const articles = Array.from(document.querySelectorAll('[data-search-results] .result'));
+
+    const filterAndSort = () => {
+      const query = queryInput.value.toLowerCase().trim();
+      const type = typeSelect.value;
+      const sort = sortSelect.value;
+
+      let filtered = articles.filter((article) => {
+        const matchesQuery = !query || article.dataset.title.includes(query) || article.dataset.summary.includes(query);
+        const matchesType = !type || article.dataset.collection === type;
+        return matchesQuery && matchesType;
+      });
+
+      if (sort === 'az') {
+        filtered = filtered.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
+      } else if (sort === 'latest') {
+        filtered = filtered.sort((a, b) => (b.dataset.updated || '').localeCompare(a.dataset.updated || ''));
+      }
+
+      articles.forEach((article) => {
+        article.classList.toggle('hidden', !filtered.includes(article));
+      });
+    };
+
+    queryInput.addEventListener('input', filterAndSort);
+    typeSelect.addEventListener('change', filterAndSort);
+    sortSelect.addEventListener('change', filterAndSort);
+  }
+</script>
+
+<style>
+  .search {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .search-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .search-controls input,
+  .search-controls select {
+    padding: 0.75rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+  }
+
+  .results {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .result {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    background: #fff;
+  }
+
+  .result.hidden {
+    display: none;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(178, 109, 74, 0.12);
+    color: #b26d4a;
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .result h2 {
+    margin: 0.4rem 0;
+    font-size: 1.2rem;
+  }
+
+  .result h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    list-style: none;
+    margin: 0.8rem 0 0;
+  }
+
+  .tags li {
+    background: rgba(31, 28, 20, 0.08);
+    border-radius: 999px;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.75rem;
+  }
+</style>

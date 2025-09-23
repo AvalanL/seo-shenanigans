@@ -1,0 +1,31 @@
+{
+  "name": "swedish-wedding-seo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "prebuild": "node ./scripts/generate-links.mjs",
+    "lint": "astro check && prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^2.0.0",
+    "@astrojs/sitemap": "^3.1.2",
+    "astro": "^4.8.2",
+    "astro-icon": "^0.8.1",
+    "yaml": "^2.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.5.7",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.12.2",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=20.10.0"
+  }
+}

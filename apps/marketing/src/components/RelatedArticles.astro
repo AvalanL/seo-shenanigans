@@ -1,0 +1,109 @@
+---
+import interlinks from "~/content/shared/interlinks.json";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export interface Props {
+  currentSlug: string;
+  related: string[];
+}
+
+const { currentSlug, related } = Astro.props satisfies Props;
+
+const interlinkMap = interlinks as Record<string, string[]>;
+const suggestedSlugs = new Set<string>(related);
+(interlinkMap[currentSlug] ?? []).forEach((slug) => suggestedSlugs.add(slug));
+
+const COLLECTIONS = [
+  "guides",
+  "checklistor",
+  "budget",
+  "inspiration",
+  "leverantorer",
+  "traditioner"
+] as const;
+
+type CollectionName = (typeof COLLECTIONS)[number];
+type Entry = CollectionEntry<CollectionName>;
+
+const allEntries = await Promise.all(
+  COLLECTIONS.map((collection) =>
+    getCollection(collection, ({ data }) => data.status !== "draft")
+  )
+);
+
+const entryMap = new Map<string, Entry>();
+for (const entries of allEntries) {
+  for (const entry of entries) {
+    entryMap.set(`${entry.collection}/${entry.slug}`, entry as Entry);
+  }
+}
+
+const suggestions = Array.from(suggestedSlugs)
+  .map((slug) => entryMap.get(slug))
+  .filter((entry): entry is Entry => Boolean(entry))
+  .filter((entry) => `${entry.collection}/${entry.slug}` !== currentSlug)
+  .slice(0, 3)
+  .map((entry) => ({
+    href: `/${entry.collection}/${entry.slug}`,
+    title: entry.data.title,
+    summary: entry.data.summary
+  }));
+---
+{suggestions.length > 0 && (
+  <aside class="related">
+    <h2>Relaterade artiklar</h2>
+    <ul>
+      {suggestions.map((item) => (
+        <li>
+          <a href={item.href}>
+            <h3>{item.title}</h3>
+            <p>{item.summary}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
+
+<style>
+  .related {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    background: rgba(178, 109, 74, 0.08);
+  }
+
+  .related ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .related a {
+    display: block;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    background: white;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .related a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .related h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .related p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(31, 28, 20, 0.7);
+  }
+</style>

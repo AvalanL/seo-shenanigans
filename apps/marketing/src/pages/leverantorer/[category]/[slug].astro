@@ -1,0 +1,146 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const suppliers = await getCollection("suppliers");
+  return suppliers.map((entry) => {
+    const category = entry.data.category ?? "ovrigt";
+    const slug = entry.slug.split("/").pop() ?? entry.slug;
+    return { params: { category, slug } };
+  });
+}
+
+const categoryParam = Astro.params.category ?? "ovrigt";
+const slugParam = Astro.params.slug;
+if (!slugParam) {
+  throw new Error("Slug saknas");
+}
+
+const supplierEntries = await getCollection("suppliers");
+const candidateSlugs = new Set([slugParam, `${categoryParam}/${slugParam}`]);
+const entry = supplierEntries.find((item) => candidateSlugs.has(item.slug));
+if (!entry) {
+  throw new Error(`Hittade ingen leverantör med slug ${slugParam}`);
+}
+
+const category = categoryParam;
+const slug = slugParam;
+const { Content } = await entry.render();
+---
+<BaseLayout
+  title={`${entry.data.title} – ${entry.data.category}`}
+  description={entry.data.description}
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: entry.data.title,
+    areaServed: entry.data.serviceArea,
+    url: entry.data.website,
+    telephone: entry.data.phone,
+    email: entry.data.email,
+    image: entry.data.image,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: entry.data.city,
+      addressRegion: entry.data.serviceArea,
+      addressCountry: "SE"
+    }
+  }}
+>
+  <article class="supplier">
+    <header>
+      <p class="breadcrumbs"><a href="/leverantorer">← Alla kategorier</a> · <a href={`/leverantorer/${category}`}>Tillbaka till {category}</a></p>
+      <h1>{entry.data.title}</h1>
+      <p class="summary">{entry.data.summary}</p>
+      <div class="meta">
+        <span><strong>Utgår från:</strong> {entry.data.city}</span>
+        <span><strong>Serviceområde:</strong> {entry.data.serviceArea}</span>
+        <span><strong>Startpris:</strong> {entry.data.startPrice} kr</span>
+      </div>
+    </header>
+
+    {entry.data.image && (
+      <figure class="hero">
+        <img src={entry.data.image} alt={entry.data.title} loading="lazy" />
+      </figure>
+    )}
+
+    <div class="content">
+      <Content />
+
+      <section class="contact">
+        <h2>Kontakta {entry.data.title}</h2>
+        <ul>
+          <li><strong>Webb:</strong> <a href={entry.data.website}>{entry.data.website}</a></li>
+          {entry.data.instagram && (
+            <li><strong>Instagram:</strong> <a href={entry.data.instagram}>{entry.data.instagram}</a></li>
+          )}
+          <li><strong>E-post:</strong> <a href={`mailto:${entry.data.email}`}>{entry.data.email}</a></li>
+          <li><strong>Telefon:</strong> <a href={`tel:${entry.data.phone}`}>{entry.data.phone}</a></li>
+        </ul>
+        <a class="cta" href="/kontakt">Skicka förfrågan</a>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .supplier {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .breadcrumbs a {
+    color: rgba(31, 28, 20, 0.6);
+    text-decoration: none;
+  }
+
+  .summary {
+    font-size: 1.1rem;
+    color: rgba(31, 28, 20, 0.75);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: rgba(31, 28, 20, 0.7);
+  }
+
+  .hero img {
+    width: 100%;
+    border-radius: 1.5rem;
+    object-fit: cover;
+  }
+
+  .content {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .contact {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: #fffef9;
+  }
+
+  .contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .cta {
+    display: inline-flex;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    background: #b26d4a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

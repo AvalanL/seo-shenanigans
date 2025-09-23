@@ -1,0 +1,50 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  url?: string;
+  image?: { src: string; alt?: string };
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  url = Astro.site?.toString() ?? "https://www.erabrollopsajt.se",
+  image,
+  type = "article",
+  publishedTime,
+  modifiedTime,
+  schema
+} = Astro.props satisfies Props;
+---
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={url} />
+  {image && (
+    <>
+      <meta property="og:image" content={image.src} />
+      {image.alt && <meta property="og:image:alt" content={image.alt} />}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={image.src} />
+    </>
+  )}
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+  {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+  {schema && (
+    <script type="application/ld+json" is:inline>
+      {JSON.stringify(schema)}
+    </script>
+  )}
+</head>

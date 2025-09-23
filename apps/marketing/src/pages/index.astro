@@ -1,0 +1,212 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const [guides, checklistor, budget, inspiration] = await Promise.all([
+  getCollection("guides"),
+  getCollection("checklistor"),
+  getCollection("budget"),
+  getCollection("inspiration")
+]);
+
+const maxPerSection = 3;
+---
+<BaseLayout
+  title="Planera ert bröllop med expertstöd"
+  description="Svenska Bröllopsakademien guidar er genom varje steg från förlovning till fest med data, checklistor och budgetmallar."
+>
+  <section class="hero">
+    <p class="eyebrow">Svenska Bröllopsakademien</p>
+    <h1>Planera ert drömbröllop med svenska experter</h1>
+    <p>
+      Vi samlar allt ni behöver veta om bröllopsplanering i Sverige – juridik, budget, traditioner och de små detaljerna
+      som gör dagen minnesvärd. Utforska guider, checklistor och verktyg designade för att ge er lugn och kontroll.
+    </p>
+    <div class="cta-group">
+      <a class="primary" href="/guides">Utforska guider</a>
+      <a class="secondary" href="/checklistor">Ladda ner checklistor</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fördjupade guider</h2>
+    <div class="card-grid">
+      {guides.slice(0, maxPerSection).map((entry) => (
+        <article>
+          <h3><a href={`/guides/${entry.slug}`}>{entry.data.title}</a></h3>
+          <p>{entry.data.summary}</p>
+          <p class="meta">Primärintention: {entry.data.primaryKeyword}</p>
+        </article>
+      ))}
+      <a class="view-all" href="/guides">Se alla guider</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Missa inte våra checklistor</h2>
+    <div class="card-grid">
+      {checklistor.slice(0, maxPerSection).map((entry) => (
+        <article>
+          <h3><a href={`/checklistor/${entry.slug}`}>{entry.data.title}</a></h3>
+          <p>{entry.data.summary}</p>
+        </article>
+      ))}
+      <a class="view-all" href="/checklistor">Se alla checklistor</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Budgetverktyg &amp; kalkyler</h2>
+    <div class="card-grid">
+      {budget.slice(0, maxPerSection).map((entry) => (
+        <article>
+          <h3><a href={`/budget/${entry.slug}`}>{entry.data.title}</a></h3>
+          <p>{entry.data.summary}</p>
+        </article>
+      ))}
+      <a class="view-all" href="/budget">Se alla budgetartiklar</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Inspiration från hela Sverige</h2>
+    <div class="card-grid">
+      {inspiration.slice(0, maxPerSection).map((entry) => (
+        <article>
+          <h3><a href={`/inspiration/${entry.slug}`}>{entry.data.title}</a></h3>
+          <p>{entry.data.summary}</p>
+        </article>
+      ))}
+      <a class="view-all" href="/inspiration">Hitta mer inspiration</a>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>Snabba svar inför ert bröllop</h2>
+    <dl>
+      <div>
+        <dt>Hur långt i förväg bör vi boka vigselförrättare?</dt>
+        <dd>Minst 4–6 månader före bröllopsdatumet, men tidigare i storstäder under högsäsong (maj–september).</dd>
+      </div>
+      <div>
+        <dt>Vad kostar ett genomsnittligt svenskt bröllop?</dt>
+        <dd>Enligt Budgetkollen 2023 ligger medianbudgeten på 110 000 kr för 75 gäster, exklusive smekmånad.</dd>
+      </div>
+      <div>
+        <dt>När ska hindersprövning skickas in?</dt>
+        <dd>Ansök hos Skatteverket tidigast 4 månader innan vigsel och senast 2 veckor innan, eftersom intyget är giltigt i 4 månader.</dd>
+      </div>
+    </dl>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, rgba(255, 241, 226, 0.8), rgba(255, 228, 247, 0.6));
+    border-radius: 1.5rem;
+    padding: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero .eyebrow {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #9c5e3c;
+    font-weight: 600;
+  }
+
+  .hero h1 {
+    margin-top: 0.5rem;
+    font-size: clamp(2.25rem, 5vw, 2.9rem);
+    line-height: 1.1;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .primary,
+  .secondary {
+    padding: 0.9rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+
+  .primary {
+    background: #b26d4a;
+    color: white;
+  }
+
+  .secondary {
+    border: 1px solid #b26d4a;
+    color: #b26d4a;
+    background: white;
+  }
+
+  .primary:hover,
+  .secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  section + section {
+    margin-top: 3.5rem;
+  }
+
+  .card-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .card-grid article {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    background: white;
+  }
+
+  .meta {
+    font-size: 0.8rem;
+    color: rgba(31, 28, 20, 0.7);
+  }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(178, 109, 74, 0.12);
+    color: #b26d4a;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .faq dl {
+    display: grid;
+    gap: 1rem;
+    background: white;
+    border-radius: 1.25rem;
+    padding: 2rem;
+  }
+
+  .faq dt {
+    font-weight: 700;
+  }
+
+  .faq dd {
+    margin: 0.3rem 0 0 0;
+  }
+
+  @media (min-width: 720px) {
+    .card-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

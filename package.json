@@ -1,0 +1,18 @@
+{
+  "name": "seo-shenanigans",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:marketing": "npm --prefix apps/marketing run dev",
+    "build:marketing": "npm --prefix apps/marketing run build",
+    "lint:marketing": "npm --prefix apps/marketing run lint",
+    "format:marketing": "npm --prefix apps/marketing run format",
+    "prebuild": "npm --prefix apps/marketing run prebuild",
+    "generate:directory": "npm --prefix apps/marketing run generate:directory",
+    "scrape:venues": "npm --prefix apps/marketing run scrape:venues"
+  }
+}

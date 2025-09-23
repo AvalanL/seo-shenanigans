@@ -1,0 +1,33 @@
+{
+  "keyword": "brollopslokal stockholm",
+  "date": "2025-09-18",
+  "notes": "Fyll SERP-data: top 10 urls, schema, PAA",
+  "top_results": [
+    {
+      "url": "https://www.vigselguide.se/brollopslokal-stockholm",
+      "notes": "Lista med 20 lokaler, fokus innerstan"
+    },
+    {
+      "url": "https://www.festen.se/stockholm/brollopslokaler",
+      "notes": "Filterbar katalog, inkluderar priser"
+    },
+    {
+      "url": "https://bröllopstorget.se/brollopslokal-stockholm",
+      "notes": "Communitytips, brist på uppdaterade priser"
+    },
+    {
+      "url": "https://www.hesselby-slott.se/brollop",
+      "notes": "Exempel på slott/herrgård"
+    },
+    {
+      "url": "https://www.ullanatur.se/brollop",
+      "notes": "Natur/utomhuslokal"
+    }
+  ],
+  "paa": [
+    "Hur mycket kostar en bröllopslokal i Stockholm?",
+    "Vilka lokaler får man ta med egen catering?",
+    "Hur långt i förväg måste man boka bröllopslokal?",
+    "Vilka är billiga bröllopslokaler i Stockholm?"
+  ]
+}

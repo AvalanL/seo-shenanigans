@@ -1,0 +1,205 @@
+---
+import "~/styles/base.css";
+import SeoHead from "~/components/SeoHead.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  url?: string;
+  image?: { src: string; alt?: string };
+  publishedTime?: string;
+  modifiedTime?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, url, image, publishedTime, modifiedTime, schema } = Astro.props satisfies Props;
+---
+<html lang="sv">
+  <SeoHead
+    title={`${title} | Svenska Bröllopsakademien`}
+    description={description}
+    url={url}
+    image={image}
+    publishedTime={publishedTime}
+    modifiedTime={modifiedTime}
+    schema={schema}
+  />
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="logo" href="/">Svenska Bröllopsakademien</a>
+        <nav aria-label="Primär navigation">
+          <a href="/guides">Guider</a>
+          <a href="/checklistor">Checklistor</a>
+          <a href="/budget">Budget</a>
+          <a href="/inspiration">Inspiration</a>
+          <a href="/leverantorer">Leverantörer</a>
+          <a href="/lokaler">Lokaler</a>
+          <a href="/sok">Sök</a>
+          <a href="/traditioner">Traditioner</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <section>
+          <h2>Om oss</h2>
+          <p>
+            Vi hjälper svenska bröllopspar att planera drömbröllop med fakta, checklistor och expertråd baserade på svensk
+            bröllopspraxis.
+          </p>
+        </section>
+        <section>
+          <h2>Snabblänkar</h2>
+          <ul>
+            <li><a href="/om">Om Svenska Bröllopsakademien</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
+            <li><a href="/sekretess">Integritetspolicy</a></li>
+            <li><a href="/villkor">Användarvillkor</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Nyhetsbrev</h2>
+          <p>Få månatliga uppdateringar om nya guider, leverantörer och bröllopstrender.</p>
+          <form action="#" method="post">
+            <label class="visually-hidden" for="footer-email">E-postadress</label>
+            <input id="footer-email" type="email" name="email" placeholder="din@epost.se" required />
+            <button type="submit">Prenumerera</button>
+          </form>
+        </section>
+      </div>
+      <p class="copyright">© {new Date().getFullYear()} Svenska Bröllopsakademien. Alla rättigheter förbehållna.</p>
+    </footer>
+  </body>
+</html>
+<style>
+  :root {
+    color-scheme: light;
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+    line-height: 1.6;
+  }
+
+  body {
+    margin: 0;
+    background-color: #fffdf8;
+    color: #1f1c14;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .site-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #b26d4a;
+    text-decoration: none;
+  }
+
+  nav a {
+    margin-left: 1rem;
+    color: #3c372b;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  nav a:hover,
+  nav a:focus {
+    color: #b26d4a;
+  }
+
+  main.container {
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .site-footer {
+    background: #1f1c14;
+    color: #fff;
+    padding: 3rem 1.5rem;
+  }
+
+  .site-footer .container {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .site-footer h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+  }
+
+  .site-footer a {
+    color: #f3d4c2;
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+
+  form {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  input[type="email"] {
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    border: none;
+    flex: 1 1 240px;
+  }
+
+  button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    border: none;
+    background: #b26d4a;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #a25d3b;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (min-width: 720px) {
+    .site-footer .container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

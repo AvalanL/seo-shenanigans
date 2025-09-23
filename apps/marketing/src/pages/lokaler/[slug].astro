@@ -1,0 +1,145 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("venues");
+  return entries.map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+const slug = Astro.params.slug;
+if (!slug) {
+  throw new Error("Slug saknas");
+}
+
+const venueEntries = await getCollection("venues");
+const entry = venueEntries.find((item) => item.slug === slug);
+if (!entry) {
+  throw new Error(`Hittade ingen lokal med slug ${slug}`);
+}
+
+const { Content } = await entry.render();
+---
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    name: entry.data.title,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: entry.data.city,
+      addressRegion: entry.data.region,
+      addressCountry: "SE"
+    },
+    image: entry.data.image,
+    url: entry.data.website,
+    telephone: entry.data.phone,
+    geo: entry.data.latitude
+      ? {
+          "@type": "GeoCoordinates",
+          latitude: entry.data.latitude,
+          longitude: entry.data.longitude
+        }
+      : undefined
+  }}
+>
+  <article class="venue">
+    <header>
+      <p class="breadcrumbs"><a href="/lokaler">← Tillbaka till lokallistan</a></p>
+      <h1>{entry.data.title}</h1>
+      <p class="summary">{entry.data.summary}</p>
+      <div class="meta">
+        <span><strong>Plats:</strong> {entry.data.city}, {entry.data.region}</span>
+        <span><strong>Kapacitet:</strong> {entry.data.capacity} gäster</span>
+        <span><strong>Startpris:</strong> {entry.data.startPrice} kr</span>
+      </div>
+    </header>
+
+    {entry.data.image && (
+      <figure class="hero">
+        <img src={entry.data.image} alt={entry.data.title} loading="lazy" />
+      </figure>
+    )}
+
+    <div class="content">
+      <Content />
+
+      <section class="contact">
+        <h2>Kontakt</h2>
+        <ul>
+          <li><strong>Webb:</strong> <a href={entry.data.website}>{entry.data.website}</a></li>
+          <li><strong>E-post:</strong> <a href={`mailto:${entry.data.email}`}>{entry.data.email}</a></li>
+          <li><strong>Telefon:</strong> <a href={`tel:${entry.data.phone}`}>{entry.data.phone}</a></li>
+        </ul>
+        <a class="cta" href="/templates/lokal-checklista">Ladda ner lokalchecklistan</a>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .venue {
+    display: grid;
+    gap: 2rem;
+  }
+
+  header {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .breadcrumbs a {
+    color: rgba(31, 28, 20, 0.6);
+    text-decoration: none;
+  }
+
+  .summary {
+    font-size: 1.1rem;
+    color: rgba(31, 28, 20, 0.75);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: rgba(31, 28, 20, 0.7);
+  }
+
+  .hero img {
+    width: 100%;
+    border-radius: 1.5rem;
+    object-fit: cover;
+  }
+
+  .content {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .contact {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: #fffef9;
+  }
+
+  .contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .cta {
+    display: inline-flex;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    background: #b26d4a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

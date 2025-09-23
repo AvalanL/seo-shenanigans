@@ -1,0 +1,12 @@
+- name: Skatteverket
+  type: GovernmentOrganization
+  url: https://www.skatteverket.se
+  relevance: juridik
+- name: Svenska kyrkan
+  type: Organization
+  url: https://www.svenskakyrkan.se
+  relevance: vigsel
+- name: Statistiska centralbyrån
+  type: GovernmentOrganization
+  url: https://www.scb.se
+  relevance: statistik

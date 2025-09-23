@@ -1,0 +1,125 @@
+{
+  "guides/brollopsplanering-grundkurs": [
+    "guides/brollopstidslinje-12-manader",
+    "budget/brollopsbudget-2025",
+    "checklistor/brollopsbudget-checklista",
+    "traditioner/svenska-vigseltraditioner",
+    "checklistor/100-fragor-infor-brollopet",
+    "leverantorer/brollopsfotograf-stockholm"
+  ],
+  "guides/brollopstidslinje-12-manader": [
+    "guides/brollopsplanering-grundkurs",
+    "guides/detaljer-alla-brollopsplanerare-missar",
+    "checklistor/fragor-till-brollopsfotograf"
+  ],
+  "budget/brollopsbudget-2025": [
+    "checklistor/brollopsbudget-checklista",
+    "guides/brollopsplanering-grundkurs",
+    "leverantorer/brollopskoordinator-pris-och-guide",
+    "leverantorer/brollopsfotograf-stockholm"
+  ],
+  "checklistor/brollopsbudget-checklista": [
+    "budget/brollopsbudget-2025",
+    "guides/detaljer-alla-brollopsplanerare-missar"
+  ],
+  "checklistor/fragor-till-brollopsfotograf": [
+    "leverantorer/brollopskoordinator-pris-och-guide",
+    "guides/detaljer-alla-brollopsplanerare-missar",
+    "leverantorer/brollopsfotograf-stockholm"
+  ],
+  "traditioner/svenska-vigseltraditioner": [
+    "guides/brollopsplanering-grundkurs",
+    "guides/detaljer-alla-brollopsplanerare-missar",
+    "checklistor/100-fragor-infor-brollopet"
+  ],
+  "leverantorer/brollopskoordinator-pris-och-guide": [
+    "guides/brollopsplanering-grundkurs",
+    "budget/brollopsbudget-2025",
+    "guides/detaljer-alla-brollopsplanerare-missar"
+  ],
+  "inspiration/brollopstrender-2025": [
+    "guides/brollopsplanering-grundkurs",
+    "traditioner/svenska-vigseltraditioner"
+  ],
+  "guides/detaljer-alla-brollopsplanerare-missar": [
+    "guides/brollopstidslinje-12-manader",
+    "checklistor/brollopsbudget-checklista",
+    "leverantorer/brollopskoordinator-pris-och-guide"
+  ],
+  "checklistor/100-fragor-infor-brollopet": [
+    "guides/brollopsplanering-grundkurs",
+    "budget/brollopsbudget-2025",
+    "traditioner/svenska-vigseltraditioner"
+  ],
+  "leverantorer/brollopsfotograf-stockholm": [
+    "checklistor/fragor-till-brollopsfotograf",
+    "budget/brollopsbudget-2025",
+    "guides/brollopsplanering-grundkurs"
+  ],
+  "leverantorer/brollopsfotograf-goteborg": [
+    "checklistor/fragor-till-brollopsfotograf",
+    "budget/brollopsbudget-2025",
+    "guides/brollopsplanering-grundkurs"
+  ],
+  "leverantorer/brollopsfotograf-malmo": [
+    "checklistor/fragor-till-brollopsfotograf",
+    "guides/brollopsplanering-grundkurs"
+  ],
+  "leverantorer/brollopsfotograf-uppsala": [
+    "checklistor/fragor-till-brollopsfotograf",
+    "guides/brollopsplanering-grundkurs"
+  ],
+  "leverantorer/brollopsfotograf-gotland": [
+    "checklistor/fragor-till-brollopsfotograf",
+    "guides/brollopsplanering-grundkurs",
+    "guides/detaljer-alla-brollopsplanerare-missar"
+  ],
+  "leverantorer/brollopsflorist-stockholm": [
+    "budget/brollopsbudget-2025",
+    "guides/brollopsplanering-grundkurs"
+  ],
+  "leverantorer/brollopsflorist-goteborg": [
+    "budget/brollopsbudget-2025",
+    "guides/brollopsplanering-grundkurs"
+  ],
+  "leverantorer/brollopsflorist-malmo": ["budget/brollopsbudget-2025"],
+  "leverantorer/brollopslokal-stockholm": [
+    "budget/brollopsbudget-2025",
+    "guides/brollopsplanering-grundkurs",
+    "guides/detaljer-alla-brollopsplanerare-missar"
+  ],
+  "leverantorer/brollopslokal-goteborg": ["budget/brollopsbudget-2025"],
+  "leverantorer/brollopslokal-skargarden": [
+    "guides/detaljer-alla-brollopsplanerare-missar",
+    "budget/brollopsbudget-2025"
+  ],
+  "leverantorer/brollopskoordinator-goteborg": [
+    "leverantorer/brollopskoordinator-pris-och-guide"
+  ],
+  "leverantorer/brollopskoordinator-malmo": [
+    "leverantorer/brollopskoordinator-pris-och-guide"
+  ],
+  "inspiration/brollopsdekor-diy": [
+    "budget/brollopsbudget-2025",
+    "guides/detaljer-alla-brollopsplanerare-missar"
+  ],
+  "guides/brollopsmeny-exempel": [
+    "budget/brollopsbudget-2025",
+    "guides/brollopsplanering-grundkurs"
+  ],
+  "traditioner/brollopstal-brud": ["traditioner/svenska-vigseltraditioner"],
+  "traditioner/toastmaster-guide": [
+    "traditioner/svenska-vigseltraditioner",
+    "guides/detaljer-alla-brollopsplanerare-missar"
+  ],
+  "guides/hindersprovning-tid": ["guides/brollopsplanering-grundkurs"],
+  "guides/aktenskapsforord-mall": ["budget/brollopsbudget-2025"],
+  "budget/brollopsbudget-excel": [
+    "budget/brollopsbudget-2025",
+    "checklistor/brollopsbudget-checklista"
+  ],
+  "checklistor/brollop-checklista-pdf": [
+    "guides/brollopsplanering-grundkurs",
+    "checklistor/100-fragor-infor-brollopet"
+  ]
+}

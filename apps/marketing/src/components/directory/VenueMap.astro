@@ -1,0 +1,80 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  venues: CollectionEntry<"venues">[];
+}
+
+const { venues } = Astro.props;
+const markers = venues
+  .map((entry) => ({
+    title: entry.data.title,
+    city: entry.data.city,
+    startPrice: entry.data.startPrice,
+    url: `/lokaler/${entry.slug}`,
+    latitude: Number(entry.data.latitude ?? 0),
+    longitude: Number(entry.data.longitude ?? 0),
+  }))
+  .filter((marker) => marker.latitude && marker.longitude);
+
+const mapId = `venue-map-${Math.random().toString(36).slice(2)}`;
+---
+{markers.length > 0 ? (
+  <section class="map-section">
+    <h2>Visa lokaler på karta</h2>
+    <div id={mapId} class="map" data-markers={JSON.stringify(markers)}></div>
+  </section>
+) : null}
+
+<style>
+  .map-section {
+    margin: 2rem 0 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .map {
+    width: 100%;
+    height: 420px;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+</style>
+
+<script is:inline>
+  const el = document.getElementById("{mapId}");
+  if (el) {
+    const ensureLeaflet = async () => {
+      if (!document.getElementById("leaflet-css")) {
+        const link = document.createElement("link");
+        link.id = "leaflet-css";
+        link.rel = "stylesheet";
+        link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+        document.head.appendChild(link);
+      }
+      if (!(window).L) {
+        await import("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js");
+      }
+      return window.L;
+    };
+
+    ensureLeaflet().then((L) => {
+      const markers = JSON.parse(el.dataset.markers || "[]");
+      const map = L.map(el).setView([markers[0].latitude, markers[0].longitude], 11);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      markers.forEach((marker) => {
+        const price = marker.startPrice ? `${new Intl.NumberFormat('sv-SE').format(marker.startPrice)} kr` : "";
+        const popup = `<strong>${marker.title}</strong><br/>${marker.city}${price ? `<br/>Startpris: ${price}` : ''}<br/><a href="${marker.url}">Visa detaljer</a>`;
+        L.marker([marker.latitude, marker.longitude]).addTo(map).bindPopup(popup);
+      });
+
+      const bounds = L.latLngBounds(markers.map((m) => [m.latitude, m.longitude]));
+      map.fitBounds(bounds, { padding: [24, 24] });
+    });
+  }
+</script>

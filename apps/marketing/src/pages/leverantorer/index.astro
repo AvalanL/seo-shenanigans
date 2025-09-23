@@ -1,0 +1,60 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const suppliers = await getCollection("suppliers");
+const categories = Array.from(
+  suppliers.reduce((map, item) => {
+    const category = item.data.category ?? "ovrigt";
+    if (!map.has(category)) {
+      map.set(category, []);
+    }
+    map.get(category)?.push(item);
+    return map;
+  }, new Map())
+);
+---
+<BaseLayout title="Bröllopsleverantörer" description="Hitta fotografer, florister, koordinatorer och andra leverantörer för ert bröllop i Sverige.">
+  <section class="intro">
+    <h1>Bröllopsleverantörer i Sverige</h1>
+    <p>
+      Utforska våra kuraterade listor per kategori. Klicka in för att filtrera på stad, pris och tjänster. Vi lägger till nya leverantörer varje vecka – vill du synas? <a href="/kontakt">Kontakta oss</a>.
+    </p>
+  </section>
+
+  <section class="category-grid">
+    {categories.map(([category, items]) => (
+      <a href={`/leverantorer/${category}`} class="category-card">
+        <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+        <p>{items.length} listade leverantörer</p>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .category-card {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    background: #fff;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .category-card h2 {
+    margin: 0 0 0.5rem;
+  }
+</style>
