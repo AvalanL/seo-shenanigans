@@ -1,0 +1,225 @@
+{
+  "stockholm": {
+    "name": "Stockholm",
+    "region": "Stockholms län",
+    "population": 975000,
+    "searchVolumes": {
+      "bröllopsfotograf": 1900,
+      "bröllopslokal": 4400,
+      "bröllopscatering": 800,
+      "bröllopsflorist": 800,
+      "bröllopskoordinator": 400
+    },
+    "pricing": {
+      "bröllopsfotograf": { "min": 25000, "avg": 45000, "max": 85000 },
+      "bröllopslokal": { "min": 45000, "avg": 80000, "max": 150000 },
+      "bröllopscatering": { "min": 500, "avg": 850, "max": 1500 }
+    },
+    "supplierCounts": {
+      "bröllopsfotograf": 47,
+      "bröllopslokal": 23,
+      "bröllopscatering": 31
+    },
+    "popularVenues": [
+      "Hesselby Slott",
+      "Winterviken",
+      "Nacka Strand",
+      "Stockholms Stadshus",
+      "Fjäderholmarna"
+    ],
+    "neighborhoods": [
+      "Östermalm",
+      "Södermalm",
+      "Gamla Stan",
+      "Djurgården",
+      "Vasastan"
+    ],
+    "transport": {
+      "airport": "Arlanda - 45 min",
+      "public": "Tunnelbana, bussar, pendeltåg",
+      "parking": "Begränsad i innerstan"
+    },
+    "seasonality": {
+      "peak": "maj-september",
+      "note": "Ljusa sommarnätter populära",
+      "priceIncrease": "15-25% under peak"
+    }
+  },
+  "göteborg": {
+    "name": "Göteborg",
+    "region": "Västra Götalands län",
+    "population": 580000,
+    "searchVolumes": {
+      "bröllopsfotograf": 1300,
+      "bröllopslokal": 2400,
+      "bröllopscatering": 550,
+      "bröllopsflorist": 550,
+      "bröllopskoordinator": 400
+    },
+    "pricing": {
+      "bröllopsfotograf": { "min": 22000, "avg": 38000, "max": 75000 },
+      "bröllopslokal": { "min": 35000, "avg": 65000, "max": 120000 },
+      "bröllopscatering": { "min": 450, "avg": 700, "max": 1200 }
+    },
+    "supplierCounts": {
+      "bröllopsfotograf": 31,
+      "bröllopslokal": 18,
+      "bröllopscatering": 22
+    },
+    "popularVenues": [
+      "Liseberg",
+      "Göteborgs Konsthall",
+      "Älvsjö Gård",
+      "Botaniska trädgården",
+      "Eriksberg"
+    ],
+    "neighborhoods": [
+      "Centrum",
+      "Linnéstaden",
+      "Majorna",
+      "Hisingen",
+      "Örgryte"
+    ],
+    "transport": {
+      "airport": "Landvetter - 30 min",
+      "public": "Spårvagn, bussar",
+      "parking": "Begränsad i centrum"
+    },
+    "seasonality": {
+      "peak": "juni-augusti",
+      "note": "Västkustväder påverkar outdoor-bröllop",
+      "priceIncrease": "10-20% under peak"
+    }
+  },
+  "malmö": {
+    "name": "Malmö",
+    "region": "Skåne län",
+    "population": 350000,
+    "searchVolumes": {
+      "bröllopsfotograf": 900,
+      "bröllopslokal": 1800,
+      "bröllopscatering": 420,
+      "bröllopsflorist": 420,
+      "bröllopskoordinator": 320
+    },
+    "pricing": {
+      "bröllopsfotograf": { "min": 20000, "avg": 35000, "max": 70000 },
+      "bröllopslokal": { "min": 30000, "avg": 55000, "max": 100000 },
+      "bröllopscatering": { "min": 400, "avg": 650, "max": 1100 }
+    },
+    "supplierCounts": {
+      "bröllopsfotograf": 23,
+      "bröllopslokal": 15,
+      "bröllopscatering": 18
+    },
+    "popularVenues": [
+      "Malmö Konsthall",
+      "Ribersborg",
+      "Turning Torso",
+      "Malmöhus Slott",
+      "Västra Hamnen"
+    ],
+    "neighborhoods": [
+      "Gamla Väster",
+      "Möllevången",
+      "Västra Hamnen",
+      "Centrum",
+      "Limhamn"
+    ],
+    "transport": {
+      "airport": "Kastrup (Köpenhamn) - 30 min",
+      "public": "Bussar, tåg till Köpenhamn",
+      "parking": "Relativt tillgänglig"
+    },
+    "seasonality": {
+      "peak": "maj-september",
+      "note": "Dansk påverkan, många destination weddings",
+      "priceIncrease": "15-20% under peak"
+    }
+  },
+  "uppsala": {
+    "name": "Uppsala",
+    "region": "Uppsala län",
+    "population": 230000,
+    "searchVolumes": {
+      "bröllopsfotograf": 500,
+      "bröllopslokal": 1200,
+      "bröllopscatering": 300,
+      "bröllopsflorist": 280,
+      "bröllopskoordinator": 200
+    },
+    "pricing": {
+      "bröllopsfotograf": { "min": 18000, "avg": 32000, "max": 65000 },
+      "bröllopslokal": { "min": 25000, "avg": 45000, "max": 85000 },
+      "bröllopscatering": { "min": 350, "avg": 600, "max": 950 }
+    },
+    "supplierCounts": {
+      "bröllopsfotograf": 18,
+      "bröllopslokal": 12,
+      "bröllopscatering": 14
+    },
+    "popularVenues": [
+      "Uppsala Domkyrka",
+      "Linnéträdgården",
+      "Uppsala Slott",
+      "Botaniska trädgården",
+      "Gamla Uppsala"
+    ],
+    "neighborhoods": [
+      "Centrum",
+      "Luthagen",
+      "Fålhagen",
+      "Librobäck",
+      "Gottsunda"
+    ],
+    "transport": {
+      "airport": "Arlanda - 35 min",
+      "public": "Pendeltåg till Stockholm, lokala bussar",
+      "parking": "Relativt tillgänglig"
+    },
+    "seasonality": {
+      "peak": "maj-september",
+      "note": "Student-påverkat schema, undvik tentaveckor",
+      "priceIncrease": "10-15% under peak"
+    }
+  },
+  "västerås": {
+    "name": "Västerås",
+    "region": "Västmanlands län",
+    "population": 155000,
+    "searchVolumes": {
+      "bröllopsfotograf": 300,
+      "bröllopslokal": 800,
+      "bröllopscatering": 200,
+      "bröllopsflorist": 180,
+      "bröllopskoordinator": 120
+    },
+    "pricing": {
+      "bröllopsfotograf": { "min": 16000, "avg": 28000, "max": 55000 },
+      "bröllopslokal": { "min": 20000, "avg": 40000, "max": 75000 },
+      "bröllopscatering": { "min": 300, "avg": 550, "max": 850 }
+    },
+    "supplierCounts": {
+      "bröllopsfotograf": 12,
+      "bröllopslokal": 8,
+      "bröllopscatering": 10
+    },
+    "popularVenues": [
+      "Västerås Slott",
+      "Anundshög",
+      "Mälarpaviljongen",
+      "Kokpunkten",
+      "Ängsö Slott"
+    ],
+    "transport": {
+      "airport": "Arlanda - 60 min",
+      "public": "Tåg till Stockholm, lokala bussar",
+      "parking": "God tillgång"
+    },
+    "seasonality": {
+      "peak": "juni-augusti",
+      "note": "Mälarnära läge, vattenfoto populärt",
+      "priceIncrease": "8-15% under peak"
+    }
+  }
+}

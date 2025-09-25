@@ -1,0 +1,773 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import cities from '../../../data/cities.json';
+
+const currentYear = new Date().getFullYear();
+
+// Calculate aggregate stats
+const totalCities = Object.keys(cities).length;
+const totalSuppliers = Object.values(cities).reduce((sum, city) =>
+  sum + Object.values(city.supplierCounts || {}).reduce((citySum, count) => citySum + count, 0), 0
+);
+
+const totalSearchVolume = Object.values(cities).reduce((sum, city) =>
+  sum + Object.values(city.searchVolumes || {}).reduce((citySum, volume) => citySum + volume, 0), 0
+);
+
+// Sort cities by population
+const sortedCities = Object.entries(cities).sort(([,a], [,b]) => b.population - a.population);
+---
+
+<BaseLayout
+  title={`Bröllop i Sverige ${currentYear} - Städer & Regioner`}
+  description={`Planera ert drömbrölllop i ${totalCities} svenska städer. ${totalSuppliers}+ leverantörer, lokala priser och komplett guide för varje stad.`}
+  keywords={['bröllop sverige', 'bröllopsstäder sverige', 'bröllopsplanering', 'bröllopsleverantörer']}
+>
+  <!-- Schema markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `Bröllopsguide Sverige ${currentYear}`,
+    "description": "Komplett guide för bröllopsplanering i alla svenska städer",
+    "numberOfItems": totalCities,
+    "about": {
+      "@type": "Place",
+      "name": "Sverige",
+      "@id": "https://www.wikidata.org/wiki/Q34"
+    }
+  })} />
+
+  <!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="breadcrumb">
+    <ol>
+      <li><a href="/">Hem</a></li>
+      <li aria-current="page">Städer</li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="cities-hero">
+      <div class="hero-content">
+        <h1>Bröllop i Sverige {currentYear}</h1>
+        <p class="lead">Upptäck de bästa bröllopsplatserna i {totalCities} svenska städer</p>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>{totalCities}</strong>
+            <span>Städer</span>
+          </div>
+          <div class="stat">
+            <strong>{totalSuppliers}+</strong>
+            <span>Leverantörer</span>
+          </div>
+          <div class="stat">
+            <strong>{totalSearchVolume.toLocaleString('sv-SE')}+</strong>
+            <span>Sökningar/månad</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Search -->
+    <section class="quick-search">
+      <h2>Hitta ert drömbrölllop</h2>
+      <p>Välj stad baserat på storlek, region eller stil:</p>
+
+      <div class="search-filters">
+        <div class="filter-group">
+          <h3>Efter region</h3>
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Alla regioner</button>
+            <button class="filter-btn" data-filter="stockholms-län">Stockholms län</button>
+            <button class="filter-btn" data-filter="västra-götalands-län">Västra Götalands län</button>
+            <button class="filter-btn" data-filter="skåne-län">Skåne län</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>Efter storlek</h3>
+          <div class="filter-buttons">
+            <button class="filter-btn" data-filter="stora">Stora städer (500k+)</button>
+            <button class="filter-btn" data-filter="medelstora">Medelstora (100-500k)</button>
+            <button class="filter-btn" data-filter="mindre">Mindre städer (-100k)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cities Grid -->
+    <section class="cities-main">
+      <div class="cities-grid" id="cities-grid">
+        {sortedCities.map(([cityKey, cityData]) => (
+          <a
+            href={`/stad/${cityKey}`}
+            class="city-card"
+            data-region={cityData.region.toLowerCase().replace(/\s+/g, '-')}
+            data-size={
+              cityData.population >= 500000 ? 'stora' :
+              cityData.population >= 100000 ? 'medelstora' : 'mindre'
+            }
+          >
+            <div class="city-header">
+              <h3>{cityData.name}</h3>
+              <span class="city-population">{cityData.population.toLocaleString('sv-SE')} inv</span>
+            </div>
+
+            <div class="city-region">
+              <span>{cityData.region}</span>
+            </div>
+
+            <div class="city-stats">
+              <div class="city-stat">
+                <strong>{Object.values(cityData.supplierCounts || {}).reduce((a, b) => a + b, 0)}</strong>
+                <span>leverantörer</span>
+              </div>
+              <div class="city-stat">
+                <strong>{Object.keys(cityData.pricing || {}).length}</strong>
+                <span>tjänster</span>
+              </div>
+            </div>
+
+            <div class="city-highlights">
+              <p><strong>Peak säsong:</strong> {cityData.seasonality.peak}</p>
+              <p><strong>Populärt:</strong> {cityData.popularVenues ? cityData.popularVenues[0] : 'Centrumområdet'}</p>
+            </div>
+
+            <div class="city-pricing">
+              {cityData.pricing.bröllopsfotograf && (
+                <p>Fotograf från <strong>{cityData.pricing.bröllopsfotograf.min.toLocaleString('sv-SE')} kr</strong></p>
+              )}
+              {cityData.pricing.bröllopslokal && (
+                <p>Lokal från <strong>{cityData.pricing.bröllopslokal.min.toLocaleString('sv-SE')} kr</strong></p>
+              )}
+            </div>
+
+            <div class="city-arrow">→</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Popular Regions -->
+    <section class="popular-regions">
+      <h2>Populära bröllopsregioner</h2>
+
+      <div class="regions-grid">
+        <div class="region-card">
+          <h3>🏙️ Storstockholm</h3>
+          <p>Sveriges huvudstad erbjuder allt från slott till moderna lokaler. Största utbudet av leverantörer men också högsta priserna.</p>
+          <div class="region-cities">
+            <strong>Städer:</strong> Stockholm
+          </div>
+          <a href="/stad/stockholm" class="region-link">Utforska Stockholm →</a>
+        </div>
+
+        <div class="region-card">
+          <h3>🌊 Västkusten</h3>
+          <p>Charmiga västkustmiljöer med närhet till havet. Perfekt för romantiska kustbröllop med lokal karaktär.</p>
+          <div class="region-cities">
+            <strong>Städer:</strong> Göteborg, Malmö
+          </div>
+          <a href="/stad/göteborg" class="region-link">Utforska Göteborg →</a>
+        </div>
+
+        <div class="region-card">
+          <h3>🎓 Universitetsstäder</h3>
+          <p>Historiska universitetsstäder med unik akademisk atmosfär. Ofta bra priser och vackra historiska miljöer.</p>
+          <div class="region-cities">
+            <strong>Städer:</strong> Uppsala, Lund
+          </div>
+          <a href="/stad/uppsala" class="region-link">Utforska Uppsala →</a>
+        </div>
+
+        <div class="region-card">
+          <h3>🏰 Småstäder</h3>
+          <p>Charmiga mindre städer med personlig service och mer intima bröllopsupplevelser. Ofta bättre priser.</p>
+          <div class="region-cities">
+            <strong>Städer:</strong> Västerås, Linköping
+          </div>
+          <a href="/stad/västerås" class="region-link">Utforska Västerås →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Guide -->
+    <section class="comparison-guide">
+      <h2>Jämför svenska bröllopsplatser</h2>
+
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Stad</th>
+              <th>Region</th>
+              <th>Leverantörer</th>
+              <th>Fotograf från</th>
+              <th>Lokal från</th>
+              <th>Peak säsong</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedCities.slice(0, 8).map(([cityKey, cityData]) => (
+              <tr>
+                <td>
+                  <a href={`/stad/${cityKey}`} class="city-link">
+                    <strong>{cityData.name}</strong>
+                    <br />
+                    <small>{cityData.population.toLocaleString('sv-SE')} inv</small>
+                  </a>
+                </td>
+                <td>{cityData.region}</td>
+                <td>{Object.values(cityData.supplierCounts || {}).reduce((a, b) => a + b, 0)}</td>
+                <td>
+                  {cityData.pricing.bröllopsfotograf ?
+                    `${cityData.pricing.bröllopsfotograf.min.toLocaleString('sv-SE')} kr` :
+                    '-'
+                  }
+                </td>
+                <td>
+                  {cityData.pricing.bröllopslokal ?
+                    `${cityData.pricing.bröllopslokal.min.toLocaleString('sv-SE')} kr` :
+                    '-'
+                  }
+                </td>
+                <td>{cityData.seasonality.peak}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="view-all-cities">
+        <p>Se alla våra {totalCities} städer i rutnätet ovan</p>
+      </div>
+    </section>
+
+    <!-- Tips for Choosing -->
+    <section class="choosing-tips">
+      <h2>Så väljer ni rätt bröllopsstad</h2>
+
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h3>🎯 Bestäm er stil</h3>
+          <p><strong>Storstad:</strong> Mer utbud, högre priser, urban miljö</p>
+          <p><strong>Småstad:</strong> Personlig service, lägre priser, intim känsla</p>
+          <p><strong>Kuststad:</strong> Romantisk miljö, säsongsbaserade priser</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>💰 Budgetera rätt</h3>
+          <p>Priserna varierar kraftigt mellan städer:</p>
+          <ul>
+            <li>Stockholm/Göteborg: Högst priser</li>
+            <li>Mellansverige: Måttliga priser</li>
+            <li>Mindre städer: Bästa priserna</li>
+          </ul>
+        </div>
+
+        <div class="tip-card">
+          <h3>🚗 Tänk på logistik</h3>
+          <p><strong>Gästernas resa:</strong> Flyganslutningar och tågförbindelser</p>
+          <p><strong>Boende:</strong> Hotell och B&B i närheten</p>
+          <p><strong>Säsong:</strong> Väder och tillgänglighet</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>📅 Planera i tid</h3>
+          <p><strong>Populära städer:</strong> Boka 12-18 månader i förväg</p>
+          <p><strong>Peak säsong:</strong> Maj-september mest efterfrågat</p>
+          <p><strong>Alternativ:</strong> Höst/vinter kan ge bättre priser</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cities-cta">
+      <h2>Redo att planera ert drömbrölllop?</h2>
+      <p>Börja med att välja stad och sedan utforska alla möjligheter</p>
+        <div class="cta-buttons">
+          <a href="/budget/budgetkalkylator?ref=stad-index" class="btn primary">Planera budget</a>
+        <a href="/guides/brollopsplanering-grundkurs" class="btn secondary">Läs planeringsguide</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+.cities-hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.cities-hero h1 {
+  font-size: 3rem;
+  margin: 0.5rem 0;
+  color: #1f1c14;
+}
+
+.lead {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.8rem;
+  color: #B26D4A;
+  font-weight: 700;
+}
+
+.stat span {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.breadcrumb ol {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li:not(:last-child):after {
+  content: "›";
+  margin: 0 0.5rem;
+  color: #999;
+}
+
+.breadcrumb a {
+  color: #B26D4A;
+  text-decoration: none;
+}
+
+.quick-search {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+}
+
+.search-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.filter-group h3 {
+  color: #1f1c14;
+  margin-bottom: 1rem;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: #B26D4A;
+  color: white;
+  border-color: #B26D4A;
+}
+
+.cities-main {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.city-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  position: relative;
+}
+
+.city-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border-color: #B26D4A;
+}
+
+.city-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.city-header h3 {
+  margin: 0;
+  color: #1f1c14;
+  font-size: 1.4rem;
+}
+
+.city-population {
+  color: #666;
+  font-size: 0.8rem;
+  background: #f8f9fa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.city-region {
+  color: #B26D4A;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.city-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.city-stat strong {
+  display: block;
+  color: #B26D4A;
+  font-weight: 700;
+}
+
+.city-stat span {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.city-highlights {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.city-highlights p {
+  margin: 0.25rem 0;
+}
+
+.city-pricing {
+  margin: 1rem 0 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.city-pricing p {
+  margin: 0.25rem 0;
+}
+
+.city-arrow {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.2rem;
+  color: #B26D4A;
+  transition: transform 0.2s ease;
+}
+
+.city-card:hover .city-arrow {
+  transform: translateX(4px);
+}
+
+.popular-regions {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.region-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+}
+
+.region-card h3 {
+  color: #1f1c14;
+  margin-top: 0;
+}
+
+.region-cities {
+  margin: 1rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.region-link {
+  color: #B26D4A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.region-link:hover {
+  text-decoration: underline;
+}
+
+.comparison-guide {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.comparison-guide > h2 {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+.comparison-table {
+  overflow-x: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.comparison-table th, .comparison-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.comparison-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #1f1c14;
+}
+
+.city-link {
+  color: #B26D4A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.city-link:hover {
+  text-decoration: underline;
+}
+
+.view-all-cities {
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.choosing-tips {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tip-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #B26D4A;
+}
+
+.tip-card h3 {
+  margin-top: 0;
+  color: #1f1c14;
+}
+
+.tip-card ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.cities-cta {
+  background: #B26D4A;
+  color: white;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.cities-cta h2 {
+  margin-top: 0;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.btn.primary {
+  background: white;
+  color: #B26D4A;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn:hover.primary {
+  background: #f8f9fa;
+}
+
+.btn:hover.secondary {
+  background: white;
+  color: #B26D4A;
+}
+
+/* Filtering */
+.city-card.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hero-stats {
+    gap: 1.5rem;
+  }
+
+  .cities-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .cities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .city-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filter-buttons {
+    justify-content: flex-start;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
+
+<script>
+// City filtering functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cityCards = document.querySelectorAll('.city-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      // Show/hide cities
+      cityCards.forEach(card => {
+        if (filter === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          const matchesFilter =
+            card.getAttribute('data-region').includes(filter) ||
+            card.getAttribute('data-size') === filter;
+
+          if (matchesFilter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        }
+      });
+    });
+  });
+});
+</script>

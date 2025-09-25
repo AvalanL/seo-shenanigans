@@ -9,10 +9,10 @@ schemaType: "Article"
 publishedAt: 2024-06-10
 updatedAt: 2024-06-10
 author: "Svenska Bröllopsakademien"
-status: "in-review"
+status: "published"
 evergreen: true
 ctaLabel: "Planera florabudgeten"
-ctaUrl: "/budget/brollopsbudget-2025"
+ctaUrl: "/budget/budgetkalkylator?ref=cta"
 faq:
   - question: "Vad kostar en bröllopsflorist i Malmö 2025?"
     answer: "Räkna med 18 000–28 000 kr för ett helhetskoncept med brudbukett, tärnor, corsage och middagsdekor. Mindre paket med brudbukett och två tärnor börjar kring 8 500 kr."
@@ -30,6 +30,7 @@ sources:
   - label: "Konsumentverket – Avtal med företag"
     url: "https://www.konsumentverket.se/"
 related:
+  - "budget/budgetkalkylator"
   - "budget/brollopsbudget-2025"
   - "checklistor/brollopsbudget-checklista"
   - "guides/brollopsplanering-grundkurs"

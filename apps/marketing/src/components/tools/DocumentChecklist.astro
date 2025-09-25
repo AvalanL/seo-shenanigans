@@ -1,0 +1,495 @@
+---
+// Document Checklist Tool - Interactive checklist for required documents
+---
+
+<div class="document-checklist bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    📋 Interaktiv dokumentchecklista
+  </h3>
+
+  <div class="checklist-container bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Välj er situation för att få en personlig checklista över vilka dokument ni behöver:
+    </p>
+
+    <!-- Situation Selector -->
+    <div class="situation-selector mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-4">🎯 Er situation:</h4>
+      <div class="selector-buttons grid md:grid-cols-2 gap-3">
+        <button class="situation-btn active" data-situation="swedish-both" onclick="showChecklist(this)">
+          <div class="text-2xl mb-2">🇸🇪</div>
+          <div class="font-semibold">Båda svenska medborgare</div>
+          <div class="text-sm text-gray-600">Enklaste processen</div>
+        </button>
+        <button class="situation-btn" data-situation="swedish-foreign" onclick="showChecklist(this)">
+          <div class="text-2xl mb-2">🌍</div>
+          <div class="font-semibold">En svensk, en utländsk</div>
+          <div class="text-sm text-gray-600">Blandad nationalitet</div>
+        </button>
+        <button class="situation-btn" data-situation="eu-citizens" onclick="showChecklist(this)">
+          <div class="text-2xl mb-2">🇪🇺</div>
+          <div class="font-semibold">EU-medborgare</div>
+          <div class="text-sm text-gray-600">Europeiska unionen</div>
+        </button>
+        <button class="situation-btn" data-situation="non-eu" onclick="showChecklist(this)">
+          <div class="text-2xl mb-2">🗺️</div>
+          <div class="font-semibold">Utomeuropeiska</div>
+          <div class="text-sm text-gray-600">Mest komplexa kraven</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Document Checklists -->
+    <div id="checklist-content">
+
+      <!-- Swedish Both -->
+      <div id="checklist-swedish-both" class="document-list active">
+        <h4 class="text-lg font-bold text-green-800 mb-4 flex items-center">
+          <span class="text-2xl mr-2">🇸🇪</span>
+          Båda svenska medborgare - Grundläggande krav
+        </h4>
+
+        <div class="checklist-sections space-y-4">
+          <div class="section bg-green-50 rounded-lg p-4">
+            <h5 class="font-semibold text-gray-800 mb-3">📋 Obligatoriska dokument för båda:</h5>
+            <div class="document-items space-y-2">
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Ansökan om hindersprövning (blankett 1502)</div>
+                  <div class="text-sm text-gray-600">Ladda ner från skatteverket.se</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Giltig ID-handling</div>
+                  <div class="text-sm text-gray-600">Körkort, pass eller nationellt ID-kort</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Personbevis (max 6 månader gammalt)</div>
+                  <div class="text-sm text-gray-600">Beställs från Skatteverket, kostar 50 kr</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Avgift 674 kr per person</div>
+                  <div class="text-sm text-gray-600">Totalt 1,348 kr för paret</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="section bg-yellow-50 rounded-lg p-4">
+            <h5 class="font-semibold text-gray-800 mb-3">⚠️ Extra dokument vid särskilda fall:</h5>
+            <div class="document-items space-y-2">
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Äktenskapsskillnad eller dödsbevis</div>
+                  <div class="text-sm text-gray-600">Om tidigare gift - bevis att förra äktenskapet upphört</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Namnbytesdokument</div>
+                  <div class="text-sm text-gray-600">Om ni bytt namn - alla tidigare namnbyten</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Adoptionsbeslut</div>
+                  <div class="text-sm text-gray-600">Om adoption påverkar släktskapsförhållanden</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-estimate bg-blue-50 rounded-lg p-4 mt-4">
+          <h5 class="font-semibold text-blue-800 mb-2">⏰ Tidsberäkning:</h5>
+          <ul class="text-sm text-blue-700 space-y-1">
+            <li>• Handläggningstid: 4 veckor (6-8 veckor i storstäder under sommaren)</li>
+            <li>• Total kostnad: ~1,450 kr (inkl. personbevis och porto)</li>
+            <li>• Rekommenderad ansökningstid: 3 månader före planerad vigsel</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Swedish-Foreign -->
+      <div id="checklist-swedish-foreign" class="document-list">
+        <h4 class="text-lg font-bold text-blue-800 mb-4 flex items-center">
+          <span class="text-2xl mr-2">🌍</span>
+          En svensk, en utländsk medborgare
+        </h4>
+
+        <div class="checklist-sections space-y-4">
+          <div class="section bg-green-50 rounded-lg p-4">
+            <h5 class="font-semibold text-gray-800 mb-3">🇸🇪 För svenska medborgaren:</h5>
+            <div class="document-items space-y-2">
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Ansökan om hindersprövning</div>
+                  <div class="text-sm text-gray-600">Blankett 1502</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Giltig ID-handling + personbevis</div>
+                  <div class="text-sm text-gray-600">Samma krav som för svenska par</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Avgift 674 kr</div>
+                  <div class="text-sm text-gray-600">För den svenska medborgaren</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="section bg-blue-50 rounded-lg p-4">
+            <h5 class="font-semibold text-gray-800 mb-3">🌍 För utländska medborgaren:</h5>
+            <div class="document-items space-y-2">
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Ansökan om hindersprövning</div>
+                  <div class="text-sm text-gray-600">Samma blankett som svensk partner</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Giltigt pass + uppehållstillstånd</div>
+                  <div class="text-sm text-gray-600">Måste visa laglig vistelse i Sverige</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Äktenskapsduglighetsbevis</div>
+                  <div class="text-sm text-gray-600">Från hemlandet - bevis att inget äktenskapshinder finns</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Auktoriserad översättning till svenska</div>
+                  <div class="text-sm text-gray-600">Av alla utländska dokument</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Apostillering av dokument</div>
+                  <div class="text-sm text-gray-600">Bekräftelse av dokumentens äkthet</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Avgift 674 kr</div>
+                  <div class="text-sm text-gray-600">För den utländska medborgaren</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-estimate bg-orange-50 rounded-lg p-4 mt-4">
+          <h5 class="font-semibold text-orange-800 mb-2">⏰ Tidsberäkning:</h5>
+          <ul class="text-sm text-orange-700 space-y-1">
+            <li>• Handläggningstid: 6-10 veckor (extra tid för internationell kontroll)</li>
+            <li>• Total kostnad: 3,000-5,000 kr (inkl. översättningar och apostillering)</li>
+            <li>• Rekommenderad ansökningstid: 4 månader före planerad vigsel</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EU Citizens -->
+      <div id="checklist-eu-citizens" class="document-list">
+        <h4 class="text-lg font-bold text-blue-800 mb-4 flex items-center">
+          <span class="text-2xl mr-2">🇪🇺</span>
+          EU-medborgare (båda)
+        </h4>
+
+        <div class="checklist-sections space-y-4">
+          <div class="section bg-blue-50 rounded-lg p-4">
+            <h5 class="font-semibold text-gray-800 mb-3">📋 För båda EU-medborgarna:</h5>
+            <div class="document-items space-y-2">
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Ansökan om hindersprövning (var)</div>
+                  <div class="text-sm text-gray-600">Blankett 1502 per person</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Giltigt pass eller nationellt ID</div>
+                  <div class="text-sm text-gray-600">EU ID-kort accepteras</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Personbevis/utdrag från hemlandets befolkningsregister</div>
+                  <div class="text-sm text-gray-600">Max 6 månader gammalt</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Äktenskapsduglighetsbevis</div>
+                  <div class="text-sm text-gray-600">Från respektive hemland</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Auktoriserad översättning</div>
+                  <div class="text-sm text-gray-600">Om dokumenten inte är på svenska/engelska</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Avgift 1,348 kr</div>
+                  <div class="text-sm text-gray-600">674 kr per person</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-estimate bg-blue-50 rounded-lg p-4 mt-4">
+          <h5 class="font-semibold text-blue-800 mb-2">⏰ Tidsberäkning:</h5>
+          <ul class="text-sm text-blue-700 space-y-1">
+            <li>• Handläggningstid: 4-6 veckor</li>
+            <li>• Total kostnad: 2,500-4,000 kr (inkl. översättningar)</li>
+            <li>• Rekommenderad ansökningstid: 3 månader före planerad vigsel</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Non-EU -->
+      <div id="checklist-non-eu" class="document-list">
+        <h4 class="text-lg font-bold text-red-800 mb-4 flex items-center">
+          <span class="text-2xl mr-2">🗺️</span>
+          Utomeuropeiska medborgare
+        </h4>
+
+        <div class="checklist-sections space-y-4">
+          <div class="section bg-red-50 rounded-lg p-4">
+            <h5 class="font-semibold text-gray-800 mb-3">📋 Kompletta dokumentkrav:</h5>
+            <div class="document-items space-y-2">
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Ansökan om hindersprövning</div>
+                  <div class="text-sm text-gray-600">Blankett 1502 för varje person</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Giltigt pass + uppehållstillstånd</div>
+                  <div class="text-sm text-gray-600">Måste visa laglig rätt att vistas i Sverige</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Äktenskapsduglighetsbevis från hemland</div>
+                  <div class="text-sm text-gray-600">Utfärdat av behörig myndighet</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Apostillering av alla utländska dokument</div>
+                  <div class="text-sm text-gray-600">Bekräftelse enligt Haagkonventionen</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Auktoriserad översättning till svenska</div>
+                  <div class="text-sm text-gray-600">Av ALLA dokument som inte är på svenska</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Bevis om civilstånd från hemland</div>
+                  <div class="text-sm text-gray-600">Bekräftar att personen inte redan är gift</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Eventuellt intyg från svenska ambassaden</div>
+                  <div class="text-sm text-gray-600">Beroende på hemland</div>
+                </div>
+              </label>
+              <label class="document-item flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3">
+                <div>
+                  <div class="font-semibold">Avgift 1,348 kr + extra kostnader</div>
+                  <div class="text-sm text-gray-600">674 kr per person plus dokumentkostnader</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-estimate bg-red-50 rounded-lg p-4 mt-4">
+          <h5 class="font-semibold text-red-800 mb-2">⏰ Tidsberäkning:</h5>
+          <ul class="text-sm text-red-700 space-y-1">
+            <li>• Handläggningstid: 8-12 veckor (extra kontroller krävs)</li>
+            <li>• Total kostnad: 5,000-10,000 kr (inkl. alla översättningar och apostillering)</li>
+            <li>• Rekommenderad ansökningstid: 5-6 månader före planerad vigsel</li>
+            <li>• <strong>Råd:</strong> Kontakta svensk ambassad i hemlandet först!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress tracker -->
+    <div class="progress-tracker bg-gray-50 rounded-lg p-4 mt-6">
+      <h5 class="font-semibold text-gray-800 mb-2">📊 Er framsteg:</h5>
+      <div class="progress-bar bg-gray-200 rounded-full h-3 mb-2">
+        <div class="progress-fill bg-green-500 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+      <div class="progress-text text-sm text-gray-600">
+        <span class="progress-count">0</span> av <span class="progress-total">0</span> dokument klara
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showChecklist(button) {
+  // Remove active class from all buttons
+  document.querySelectorAll('.situation-btn').forEach(btn => btn.classList.remove('active'));
+
+  // Add active class to clicked button
+  button.classList.add('active');
+
+  // Hide all checklists
+  document.querySelectorAll('.document-list').forEach(list => list.classList.remove('active'));
+
+  // Show selected checklist
+  const situation = button.dataset.situation;
+  document.getElementById(`checklist-${situation}`).classList.add('active');
+
+  // Update progress tracker
+  updateProgress();
+}
+
+function updateProgress() {
+  const activeChecklist = document.querySelector('.document-list.active');
+  if (!activeChecklist) return;
+
+  const checkboxes = activeChecklist.querySelectorAll('input[type="checkbox"]');
+  const checkedBoxes = activeChecklist.querySelectorAll('input[type="checkbox"]:checked');
+
+  const total = checkboxes.length;
+  const completed = checkedBoxes.length;
+  const percentage = total > 0 ? (completed / total) * 100 : 0;
+
+  document.querySelector('.progress-fill').style.width = `${percentage}%`;
+  document.querySelector('.progress-count').textContent = completed;
+  document.querySelector('.progress-total').textContent = total;
+}
+
+// Add event listeners to all checkboxes
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', updateProgress);
+  });
+
+  // Initialize progress
+  updateProgress();
+});
+</script>
+
+<style>
+  .document-checklist {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .situation-btn {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .situation-btn:hover {
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
+
+  .situation-btn.active {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  }
+
+  .document-list {
+    display: none;
+  }
+
+  .document-list.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .document-item {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .document-item:hover {
+    background-color: #f9fafb;
+  }
+
+  input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .progress-fill {
+    transition: width 0.5s ease;
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+interface Props {
+  username: string;
+  title: string;
+}
+
+const { username, title } = Astro.props;
+
+// Ta bort @ och URL-delar om de finns
+const cleanUsername = username.replace(/^@/, '').replace(/^https?:\/\/(www\.)?instagram\.com\//, '');
+---
+
+<section class="instagram-gallery-simple">
+  <div class="instagram-cta">
+    <a
+      href={`https://instagram.com/${cleanUsername}`}
+      target="_blank"
+      rel="noopener"
+      class="instagram-link"
+    >
+      📸 Följ @{cleanUsername} på Instagram
+    </a>
+  </div>
+</section>
+
+<style>
+  .instagram-gallery-simple {
+    margin-top: 2rem;
+  }
+
+  .instagram-cta {
+    text-align: center;
+  }
+
+  .instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .instagram-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(240, 148, 51, 0.3);
+  }
+</style>

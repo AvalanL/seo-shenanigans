@@ -1,0 +1,830 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import cities from '../../../data/cities.json';
+
+export async function getStaticPaths() {
+  return Object.entries(cities).map(([cityKey, cityData]) => ({
+    params: { city: cityKey },
+    props: { cityData, cityKey }
+  }));
+}
+
+const { cityData, cityKey } = Astro.props;
+const currentYear = new Date().getFullYear();
+
+// Get all services available in this city
+const availableServices = Object.entries(cityData.pricing).map(([service, pricing]) => ({
+  service,
+  pricing,
+  supplierCount: cityData.supplierCounts[service] || 0,
+  searchVolume: cityData.searchVolumes[service] || 0
+})).filter(item => item.supplierCount > 0);
+
+// Calculate city totals
+const totalSuppliers = availableServices.reduce((sum, item) => sum + item.supplierCount, 0);
+const totalSearchVolume = availableServices.reduce((sum, item) => sum + item.searchVolume, 0);
+
+// Service data for display
+const serviceInfo = {
+  'bröllopsfotograf': { title: 'Bröllopsfotografer', icon: '📸', category: 'kreativt' },
+  'bröllopslokal': { title: 'Bröllopslokaler', icon: '🏰', category: 'platser' },
+  'bröllopscatering': { title: 'Bröllopscatering', icon: '🍽️', category: 'mat' },
+  'bröllopsflorist': { title: 'Bröllopsflorister', icon: '💐', category: 'dekoration' }
+};
+
+// Get actual suppliers from this city
+let actualSuppliers = [];
+try {
+  const suppliers = await getCollection('suppliers');
+  actualSuppliers = suppliers
+    .filter(supplier => supplier.data.city.toLowerCase().includes(cityData.name.toLowerCase()))
+    .slice(0, 8);
+} catch (error) {
+  console.warn('Could not load suppliers for city:', error);
+}
+
+// Get actual venues from this city
+let actualVenues = [];
+try {
+  const venues = await getCollection('venues');
+  actualVenues = venues
+    .filter(venue => venue.data.city.toLowerCase().includes(cityData.name.toLowerCase()))
+    .slice(0, 6);
+} catch (error) {
+  console.warn('Could not load venues for city:', error);
+}
+---
+
+<BaseLayout
+  title={`Bröllop ${cityData.name} ${currentYear} - Komplett guide för bröllopsplanering`}
+  description={`Planera ert drömbrölllop i ${cityData.name}. ${totalSuppliers}+ leverantörer, alla tjänster, lokala priser och tips. Komplett guide för ${cityData.name}.`}
+  keywords={[`bröllop ${cityKey}`, `bröllop ${cityData.name}`, `bröllopsplanering ${cityData.name}`, `bröllopsleverantörer ${cityData.name}`]}
+>
+  <!-- Schema markup for city -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Place",
+    "name": cityData.name,
+    "description": `Bröllopsguide för ${cityData.name}`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": cityData.name,
+      "addressRegion": cityData.region,
+      "addressCountry": "SE"
+    },
+    "geo": cityData.latitude && cityData.longitude ? {
+      "@type": "GeoCoordinates",
+      "latitude": cityData.latitude,
+      "longitude": cityData.longitude
+    } : undefined
+  })} />
+
+  <!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="breadcrumb">
+    <ol>
+      <li><a href="/">Hem</a></li>
+      <li><a href="/stad">Städer</a></li>
+      <li aria-current="page">{cityData.name}</li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="city-hero">
+      <div class="hero-content">
+        <h1>Bröllop i {cityData.name} {currentYear}</h1>
+        <p class="lead">Komplett guide för bröllopsplanering i {cityData.name}, {cityData.region}</p>
+
+        <div class="city-stats">
+          <div class="stat">
+            <strong>{totalSuppliers}+</strong>
+            <span>Leverantörer</span>
+          </div>
+          <div class="stat">
+            <strong>{availableServices.length}</strong>
+            <span>Tjänster</span>
+          </div>
+          <div class="stat">
+            <strong>{cityData.population.toLocaleString('sv-SE')}</strong>
+            <span>Invånare</span>
+          </div>
+          <div class="stat">
+            <strong>{totalSearchVolume.toLocaleString('sv-SE')}+</strong>
+            <span>Sökningar/månad</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- City Overview -->
+    <section class="city-overview">
+      <div class="overview-content">
+        <h2>Varför gifta sig i {cityData.name}?</h2>
+
+        <div class="overview-grid">
+          <div class="overview-item">
+            <h3>🌟 Populära säsonger</h3>
+            <p><strong>{cityData.seasonality.peak}</strong> är mest populärt i {cityData.name}</p>
+            <p>{cityData.seasonality.note}</p>
+          </div>
+
+          <div class="overview-item">
+            <h3>🚗 Transport & tillgänglighet</h3>
+            <p><strong>Flyg:</strong> {cityData.transport.airport}</p>
+            <p><strong>Kollektivtrafik:</strong> {cityData.transport.public}</p>
+            <p><strong>Parkering:</strong> {cityData.transport.parking}</p>
+          </div>
+
+          <div class="overview-item">
+            <h3>🏰 Populära bröllopsplatser</h3>
+            <ul>
+              {cityData.popularVenues.map(venue => (
+                <li>{venue}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="overview-item">
+            <h3>💰 Prisfaktorer</h3>
+            <p>Priserna är generellt <strong>{cityData.seasonality.priceIncrease}</strong> högre under {cityData.seasonality.peak}</p>
+            <p>Boka tidigt för bästa priser och tillgänglighet</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services-section">
+      <h2>Bröllopstjänster i {cityData.name}</h2>
+      <p>Alla tjänster ni behöver för ert drömbrölllop, lokalt i {cityData.name}:</p>
+
+      <div class="services-grid">
+        {availableServices.map(({ service, pricing, supplierCount, searchVolume }) => {
+          const info = serviceInfo[service];
+          return info ? (
+            <a href={`/leverantorer/${service}/${cityKey}`} class="service-card">
+              <div class="service-header">
+                <span class="service-icon">{info.icon}</span>
+                <div>
+                  <h3>{info.title}</h3>
+                  <span class="service-category">{info.category}</span>
+                </div>
+              </div>
+
+              <div class="service-stats">
+                <div class="service-stat">
+                  <strong>{supplierCount}</strong>
+                  <span>leverantörer</span>
+                </div>
+                <div class="service-stat">
+                  <strong>från {pricing.min.toLocaleString('sv-SE')} kr</strong>
+                  <span>startpris</span>
+                </div>
+              </div>
+
+              <div class="service-pricing">
+                <p>Genomsnitt: <strong>{pricing.avg.toLocaleString('sv-SE')} kr</strong></p>
+                <p>Intervall: {pricing.min.toLocaleString('sv-SE')} - {pricing.max.toLocaleString('sv-SE')} kr</p>
+              </div>
+
+              <div class="service-arrow">→</div>
+            </a>
+          ) : null;
+        })}
+      </div>
+    </section>
+
+    <!-- Featured Venues -->
+    {actualVenues.length > 0 && (
+      <section class="featured-venues">
+        <h2>Populära bröllopslokaler i {cityData.name}</h2>
+
+        <div class="venues-grid">
+          {actualVenues.map(venue => (
+            <a href={`/lokaler/${venue.slug}`} class="venue-card">
+              <div class="venue-info">
+                <h3>{venue.data.title}</h3>
+                <p class="venue-style">Stil: {venue.data.style}</p>
+                <p class="venue-capacity">Kapacitet: {venue.data.capacity} gäster</p>
+                <p class="venue-price">Från {venue.data.startPrice?.toLocaleString('sv-SE')} kr</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Featured Suppliers -->
+    {actualSuppliers.length > 0 && (
+      <section class="featured-suppliers">
+        <h2>Rekommenderade leverantörer i {cityData.name}</h2>
+
+        <div class="suppliers-grid">
+          {actualSuppliers.map(supplier => (
+            <a href={`/leverantorer/${supplier.data.category}/${supplier.slug.split('/').pop()}`} class="supplier-card">
+              {supplier.data.image && (
+                <img src={supplier.data.image} alt={supplier.data.title} loading="lazy" />
+              )}
+              <div class="supplier-info">
+                <h3>{supplier.data.title}</h3>
+                <p class="supplier-category">{supplier.data.category}</p>
+                <p class="supplier-area">Område: {supplier.data.serviceArea}</p>
+                <p class="supplier-price">Från {supplier.data.startPrice?.toLocaleString('sv-SE')} kr</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Local Tips -->
+    <section class="local-tips">
+      <h2>Lokala tips för bröllop i {cityData.name}</h2>
+
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h3>📅 Bästa tiden att gifta sig</h3>
+          <p><strong>Peak säsong:</strong> {cityData.seasonality.peak}</p>
+          <p>Under denna tid är priserna {cityData.seasonality.priceIncrease} högre, men vädret och tillgängligheten är bäst.</p>
+          <p><strong>Tips:</strong> Boka 12-18 månader i förväg för peak säsong.</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>🚗 Transport för gäster</h3>
+          <p><strong>Flyganslutningar:</strong> {cityData.transport.airport}</p>
+          <p><strong>Lokaltrafik:</strong> {cityData.transport.public}</p>
+          <p><strong>Parkering:</strong> {cityData.transport.parking}</p>
+          <p><strong>Tips:</strong> Informera gästerna om transport i god tid.</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>🏨 Boende för gäster</h3>
+          <p>Boka hotell för utomstående gäster tidigt, särskilt under {cityData.seasonality.peak}.</p>
+          <p>Många par förhandlar grupprabatter med lokala hotell.</p>
+          <p><strong>Areas att överväga:</strong> {cityData.neighborhoods ? cityData.neighborhoods.slice(0, 3).join(', ') : 'Centralt läge'}</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>💡 Lokala specialiteter</h3>
+          <p>Ta vara på vad som gör {cityData.name} unikt:</p>
+          <ul>
+            {cityData.popularVenues.slice(0, 3).map(venue => (
+              <li>{venue} - historisk charm</li>
+            ))}
+          </ul>
+          <p>Inkludera lokala traditioner och specialiteter i ert bröllop.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Overview -->
+    <section class="pricing-overview">
+      <h2>Prisöversikt bröllop {cityData.name} {currentYear}</h2>
+
+      <div class="pricing-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Tjänst</th>
+              <th>Lägsta pris</th>
+              <th>Genomsnitt</th>
+              <th>Högsta pris</th>
+              <th>Leverantörer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {availableServices.map(({ service, pricing, supplierCount }) => {
+              const info = serviceInfo[service];
+              return info ? (
+                <tr>
+                  <td>
+                    <a href={`/leverantorer/${service}/${cityKey}`} class="service-link">
+                      {info.icon} {info.title}
+                    </a>
+                  </td>
+                  <td>{pricing.min.toLocaleString('sv-SE')} kr</td>
+                  <td><strong>{pricing.avg.toLocaleString('sv-SE')} kr</strong></td>
+                  <td>{pricing.max.toLocaleString('sv-SE')} kr</td>
+                  <td>{supplierCount}</td>
+                </tr>
+              ) : null;
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="budget-tip">
+        <p><strong>💡 Budgettips:</strong> Ett genomsnittsbröllop i {cityData.name} kostar cirka <strong>{availableServices.reduce((sum, item) => sum + item.pricing.avg, 0).toLocaleString('sv-SE')} kr</strong> för alla huvudtjänster.</p>
+      </div>
+    </section>
+
+    <!-- Related Cities -->
+    <section class="related-cities">
+      <h2>Andra populära bröllopsplatser</h2>
+      <p>Överväger ni andra städer för ert bröllop?</p>
+
+      <div class="cities-grid">
+        {Object.entries(cities)
+          .filter(([key]) => key !== cityKey)
+          .slice(0, 6)
+          .map(([key, data]) => (
+            <a href={`/stad/${key}`} class="city-card">
+              <h3>{data.name}</h3>
+              <p>{data.region}</p>
+              <div class="city-quick-stats">
+                <span>{Object.values(data.supplierCounts || {}).reduce((a, b) => a + b, 0)} leverantörer</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="city-cta">
+      <h2>Planera ert bröllop i {cityData.name}</h2>
+      <p>Använd våra verktyg för att planera och budgetera ert drömbrölllop.</p>
+        <div class="cta-buttons">
+          <a href="/budget/budgetkalkylator?ref=stad-city" class="btn primary">Skapa budget</a>
+        <a href="/guides/brollopsplanering-grundkurs" class="btn secondary">Planeringsguide</a>
+        <a href="/checklistor" class="btn secondary">Checklistor</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+.city-hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.city-hero h1 {
+  font-size: 3rem;
+  margin: 0.5rem 0;
+  color: #1f1c14;
+}
+
+.lead {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.city-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.8rem;
+  color: #B26D4A;
+  font-weight: 700;
+}
+
+.stat span {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.breadcrumb ol {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li:not(:last-child):after {
+  content: "›";
+  margin: 0 0.5rem;
+  color: #999;
+}
+
+.breadcrumb a {
+  color: #B26D4A;
+  text-decoration: none;
+}
+
+.city-overview {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.overview-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.overview-item h3 {
+  color: #B26D4A;
+  margin-top: 0;
+}
+
+.overview-item ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.services-section {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.services-section > h2, .services-section > p {
+  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.services-section > p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.service-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  position: relative;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border-color: #B26D4A;
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.service-icon {
+  font-size: 2rem;
+}
+
+.service-header h3 {
+  margin: 0;
+  color: #1f1c14;
+}
+
+.service-category {
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.service-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.service-stat strong {
+  display: block;
+  color: #B26D4A;
+  font-weight: 700;
+}
+
+.service-stat span {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.service-pricing {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.service-arrow {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.2rem;
+  color: #B26D4A;
+  transition: transform 0.2s ease;
+}
+
+.service-card:hover .service-arrow {
+  transform: translateX(4px);
+}
+
+.featured-venues, .featured-suppliers {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.venues-grid, .suppliers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.venue-card, .supplier-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+}
+
+.venue-card:hover, .supplier-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.supplier-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  float: right;
+}
+
+.supplier-info h3, .venue-info h3 {
+  margin: 0;
+  color: #1f1c14;
+}
+
+.supplier-category, .venue-style, .venue-capacity, .venue-price, .supplier-area, .supplier-price {
+  color: #B26D4A;
+  font-weight: 600;
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.local-tips {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.local-tips > h2 {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.tip-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #B26D4A;
+}
+
+.tip-card h3 {
+  margin-top: 0;
+  color: #1f1c14;
+}
+
+.tip-card ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.pricing-overview {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.pricing-table {
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+.pricing-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.pricing-table th, .pricing-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.pricing-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #1f1c14;
+}
+
+.service-link {
+  color: #B26D4A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.service-link:hover {
+  text-decoration: underline;
+}
+
+.budget-tip {
+  background: #e8f5e8;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.related-cities {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.related-cities > h2, .related-cities > p {
+  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+
+.city-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+}
+
+.city-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.city-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #1f1c14;
+}
+
+.city-quick-stats {
+  margin-top: 0.5rem;
+  color: #B26D4A;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.city-cta {
+  background: #B26D4A;
+  color: white;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.city-cta h2 {
+  margin-top: 0;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.btn.primary {
+  background: white;
+  color: #B26D4A;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn:hover.primary {
+  background: #f8f9fa;
+}
+
+.btn:hover.secondary {
+  background: white;
+  color: #B26D4A;
+}
+
+@media (max-width: 768px) {
+  .city-stats {
+    gap: 1.5rem;
+  }
+
+  .city-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .overview-grid, .tips-grid, .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>

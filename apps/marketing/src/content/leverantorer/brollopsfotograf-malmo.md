@@ -7,7 +7,7 @@ secondaryKeywords:
   - "bröllopsfotograf pris malmö"
   - "wedding photographer malmo"
 schemaType: "Article"
-status: "in-review"
+status: "published"
 evergreen: true
 ctaLabel: "Ladda ner jämförelsemall"
 ctaUrl: "/templates/fotograf-jamforelsemall"

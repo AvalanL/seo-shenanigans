@@ -11,7 +11,7 @@ schemaType: "Article"
 publishedAt: 2024-06-07
 updatedAt: 2024-06-07
 author: "Svenska Bröllopsakademien"
-status: "in-review"
+status: "published"
 evergreen: true
 ctaLabel: "Ladda ner jämförelsemall"
 ctaUrl: "/templates/fotograf-jamforelsemall"

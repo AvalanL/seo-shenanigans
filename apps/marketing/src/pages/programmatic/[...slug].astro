@@ -1,0 +1,295 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  // Get all programmatic content
+  const programmaticContent = await getCollection('programmatic');
+
+  return programmaticContent.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  keywords={[entry.data.primaryKeyword, ...entry.data.secondaryKeywords]}
+>
+  <!-- Structured Data for Local Business -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": entry.data.title,
+    "description": entry.data.description,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": entry.data.city,
+      "addressRegion": entry.data.region,
+      "addressCountry": "SE"
+    },
+    "priceRange": `${entry.data.priceRange} SEK`,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "reviewCount": entry.data.supplierCount
+    }
+  })} />
+
+  <!-- Programmatic SEO Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="breadcrumb">
+    <ol>
+      <li><a href="/">Hem</a></li>
+      <li><a href="/leverantorer">Leverantörer</a></li>
+      <li><a href={`/${entry.data.category}`}>{entry.data.category.charAt(0).toUpperCase() + entry.data.category.slice(1)}</a></li>
+      <li aria-current="page">{entry.data.city}</li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- Hero Section with Key Metrics -->
+    <section class="programmatic-hero">
+      <div class="hero-content">
+        <h1>{entry.data.title}</h1>
+        <p class="lead">{entry.data.summary}</p>
+
+        <div class="key-stats">
+          <div class="stat">
+            <strong>{entry.data.supplierCount}+</strong>
+            <span>Leverantörer</span>
+          </div>
+          <div class="stat">
+            <strong>{entry.data.avgPrice?.toLocaleString?.('sv-SE') || 'Från'} kr</strong>
+            <span>Genomsnittspris</span>
+          </div>
+          <div class="stat">
+            <strong>{entry.data.searchVolume}+</strong>
+            <span>Sökningar/månad</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <article class="programmatic-content">
+      <Content />
+    </article>
+
+    <!-- FAQ Schema -->
+    {entry.data.faq && (
+      <section class="faq-section">
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": entry.data.faq.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": item.answer
+            }
+          }))
+        })} />
+      </section>
+    )}
+
+    <!-- Related Programmatic Content -->
+    <aside class="related-programmatic">
+      <h3>Relaterat i andra städer</h3>
+      <ul class="related-links">
+        <li><a href="/programmatic/{entry.data.primaryKeyword.split(' ')[0]}-göteborg-{new Date().getFullYear()}">Göteborg</a></li>
+        <li><a href="/programmatic/{entry.data.primaryKeyword.split(' ')[0]}-malmö-{new Date().getFullYear()}">Malmö</a></li>
+        <li><a href="/programmatic/{entry.data.primaryKeyword.split(' ')[0]}-uppsala-{new Date().getFullYear()}">Uppsala</a></li>
+      </ul>
+
+      <h3>Andra tjänster i {entry.data.city}</h3>
+      <ul class="service-links">
+        <li><a href="/programmatic/bröllopslokal-{entry.data.city.toLowerCase()}-{new Date().getFullYear()}">Bröllopslokaler</a></li>
+        <li><a href="/programmatic/bröllopsfotograf-{entry.data.city.toLowerCase()}-{new Date().getFullYear()}">Fotografer</a></li>
+        <li><a href="/programmatic/bröllopscatering-{entry.data.city.toLowerCase()}-{new Date().getFullYear()}">Catering</a></li>
+      </ul>
+    </aside>
+
+    <!-- CTA Section -->
+    <section class="programmatic-cta">
+      <h2>Planerar ni bröllop i {entry.data.city}?</h2>
+      <p>Använd våra verktyg för att jämföra leverantörer och planera er budget.</p>
+      <div class="cta-buttons">
+        <a href="/budget/budgetkalkylator?ref=programmatic" class="btn primary">Skapa budget</a>
+        <a href="/guides/brollopsplanering-grundkurs" class="btn secondary">Planerings-guide</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+.programmatic-hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.key-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+  padding: 1rem;
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.5rem;
+  color: #B26D4A;
+  font-weight: 700;
+}
+
+.stat span {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.breadcrumb ol {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li:not(:last-child):after {
+  content: "›";
+  margin: 0 0.5rem;
+  color: #999;
+}
+
+.breadcrumb a {
+  color: #B26D4A;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.programmatic-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+.related-programmatic {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 3rem 0;
+}
+
+.related-programmatic h3 {
+  margin-top: 0;
+  color: #B26D4A;
+}
+
+.related-links, .service-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.related-links a, .service-links a {
+  color: #B26D4A;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #B26D4A;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.related-links a:hover, .service-links a:hover {
+  background: #B26D4A;
+  color: white;
+}
+
+.programmatic-cta {
+  background: #B26D4A;
+  color: white;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 8px;
+  margin: 3rem 0;
+}
+
+.programmatic-cta h2 {
+  margin-top: 0;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.btn.primary {
+  background: white;
+  color: #B26D4A;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn:hover.primary {
+  background: #f8f9fa;
+}
+
+.btn:hover.secondary {
+  background: white;
+  color: #B26D4A;
+}
+
+@media (max-width: 768px) {
+  .key-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .related-links, .service-links {
+    flex-direction: column;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+}
+</style>

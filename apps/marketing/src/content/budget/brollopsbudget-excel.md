@@ -6,7 +6,7 @@ primaryKeyword: "bröllopsbudget excel"
 secondaryKeywords:
   - "budget bröllop mall"
 schemaType: "Article"
-status: "in-review"
+status: "published"
 evergreen: true
 faq:
   - question: "Hur laddar vi ner och använder Excel-mallen?"
@@ -98,7 +98,7 @@ Koppla varje kostnadspost till en uppgift i [Checklista för bröllopsbudget](/c
 - **Följ Konsumentverkets riktlinjer:** Använd deras kategorisering (boende, transporter, mat) för att enklare jämföra hushållsbudget och bröllopsbudget.
 - **Dokumentera lärdomar:** Lägg till en kolumn "Note to future us" för att skriva ner vad som fungerade bra – perfekt om ni ska hjälpa vänner eller planera framtida högtider.
 
-## 8. FAQ – kortsvar för AI & snippets
+## Vanliga frågor
 
 **Hur hanterar vi förändringar i valutakurser?** Ange valutakod (SEK, EUR, USD) i fliken Inställningar. Mallen hämtar en växelkurs som ni manuellt kan uppdatera när ni får fakturor i utländsk valuta.
 

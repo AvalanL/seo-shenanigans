@@ -4,47 +4,151 @@ import { randomUUID } from "node:crypto";
 const toolId = `budget-tool-${randomUUID()}`;
 
 const defaultCategories = [
-  { id: "lokal", label: "Lokal & hyra", defaultValue: 35000 },
-  { id: "mat", label: "Mat & dryck", defaultValue: 45000 },
-  { id: "klader", label: "Kläder & styling", defaultValue: 15000 },
-  { id: "foto", label: "Foto & film", defaultValue: 20000 },
-  { id: "musik", label: "Musik & underhållning", defaultValue: 12000 },
-  { id: "dekor", label: "Dekor & blommor", defaultValue: 10000 },
+  { id: "lokal", label: "Lokal & hyra", defaultValue: 32000 },
+  { id: "mat", label: "Mat & dryck", defaultValue: 42000 },
+  { id: "klader", label: "Kläder & styling", defaultValue: 14000 },
+  { id: "foto", label: "Foto & film", defaultValue: 18000 },
+  { id: "musik", label: "Musik & underhållning", defaultValue: 11000 },
+  { id: "dekor", label: "Dekor & blommor", defaultValue: 9000 },
   { id: "ovrigt", label: "Övrigt & buffert", defaultValue: 8000 }
 ];
+
+const scenarioPresets = [
+  {
+    id: "smart",
+    label: "Smart",
+    description: "Lågsäsong, 60 gäster, fokus på DIY och lokala leverantörer",
+    guests: 60,
+    values: {
+      lokal: 25000,
+      mat: 30000,
+      klader: 10000,
+      foto: 12000,
+      musik: 8000,
+      dekor: 6000,
+      ovrigt: 7000
+    }
+  },
+  {
+    id: "standard",
+    label: "Standard",
+    description: "Helg i säsong för 80 gäster med mix av leverantörer",
+    guests: 80,
+    values: Object.fromEntries(defaultCategories.map((item) => [item.id, item.defaultValue]))
+  },
+  {
+    id: "premium",
+    label: "Premium",
+    description: "Slottsbröllop, 110 gäster, helhetskoordinator och liveband",
+    guests: 110,
+    values: {
+      lokal: 52000,
+      mat: 72000,
+      klader: 28000,
+      foto: 26000,
+      musik: 24000,
+      dekor: 22000,
+      ovrigt: 20000
+    }
+  }
+];
+
+const insightsRanges = [
+  {
+    max: 110000,
+    title: "Smart budget",
+    tip: "Ni ligger under rikssnittet. Prioritera leverantörer som erbjuder paket och digitala inbjudningar."
+  },
+  {
+    max: 165000,
+    title: "Balans budget",
+    tip: "Ni matchar svenska medianen. Säkerställ offert på lokal, catering och fotograf tidigt."
+  },
+  {
+    max: Infinity,
+    title: "Premium budget",
+    tip: "Planera tidsmarginaler och kontrakt för exklusiva tjänster. Säkerställ extra buffert för logistik."
+  }
+];
 ---
-<section id={toolId} class="budget-tool" data-budget-tool data-defaults={JSON.stringify(defaultCategories)}>
+<section
+  id={toolId}
+  class="budget-tool"
+  data-budget-tool
+  data-defaults={JSON.stringify(defaultCategories)}
+  data-scenarios={JSON.stringify(scenarioPresets)}
+  data-insights={JSON.stringify(insightsRanges)}
+  data-default-scenario="standard"
+  data-default-guests="80"
+>
   <header>
-    <h2>Bygg din bröllopsbudget</h2>
-    <p>Justera posterna nedan för att se total budget, kostnad per gäst och spara din plan lokalt.</p>
+    <p class="eyebrow">Interaktiv kalkyl</p>
+    <h2>Bygg er bröllopsbudget</h2>
+    <p class="lede">Justera posterna, spara lokalt och exportera som CSV. Alla värden är baserade på svenska prisnivåer för 2024.</p>
   </header>
 
+  <div class="scenario-bar" role="radiogroup" aria-label="Budgetläge">
+    {scenarioPresets.map((scenario) => (
+      <button
+        type="button"
+        class={`scenario-option${scenario.id === "standard" ? " is-active" : ""}`}
+        data-scenario={scenario.id}
+        aria-pressed={scenario.id === "standard" ? "true" : "false"}
+      >
+        <span class="scenario-label">{scenario.label}</span>
+        <span class="scenario-meta">{scenario.description}</span>
+      </button>
+    ))}
+    <button type="button" class="scenario-option ghost" data-scenario="custom" aria-pressed="false">
+      <span class="scenario-label">Eget läge</span>
+      <span class="scenario-meta">Behåll egna värden och justera manuellt.</span>
+    </button>
+  </div>
+
   <form class="budget-form" autocomplete="off">
-    <div class="inputs">
+    <fieldset class="basics">
+      <legend class="visually-hidden">Grundinställningar</legend>
       <label class="guest-input">
         <span>Antal gäster</span>
         <input type="number" inputmode="numeric" min="0" step="1" name="guests" value="80" />
       </label>
+      <p class="helper-text">Kostnad per gäst beräknas automatiskt för att spegla svenska medianpriser.</p>
+    </fieldset>
+
+    <div class="category-list" data-category-list>
       {defaultCategories.map((category) => (
-        <label class="budget-input" for={`${toolId}-${category.id}`}>
-          <span>{category.label}</span>
-          <div class="input-group">
-            <span class="currency">kr</span>
-            <input
-              id={`${toolId}-${category.id}`}
-              type="number"
-              inputmode="decimal"
-              min="0"
-              step="100"
-              name={category.id}
-              value={category.defaultValue}
-            />
+        <div class="category-row" data-category={category.id} data-default="true">
+          <div class="row-main">
+            <label class="row-label" for={`${toolId}-${category.id}`}>
+              <span>{category.label}</span>
+            </label>
+            <div class="row-input">
+              <span class="currency">kr</span>
+              <input
+                id={`${toolId}-${category.id}`}
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="100"
+                name={category.id}
+                value={category.defaultValue}
+                data-label={category.label}
+              />
+            </div>
           </div>
-        </label>
+          <button type="button" class="remove-btn" data-remove hidden aria-label={`Ta bort ${category.label}`}>
+            ×
+          </button>
+        </div>
       ))}
     </div>
 
-    <div class="summary">
+    <div class="add-row">
+      <button type="button" class="add-trigger" data-action="add-category">+ Lägg till egen kostnadspost</button>
+      <p class="helper-text">Exempel: smekmånad, vigselring, barnpassning eller kör.</p>
+    </div>
+
+    <div class="summary" aria-live="polite">
       <div>
         <p class="label">Total budget</p>
         <p class="value" data-total>0 kr</p>
@@ -54,19 +158,43 @@ const defaultCategories = [
         <p class="value" data-per-guest>0 kr</p>
       </div>
       <div>
-        <p class="label">Buffert (10 %)</p>
+        <p class="label">Rekommenderad buffert (10 %)</p>
         <p class="value" data-buffer>0 kr</p>
       </div>
+      <div>
+        <p class="label">Budgetläge</p>
+        <p class="value" data-budget-tier>–</p>
+      </div>
+    </div>
+
+    <div class="insights" data-budget-tip>
+      Tips uppdateras när ni justerar budgeten.
     </div>
 
     <div class="actions">
       <button type="button" data-action="save">Spara i webbläsaren</button>
       <button type="button" data-action="load">Återställ sparade värden</button>
-      <button type="button" data-action="reset" class="secondary">Återställ standard</button>
+      <button type="button" data-action="reset" class="secondary">Återställ grundvärden</button>
       <button type="button" data-action="export" class="secondary">Exportera som CSV</button>
       <button type="button" data-action="clear" class="ghost">Rensa sparat</button>
     </div>
   </form>
+
+  <template id={`${toolId}-category-template`}>
+    <div class="category-row" data-default="false">
+      <div class="row-main">
+        <label class="row-label">
+          <span class="visually-hidden">Benämning</span>
+          <input type="text" class="label-input" data-label-input placeholder="Ny kostnadspost" maxlength="48" />
+        </label>
+        <div class="row-input">
+          <span class="currency">kr</span>
+          <input type="number" inputmode="decimal" min="0" step="100" data-amount-input value="0" />
+        </div>
+      </div>
+      <button type="button" class="remove-btn" data-remove aria-label="Ta bort post">×</button>
+    </div>
+  </template>
 </section>
 
 <script type="application/javascript" is:inline>
@@ -74,61 +202,137 @@ const defaultCategories = [
   const root = document.getElementById(rootId);
   if (root) {
     const defaults = JSON.parse(root.dataset.defaults || "[]");
-    const storageKey = "budget-calculator-v1";
+    const scenarios = JSON.parse(root.dataset.scenarios || "[]");
+    const insights = JSON.parse(root.dataset.insights || "[]");
+    const defaultScenarioId = root.dataset.defaultScenario || "standard";
+    const baselineGuests = parseInt(root.dataset.defaultGuests || "80", 10) || 0;
+    const storageKey = "budget-calculator-v2";
+
     const form = root.querySelector(".budget-form");
-    const inputs = Array.from(root.querySelectorAll("input[name]"));
+    const guestInput = root.querySelector('input[name="guests"]');
+    const categoryList = root.querySelector("[data-category-list]");
+    const scenarioButtons = Array.from(root.querySelectorAll("[data-scenario]"));
+    const template = root.querySelector(`#${CSS.escape(rootId)}-category-template`);
+
     const totalEl = root.querySelector("[data-total]");
     const perGuestEl = root.querySelector("[data-per-guest]");
     const bufferEl = root.querySelector("[data-buffer]");
+    const tierEl = root.querySelector("[data-budget-tier]");
+    const tipEl = root.querySelector("[data-budget-tip]");
 
     const numberFormatter = new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 0 });
 
-    const getValues = () => {
-      const values = {};
-      inputs.forEach((input) => {
-        const { name } = input;
-        const value = parseFloat(input.value.replace(/,/g, ".")) || 0;
-        values[name] = value;
-      });
-      return values;
+    const createCustomRow = ({ id, label, value }) => {
+      if (!template) return null;
+      const fragment = template.content.cloneNode(true);
+      const row = fragment.querySelector(".category-row");
+      const labelInput = fragment.querySelector("[data-label-input]");
+      const amountInput = fragment.querySelector("[data-amount-input]");
+
+      const generatedId = id || `custom-${crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(16).slice(2)}`;
+      row.dataset.category = generatedId;
+      labelInput.value = label || "";
+      amountInput.value = value != null ? value : 0;
+      amountInput.name = generatedId;
+      amountInput.dataset.label = label || "";
+      categoryList.appendChild(row);
+      return row;
     };
 
-    const applyValues = (data) => {
-      inputs.forEach((input) => {
-        if (input.name in data) {
-          input.value = data[input.name];
+    const removeCustomRows = () => {
+      categoryList.querySelectorAll('.category-row[data-default="false"]').forEach((row) => row.remove());
+    };
+
+    const resetDefaults = () => {
+      guestInput.value = baselineGuests;
+      defaults.forEach((item) => {
+        const row = categoryList.querySelector(`.category-row[data-category="${item.id}"]`);
+        const input = row?.querySelector('input[type="number"]');
+        if (input) {
+          input.value = item.defaultValue;
+          input.dataset.label = item.label;
         }
       });
+      removeCustomRows();
       updateTotals();
     };
 
-    const getDefaultValues = () => {
-      const map = { guests: 80 };
-      defaults.forEach((item) => {
-        map[item.id] = item.defaultValue;
+    const getState = () => {
+      const guests = parseInt(guestInput.value || "0", 10) || 0;
+      const categories = [];
+      categoryList.querySelectorAll(".category-row").forEach((row) => {
+        const amountInput = row.querySelector('input[type="number"]');
+        if (!amountInput) return;
+        const isDefault = row.dataset.default === "true";
+        const value = parseFloat((amountInput.value || "0").replace(/,/g, ".")) || 0;
+        const id = row.dataset.category || amountInput.name || `custom-${Date.now()}`;
+        if (!row.dataset.category) {
+          row.dataset.category = id;
+        }
+        amountInput.name = id;
+
+        let label;
+        if (isDefault) {
+          label = amountInput.dataset.label || row.querySelector(".row-label span")?.textContent?.trim() || id;
+        } else {
+          const labelInput = row.querySelector("[data-label-input]");
+          label = labelInput?.value.trim() || "Egen post";
+          amountInput.dataset.label = label;
+        }
+        categories.push({ id, label, value, default: isDefault });
       });
-      return map;
+      return { guests, categories };
+    };
+
+    const applyState = (state) => {
+      resetDefaults();
+      if (!state) return;
+      if (typeof state.guests === "number") {
+        guestInput.value = state.guests;
+      }
+
+      const defaultMap = new Map(state.categories?.filter((item) => item.default).map((item) => [item.id, item]));
+      defaults.forEach((item) => {
+        const stored = defaultMap.get(item.id);
+        const row = categoryList.querySelector(`.category-row[data-category="${item.id}"]`);
+        const input = row?.querySelector('input[type="number"]');
+        if (stored && input) {
+          input.value = stored.value;
+          input.dataset.label = stored.label || item.label;
+        }
+      });
+
+      const customItems = state.categories?.filter((item) => !item.default) ?? [];
+      customItems.forEach((item) => {
+        const row = createCustomRow({ id: item.id, label: item.label, value: item.value });
+        const labelInput = row?.querySelector("[data-label-input]");
+        labelInput?.dispatchEvent(new Event("input"));
+      });
+
+      updateTotals();
     };
 
     const updateTotals = () => {
-      const values = getValues();
-      const guests = values.guests || 0;
-      const total = Object.entries(values)
-        .filter(([key]) => key !== "guests")
-        .reduce((sum, [, value]) => sum + value, 0);
-      const buffer = Math.round(total * 0.1);
+      const state = getState();
+      const total = state.categories.reduce((sum, item) => sum + item.value, 0);
+      const guests = state.guests;
       const perGuest = guests > 0 ? Math.round(total / guests) : 0;
+      const buffer = Math.round(total * 0.1);
 
       if (totalEl) totalEl.textContent = `${numberFormatter.format(total)} kr`;
       if (perGuestEl) perGuestEl.textContent = perGuest ? `${numberFormatter.format(perGuest)} kr` : "–";
       if (bufferEl) bufferEl.textContent = `${numberFormatter.format(buffer)} kr`;
+
+      const tier = insights.find((item) => total <= item.max) || insights[0];
+      if (tierEl) tierEl.textContent = tier?.title ?? "–";
+      if (tipEl) tipEl.textContent = tier?.tip ?? "Justera posterna för att se rekommendationer.";
     };
 
     const saveToStorage = () => {
-      const values = getValues();
-      localStorage.setItem(storageKey, JSON.stringify(values));
+      const state = getState();
+      localStorage.setItem(storageKey, JSON.stringify({ version: 2, ...state }));
       root.classList.add("saved");
-      setTimeout(() => root.classList.remove("saved"), 1200);
+      setTimeout(() => root.classList.remove("saved"), 1000);
     };
 
     const loadFromStorage = () => {
@@ -136,7 +340,27 @@ const defaultCategories = [
       if (!stored) return;
       try {
         const parsed = JSON.parse(stored);
-        applyValues(parsed);
+        if (parsed && parsed.categories) {
+          applyState(parsed);
+        } else {
+          // Fallback för äldre versioner
+          const legacyValues = parsed;
+          if (legacyValues && typeof legacyValues === "object") {
+            resetDefaults();
+            Object.entries(legacyValues).forEach(([key, value]) => {
+              if (key === "guests") {
+                guestInput.value = parseInt(value, 10) || baselineGuests;
+                return;
+              }
+              const row = categoryList.querySelector(`.category-row[data-category="${key}"]`);
+              const input = row?.querySelector('input[type="number"]');
+              if (input) {
+                input.value = value;
+              }
+            });
+            updateTotals();
+          }
+        }
       } catch (error) {
         console.error("Kunde inte läsa sparade värden", error);
       }
@@ -147,20 +371,16 @@ const defaultCategories = [
     };
 
     const exportCsv = () => {
-      const values = getValues();
-      const guests = values.guests || 0;
-      const entries = Object.entries(values)
-        .filter(([key]) => key !== "guests");
-      const total = entries.reduce((sum, [, value]) => sum + value, 0);
+      const state = getState();
+      const total = state.categories.reduce((sum, item) => sum + item.value, 0);
       const buffer = Math.round(total * 0.1);
-      const perGuest = guests > 0 ? Math.round(total / guests) : 0;
+      const perGuest = state.guests > 0 ? Math.round(total / state.guests) : 0;
 
       let csv = "Kategori;Belopp (kr)\n";
-      entries.forEach(([key, value]) => {
-        const label = defaults.find((item) => item.id === key)?.label ?? key;
-        csv += `${label};${value}\n`;
+      state.categories.forEach((item) => {
+        csv += `${item.label.replace(/;/g, ",")};${item.value}\n`;
       });
-      csv += `Antal gäster;${guests}\n`;
+      csv += `Antal gäster;${state.guests}\n`;
       csv += `Total;${total}\n`;
       csv += `Buffert 10%;${buffer}\n`;
       csv += `Per gäst;${perGuest}\n`;
@@ -169,16 +389,62 @@ const defaultCategories = [
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "brollopsbudget-malmo.csv";
+      link.download = "brollopsbudget.csv";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     };
 
+    const applyScenario = (scenarioId) => {
+      if (scenarioId === "custom") {
+        scenarioButtons.forEach((btn) => btn.classList.remove("is-active"));
+        const customButton = scenarioButtons.find((btn) => btn.dataset.scenario === "custom");
+        if (customButton) {
+          customButton.classList.add("is-active");
+          customButton.setAttribute("aria-pressed", "true");
+        }
+        updateTotals();
+        return;
+      }
+
+      const scenario = scenarios.find((item) => item.id === scenarioId);
+      if (!scenario) return;
+
+      scenarioButtons.forEach((btn) => {
+        const isActive = btn.dataset.scenario === scenarioId;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      if (scenario.guests && guestInput) {
+        guestInput.value = scenario.guests;
+      }
+
+      Object.entries(scenario.values).forEach(([id, value]) => {
+        const row = categoryList.querySelector(`.category-row[data-category="${id}"]`);
+        const input = row?.querySelector('input[type="number"]');
+        if (input) {
+          input.value = value;
+        }
+      });
+
+      updateTotals();
+    };
+
     form?.addEventListener("input", (event) => {
       const target = event.target;
-      if (target instanceof HTMLInputElement) {
+      if (!(target instanceof HTMLInputElement)) return;
+
+      if (target.matches("[data-label-input]")) {
+        const row = target.closest(".category-row");
+        const amountInput = row?.querySelector('input[type="number"]');
+        if (amountInput) {
+          amountInput.dataset.label = target.value.trim();
+        }
+      }
+
+      if (target.type === "number") {
         if (target.value.length > 12) {
           target.value = target.value.slice(0, 12);
         }
@@ -187,132 +453,322 @@ const defaultCategories = [
     });
 
     form?.addEventListener("click", (event) => {
-      const btn = event.target instanceof HTMLButtonElement ? event.target : null;
-      if (!btn) return;
-      const action = btn.dataset.action;
-      if (!action) return;
-      event.preventDefault();
-      switch (action) {
-        case "save":
-          saveToStorage();
-          break;
-        case "load":
-          loadFromStorage();
-          break;
-        case "reset":
-          applyValues(getDefaultValues());
-          break;
-        case "clear":
-          clearStorage();
-          break;
-        case "export":
-          exportCsv();
-          break;
+      const button = event.target instanceof HTMLButtonElement ? event.target : null;
+      if (!button) return;
+
+      if (button.dataset.action === "add-category") {
+        event.preventDefault();
+        const row = createCustomRow({ id: null, label: "", value: 0 });
+        row?.querySelector("[data-label-input]")?.focus();
+        updateTotals();
+        return;
+      }
+
+      if (button.dataset.action) {
+        event.preventDefault();
+        switch (button.dataset.action) {
+          case "save":
+            saveToStorage();
+            break;
+          case "load":
+            loadFromStorage();
+            break;
+          case "reset":
+            resetDefaults();
+            applyScenario(defaultScenarioId);
+            break;
+          case "clear":
+            clearStorage();
+            break;
+          case "export":
+            exportCsv();
+            break;
+        }
+        return;
+      }
+
+      if (button.matches("[data-remove]")) {
+        event.preventDefault();
+        const row = button.closest(".category-row");
+        if (row && row.dataset.default !== "true") {
+          row.remove();
+          updateTotals();
+        }
       }
     });
 
-    const defaultsMap = getDefaultValues();
-    applyValues(defaultsMap);
+    root.querySelector(".scenario-bar")?.addEventListener("click", (event) => {
+      const button = event.target instanceof HTMLButtonElement ? event.target : event.target.closest("button");
+      if (!(button instanceof HTMLButtonElement) || !button.dataset.scenario) return;
+      event.preventDefault();
+      applyScenario(button.dataset.scenario);
+    });
+
+    guestInput?.addEventListener("input", () => updateTotals());
+
+    // Init
+    resetDefaults();
+    applyScenario(defaultScenarioId);
     loadFromStorage();
   }
 </script>
 
 <style>
   .budget-tool {
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    background: #fff;
-    margin: 2rem 0;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(31, 28, 20, 0.12);
+    border-radius: 1.75rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: rgba(255, 255, 255, 0.9);
+    margin: 2.5rem 0;
+    box-shadow: 0 30px 70px rgba(15, 9, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .budget-tool::after {
+    content: "";
+    position: absolute;
+    inset: -40% 60% auto -15%;
+    height: 180%;
+    background: radial-gradient(circle at center, rgba(178, 109, 74, 0.18), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .budget-tool > * {
+    position: relative;
+    z-index: 1;
   }
 
   .budget-tool.saved {
-    outline: 3px solid rgba(178, 109, 74, 0.4);
-    transition: outline 0.3s ease;
+    box-shadow: 0 0 0 3px rgba(178, 109, 74, 0.4), 0 30px 70px rgba(15, 9, 0, 0.08);
   }
 
-  .budget-tool header h2 {
-    margin: 0;
-    font-size: 1.6rem;
+  header {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  .budget-tool header p {
-    margin-top: 0.5rem;
-    color: rgba(31, 28, 20, 0.75);
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    color: rgba(178, 109, 74, 0.95);
+    font-weight: 600;
+  }
+
+  .lede {
+    color: rgba(31, 28, 20, 0.72);
+    max-width: 60ch;
+  }
+
+  .scenario-bar {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .scenario-option {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(178, 109, 74, 0.25);
+    background: rgba(255, 255, 255, 0.8);
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .scenario-option:hover,
+  .scenario-option:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(15, 9, 0, 0.12);
+  }
+
+  .scenario-option.is-active {
+    border-color: rgba(178, 109, 74, 0.65);
+    background: linear-gradient(135deg, rgba(178, 109, 74, 0.1), rgba(178, 109, 74, 0.02));
+  }
+
+  .scenario-option.ghost {
+    border-style: dashed;
+    color: rgba(31, 28, 20, 0.7);
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .scenario-label {
+    font-weight: 600;
+  }
+
+  .scenario-meta {
+    font-size: 0.85rem;
+    color: rgba(31, 28, 20, 0.65);
   }
 
   .budget-form {
     display: grid;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    gap: 1.75rem;
   }
 
-  .inputs {
+  .basics {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .guest-input {
+    display: grid;
+    gap: 0.4rem;
+    font-weight: 600;
+  }
+
+  .guest-input input {
+    border: 1px solid rgba(31, 28, 20, 0.2);
+    border-radius: 0.9rem;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .helper-text {
+    font-size: 0.85rem;
+    color: rgba(31, 28, 20, 0.6);
+    margin: 0;
+  }
+
+  .category-list {
     display: grid;
     gap: 1rem;
   }
 
-  .budget-input,
-  .guest-input {
+  .category-row {
+    display: grid;
+    gap: 0.4rem;
+    padding: 0.9rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(31, 28, 20, 0.12);
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .row-main {
     display: grid;
     gap: 0.4rem;
   }
 
-  .budget-input span,
-  .guest-input span {
+  @media (min-width: 640px) {
+    .row-main {
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  .row-label span {
     font-weight: 600;
   }
 
-  .input-group {
+  .label-input {
+    border: 1px solid rgba(31, 28, 20, 0.2);
+    border-radius: 0.7rem;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .row-input {
     display: flex;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 0.75rem;
-    padding: 0.2rem 0.6rem;
-    background: #fff;
+    border: 1px solid rgba(31, 28, 20, 0.18);
+    border-radius: 0.9rem;
+    padding: 0.2rem 0.65rem;
+    background: rgba(255, 255, 255, 0.95);
   }
 
   .currency {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: rgba(31, 28, 20, 0.6);
-    margin-right: 0.4rem;
+    margin-right: 0.45rem;
   }
 
-  input[type="number"] {
+  .row-input input[type="number"] {
     border: none;
+    outline: none;
     width: 100%;
     font-size: 1rem;
-    padding: 0.6rem;
-    border-radius: 0.75rem;
+    padding: 0.6rem 0.4rem;
     background: transparent;
-    outline: none;
   }
 
-  input[type="number"]:focus {
-    border-bottom: 2px solid rgba(178, 109, 74, 0.6);
+  .remove-btn {
+    justify-self: end;
+    border: none;
+    background: rgba(31, 28, 20, 0.08);
+    color: rgba(31, 28, 20, 0.65);
+    border-radius: 999px;
+    padding: 0.1rem 0.55rem;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .category-row[data-default="true"] .remove-btn {
+    display: none;
+  }
+
+  .remove-btn:hover {
+    background: rgba(178, 109, 74, 0.2);
+    color: #b26d4a;
+  }
+
+  .add-row {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .add-trigger {
+    border: 1px dashed rgba(178, 109, 74, 0.55);
+    background: rgba(178, 109, 74, 0.08);
+    color: #b26d4a;
+    border-radius: 0.9rem;
+    padding: 0.7rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
   }
 
   .summary {
     display: grid;
     gap: 1rem;
-    background: rgba(178, 109, 74, 0.08);
-    border-radius: 1.25rem;
-    padding: 1.5rem;
+    background: rgba(178, 109, 74, 0.12);
+    border-radius: 1.4rem;
+    padding: 1.6rem;
   }
 
   .summary .label {
-    margin: 0;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
     font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    color: rgba(31, 28, 20, 0.6);
+    color: rgba(31, 28, 20, 0.65);
+    margin: 0;
   }
 
   .summary .value {
-    margin: 0.4rem 0 0;
-    font-size: 1.6rem;
+    margin: 0.3rem 0 0;
+    font-size: 1.5rem;
     font-weight: 700;
+  }
+
+  .insights {
+    background: rgba(31, 28, 20, 0.08);
+    border-radius: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.95rem;
+    color: rgba(31, 28, 20, 0.75);
   }
 
   .actions {
@@ -324,7 +780,7 @@ const defaultCategories = [
   .actions button {
     border: none;
     border-radius: 999px;
-    padding: 0.65rem 1.4rem;
+    padding: 0.7rem 1.6rem;
     font-weight: 600;
     cursor: pointer;
     background: #b26d4a;
@@ -345,35 +801,95 @@ const defaultCategories = [
 
   .actions button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 24px rgba(15, 9, 0, 0.1);
   }
 
-  @media (min-width: 640px) {
-    .inputs {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
-    .guest-input {
-      grid-column: 1 / span 2;
+  @media (min-width: 768px) {
+    .scenario-bar {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
     .summary {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
-  @media (min-width: 960px) {
-    .budget-form {
-      grid-template-columns: 2fr 1fr;
-      align-items: start;
+  @media (prefers-color-scheme: dark) {
+    .budget-tool {
+      background: rgba(20, 15, 10, 0.9);
+      border-color: rgba(245, 235, 225, 0.12);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    }
+
+    .budget-tool::after {
+      background: radial-gradient(circle at center, rgba(210, 185, 255, 0.22), transparent 65%);
+    }
+
+    header .lede,
+    .helper-text,
+    .scenario-meta,
+    .insights,
+    .summary .label {
+      color: rgba(245, 235, 225, 0.78);
+    }
+
+    .scenario-option {
+      background: rgba(38, 31, 40, 0.7);
+      border-color: rgba(155, 135, 215, 0.32);
+    }
+
+    .scenario-option.is-active {
+      background: linear-gradient(135deg, rgba(155, 135, 215, 0.25), rgba(155, 135, 215, 0.1));
+      border-color: rgba(195, 183, 255, 0.65);
+    }
+
+    .scenario-option.ghost {
+      background: rgba(38, 31, 40, 0.4);
+      border-color: rgba(195, 183, 255, 0.28);
+      color: rgba(231, 225, 245, 0.8);
+    }
+
+    .category-row {
+      background: rgba(38, 31, 40, 0.72);
+      border-color: rgba(195, 183, 255, 0.22);
+    }
+
+    .row-input,
+    .guest-input input,
+    .label-input {
+      background: rgba(20, 15, 25, 0.85);
+      border-color: rgba(195, 183, 255, 0.25);
+      color: #f5f1ff;
+    }
+
+    .currency {
+      color: rgba(231, 225, 245, 0.7);
     }
 
     .summary {
-      grid-template-columns: 1fr;
+      background: rgba(155, 135, 215, 0.18);
     }
 
-    .actions {
-      grid-column: 1 / span 2;
+    .actions button.secondary {
+      background: rgba(155, 135, 215, 0.15);
+      color: #d2b9ff;
+    }
+
+    .actions button.ghost {
+      color: rgba(231, 225, 245, 0.7);
+      border-color: rgba(195, 183, 255, 0.25);
     }
   }
 </style>

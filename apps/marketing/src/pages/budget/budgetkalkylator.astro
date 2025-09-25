@@ -1,0 +1,476 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import BudgetCalculator from "~/components/tools/BudgetCalculator.astro";
+import { getCollection } from "astro:content";
+
+const [budgetArticles, checklistEntries] = await Promise.all([
+  getCollection("budget", ({ data }) => data.status !== "draft"),
+  getCollection("checklistor", ({ data }) => data.status !== "draft")
+]);
+
+const relatedBudget = budgetArticles
+  .filter((entry) => entry.slug !== "brollopsbudget-2025")
+  .slice(0, 3);
+
+const relatedChecklist = checklistEntries.find((entry) => entry.slug === "brollopsbudget-checklista");
+
+const currentYear = new Date().getFullYear();
+
+const faq = [
+  {
+    question: "Hur ofta bör vi uppdatera budgetkalkylen?",
+    answer:
+      "Revidera budgeten varje gång ni får en ny offert eller bekräftar en leverantör. Sätt en kalenderpåminnelse varje månad fram till bröllopet."
+  },
+  {
+    question: "Hur stor buffert behöver vi?",
+    answer:
+      "Planera för minst 10 % buffert. För premiumupplägg eller vinterbröllop med hög logistik rekommenderar vi 15 %."
+  },
+  {
+    question: "Kan vi lägga till egna kostnadsposter?",
+    answer:
+      "Ja, klicka på ‘Lägg till egen kostnadspost’ i kalkylatorn för att skapa poster som smekmånad, barnpassning eller extra dekor."
+  },
+  {
+    question: "Hur sparas våra uppgifter?",
+    answer:
+      "All data lagras lokalt i er webbläsare via localStorage. Ni kan rensa uppgifterna med knappen ‘Rensa sparat’."
+  }
+];
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Budgetkalkylator för bröllop",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Web",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "SEK",
+    description: "Kostnadsfritt verktyg för att planera svensk bröllopsbudget."
+  },
+  description:
+    "Interaktiv budgetkalkylator för svenska bröllop med scenariovärden, sparfunktion och export till CSV.",
+  featureList: [
+    "Svenska standardvärden för 2024",
+    "Scenario: Smart, Standard, Premium",
+    "Lägg till egna kostnadsposter",
+    "Spara lokalt och exportera som CSV",
+    "Automatiskt beräknad buffert och kostnad per gäst"
+  ],
+  url: "https://www.erabrollopsajt.se/budget/budgetkalkylator"
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer
+    }
+  }))
+};
+---
+<BaseLayout
+  title={`Budgetkalkylator för bröllop ${currentYear} – Räkna på kostnaderna`}
+  description="Skapa en komplett bröllopsbudget på minuter. Välj scenario, uppdatera poster med svenska prisnivåer och spara lokalt."
+>
+  <section class="hero">
+    <p class="hero-eyebrow">Budgetverktyg</p>
+    <h1>Budgetkalkylator för svenska bröllop {currentYear}</h1>
+    <p>
+      Bygg er budget med svenska prisnivåer, justera för antal gäster och exportera resultatet på sekunder. Verktyget sparar
+      automatiskt i webbläsaren så att ni kan fortsätta planeringen när som helst.
+    </p>
+    <div class="hero-stats">
+      <article>
+        <p class="stat-label">Medianbudget 2024</p>
+        <p class="stat-value">120&nbsp;000 kr</p>
+        <p class="stat-meta">För 80 gäster enligt Svenska Bröllopsakademiens undersökning.</p>
+      </article>
+      <article>
+        <p class="stat-label">Kostnad per gäst</p>
+        <p class="stat-value">1&nbsp;450 kr</p>
+        <p class="stat-meta">Inkluderar lokal, mat, dryck och personal.</p>
+      </article>
+      <article>
+        <p class="stat-label">Buffertrekommendation</p>
+        <p class="stat-value">10–15 %</p>
+        <p class="stat-meta">Säkrar oförutsedda kostnader som väderplan B eller extra timmar.</p>
+      </article>
+    </div>
+    <div class="hero-cta">
+      <a class="btn primary" href="#budgetkalkylator">Starta kalkylatorn</a>
+      <a class="btn secondary" href="/budget/brollopsbudget-2025?ref=budgetkalkylator">Läs budgetguiden 2025</a>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div>
+      <h2>Så använder ni budgetkalkylatorn</h2>
+      <ol>
+        <li>Välj budgetläge: Smart, Standard eller Premium baserat på ert upplägg.</li>
+        <li>Ange antal gäster – verktyget räknar om kostnad per gäst automatiskt.</li>
+        <li>Justera posterna, lägg till egna kostnader och spara lokalt.</li>
+        <li>Exportera resultatet som CSV för att dela med partner eller koordinator.</li>
+      </ol>
+    </div>
+    <div class="tips">
+      <h3>Snabba riktmärken</h3>
+      <ul>
+        <li>Smart budget: 85&nbsp;000–110&nbsp;000 kr, fokus på vardagsdatum och lokala leverantörer.</li>
+        <li>Standard: 110&nbsp;000–160&nbsp;000 kr, helg i säsong med mix av proffsleverantörer.</li>
+        <li>Premium: 160&nbsp;000+ kr, slottsbröllop eller koordinerad helhetsupplevelse.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="budgetkalkylator" class="tool-section" aria-labelledby="tool-heading">
+    <div class="section-header">
+      <h2 id="tool-heading">Skapa er budget</h2>
+      <p>All data sparas lokalt. Ni kan när som helst rensa eller exportera siffrorna.</p>
+    </div>
+    <BudgetCalculator client:load />
+  </section>
+
+  <section class="insight-grid">
+    <article>
+      <h3>Rekommenderad kostnadsfördelning</h3>
+      <ul>
+        <li>Lokal &amp; hyra: 20–28 % av total budget.</li>
+        <li>Mat &amp; dryck: 25–30 % – störst post för de flesta bröllop.</li>
+        <li>Foto &amp; film: 8–12 % – bokas 8–12 månader i förväg.</li>
+        <li>Buffert: minst 10 % för oförutsedda kostnader.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Tips för att hålla budget</h3>
+      <ul>
+        <li>Jämför paketpriser (lokal + catering) och fråga om vardagsrabatter.</li>
+        <li>Planera bröllopsveckan i detalj för att undvika expressleveranser.</li>
+        <li>Förhandla alltid med skriftlig offert och tydliga avbokningsvillkor.</li>
+        <li>Sätt en maxgräns per kategori och följ upp efter varje möte.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Checklistor &amp; mallar</h3>
+      <p>
+        Använd checklistor för att säkerställa att alla poster finns med. Vår checklista täcker allt från depå till slutbetalning.
+      </p>
+      {relatedChecklist ? (
+        <a class="link" href={`/checklistor/${relatedChecklist.slug}?ref=budgetkalkylator`}>
+          Öppna bröllopsbudget-checklistan →
+        </a>
+      ) : (
+        <a class="link" href="/checklistor?ref=budgetkalkylator">Se alla checklistor →</a>
+      )}
+    </article>
+  </section>
+
+  <section class="related-articles">
+    <h2>Fördjupa er budgetplanering</h2>
+    <div class="card-grid">
+      {relatedBudget.map((entry) => (
+        <article class="card">
+          <h3><a href={`/budget/${entry.slug}?ref=budgetkalkylator`}>{entry.data.title}</a></h3>
+          <p>{entry.data.summary}</p>
+          <p class="meta">Uppdaterad {entry.data.updatedAt ?? entry.data.publishedAt}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>Vanliga frågor om budgetkalkylatorn</h2>
+    <div class="faq-items">
+      {faq.map((item) => (
+        <details>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="cta">
+    <div>
+      <h2>Få uppdaterade prisnivåer varje kvartal</h2>
+      <p>Anmäl er till vårt nyhetsbrev för nya data, checklistor och förhandlingsråd direkt i inkorgen.</p>
+    </div>
+    <a class="btn primary" href="/nyhetsbrev?ref=budgetkalkylator">Prenumerera gratis</a>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify([softwareSchema, faqSchema])} />
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, rgba(255, 235, 220, 0.9), rgba(233, 224, 255, 0.85));
+    border-radius: 2rem;
+    padding: clamp(2rem, 5vw, 3rem);
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-eyebrow {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #9c5e3c;
+    font-weight: 600;
+  }
+
+  .hero-stats {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero-stats article {
+    border-radius: 1.2rem;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .stat-label {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: rgba(31, 28, 20, 0.6);
+  }
+
+  .stat-value {
+    margin: 0.3rem 0 0;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1f1c14;
+  }
+
+  .stat-meta {
+    margin: 0.4rem 0 0;
+    color: rgba(31, 28, 20, 0.7);
+    font-size: 0.9rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.8rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn.primary {
+    background: #b26d4a;
+    color: white;
+  }
+
+  .btn.secondary {
+    border: 1px solid #b26d4a;
+    color: #b26d4a;
+    background: white;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .how-it-works {
+    display: grid;
+    gap: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 3rem;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .how-it-works ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .how-it-works .tips ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .tool-section {
+    margin: 4rem 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .section-header p {
+    margin: 0;
+    color: rgba(31, 28, 20, 0.65);
+  }
+
+  .insight-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin: 4rem 0;
+  }
+
+  .insight-grid article {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 1.4rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .insight-grid ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .insight-grid .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #b26d4a;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .card-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .card {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .meta {
+    font-size: 0.85rem;
+    color: rgba(31, 28, 20, 0.55);
+  }
+
+  .faq-items {
+    display: grid;
+    gap: 1rem;
+  }
+
+  details {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .cta {
+    margin: 4rem 0 2rem;
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background: linear-gradient(135deg, rgba(178, 109, 74, 0.18), rgba(233, 224, 255, 0.15));
+    border: 1px solid rgba(178, 109, 74, 0.2);
+  }
+
+  @media (min-width: 720px) {
+    .hero-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .how-it-works {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .insight-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cta {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hero {
+      background: linear-gradient(135deg, rgba(56, 38, 70, 0.8), rgba(33, 23, 40, 0.85));
+    }
+
+    .hero-stats article,
+    .how-it-works,
+    .insight-grid article,
+    .card,
+    details {
+      background: rgba(25, 18, 32, 0.85);
+      border-color: rgba(210, 185, 255, 0.16);
+    }
+
+    .stat-label,
+    .stat-meta,
+    .section-header p,
+    .meta {
+      color: rgba(241, 233, 255, 0.7);
+    }
+
+    .stat-value,
+    .btn.secondary {
+      color: #f1e9ff;
+    }
+
+    .btn.secondary {
+      border-color: rgba(210, 185, 255, 0.6);
+      background: transparent;
+    }
+
+    .how-it-works,
+    .insight-grid article,
+    .card,
+    details {
+      color: rgba(248, 244, 255, 0.9);
+    }
+
+    summary {
+      color: #f8f4ff;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, rgba(155, 135, 215, 0.28), rgba(56, 38, 70, 0.28));
+      border-color: rgba(210, 185, 255, 0.35);
+    }
+  }
+</style>

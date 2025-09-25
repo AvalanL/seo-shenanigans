@@ -1,0 +1,341 @@
+---
+// Cost Calculator for Legal Wedding Process
+---
+
+<div class="cost-calculator bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    💰 Juridisk kostnadskalkylator
+  </h3>
+
+  <div class="calculator-form bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Beräkna era totala juridiska kostnader för att gifta sig i Sverige:
+    </p>
+
+    <div class="form-sections space-y-6">
+      <!-- Citizenship Selection -->
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-800 mb-3">
+          👥 Era medborgarskap:
+        </label>
+        <select id="citizenship-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500" onchange="updateCalculation()">
+          <option value="swedish-both">Båda svenska medborgare</option>
+          <option value="swedish-foreign">En svensk, en utländsk</option>
+          <option value="eu-both">Båda EU-medborgare</option>
+          <option value="non-eu-both">Båda utomeuropeiska</option>
+          <option value="mixed-complex">Blandad (svensk + utomeuropeisk)</option>
+        </select>
+      </div>
+
+      <!-- Previous Marriage -->
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-800 mb-3">
+          💍 Tidigare äktenskap:
+        </label>
+        <div class="checkbox-group space-y-2">
+          <label class="flex items-center">
+            <input type="checkbox" id="previous-marriage" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">En eller båda har varit gifta tidigare</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="international-divorce" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">Skilsmässa genomförd utomlands</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Document Complexity -->
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-800 mb-3">
+          📋 Dokumentkomplexitet:
+        </label>
+        <div class="checkbox-group space-y-2">
+          <label class="flex items-center">
+            <input type="checkbox" id="name-changes" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">Namnbyten att bevisa</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="translations-needed" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">Översättningar krävs</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="apostille-needed" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">Apostillering krävs</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="embassy-documents" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">Ambassad-dokument krävs</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Wedding Type -->
+      <div class="input-group">
+        <label for="wedding-type" class="block text-sm font-semibold text-gray-800 mb-3">
+          ⛪ Typ av vigsel:
+        </label>
+        <select id="wedding-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500" onchange="updateCalculation()">
+          <option value="civil-courthouse">Borgerlig vigsel på tingsrätt</option>
+          <option value="civil-external">Borgerlig vigsel på extern plats</option>
+          <option value="religious-swedish">Svenska kyrkan</option>
+          <option value="religious-other">Annan religiös vigsel</option>
+        </select>
+      </div>
+
+      <!-- Urgency -->
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-800 mb-3">
+          ⏰ Tidspress:
+        </label>
+        <div class="radio-group space-y-2">
+          <label class="flex items-center">
+            <input type="radio" name="urgency" value="normal" class="mr-2" checked onchange="updateCalculation()">
+            <span class="text-sm">Normal hantering (3+ månader tid)</span>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="urgency" value="urgent" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">Bråttom (mindre än 2 månader)</span>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="urgency" value="emergency" class="mr-2" onchange="updateCalculation()">
+            <span class="text-sm">Akut (mindre än 1 månad)</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Display -->
+    <div class="results bg-gradient-to-r from-amber-100 to-yellow-100 rounded-lg p-6 mt-6">
+      <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+        <span class="text-2xl mr-2">💸</span>
+        Era beräknade kostnader:
+      </h4>
+
+      <div class="cost-breakdown space-y-3">
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">Grundläggande kostnader</h5>
+            <span class="font-bold text-amber-600" id="basic-costs">1,450 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="basic-details">
+            Hindersprövning (1,348 kr) + Personbevis (100 kr)
+          </div>
+        </div>
+
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">Dokumentkostnader</h5>
+            <span class="font-bold text-blue-600" id="document-costs">0 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="document-details">
+            Inga extra dokumentkostnader
+          </div>
+        </div>
+
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">Vigselkostnader</h5>
+            <span class="font-bold text-green-600" id="ceremony-costs">2,500 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="ceremony-details">
+            Borgerlig vigsel på tingsrätt
+          </div>
+        </div>
+
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">Tilläggskostnader</h5>
+            <span class="font-bold text-purple-600" id="extra-costs">0 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="extra-details">
+            Inga tilläggskostnader
+          </div>
+        </div>
+
+        <div class="total-cost bg-gradient-to-r from-amber-200 to-yellow-200 rounded-lg p-4 mt-4 border-2 border-amber-300">
+          <div class="flex justify-between items-center">
+            <h5 class="text-lg font-bold text-amber-800">Total kostnad:</h5>
+            <span class="text-xl font-bold text-amber-800" id="total-cost">3,950 kr</span>
+          </div>
+          <div class="text-sm text-amber-700 mt-1" id="total-notes">
+            Beräkning baserad på era val
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline estimate -->
+      <div class="timeline-info bg-blue-50 rounded-lg p-4 mt-4 border border-blue-200">
+        <h5 class="font-semibold text-blue-800 mb-2">⏰ Beräknad tidsplan:</h5>
+        <div class="timeline-details text-sm text-blue-700" id="timeline-info">
+          4 veckor handläggningstid + 1 vecka för vigsel
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="important-notes bg-red-50 border-l-4 border-red-400 p-4 mt-6">
+    <h4 class="font-semibold text-red-800 mb-2">⚠️ Viktiga påminnelser:</h4>
+    <ul class="text-sm text-red-700 space-y-1">
+      <li>• Priserna är beräkningar och kan variera beroende på specifik situation</li>
+      <li>• Kontakta alltid aktuella myndigheter för exakta avgifter</li>
+      <li>• Internationella dokument kan kräva extra verifiering och kostnader</li>
+      <li>• Planera alltid extra tid och budget för oförutsedda förseningar</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const baseCosts = {
+  'swedish-both': { basic: 1450, description: 'Hindersprövning (1,348 kr) + Personbevis (100 kr)' },
+  'swedish-foreign': { basic: 2200, description: 'Hindersprövning båda (1,348 kr) + Personbevis (100 kr) + Utländska dokument (750 kr)' },
+  'eu-both': { basic: 2800, description: 'Hindersprövning (1,348 kr) + EU-dokument (1,450 kr)' },
+  'non-eu-both': { basic: 4500, description: 'Hindersprövning (1,348 kr) + Utomeuropeiska dokument (3,150 kr)' },
+  'mixed-complex': { basic: 3800, description: 'Blandade krav, svensk + utomeuropeisk partner' }
+};
+
+const ceremonyCosts = {
+  'civil-courthouse': { cost: 2500, description: 'Borgerlig vigsel på tingsrätt' },
+  'civil-external': { cost: 4000, description: 'Borgerlig vigsel på extern plats' },
+  'religious-swedish': { cost: 3500, description: 'Svenska kyrkan vigsel' },
+  'religious-other': { cost: 3000, description: 'Annan religiös vigsel' }
+};
+
+function updateCalculation() {
+  const citizenshipType = document.getElementById('citizenship-type').value;
+  const weddingType = document.getElementById('wedding-type').value;
+  const urgency = document.querySelector('input[name="urgency"]:checked').value;
+
+  // Basic costs
+  const basicCost = baseCosts[citizenshipType];
+  document.getElementById('basic-costs').textContent = `${basicCost.basic.toLocaleString('sv-SE')} kr`;
+  document.getElementById('basic-details').textContent = basicCost.description;
+
+  // Document costs
+  let documentCosts = 0;
+  let documentDetails = [];
+
+  if (document.getElementById('previous-marriage').checked) {
+    documentCosts += 500;
+    documentDetails.push('Äktenskapsskillnad/dödsbevis (500 kr)');
+  }
+
+  if (document.getElementById('international-divorce').checked) {
+    documentCosts += 800;
+    documentDetails.push('Internationell äktenskapsskillnad (800 kr)');
+  }
+
+  if (document.getElementById('name-changes').checked) {
+    documentCosts += 300;
+    documentDetails.push('Namnbytesdokument (300 kr)');
+  }
+
+  if (document.getElementById('translations-needed').checked) {
+    documentCosts += 1200;
+    documentDetails.push('Auktoriserad översättning (1,200 kr)');
+  }
+
+  if (document.getElementById('apostille-needed').checked) {
+    documentCosts += 600;
+    documentDetails.push('Apostillering (600 kr)');
+  }
+
+  if (document.getElementById('embassy-documents').checked) {
+    documentCosts += 1000;
+    documentDetails.push('Ambassaddokument (1,000 kr)');
+  }
+
+  document.getElementById('document-costs').textContent = `${documentCosts.toLocaleString('sv-SE')} kr`;
+  document.getElementById('document-details').textContent = documentDetails.length > 0 ?
+    documentDetails.join(', ') : 'Inga extra dokumentkostnader';
+
+  // Ceremony costs
+  const ceremonyCost = ceremonyCosts[weddingType];
+  document.getElementById('ceremony-costs').textContent = `${ceremonyCost.cost.toLocaleString('sv-SE')} kr`;
+  document.getElementById('ceremony-details').textContent = ceremonyCost.description;
+
+  // Extra costs (urgency)
+  let extraCosts = 0;
+  let extraDetails = [];
+
+  if (urgency === 'urgent') {
+    extraCosts += 1000;
+    extraDetails.push('Brådskande hantering (1,000 kr)');
+  } else if (urgency === 'emergency') {
+    extraCosts += 2500;
+    extraDetails.push('Akut hantering (2,500 kr)');
+  }
+
+  document.getElementById('extra-costs').textContent = `${extraCosts.toLocaleString('sv-SE')} kr`;
+  document.getElementById('extra-details').textContent = extraDetails.length > 0 ?
+    extraDetails.join(', ') : 'Inga tilläggskostnader';
+
+  // Total calculation
+  const totalCost = basicCost.basic + documentCosts + ceremonyCost.cost + extraCosts;
+  document.getElementById('total-cost').textContent = `${totalCost.toLocaleString('sv-SE')} kr`;
+
+  // Timeline information
+  let timelineText = '';
+  let weeks = 4;
+
+  if (citizenshipType.includes('foreign') || citizenshipType.includes('non-eu') || citizenshipType.includes('mixed')) {
+    weeks = 6;
+  }
+
+  if (urgency === 'urgent') {
+    weeks = Math.max(2, weeks - 2);
+    timelineText = `${weeks} veckor handläggningstid (expediert) + 1 vecka för vigsel`;
+  } else if (urgency === 'emergency') {
+    weeks = Math.max(1, weeks - 3);
+    timelineText = `${weeks} vecka handläggningstid (akut) + omedelbar vigsel`;
+  } else {
+    timelineText = `${weeks} veckor handläggningstid + 1 vecka för vigsel`;
+  }
+
+  document.getElementById('timeline-info').textContent = timelineText;
+
+  // Total notes
+  let totalNotes = 'Beräkning baserad på era val';
+  if (totalCost > 8000) {
+    totalNotes = 'Komplexa internationella krav - kontakta expert';
+  } else if (totalCost > 5000) {
+    totalNotes = 'Medelhöga kostnader - planera extra tid';
+  }
+
+  document.getElementById('total-notes').textContent = totalNotes;
+}
+
+// Initialize calculation on page load
+document.addEventListener('DOMContentLoaded', function() {
+  updateCalculation();
+});
+</script>
+
+<style>
+  .cost-calculator {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .cost-category {
+    transition: all 0.2s ease;
+  }
+
+  .cost-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  select {
+    transition: all 0.2s ease;
+  }
+
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+  }
+</style>

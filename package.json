@@ -14,5 +14,9 @@
     "prebuild": "npm --prefix apps/marketing run prebuild",
     "generate:directory": "npm --prefix apps/marketing run generate:directory",
     "scrape:venues": "npm --prefix apps/marketing run scrape:venues"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "puppeteer": "^24.22.2"
   }
 }

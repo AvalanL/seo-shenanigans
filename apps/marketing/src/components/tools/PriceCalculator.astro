@@ -1,0 +1,201 @@
+---
+// Price Calculator for Wedding Venues
+---
+
+<div class="price-calculator bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    💰 Bröllopslokal Priskalkylator
+  </h3>
+
+  <div class="calculator-form bg-white rounded-lg p-6 shadow-sm">
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <!-- Guest Count Input -->
+      <div class="input-group">
+        <label for="guest-count" class="block text-sm font-semibold text-gray-800 mb-2">
+          👥 Antal gäster
+        </label>
+        <input
+          type="range"
+          id="guest-count"
+          min="20"
+          max="200"
+          value="75"
+          class="w-full h-2 bg-teal-200 rounded-lg appearance-none cursor-pointer"
+          oninput="updateCalculation()"
+        >
+        <div class="flex justify-between text-sm text-gray-600 mt-1">
+          <span>20</span>
+          <span id="guest-display" class="font-semibold text-teal-600">75 gäster</span>
+          <span>200</span>
+        </div>
+      </div>
+
+      <!-- Region Selection -->
+      <div class="input-group">
+        <label for="region" class="block text-sm font-semibold text-gray-800 mb-2">
+          📍 Region
+        </label>
+        <select id="region" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500" onchange="updateCalculation()">
+          <option value="1.0">Göteborg/Malmö (rikssnitt)</option>
+          <option value="1.15">Stockholm (+15%)</option>
+          <option value="0.8">Mindre orter (-20%)</option>
+          <option value="0.7">Norrland (-30%)</option>
+        </select>
+      </div>
+
+      <!-- Venue Type -->
+      <div class="input-group">
+        <label for="venue-type" class="block text-sm font-semibold text-gray-800 mb-2">
+          🏰 Typ av lokal
+        </label>
+        <select id="venue-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500" onchange="updateCalculation()">
+          <option value="1500">Restaurang (1,500 kr/gäst)</option>
+          <option value="2200">Hotell (2,200 kr/gäst)</option>
+          <option value="3000">Slott/Herrgård (3,000 kr/gäst)</option>
+          <option value="1200">Utomhusplats (1,200 kr/gäst)</option>
+          <option value="1800">Unik lokal (1,800 kr/gäst)</option>
+        </select>
+      </div>
+
+      <!-- Season/Day -->
+      <div class="input-group">
+        <label for="season" class="block text-sm font-semibold text-gray-800 mb-2">
+          📅 Säsong & dag
+        </label>
+        <select id="season" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500" onchange="updateCalculation()">
+          <option value="1.0">Standard (lördag, mellansäsong)</option>
+          <option value="1.3">Högsäsong lördag (+30%)</option>
+          <option value="0.85">Fredag (-15%)</option>
+          <option value="0.75">Söndag (-25%)</option>
+          <option value="0.6">Vinter/vardag (-40%)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results Display -->
+    <div class="results bg-gradient-to-r from-teal-100 to-emerald-100 rounded-lg p-6">
+      <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+        <span class="text-2xl mr-2">📊</span>
+        Beräknad kostnad för ert bröllop:
+      </h4>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-4">
+        <div class="result-item bg-white rounded-lg p-4 text-center">
+          <div class="text-2xl font-bold text-teal-600" id="base-cost">112,500 kr</div>
+          <div class="text-sm text-gray-600">Grundkostnad</div>
+        </div>
+
+        <div class="result-item bg-white rounded-lg p-4 text-center">
+          <div class="text-2xl font-bold text-emerald-600" id="buffer-cost">16,875 kr</div>
+          <div class="text-sm text-gray-600">Buffer (15%)</div>
+        </div>
+
+        <div class="result-item bg-white rounded-lg p-4 text-center">
+          <div class="text-2xl font-bold text-gray-800" id="total-cost">129,375 kr</div>
+          <div class="text-sm text-gray-600">Total budget</div>
+        </div>
+      </div>
+
+      <div class="breakdown bg-white rounded-lg p-4">
+        <h5 class="font-semibold text-gray-800 mb-2">Kostnaduppdelning:</h5>
+        <div class="text-sm text-gray-700 space-y-1" id="breakdown-details">
+          <div class="flex justify-between">
+            <span>75 gäster × 1,500 kr/gäst</span>
+            <span class="font-semibold">112,500 kr</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Regionjustering (Stockholm)</span>
+            <span class="font-semibold">+0 kr</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Säsong/dag-justering</span>
+            <span class="font-semibold">+0 kr</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+    <p class="text-sm text-blue-800">
+      <strong>💡 Tips:</strong> Denna kalkyl inkluderar lokal, mat och grundservice. Lägg till 20,000-50,000 kr för fotograf, blommor, underhållning och andra leverantörer.
+    </p>
+  </div>
+</div>
+
+<script>
+function updateCalculation() {
+  const guestCount = parseInt(document.getElementById('guest-count').value);
+  const regionMultiplier = parseFloat(document.getElementById('region').value);
+  const basePrice = parseInt(document.getElementById('venue-type').value);
+  const seasonMultiplier = parseFloat(document.getElementById('season').value);
+
+  // Update guest display
+  document.getElementById('guest-display').textContent = `${guestCount} gäster`;
+
+  // Calculate costs
+  const baseCost = guestCount * basePrice;
+  const adjustedCost = baseCost * regionMultiplier * seasonMultiplier;
+  const bufferCost = adjustedCost * 0.15; // 15% buffer
+  const totalCost = adjustedCost + bufferCost;
+
+  // Update displays
+  document.getElementById('base-cost').textContent = `${adjustedCost.toLocaleString('sv-SE')} kr`;
+  document.getElementById('buffer-cost').textContent = `${bufferCost.toLocaleString('sv-SE')} kr`;
+  document.getElementById('total-cost').textContent = `${totalCost.toLocaleString('sv-SE')} kr`;
+
+  // Update breakdown
+  const regionText = regionMultiplier === 1.15 ? '+15%' : regionMultiplier === 0.8 ? '-20%' : regionMultiplier === 0.7 ? '-30%' : '±0%';
+  const seasonText = seasonMultiplier === 1.3 ? '+30%' : seasonMultiplier === 0.85 ? '-15%' : seasonMultiplier === 0.75 ? '-25%' : seasonMultiplier === 0.6 ? '-40%' : '±0%';
+
+  const regionAdjustment = baseCost * (regionMultiplier - 1);
+  const seasonAdjustment = baseCost * regionMultiplier * (seasonMultiplier - 1);
+
+  document.getElementById('breakdown-details').innerHTML = `
+    <div class="flex justify-between">
+      <span>${guestCount} gäster × ${basePrice.toLocaleString('sv-SE')} kr/gäst</span>
+      <span class="font-semibold">${baseCost.toLocaleString('sv-SE')} kr</span>
+    </div>
+    <div class="flex justify-between">
+      <span>Regionjustering (${regionText})</span>
+      <span class="font-semibold">${regionAdjustment >= 0 ? '+' : ''}${regionAdjustment.toLocaleString('sv-SE')} kr</span>
+    </div>
+    <div class="flex justify-between">
+      <span>Säsong/dag-justering (${seasonText})</span>
+      <span class="font-semibold">${seasonAdjustment >= 0 ? '+' : ''}${seasonAdjustment.toLocaleString('sv-SE')} kr</span>
+    </div>
+  `;
+}
+
+// Initialize calculation on page load
+document.addEventListener('DOMContentLoaded', function() {
+  updateCalculation();
+});
+</script>
+
+<style>
+  .price-calculator {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #14b8a6;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #14b8a6;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+</style>

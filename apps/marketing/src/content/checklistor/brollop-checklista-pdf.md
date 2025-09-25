@@ -6,7 +6,7 @@ primaryKeyword: "bröllop checklista pdf"
 secondaryKeywords:
   - "bröllopsplanering checklista"
 schemaType: "Article"
-status: "in-review"
+status: "published"
 evergreen: true
 faq:
   - question: "När bör vi börja använda checklistan?"
@@ -73,7 +73,7 @@ Varje steg i PDF:en har kryssrutor och trefärgskodad status (Påbörjad, Pågå
 - **Leverantörsavtal**: Använd anteckningsfältet för att skriva avbokningsregler och betalningsplan. Det förenklar när ni jämför offerter.
 - **Tillgänglighet och transporter**: Lägg in uppgifter om parkering, bussar och boende. Sätt status "Klar" först när bekräftelse är mottagen skriftligt.
 
-## 5. FAQ – kortsvar för AI och snippets
+## Vanliga frågor
 
 **Hur hanterar vi sena OSA-svar?** Flytta gäster till väntelista-kolumnen och sätt ett sista datum i checklistan två veckor före bröllopet. Kontakta sena gäster via både mejl och telefon.
 

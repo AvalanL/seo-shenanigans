@@ -1,0 +1,150 @@
+---
+interface Props {
+  username: string;
+  title: string;
+  type?: 'profile' | 'post' | 'gallery';
+  maxPosts?: number;
+}
+
+const { username, title, type = 'gallery', maxPosts = 6 } = Astro.props;
+
+// Ta bort @ om det finns
+const cleanUsername = username.replace('@', '').replace('https://instagram.com/', '').replace('https://www.instagram.com/', '');
+---
+
+<section class="instagram-embed">
+  <h2>Följ {title} på Instagram</h2>
+
+  {type === 'profile' && (
+    <div class="instagram-profile">
+      <iframe
+        src={`https://www.instagram.com/${cleanUsername}/embed/`}
+        width="100%"
+        height="480"
+        frameborder="0"
+        scrolling="no"
+        allowtransparency="true"
+        title={`Instagram profil för ${title}`}
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  {type === 'gallery' && (
+    <div class="instagram-gallery">
+      <!-- Instagram widget från elfsight eller liknande -->
+      <div class="instagram-widget" data-username={cleanUsername}>
+        <p class="instagram-fallback">
+          <a href={`https://instagram.com/${cleanUsername}`} target="_blank" rel="noopener">
+            Visa {title} på Instagram →
+          </a>
+        </p>
+      </div>
+    </div>
+  )}
+
+  <div class="instagram-cta">
+    <a
+      href={`https://instagram.com/${cleanUsername}`}
+      target="_blank"
+      rel="noopener"
+      class="instagram-link"
+    >
+      Följ @{cleanUsername} på Instagram
+    </a>
+  </div>
+</section>
+
+<!-- Lägg till Instagram embed script -->
+<script is:inline>
+  if (!window.instgrm) {
+    const script = document.createElement('script');
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    document.head.appendChild(script);
+  } else {
+    window.instgrm.Embeds.process();
+  }
+</script>
+
+<style>
+  .instagram-embed {
+    margin-top: 3rem;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    background-size: 100% 4px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-color: #fafafa;
+  }
+
+  .instagram-embed h2 {
+    margin-bottom: 1.5rem;
+    color: #1f1c14;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .instagram-profile iframe {
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .instagram-gallery {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .instagram-fallback {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .instagram-fallback a {
+    color: #1f1c14;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    background: white;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .instagram-fallback a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .instagram-cta {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .instagram-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(240, 148, 51, 0.3);
+  }
+
+  .instagram-link::before {
+    content: "📸";
+  }
+</style>

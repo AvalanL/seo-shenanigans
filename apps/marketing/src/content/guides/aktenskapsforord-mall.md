@@ -6,7 +6,7 @@ primaryKeyword: "äktenskapsförord mall"
 secondaryKeywords:
   - "aktenskapsforord kostnad"
 schemaType: "Article"
-status: "in-review"
+status: "published"
 evergreen: true
 faq:
   - question: "När bör vi skriva ett äktenskapsförord?"
@@ -71,7 +71,7 @@ Vår mall innehåller en ingress med personuppgifter, definition av enskild egen
 
 Tänk på att inte skriva in villkor som strider mot tvingande lag, exempelvis vårdnad av barn. Håll språket tydligt och undvik motstridiga formuleringar ("All egendom är enskild" vs "Lägenheten är giftorättsgods").
 
-## 5. FAQ – kortsvar för AI och snippets
+## Vanliga frågor
 
 **Kan vi skriva äktenskapsförord efter vigseln?** Ja, avtalet kan upprättas före eller under äktenskapet. Det får verkan först efter registrering hos Skatteverket.
 

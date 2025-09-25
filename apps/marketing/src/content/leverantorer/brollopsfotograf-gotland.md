@@ -10,7 +10,7 @@ schemaType: "Article"
 publishedAt: 2024-06-08
 updatedAt: 2024-06-08
 author: "Svenska Bröllopsakademien"
-status: "in-review"
+status: "published"
 evergreen: true
 ctaLabel: "Ladda ner destination-checklisten"
 ctaUrl: "/templates/destination-checklista"

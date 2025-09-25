@@ -1,0 +1,723 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import cities from '../../../../data/cities.json';
+
+
+export async function getStaticPaths() {
+  // Define services that have programmatic content
+  const services = ['brollopsfotograf', 'brollopslokal'];
+
+  // Map URL-safe service names to data keys
+  const serviceMapping = {
+    'brollopsfotograf': 'bröllopsfotograf',
+    'brollopslokal': 'bröllopslokal'
+  };
+
+  return services.map(service => ({
+    params: { service },
+    props: { service, dataKey: serviceMapping[service] }
+  }));
+}
+
+const { service, dataKey } = Astro.props;
+const currentYear = new Date().getFullYear();
+
+// Get all cities that have this service
+const availableCities = Object.entries(cities).filter(([cityKey, cityData]) =>
+  cityData.pricing[dataKey]
+);
+
+// Calculate aggregate stats
+const totalSuppliers = availableCities.reduce((sum, [key, city]) =>
+  sum + (city.supplierCounts[dataKey] || 0), 0
+);
+
+const totalSearchVolume = availableCities.reduce((sum, [key, city]) =>
+  sum + (city.searchVolumes[dataKey] || 0), 0
+);
+
+const avgPriceRange = availableCities.length > 0 ? {
+  min: Math.min(...availableCities.map(([key, city]) => city.pricing[dataKey].min)),
+  max: Math.max(...availableCities.map(([key, city]) => city.pricing[dataKey].max)),
+  avg: Math.round(availableCities.reduce((sum, [key, city]) =>
+    sum + city.pricing[dataKey].avg, 0) / availableCities.length)
+} : { min: 0, max: 0, avg: 0 };
+
+// Service-specific data
+const serviceData = {
+  'bröllopsfotograf': {
+    title: 'Bröllopsfotografer',
+    description: 'Hitta professionella bröllopsfotografer',
+    icon: '📸',
+    whatIncludes: 'Fotografering, redigering, leverans av bilder',
+    bookingAdvice: 'Boka 8-12 månader i förväg för populära datum'
+  },
+  'bröllopslokal': {
+    title: 'Bröllopslokaler',
+    description: 'Upptäck magiska platser för er stora dag',
+    icon: '🏰',
+    whatIncludes: 'Lokal, grundutrustning, ofta catering och service',
+    bookingAdvice: 'Boka 12-18 månader i förväg, särskilt för helger'
+  },
+  'bröllopscatering': {
+    title: 'Bröllopscatering',
+    description: 'Exquisit mat för era gäster',
+    icon: '🍽️',
+    whatIncludes: 'Meny, servering, personal, ofta dryck',
+    bookingAdvice: 'Boka 6-10 månader i förväg, planera för allergier'
+  },
+  'bröllopsflorist': {
+    title: 'Bröllopsflorister',
+    description: 'Vackra blommor och dekoration',
+    icon: '💐',
+    whatIncludes: 'Brudbukett, dekoration, installation',
+    bookingAdvice: 'Boka 4-8 månader i förväg, säsongsblommor kräver mer tid'
+  }
+};
+
+const currentServiceData = serviceData[dataKey];
+
+// Get related suppliers from actual content
+let actualSuppliers = [];
+try {
+  const suppliers = await getCollection('suppliers');
+  actualSuppliers = suppliers.filter(supplier =>
+    supplier.data.category === service ||
+    supplier.data.category === service.replace('bröllops', '') ||
+    (service === 'bröllopsfotograf' && supplier.data.category === 'fotograf')
+  ).slice(0, 6);
+} catch (error) {
+  console.warn('Could not load suppliers:', error);
+}
+---
+
+<BaseLayout
+  title={`${currentServiceData.title} Sverige ${currentYear} - Priser & Rekommendationer`}
+  description={`${currentServiceData.description} i ${availableCities.length} svenska städer. Jämför ${totalSuppliers}+ leverantörer, priser från ${avgPriceRange.min.toLocaleString('sv-SE')} kr.`}
+  keywords={[service, `${service} sverige`, `${service} pris`, `bästa ${service}`]}
+>
+  <!-- Schema markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${currentServiceData.title} Sverige`,
+    "description": `${currentServiceData.description} i hela Sverige`,
+    "url": `https://svenskabrollopsresan.se/leverantorer/${service}`,
+    "numberOfItems": totalSuppliers,
+    "about": {
+      "@type": "Service",
+      "name": currentServiceData.title,
+      "serviceType": service
+    }
+  })} />
+
+  <!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="breadcrumb">
+    <ol>
+      <li><a href="/">Hem</a></li>
+      <li><a href="/leverantorer">Leverantörer</a></li>
+      <li aria-current="page">{currentServiceData.title}</li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="service-hero">
+      <div class="hero-content">
+        <span class="service-icon">{currentServiceData.icon}</span>
+        <h1>{currentServiceData.title} Sverige {currentYear}</h1>
+        <p class="lead">{currentServiceData.description} i {availableCities.length} svenska städer</p>
+
+        <div class="service-stats">
+          <div class="stat">
+            <strong>{totalSuppliers}+</strong>
+            <span>Leverantörer</span>
+          </div>
+          <div class="stat">
+            <strong>{availableCities.length}</strong>
+            <span>Städer</span>
+          </div>
+          <div class="stat">
+            <strong>{avgPriceRange.min.toLocaleString('sv-SE')} - {avgPriceRange.max.toLocaleString('sv-SE')} kr</strong>
+            <span>Prisintervall</span>
+          </div>
+          <div class="stat">
+            <strong>{totalSearchVolume.toLocaleString('sv-SE')}+</strong>
+            <span>Sökningar/månad</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Guide -->
+    <section class="quick-guide">
+      <div class="guide-content">
+        <h2>Snabbguide: {currentServiceData.title}</h2>
+        <div class="guide-grid">
+          <div class="guide-item">
+            <h3>💰 Priser i Sverige</h3>
+            <p><strong>Genomsnitt:</strong> {avgPriceRange.avg.toLocaleString('sv-SE')} kr</p>
+            <p><strong>Intervall:</strong> {avgPriceRange.min.toLocaleString('sv-SE')} - {avgPriceRange.max.toLocaleString('sv-SE')} kr</p>
+          </div>
+
+          <div class="guide-item">
+            <h3>📦 Vad som ingår</h3>
+            <p>{currentServiceData.whatIncludes}</p>
+          </div>
+
+          <div class="guide-item">
+            <h3>⏰ Bokningsråd</h3>
+            <p>{currentServiceData.bookingAdvice}</p>
+          </div>
+
+          <div class="guide-item">
+            <h3>📍 Tillgängliga städer</h3>
+            <p>Vi täcker {availableCities.length} städer från Stockholm till Malmö</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- City Grid -->
+    <section class="cities-grid">
+      <h2>Välj din stad</h2>
+      <p>Hitta {service} i din stad med lokala priser och rekommendationer:</p>
+
+      <div class="city-cards">
+        {availableCities.map(([cityKey, cityData]) => (
+          <a href={`/leverantorer/${service}/${cityKey}`} class="city-card">
+            <div class="city-header">
+              <h3>{cityData.name}</h3>
+              <span class="city-region">{cityData.region}</span>
+            </div>
+
+            <div class="city-stats">
+              <div class="city-stat">
+                <strong>{cityData.supplierCounts[dataKey] || 0}</strong>
+                <span>leverantörer</span>
+              </div>
+              <div class="city-stat">
+                <strong>från {cityData.pricing[dataKey].min.toLocaleString('sv-SE')} kr</strong>
+                <span>startpris</span>
+              </div>
+            </div>
+
+            <div class="city-highlights">
+              <p><strong>Populärt:</strong> {cityData.seasonality.peak}</p>
+              <p><strong>Kända platser:</strong> {cityData.popularVenues.slice(0, 2).join(', ')}</p>
+            </div>
+
+            <div class="city-arrow">→</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Featured Suppliers -->
+    {actualSuppliers.length > 0 && (
+      <section class="featured-suppliers">
+        <h2>Rekommenderade leverantörer</h2>
+        <p>Några av våra mest populära {service} i Sverige:</p>
+
+        <div class="supplier-grid">
+          {actualSuppliers.map(supplier => (
+            <a href={`/leverantorer/${supplier.data.category}/${supplier.slug.split('/').pop()}`} class="supplier-card">
+              {supplier.data.image && (
+                <img src={supplier.data.image} alt={supplier.data.title} loading="lazy" />
+              )}
+              <div class="supplier-info">
+                <h3>{supplier.data.title}</h3>
+                <p class="supplier-location">📍 {supplier.data.city}</p>
+                <p class="supplier-price">Från {supplier.data.startPrice?.toLocaleString('sv-SE')} kr</p>
+                <p class="supplier-summary">{supplier.data.summary}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="view-all">
+          <a href={`/leverantorer/${service === 'bröllopsfotograf' ? 'fotograf' : service.replace('bröllops', '')}`} class="btn secondary">
+            Se alla {currentServiceData.title.toLowerCase()}
+          </a>
+        </div>
+      </section>
+    )}
+
+    <!-- Pricing Guide -->
+    <section class="pricing-guide">
+      <h2>Prisjämförelse per stad</h2>
+      <div class="pricing-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Stad</th>
+              <th>Lägsta pris</th>
+              <th>Genomsnitt</th>
+              <th>Högsta pris</th>
+              <th>Leverantörer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {availableCities
+              .sort(([,a], [,b]) => a.pricing[service].avg - b.pricing[service].avg)
+              .map(([cityKey, cityData]) => (
+                <tr>
+                  <td>
+                    <a href={`/leverantorer/${service}/${cityKey}`} class="city-link">
+                      {cityData.name}
+                    </a>
+                  </td>
+                  <td>{cityData.pricing[dataKey].min.toLocaleString('sv-SE')} kr</td>
+                  <td><strong>{cityData.pricing[dataKey].avg.toLocaleString('sv-SE')} kr</strong></td>
+                  <td>{cityData.pricing[dataKey].max.toLocaleString('sv-SE')} kr</td>
+                  <td>{cityData.supplierCounts[dataKey] || 0}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="service-faq">
+      <h2>Vanliga frågor om {currentServiceData.title.toLowerCase()}</h2>
+
+      <div class="faq-items">
+        <div class="faq-item">
+          <h3>Vad kostar {service} i Sverige?</h3>
+          <p>Priserna varierar kraftigt mellan städer och leverantörer. Genomsnittspriset ligger på {avgPriceRange.avg.toLocaleString('sv-SE')} kr, med ett intervall från {avgPriceRange.min.toLocaleString('sv-SE')} kr till {avgPriceRange.max.toLocaleString('sv-SE')} kr.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Vilken stad har bäst priser?</h3>
+          <p>Generellt sett är priserna lägre i mindre städer jämfört med Stockholm, Göteborg och Malmö. Se vår prisjämförelse ovan för detaljerad information.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>När ska man boka {service}?</h3>
+          <p>{currentServiceData.bookingAdvice} Popular dates goes first, så planera i tid!</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Hur många leverantörer finns det?</h3>
+          <p>Vi har kartlagt {totalSuppliers} professionella leverantörer av {currentServiceData.title.toLowerCase()} i {availableCities.length} svenska städer.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="service-cta">
+      <h2>Hitta rätt {service} för ert bröllop</h2>
+      <p>Använd våra verktyg för att jämföra leverantörer och planera er budget.</p>
+      <div class="cta-buttons">
+        <a href="/budget/budgetkalkylator?ref=leverantorer-service" class="btn primary">Planera budget</a>
+        <a href="/guides/brollopsplanering-grundkurs" class="btn secondary">Läs planeringsguide</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+.service-hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.service-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.service-hero h1 {
+  font-size: 3rem;
+  margin: 0.5rem 0;
+  color: #1f1c14;
+}
+
+.lead {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.service-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.8rem;
+  color: #B26D4A;
+  font-weight: 700;
+}
+
+.stat span {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.breadcrumb ol {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li:not(:last-child):after {
+  content: "›";
+  margin: 0 0.5rem;
+  color: #999;
+}
+
+.breadcrumb a {
+  color: #B26D4A;
+  text-decoration: none;
+}
+
+.quick-guide {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.guide-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.guide-item h3 {
+  color: #B26D4A;
+  margin-top: 0;
+}
+
+.cities-grid {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.cities-grid > h2 {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 1rem;
+  padding: 0 1rem;
+}
+
+.cities-grid > p {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  color: #666;
+}
+
+.city-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.city-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  position: relative;
+}
+
+.city-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border-color: #B26D4A;
+}
+
+.city-header h3 {
+  margin: 0;
+  color: #1f1c14;
+  font-size: 1.4rem;
+}
+
+.city-region {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.city-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.city-stat strong {
+  display: block;
+  color: #B26D4A;
+  font-weight: 700;
+}
+
+.city-stat span {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.city-highlights {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.city-highlights p {
+  margin: 0.25rem 0;
+}
+
+.city-arrow {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.2rem;
+  color: #B26D4A;
+  transition: transform 0.2s ease;
+}
+
+.city-card:hover .city-arrow {
+  transform: translateX(4px);
+}
+
+.featured-suppliers {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.supplier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.supplier-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+}
+
+.supplier-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.supplier-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  float: right;
+}
+
+.supplier-info h3 {
+  margin: 0;
+  color: #1f1c14;
+}
+
+.supplier-location, .supplier-price {
+  color: #B26D4A;
+  font-weight: 600;
+  margin: 0.25rem 0;
+}
+
+.supplier-summary {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.pricing-guide {
+  padding: 3rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.pricing-table {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.pricing-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.pricing-table th, .pricing-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.pricing-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #1f1c14;
+}
+
+.city-link {
+  color: #B26D4A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.city-link:hover {
+  text-decoration: underline;
+}
+
+.service-faq {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.faq-items {
+  max-width: 800px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #B26D4A;
+}
+
+.faq-item h3 {
+  margin-top: 0;
+  color: #1f1c14;
+}
+
+.service-cta {
+  background: #B26D4A;
+  color: white;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.service-cta h2 {
+  margin-top: 0;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.btn.primary {
+  background: white;
+  color: #B26D4A;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn:hover.primary {
+  background: #f8f9fa;
+}
+
+.btn:hover.secondary {
+  background: white;
+  color: #B26D4A;
+}
+
+.view-all {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .service-stats {
+    gap: 1.5rem;
+  }
+
+  .service-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .city-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .city-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>

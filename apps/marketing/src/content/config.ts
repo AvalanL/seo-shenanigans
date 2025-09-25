@@ -8,7 +8,7 @@ const baseSchema = ({ image }: { image: ImageFunction }) =>
     primaryKeyword: z.string(),
     secondaryKeywords: z.array(z.string()).default([]),
     schemaType: z
-      .enum(["Article", "HowTo", "FAQPage", "ItemList"])
+      .enum(["Article", "HowTo", "FAQPage", "ItemList", "LocalBusiness"])
       .default("Article"),
     publishedAt: z.date().optional(),
     updatedAt: z.date().optional(),
@@ -35,6 +35,7 @@ const baseSchema = ({ image }: { image: ImageFunction }) =>
         z.object({
           label: z.string(),
           url: z.string().url(),
+          credibility: z.string().optional()
         }),
       )
       .default([]),
@@ -96,6 +97,54 @@ const supplierSchema = z.object({
   schemaType: z.string().default("Organization"),
 });
 
+const programmaticSchema = z.object({
+  title: z.string(),
+  description: z.string().max(160),
+  summary: z.string().max(200),
+  primaryKeyword: z.string(),
+  secondaryKeywords: z.array(z.string()).default([]),
+  category: z.string(),
+  city: z.string(),
+  region: z.string(),
+  searchVolume: z.number(),
+  avgPrice: z.number(),
+  priceRange: z.string(),
+  supplierCount: z.number(),
+  publishedAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  author: z.string().default("Svenska Bröllopsakademien"),
+  status: z
+    .enum(["draft", "in-review", "published", "refresh"])
+    .default("published"),
+  schemaType: z.string().default("LocalBusiness"),
+  evergreen: z.boolean().default(true),
+  faq: z
+    .array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      }),
+    )
+    .optional(),
+  sources: z
+    .array(
+      z.object({
+        label: z.string(),
+        url: z.string().url(),
+        credibility: z.string().optional()
+      }),
+    )
+    .default([]),
+  related: z.array(z.string()).default([]),
+  programmaticData: z.object({
+    generated: z.boolean().default(true),
+    template: z.string(),
+    city: z.string(),
+    searchIntent: z.string(),
+    competitionLevel: z.string(),
+  }).optional(),
+});
+
 const guides = defineCollection({ type: "content", schema: baseSchema });
 const checklistor = defineCollection({ type: "content", schema: baseSchema });
 const budget = defineCollection({ type: "content", schema: baseSchema });
@@ -104,6 +153,7 @@ const leverantorer = defineCollection({ type: "content", schema: baseSchema });
 const venues = defineCollection({ type: "content", schema: venueSchema });
 const suppliers = defineCollection({ type: "content", schema: supplierSchema });
 const traditioner = defineCollection({ type: "content", schema: baseSchema });
+const programmatic = defineCollection({ type: "content", schema: programmaticSchema });
 const shared = defineCollection({ type: "data" });
 
 export const collections = {
@@ -115,5 +165,6 @@ export const collections = {
   venues,
   suppliers,
   traditioner,
+  programmatic,
   shared,
 };

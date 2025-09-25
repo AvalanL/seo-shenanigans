@@ -1,0 +1,118 @@
+---
+// Planning Timeline Component for Dream Wedding Planning Guide
+---
+
+<div class="planning-timeline bg-gradient-to-r from-rose-50 to-pink-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    🕐 Bröllopsdagens Tidslinje
+  </h3>
+
+  <div class="timeline-container space-y-4">
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        08:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">Morgonförberedelser</h4>
+        <p class="text-gray-600 text-sm">Frukost, hår & makeup börjar</p>
+      </div>
+    </div>
+
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        11:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">First Look</h4>
+        <p class="text-gray-600 text-sm">Första mötet och intima porträtt</p>
+      </div>
+    </div>
+
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-rose-600 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        15:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">Vigselceremoni ✨</h4>
+        <p class="text-gray-600 text-sm">Det magiska ögonblicket (30 min)</p>
+      </div>
+    </div>
+
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        17:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">Cocktail & Mingel</h4>
+        <p class="text-gray-600 text-sm">Gratulationer och porträttfoto</p>
+      </div>
+    </div>
+
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        19:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">Middag & Tal</h4>
+        <p class="text-gray-600 text-sm">Kulinarisk upplevelse med kärleksfulla ord</p>
+      </div>
+    </div>
+
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        22:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">Första dans & Tårta</h4>
+        <p class="text-gray-600 text-sm">Era speciella moment som nygifta</p>
+      </div>
+    </div>
+
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        23:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">Dans & Fest</h4>
+        <p class="text-gray-600 text-sm">Dansgolvet öppnar för alla</p>
+      </div>
+    </div>
+
+    <div class="timeline-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
+      <div class="time-badge bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold min-w-[80px] text-center">
+        01:00
+      </div>
+      <div class="content">
+        <h4 class="font-semibold text-gray-800">Nattsupa</h4>
+        <p class="text-gray-600 text-sm">Avslutning för den inre kretsen</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+    <p class="text-sm text-blue-800">
+      <strong>💡 Tips:</strong> Denna tidslinje är flexibel! Anpassa efter er lokals regler,
+      säsong (vinterljus vs sommarljus) och era egna preferenser. Viktigast är att ni
+      bygger in buffertar mellan viktiga moment.
+    </p>
+  </div>
+</div>
+
+<style>
+  .planning-timeline {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .timeline-item {
+    transition: transform 0.2s ease, shadow 0.2s ease;
+  }
+
+  .timeline-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .time-badge {
+    font-feature-settings: 'tnum' on, 'lnum' on;
+  }
+</style>

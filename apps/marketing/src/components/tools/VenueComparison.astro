@@ -1,0 +1,137 @@
+---
+// Venue Comparison Tool for Wedding Venues Guide
+---
+
+<div class="venue-comparison bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    🏰 Jämför bröllopslokaler
+  </h3>
+
+  <div class="comparison-table overflow-x-auto">
+    <table class="w-full text-sm border-collapse">
+      <thead>
+        <tr class="bg-purple-100">
+          <th class="px-4 py-3 text-left font-semibold text-purple-800 border border-purple-200">Lokaltyp</th>
+          <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Pris/gäst</th>
+          <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Kapacitet</th>
+          <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Säsong</th>
+          <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Bokningstidig</th>
+          <th class="px-4 py-3 text-left font-semibold text-purple-800 border border-purple-200">Bäst för</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white">
+        <tr class="hover:bg-purple-25">
+          <td class="px-4 py-3 border border-gray-200">
+            <div class="flex items-center">
+              <span class="text-2xl mr-2">🏰</span>
+              <strong>Slott & Herrgårdar</strong>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">
+            <span class="text-red-600 font-semibold">2,000-4,000+ kr</span>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">50-300</td>
+          <td class="px-4 py-3 text-center border border-gray-200">Året runt</td>
+          <td class="px-4 py-3 text-center border border-gray-200 text-red-600">15-18 mån</td>
+          <td class="px-4 py-3 border border-gray-200">Lyxbröllop, wow-faktor</td>
+        </tr>
+
+        <tr class="bg-gray-50 hover:bg-purple-25">
+          <td class="px-4 py-3 border border-gray-200">
+            <div class="flex items-center">
+              <span class="text-2xl mr-2">🍽️</span>
+              <strong>Restauranger</strong>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">
+            <span class="text-green-600 font-semibold">1,200-2,500 kr</span>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">20-150</td>
+          <td class="px-4 py-3 text-center border border-gray-200">Året runt</td>
+          <td class="px-4 py-3 text-center border border-gray-200 text-green-600">6-12 mån</td>
+          <td class="px-4 py-3 border border-gray-200">Pålitlig service, god mat</td>
+        </tr>
+
+        <tr class="hover:bg-purple-25">
+          <td class="px-4 py-3 border border-gray-200">
+            <div class="flex items-center">
+              <span class="text-2xl mr-2">🌿</span>
+              <strong>Utomhusplatser</strong>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">
+            <span class="text-blue-600 font-semibold">800-1,800 kr</span>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">30-200+</td>
+          <td class="px-4 py-3 text-center border border-gray-200 text-orange-600">Maj-Sep</td>
+          <td class="px-4 py-3 text-center border border-gray-200 text-green-600">6-12 mån</td>
+          <td class="px-4 py-3 border border-gray-200">Naturälskare, sommarbröllop</td>
+        </tr>
+
+        <tr class="bg-gray-50 hover:bg-purple-25">
+          <td class="px-4 py-3 border border-gray-200">
+            <div class="flex items-center">
+              <span class="text-2xl mr-2">🏨</span>
+              <strong>Hotell</strong>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">
+            <span class="text-yellow-600 font-semibold">1,500-3,000 kr</span>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">50-300</td>
+          <td class="px-4 py-3 text-center border border-gray-200">Året runt</td>
+          <td class="px-4 py-3 text-center border border-gray-200 text-yellow-600">8-15 mån</td>
+          <td class="px-4 py-3 border border-gray-200">All-inclusive, bekvämlighet</td>
+        </tr>
+
+        <tr class="hover:bg-purple-25">
+          <td class="px-4 py-3 border border-gray-200">
+            <div class="flex items-center">
+              <span class="text-2xl mr-2">🎭</span>
+              <strong>Unika lokaler</strong>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">
+            <span class="text-purple-600 font-semibold">1,000-3,500 kr</span>
+          </td>
+          <td class="px-4 py-3 text-center border border-gray-200">20-500</td>
+          <td class="px-4 py-3 text-center border border-gray-200">Varierar</td>
+          <td class="px-4 py-3 text-center border border-gray-200 text-yellow-600">6-18 mån</td>
+          <td class="px-4 py-3 border border-gray-200">Äventyrslystna, unika berättelser</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-6 grid md:grid-cols-3 gap-4 text-sm">
+    <div class="bg-green-100 rounded-lg p-4 border border-green-200">
+      <h4 class="font-semibold text-green-800 mb-2">💰 Budget-tips</h4>
+      <p class="text-green-700">Välj fredag/söndag för 20-30% rabatt. Vinter ger ytterligare besparingar.</p>
+    </div>
+
+    <div class="bg-blue-100 rounded-lg p-4 border border-blue-200">
+      <h4 class="font-semibold text-blue-800 mb-2">⏰ Timing</h4>
+      <p class="text-blue-700">Börja titta 15-18 månader före för populära lokaler och högsäsong.</p>
+    </div>
+
+    <div class="bg-purple-100 rounded-lg p-4 border border-purple-200">
+      <h4 class="font-semibold text-purple-800 mb-2">🎯 Val-tips</h4>
+      <p class="text-purple-700">Besök alltid lokaler personligen och testa akustik/belysning.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .venue-comparison {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .comparison-table table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .hover\:bg-purple-25:hover {
+    background-color: #faf5ff;
+  }
+</style>

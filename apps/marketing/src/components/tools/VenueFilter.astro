@@ -1,0 +1,306 @@
+---
+// Venue Filter Tool - Interactive venue selection helper
+---
+
+<div class="venue-filter bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    🎯 Hitta er perfekta lokaltyp
+  </h3>
+
+  <div class="filter-questions bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Svara på frågorna nedan så hjälper vi er att hitta lokaltyper som passar era önskemål:
+    </p>
+
+    <!-- Question 1: Budget -->
+    <div class="question mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-3">💰 Vad är er ungefärliga budget per gäst?</h4>
+      <div class="options grid md:grid-cols-4 gap-3">
+        <button class="option-btn" data-question="budget" data-value="low" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">💚</div>
+          <div class="font-semibold">Under 1,500 kr</div>
+          <div class="text-sm text-gray-600">Budget-medveten</div>
+        </button>
+        <button class="option-btn" data-question="budget" data-value="medium" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">💛</div>
+          <div class="font-semibold">1,500-2,500 kr</div>
+          <div class="text-sm text-gray-600">Standard</div>
+        </button>
+        <button class="option-btn" data-question="budget" data-value="high" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">🧡</div>
+          <div class="font-semibold">2,500-4,000 kr</div>
+          <div class="text-sm text-gray-600">Premium</div>
+        </button>
+        <button class="option-btn" data-question="budget" data-value="luxury" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">❤️</div>
+          <div class="font-semibold">4,000+ kr</div>
+          <div class="text-sm text-gray-600">Lyx</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Question 2: Season -->
+    <div class="question mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-3">📅 Vilken säsong planerar ni?</h4>
+      <div class="options grid md:grid-cols-4 gap-3">
+        <button class="option-btn" data-question="season" data-value="summer" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">☀️</div>
+          <div class="font-semibold">Sommar</div>
+          <div class="text-sm text-gray-600">Juni-Augusti</div>
+        </button>
+        <button class="option-btn" data-question="season" data-value="spring" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">🌸</div>
+          <div class="font-semibold">Vår</div>
+          <div class="text-sm text-gray-600">April-Maj</div>
+        </button>
+        <button class="option-btn" data-question="season" data-value="autumn" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">🍂</div>
+          <div class="font-semibold">Höst</div>
+          <div class="text-sm text-gray-600">September-Oktober</div>
+        </button>
+        <button class="option-btn" data-question="season" data-value="winter" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">❄️</div>
+          <div class="font-semibold">Vinter</div>
+          <div class="text-sm text-gray-600">November-Mars</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Question 3: Style Preference -->
+    <div class="question mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-3">✨ Vilken atmosfär drömmer ni om?</h4>
+      <div class="options grid md:grid-cols-3 gap-3">
+        <button class="option-btn" data-question="style" data-value="classic" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">👑</div>
+          <div class="font-semibold">Klassisk elegans</div>
+          <div class="text-sm text-gray-600">Slott, herrgårdar</div>
+        </button>
+        <button class="option-btn" data-question="style" data-value="natural" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">🌿</div>
+          <div class="font-semibold">Naturlig charm</div>
+          <div class="text-sm text-gray-600">Utomhus, trädgårdar</div>
+        </button>
+        <button class="option-btn" data-question="style" data-value="modern" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">🏙️</div>
+          <div class="font-semibold">Modern & urban</div>
+          <div class="text-sm text-gray-600">Hotell, restauranger</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Question 4: Guest Count -->
+    <div class="question mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-3">👥 Ungefär hur många gäster?</h4>
+      <div class="options grid md:grid-cols-4 gap-3">
+        <button class="option-btn" data-question="guests" data-value="intimate" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">💕</div>
+          <div class="font-semibold">20-40 gäster</div>
+          <div class="text-sm text-gray-600">Intimt</div>
+        </button>
+        <button class="option-btn" data-question="guests" data-value="small" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">👨‍👩‍👧‍👦</div>
+          <div class="font-semibold">40-80 gäster</div>
+          <div class="text-sm text-gray-600">Familj & vänner</div>
+        </button>
+        <button class="option-btn" data-question="guests" data-value="medium" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">🎉</div>
+          <div class="font-semibold">80-150 gäster</div>
+          <div class="text-sm text-gray-600">Stor fest</div>
+        </button>
+        <button class="option-btn" data-question="guests" data-value="large" onclick="selectOption(this)">
+          <div class="text-2xl mb-2">🏛️</div>
+          <div class="font-semibold">150+ gäster</div>
+          <div class="text-sm text-gray-600">Storslaget</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="results hidden bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 mt-6 border border-green-200">
+      <h4 class="text-lg font-bold text-green-800 mb-4 flex items-center">
+        <span class="text-2xl mr-2">🎯</span>
+        Era rekommenderade lokaltyper:
+      </h4>
+      <div id="recommendations" class="space-y-4">
+        <!-- Recommendations will be inserted here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const answers = {
+  budget: null,
+  season: null,
+  style: null,
+  guests: null
+};
+
+const recommendations = {
+  castle: {
+    name: "🏰 Slott & Herrgårdar",
+    description: "Majestätisk atmosfär med sekelgammal historia",
+    matches: ["classic", "luxury", "high", "medium", "large"],
+    price: "2,000-4,000+ kr/gäst",
+    seasons: ["summer", "spring", "autumn", "winter"],
+    pros: ["Magisk atmosfär", "Fantastiska fotomiljöer", "All-inclusive paket", "Wow-faktor"]
+  },
+  restaurant: {
+    name: "🍽️ Restauranger & Hotell",
+    description: "Pålitlig service och professionell mathantering",
+    matches: ["modern", "medium", "low", "small", "intimate"],
+    price: "1,200-2,500 kr/gäst",
+    seasons: ["summer", "spring", "autumn", "winter"],
+    pros: ["Trygg leverans", "God mat", "Enkel logistik", "Flexibla paket"]
+  },
+  outdoor: {
+    name: "🌿 Utomhusplatser",
+    description: "Sveriges vackra natur som bakgrund",
+    matches: ["natural", "summer", "spring", "low", "medium"],
+    price: "800-1,800 kr/gäst",
+    seasons: ["summer", "spring", "autumn"],
+    pros: ["Naturlig skönhet", "Flexibilitet", "Bra priser", "Unik känsla"]
+  },
+  unique: {
+    name: "🎭 Unika lokaler",
+    description: "Museum, båtar, gallerier och andra specialplatser",
+    matches: ["modern", "high", "luxury", "small", "intimate"],
+    price: "1,000-3,500 kr/gäst",
+    seasons: ["summer", "spring", "autumn", "winter"],
+    pros: ["Minnesvärd upplevelse", "Unik berättelse", "Kreativ miljö", "Få har samma"]
+  }
+};
+
+function selectOption(button) {
+  const question = button.dataset.question;
+  const value = button.dataset.value;
+
+  // Remove active class from all buttons in this question
+  const questionButtons = button.parentNode.querySelectorAll('.option-btn');
+  questionButtons.forEach(btn => btn.classList.remove('active'));
+
+  // Add active class to clicked button
+  button.classList.add('active');
+
+  // Store answer
+  answers[question] = value;
+
+  // Check if all questions are answered
+  if (Object.values(answers).every(answer => answer !== null)) {
+    showRecommendations();
+  }
+}
+
+function showRecommendations() {
+  const resultsDiv = document.getElementById('results');
+  const recommendationsDiv = document.getElementById('recommendations');
+
+  // Calculate scores for each venue type
+  const scores = {};
+  Object.keys(recommendations).forEach(venue => {
+    scores[venue] = calculateScore(venue);
+  });
+
+  // Sort by score
+  const sortedVenues = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+
+  // Generate recommendations HTML
+  let html = '';
+  sortedVenues.forEach((venue, index) => {
+    const rec = recommendations[venue];
+    const score = scores[venue];
+    const matchPercent = Math.round(score * 25); // Convert to percentage
+
+    if (matchPercent >= 50) { // Only show venues with good matches
+      const matchLevel = matchPercent >= 80 ? 'Perfekt match!' : matchPercent >= 65 ? 'Mycket bra match' : 'Bra alternativ';
+      const colorClass = matchPercent >= 80 ? 'bg-green-100 border-green-300' : matchPercent >= 65 ? 'bg-blue-100 border-blue-300' : 'bg-yellow-100 border-yellow-300';
+
+      html += `
+        <div class="recommendation ${colorClass} rounded-lg p-4 border">
+          <div class="flex justify-between items-start mb-2">
+            <h5 class="text-lg font-semibold text-gray-800">${rec.name}</h5>
+            <span class="text-sm font-semibold px-3 py-1 bg-white rounded-full">${matchLevel} (${matchPercent}%)</span>
+          </div>
+          <p class="text-gray-700 mb-3">${rec.description}</p>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <strong>💰 Pris:</strong> ${rec.price}
+            </div>
+            <div>
+              <strong>✅ Fördelar:</strong> ${rec.pros.slice(0, 2).join(', ')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  recommendationsDiv.innerHTML = html;
+  resultsDiv.classList.remove('hidden');
+
+  // Scroll to results
+  resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function calculateScore(venue) {
+  const rec = recommendations[venue];
+  let score = 0;
+
+  // Check matches for each answer
+  Object.values(answers).forEach(answer => {
+    if (rec.matches.includes(answer)) {
+      score += 1;
+    }
+  });
+
+  return score;
+}
+</script>
+
+<style>
+  .venue-filter {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .option-btn {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .option-btn:hover {
+    border-color: #8b5cf6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+  }
+
+  .option-btn.active {
+    border-color: #8b5cf6;
+    background: #f3f4f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+  }
+
+  .results {
+    animation: slideIn 0.5s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>

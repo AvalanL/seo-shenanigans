@@ -9,6 +9,36 @@
   line-height: 1.6;
   background-color: #fffdf8;
   color: #1f1c14;
+  --table-surface: #ffffff;
+  --table-header: #f5ede6;
+  --table-header-accent: #ead9cf;
+  --table-header-text: #3c372b;
+  --table-border: rgba(28, 22, 13, 0.08);
+  --table-row-alt: rgba(178, 109, 74, 0.07);
+  --table-row-hover: rgba(178, 109, 74, 0.12);
+  --table-text: #2d241f;
+  --table-caption: #6d5c4f;
+  --table-link: #b26d4a;
+  --table-shadow: 0 24px 45px rgba(31, 28, 20, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    background-color: #0f0d0a;
+    color: #f6f3eb;
+    --table-surface: #16111c;
+    --table-header: #221b29;
+    --table-header-accent: #2c2236;
+    --table-header-text: #f1e9ff;
+    --table-border: rgba(255, 255, 255, 0.12);
+    --table-row-alt: rgba(172, 132, 255, 0.08);
+    --table-row-hover: rgba(172, 132, 255, 0.16);
+    --table-text: #f7f3ff;
+    --table-caption: #c3b7ff;
+    --table-link: #d2b9ff;
+    --table-shadow: 0 30px 60px rgba(5, 3, 12, 0.55);
+  }
 }
 
 a {
@@ -26,4 +56,106 @@ img {
 
 main a {
   text-decoration-thickness: 2px;
+}
+
+main table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2.5rem 0;
+  background: var(--table-surface);
+  color: var(--table-text);
+  border: 1px solid var(--table-border);
+  border-radius: 16px;
+  box-shadow: var(--table-shadow);
+  overflow: hidden;
+}
+
+main table caption {
+  caption-side: bottom;
+  padding: 1rem 1.25rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--table-caption);
+  text-align: left;
+}
+
+main table thead th {
+  background: linear-gradient(135deg, var(--table-header), var(--table-header-accent));
+  color: var(--table-header-text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--table-border);
+  font-weight: 600;
+}
+
+main table tbody tr {
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+main table tbody tr:nth-child(even) {
+  background: var(--table-row-alt);
+}
+
+main table tbody tr:hover {
+  background: var(--table-row-hover);
+}
+
+main table th,
+main table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--table-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+main table th:first-child,
+main table td:first-child {
+  padding-left: 1.5rem;
+}
+
+main table th:last-child,
+main table td:last-child {
+  padding-right: 1.5rem;
+}
+
+main table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+main table a {
+  color: var(--table-link);
+  font-weight: 600;
+}
+
+main table a:hover,
+main table a:focus {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  main table {
+    font-size: 0.9rem;
+    margin: 2rem 0;
+  }
+
+  main table th,
+  main table td {
+    padding: 0.85rem 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  main table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  main table thead,
+  main table tbody,
+  main table tr {
+    width: 100%;
+  }
 }

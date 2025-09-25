@@ -12,7 +12,7 @@ schemaType: "Article"
 publishedAt: 2024-06-06
 updatedAt: 2024-06-06
 author: "Svenska Bröllopsakademien"
-status: "in-review"
+status: "published"
 evergreen: true
 ctaLabel: "Ladda ner frågebatteriet"
 ctaUrl: "/checklistor/fragor-till-brollopsfotograf"
