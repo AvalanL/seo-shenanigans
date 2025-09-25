@@ -9,13 +9,15 @@
   "scripts": {
     "dev:marketing": "npm --prefix apps/marketing run dev",
     "build:marketing": "npm --prefix apps/marketing run build",
+    "build:production": "npm --prefix apps/marketing run prebuild && npm --prefix apps/marketing run build",
     "lint:marketing": "npm --prefix apps/marketing run lint",
     "format:marketing": "npm --prefix apps/marketing run format",
     "prebuild": "npm --prefix apps/marketing run prebuild",
     "generate:directory": "npm --prefix apps/marketing run generate:directory",
-    "scrape:venues": "npm --prefix apps/marketing run scrape:venues"
+    "scrape:venues": "npm --prefix apps/marketing run scrape:venues",
+    "scrape:instagram": "node instagram-scraper.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "gray-matter": "^4.0.3",
     "puppeteer": "^24.22.2"
   }

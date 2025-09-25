@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build:production",
+  "outputDirectory": "apps/marketing/dist",
+  "installCommand": "npm install --omit=dev",
+  "framework": "astro",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/apps/marketing/dist/$1"
+    }
+  ]
+}

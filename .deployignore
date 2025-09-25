@@ -1,0 +1,14 @@
+# Development-only scripts that require browser dependencies
+instagram-scraper.js
+instagram-gallery-scraper.js
+scripts/fetch_instagram_profiles.py
+
+# Development tools
+add-supplier-hook.js
+
+# Test files
+test-programmatic-seo.html
+
+# Development dependencies that require system packages
+node_modules/puppeteer/
+node_modules/playwright/
