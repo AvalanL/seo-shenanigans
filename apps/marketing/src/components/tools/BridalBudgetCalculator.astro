@@ -1,0 +1,481 @@
+---
+// Interactive Bridal Budget Calculator
+---
+
+<div class="bridal-budget-calculator bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    💰 Beräkna din brudklänningsbudget 2025
+  </h3>
+
+  <div class="calculator-container bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Få en realistisk uppskattning av vad din dröm-brudklänning kommer kosta inklusive alla tillbehör
+    </p>
+
+    <!-- Input Section -->
+    <div class="input-section grid md:grid-cols-2 gap-6 mb-8">
+
+      <!-- Left Column -->
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-700 mb-3">
+          🎯 Vilken typ av klänning söker du?
+        </label>
+        <select id="dress-type" class="input-field w-full" onchange="calculateBudget()">
+          <option value="">Välj stil...</option>
+          <option value="budget">Budget/H&M/ASOS (3,000-8,000 kr)</option>
+          <option value="mid-range">Mellanklass svenska designer (8,000-20,000 kr)</option>
+          <option value="premium">Premium designer (20,000-35,000 kr)</option>
+          <option value="luxury">Haute couture/Lyx (35,000+ kr)</option>
+          <option value="vintage">Vintage/Second hand (2,000-12,000 kr)</option>
+          <option value="rental">Hyra klänning (1,500-6,000 kr)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-700 mb-3">
+          📍 Var planerar du handla?
+        </label>
+        <select id="shopping-location" class="input-field w-full" onchange="calculateBudget()">
+          <option value="">Välj plats...</option>
+          <option value="stockholm">Stockholm (högre priser)</option>
+          <option value="gothenburg">Göteborg (medel priser)</option>
+          <option value="malmo">Malmö (medel priser)</option>
+          <option value="smaller-city">Mindre stad (lägre priser)</option>
+          <option value="online">Online shopping</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-700 mb-3">
+          ✂️ Behöver du skräddarsydda ändringar?
+        </label>
+        <select id="alterations" class="input-field w-full" onchange="calculateBudget()">
+          <option value="">Välj nivå...</option>
+          <option value="none">Inga ändringar behövs</option>
+          <option value="minor">Mindre ändringar (längd, ärmwidt) - 1,000-2,000 kr</option>
+          <option value="major">Större ändringar (passform, design) - 2,500-5,000 kr</option>
+          <option value="extensive">Omfattande omdesign - 5,000+ kr</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-700 mb-3">
+          👠 Vilka accessoarer behöver du?
+        </label>
+        <div class="accessories-checkboxes space-y-2">
+          <label class="flex items-center">
+            <input type="checkbox" id="shoes" class="mr-2" onchange="calculateBudget()">
+            Brudsko (800-3,000 kr)
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="jewelry" class="mr-2" onchange="calculateBudget()">
+            Smycken (500-2,500 kr)
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="veil" class="mr-2" onchange="calculateBudget()">
+            Slöja (400-2,000 kr)
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="undergarments" class="mr-2" onchange="calculateBudget()">
+            Underkläder/shapewear (300-1,200 kr)
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="hair-makeup" class="mr-2" onchange="calculateBudget()">
+            Hår & makeup trial (1,500-3,500 kr)
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" id="budget-results" style="display: none;">
+      <div class="results-header bg-green-100 rounded-lg p-4 mb-6">
+        <h4 class="text-xl font-bold text-green-800 text-center mb-2">
+          Din beräknade totalbudget
+        </h4>
+        <div class="total-budget text-3xl font-bold text-green-600 text-center" id="total-amount">
+          0 kr
+        </div>
+        <p class="text-sm text-green-700 text-center mt-1" id="budget-range">
+          Intervall: 0 - 0 kr
+        </p>
+      </div>
+
+      <!-- Breakdown Chart -->
+      <div class="breakdown-section mb-6">
+        <h5 class="text-lg font-semibold text-gray-800 mb-4">💳 Kostnadsfördelning</h5>
+        <div class="breakdown-items space-y-3">
+          <!-- Dynamic breakdown items will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Savings Tips -->
+      <div class="savings-tips bg-blue-50 rounded-lg p-4">
+        <h5 class="font-semibold text-blue-800 mb-3">💡 Spartips för din budget</h5>
+        <div id="personalized-tips" class="text-sm text-blue-700">
+          <!-- Personalized tips will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Call-to-Action -->
+    <div class="cta-section text-center mt-6">
+      <button class="cta-button" onclick="exportBudget()">
+        📊 Exportera budgetplan
+      </button>
+      <button class="cta-button ml-3" onclick="findStores()">
+        🏪 Hitta butiker i min stad
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const pricingData = {
+  dressTypes: {
+    budget: { min: 3000, max: 8000, avg: 5500 },
+    'mid-range': { min: 8000, max: 20000, avg: 14000 },
+    premium: { min: 20000, max: 35000, avg: 27500 },
+    luxury: { min: 35000, max: 80000, avg: 57500 },
+    vintage: { min: 2000, max: 12000, avg: 7000 },
+    rental: { min: 1500, max: 6000, avg: 3750 }
+  },
+
+  locationMultipliers: {
+    stockholm: 1.2,
+    gothenburg: 1.0,
+    malmo: 1.0,
+    'smaller-city': 0.85,
+    online: 0.9
+  },
+
+  alterations: {
+    none: { min: 0, max: 0 },
+    minor: { min: 1000, max: 2000 },
+    major: { min: 2500, max: 5000 },
+    extensive: { min: 5000, max: 8000 }
+  },
+
+  accessories: {
+    shoes: { min: 800, max: 3000 },
+    jewelry: { min: 500, max: 2500 },
+    veil: { min: 400, max: 2000 },
+    undergarments: { min: 300, max: 1200 },
+    'hair-makeup': { min: 1500, max: 3500 }
+  }
+};
+
+function calculateBudget() {
+  const dressType = document.getElementById('dress-type').value;
+  const location = document.getElementById('shopping-location').value;
+  const alterations = document.getElementById('alterations').value;
+
+  if (!dressType) {
+    document.getElementById('budget-results').style.display = 'none';
+    return;
+  }
+
+  // Calculate dress cost
+  let dressPrice = pricingData.dressTypes[dressType];
+  let minTotal = dressPrice.min;
+  let maxTotal = dressPrice.max;
+  let avgTotal = dressPrice.avg;
+
+  // Apply location multiplier
+  if (location && pricingData.locationMultipliers[location]) {
+    const multiplier = pricingData.locationMultipliers[location];
+    minTotal *= multiplier;
+    maxTotal *= multiplier;
+    avgTotal *= multiplier;
+  }
+
+  // Add alteration costs
+  if (alterations && pricingData.alterations[alterations]) {
+    const altCost = pricingData.alterations[alterations];
+    minTotal += altCost.min;
+    maxTotal += altCost.max;
+    avgTotal += (altCost.min + altCost.max) / 2;
+  }
+
+  // Add accessory costs
+  const accessories = Object.keys(pricingData.accessories);
+  let accessoryMin = 0;
+  let accessoryMax = 0;
+  let accessoryAvg = 0;
+
+  accessories.forEach(accessory => {
+    const checkbox = document.getElementById(accessory);
+    if (checkbox && checkbox.checked) {
+      const cost = pricingData.accessories[accessory];
+      accessoryMin += cost.min;
+      accessoryMax += cost.max;
+      accessoryAvg += (cost.min + cost.max) / 2;
+    }
+  });
+
+  minTotal += accessoryMin;
+  maxTotal += accessoryMax;
+  avgTotal += accessoryAvg;
+
+  // Display results
+  displayResults(Math.round(avgTotal), Math.round(minTotal), Math.round(maxTotal), {
+    dress: Math.round(avgTotal - accessoryAvg - ((alterations && pricingData.alterations[alterations]) ? (pricingData.alterations[alterations].min + pricingData.alterations[alterations].max) / 2 : 0)),
+    alterations: alterations ? Math.round((pricingData.alterations[alterations].min + pricingData.alterations[alterations].max) / 2) : 0,
+    accessories: Math.round(accessoryAvg)
+  });
+}
+
+function displayResults(avg, min, max, breakdown) {
+  document.getElementById('total-amount').textContent = `${avg.toLocaleString('sv-SE')} kr`;
+  document.getElementById('budget-range').textContent = `Intervall: ${min.toLocaleString('sv-SE')} - ${max.toLocaleString('sv-SE')} kr`;
+
+  // Create breakdown visualization
+  const breakdownContainer = document.querySelector('.breakdown-items');
+  const total = breakdown.dress + breakdown.alterations + breakdown.accessories;
+
+  const breakdownHTML = `
+    <div class="breakdown-item">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-gray-700">👗 Brudklänning</span>
+        <span class="font-semibold">${breakdown.dress.toLocaleString('sv-SE')} kr</span>
+      </div>
+      <div class="progress-bar bg-gray-200 rounded-full h-2">
+        <div class="progress-fill bg-pink-500 h-2 rounded-full transition-all duration-500"
+             style="width: ${(breakdown.dress / total * 100)}%"></div>
+      </div>
+    </div>
+
+    ${breakdown.alterations > 0 ? `
+    <div class="breakdown-item">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-gray-700">✂️ Ändringar</span>
+        <span class="font-semibold">${breakdown.alterations.toLocaleString('sv-SE')} kr</span>
+      </div>
+      <div class="progress-bar bg-gray-200 rounded-full h-2">
+        <div class="progress-fill bg-blue-500 h-2 rounded-full transition-all duration-500"
+             style="width: ${(breakdown.alterations / total * 100)}%"></div>
+      </div>
+    </div>` : ''}
+
+    ${breakdown.accessories > 0 ? `
+    <div class="breakdown-item">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-gray-700">👠 Accessoarer</span>
+        <span class="font-semibold">${breakdown.accessories.toLocaleString('sv-SE')} kr</span>
+      </div>
+      <div class="progress-bar bg-gray-200 rounded-full h-2">
+        <div class="progress-fill bg-green-500 h-2 rounded-full transition-all duration-500"
+             style="width: ${(breakdown.accessories / total * 100)}%"></div>
+      </div>
+    </div>` : ''}
+  `;
+
+  breakdownContainer.innerHTML = breakdownHTML;
+
+  // Generate personalized tips
+  generateSavingsTips(avg);
+
+  // Show results
+  document.getElementById('budget-results').style.display = 'block';
+
+  // Smooth scroll to results
+  document.getElementById('budget-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function generateSavingsTips(totalBudget) {
+  const dressType = document.getElementById('dress-type').value;
+  const location = document.getElementById('shopping-location').value;
+
+  let tips = [];
+
+  // Budget-based tips
+  if (totalBudget > 30000) {
+    tips.push("Överväg att hyra istället för att köpa - du kan spara 70% av kostnaden");
+    tips.push("Kolla vintage-alternativ för unika fynd till en bråkdel av priset");
+  } else if (totalBudget < 10000) {
+    tips.push("H&M:s Conscious Bridal Collection har stilrena alternativ från 1,999 kr");
+    tips.push("Sök på Blocket och Facebook Marketplace efter nästan nya brudklänningar");
+  }
+
+  // Location-based tips
+  if (location === 'stockholm') {
+    tips.push("Åk till Göteborg eller Malmö för samma designers till lägre priser");
+    tips.push("Vintage Stockholm på Södermalm har fantastiska fynd");
+  }
+
+  // General tips
+  tips.push("Köp accessoarer separat från lågpriskedjor för att spara tusentals kronor");
+  tips.push("Boka provningar hos flera butiker samma dag för att jämföra priser");
+  tips.push("Fråga om paketpriser för klänning + ändringar + tillbehör");
+
+  const tipsHTML = tips.slice(0, 4).map(tip => `<p>• ${tip}</p>`).join('');
+  document.getElementById('personalized-tips').innerHTML = tipsHTML;
+}
+
+function exportBudget() {
+  const total = document.getElementById('total-amount').textContent;
+  const range = document.getElementById('budget-range').textContent;
+
+  const budgetData = `
+BRUDKLÄNNINGSBUDGET 2025
+=========================
+
+${document.getElementById('total-amount').textContent}
+${document.getElementById('budget-range').textContent}
+
+SPARADE INSTÄLLNINGAR:
+- Klänningstyp: ${document.getElementById('dress-type').value || 'Ej vald'}
+- Shoppingplats: ${document.getElementById('shopping-location').value || 'Ej vald'}
+- Ändringar: ${document.getElementById('alterations').value || 'Ej vald'}
+
+NÄSTA STEG:
+□ Jämför priser hos minst 3 butiker
+□ Boka provningar 8-10 månader före bröllopet
+□ Räkna in extra 20% i budgeten för oväntade kostnader
+□ Spara kvitton för alla köp
+
+Skapad: ${new Date().toLocaleDateString('sv-SE')}
+  `;
+
+  const blob = new Blob([budgetData], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'brudklänningsbudget-2025.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function findStores() {
+  const location = document.getElementById('shopping-location').value;
+
+  const storeRecommendations = {
+    stockholm: [
+      "Bröllop & Brudklänningar - Östermalm",
+      "Stockholm Bridal Studio - Södermalm",
+      "NK Bröllopssalong - City",
+      "H&M Conscious Bridal - Mall of Scandinavia"
+    ],
+    gothenburg: [
+      "Brudklänningar Göteborg - Centrum",
+      "Vintage Bride Göteborg - Majorna",
+      "Bröllop & Fest - Nordstan"
+    ],
+    malmo: [
+      "Malmö Bridal Collection - Centrum",
+      "Sustainable Weddings Malmö - Västra Hamnen",
+      "Bridal Boutique Malmö - Triangeln"
+    ]
+  };
+
+  const stores = storeRecommendations[location] || [
+    "Sök på Google efter 'brudklänning [din stad]'",
+    "Kolla Facebook-grupper för lokala rekommendationer",
+    "Besök större köpcentrum för butikskedjor"
+  ];
+
+  alert(`Rekommenderade butiker i ${location || 'ditt område'}:\n\n${stores.join('\n')}`);
+}
+</script>
+
+<style>
+.bridal-budget-calculator {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.input-field {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  transition: border-color 0.2s ease;
+  background: white;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.accessories-checkboxes input[type="checkbox"] {
+  accent-color: #10b981;
+  transform: scale(1.2);
+}
+
+.accessories-checkboxes label {
+  font-size: 0.9rem;
+  color: #4b5563;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.accessories-checkboxes label:hover {
+  color: #10b981;
+}
+
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  transition: width 1s ease-out;
+}
+
+.breakdown-item {
+  padding: 12px;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.cta-button {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.cta-button:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.results-section {
+  animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+  }
+}
+</style>

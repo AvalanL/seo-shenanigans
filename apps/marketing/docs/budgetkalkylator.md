@@ -1,9 +1,15 @@
 # Budgetkalkylator – Produktkravdokument
 
-## 1. Översikt
+## 1. Första principer
+1. **Kontroll över helheten:** Svenska bröllopspar vill fatta informerade beslut utan att behöva excelkunskap eller engelska mallar.
+2. **Svensk verklighet:** Prisnivåer, skatter och traditioner skiljer sig från internationella guider – verktyget måste spegla svensk marknad och språk.
+3. **Samplanering:** Besluten tas tillsammans (partner, ofta familj) och kräver enkel delning utan konton.
+4. **Tidsbesparing:** Budgetar förändras löpande; ett verktyg som sparar tid vinner lojalitet och backlinks.
+
+## 2. Översikt
 - **Produktnamn:** Interaktiv bröllopsbudgetkalkylator
 - **Ägare:** Svenska Bröllopsakademien – Produkt & Innehåll
-- **Mål:** Hjälpa svenska bröllopspar att snabbt skapa, justera och spara en komplett budget med lokal prisdata och rekommendationer.
+- **Mål:** Hjälpa svenska bröllopspar att skapa, uppdatera och dela en komplett budget med lokal prisdata och rekommendationer.
 - **Lanseringsfönster:** Q3 2024 (beta i juli, publik release augusti)
 
 ## 2. Bakgrund & problem
@@ -35,13 +41,18 @@ Svenska bröllopspar saknar ett verktyg som kombinerar svenska prisnivåer, kate
 
 ## 6. Funktionella krav
 - Förifyllda kostnadsposter (lokal, mat, foto, musik, dekor, kläder, övrigt + buffert) med svenska standardvärden.
-- Möjlighet att lägga till/ta bort egna poster.
-- Realtidsuppdatering av total, kostnad per gäst och buffert (10 % default).
+- Möjlighet att lägga till/ta bort egna poster och omdöpa dem.
+- Realtidsuppdatering av total, kostnad per gäst och buffert (10 % default, justerbar i backlogg).
 - Lokalt sparande i `localStorage` (spara / ladda / rensa).
-- Export till CSV med semikolon-separator (svensk standard).
+- Exportmöjligheter:
+  - **CSV** (svensk semikolon-standard).
+  - **Excel (.xls)** med formaterad tabell och metadata.
+  - **PDF/utskrift** via print-optimerad vy.
+  - **Dela** via Web Share API och länk med URL-parametrar (backlogg) för enkel samplanering.
 - Gästantal som påverkar kostnad per gäst.
-- Sektion för smarta tips beroende på budgetnivå.
-- FAQ med vanliga frågor kring budget.
+- Sektion för smarta tips beroende på budgetnivå + automatiskt scenarioförslag.
+- FAQ med vanliga frågor kring budget och verktyget.
+- Loggning av interaktioner för produktanalys.
 
 ## 7. Icke-funktionella krav
 - **Prestanda:** LCP < 2,5 s på mobila nät i Lighthouse test.
@@ -62,7 +73,7 @@ Svenska bröllopspar saknar ett verktyg som kombinerar svenska prisnivåer, kate
 
 ## 9. Analys & spårning
 - Event `budget_calc_interact` när användare ändrar värde.
-- Event `budget_calc_save`, `budget_calc_export`, `budget_calc_reset`.
+- Event `budget_calc_save`, `budget_calc_export`, `budget_calc_share`, `budget_calc_print`.
 - Scroll depth (50 % / 90 %) för att se engagemang.
 - UTM-taggar på interna CTA:er (t.ex. `?ref=budgetkalkylator`).
 
@@ -82,16 +93,24 @@ Svenska bröllopspar saknar ett verktyg som kombinerar svenska prisnivåer, kate
 ## 11. Tekniska anteckningar
 - Placera sidan i `src/pages/budget/budgetkalkylator.astro` och använd `BaseLayout`.
 - Återanvänd komponent `BudgetCalculator` och utöka för scenario-presets och dynamiska poster.
-- Skapa ny komponent `BudgetScenarioSelect` vid behov.
+- Exportfunktioner:
+  - CSV: befintlig implementation.
+  - Excel: generera `.xls` med semantisk tabell för kompatibilitet.
+  - PDF: print-optimerad stylesheet + `window.print()`.
+  - Share: Web Share API + fallback kopierad länk (backlogg: generera delbar URL med query params).
+- Skapa ny komponent `BudgetScenarioSelect` vid behov (kan brytas ut från verktyget).
 - Lägg till relaterade data i `src/content/budget` för att synas i listningar.
 - Säkerställ mörkt läge via globala CSS-variabler.
+- Möjliggör versionsmigrering av sparad data (v2 → v3 etc.).
 
 ## 12. Lanseringsplan
 1. **Utkast** (v0.1): Grundläggande kalkylator + copy.
-2. **Intern QA:** Fokusera på mobilanvändning och datalagring.
-3. **Beta:** Dela med nyhetsbrevslista (50 personer) – samla feedback.
-4. **Publik release:** Uppdatera startsida, sociala inlägg, pressmeddelande.
-5. **Efterlansering:** A/B-test av CTA-texter på startsidan.
+2. **v0.5:** Lägg till scenarier, custom poster och CSV-export (klart).
+3. **v0.8:** Lägg till Excel-export, print/PDF och delningsknapp.
+4. **Intern QA:** Fokusera på mobil, utskriftsvy och delning.
+5. **Beta:** Dela med nyhetsbrevslista (50 personer) – samla feedback.
+6. **Publik release:** Uppdatera startsida, sociala inlägg, pressmeddelande.
+7. **Efterlansering:** A/B-test av CTA-texter på startsidan och uppföljning av events.
 
 ## 13. Risker & mitigering
 - **Prisdata blir inaktuell:** Sätt påminnelse (kvartalsvis) för att revidera defaultvärden.
@@ -102,4 +121,3 @@ Svenska bröllopspar saknar ett verktyg som kombinerar svenska prisnivåer, kate
 - Ska vi erbjuda inlogg som premium-funktion på sikt?
 - Behöver vi visa jämförelse mellan regioner direkt i verktyget?
 - Kan kalkylatorn integreras med leverantörsdatabasen för att föreslå lokala priser?
-

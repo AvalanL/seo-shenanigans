@@ -1,0 +1,365 @@
+---
+// Cost Estimator for International Wedding Destinations
+---
+
+<div class="cost-estimator bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    💰 Kostnadskalkylator för utlandsbröllop
+  </h3>
+
+  <div class="estimator-form bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Få en realistisk uppskattning av totalkostnaden för ert utlandsbröllop:
+    </p>
+
+    <div class="form-sections space-y-6">
+      <!-- Destination Selection -->
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-800 mb-3">
+          🌍 Destination:
+        </label>
+        <select id="destination" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500" onchange="updateEstimate()">
+          <option value="cyprus">Cypern</option>
+          <option value="italy">Italien</option>
+          <option value="thailand">Thailand</option>
+          <option value="vegas">USA (Las Vegas)</option>
+          <option value="hawaii">USA (Hawaii)</option>
+          <option value="france">Frankrike</option>
+          <option value="denmark">Danmark</option>
+          <option value="caribbean">Karibien</option>
+        </select>
+      </div>
+
+      <!-- Guest Count -->
+      <div class="input-group">
+        <label class="block text-sm font-semibold text-gray-800 mb-2">
+          👥 Antal personer som reser:
+        </label>
+        <input
+          type="range"
+          id="guest-count"
+          min="2"
+          max="50"
+          value="8"
+          class="w-full h-2 bg-teal-200 rounded-lg appearance-none cursor-pointer"
+          oninput="updateEstimate()"
+        />
+        <div class="flex justify-between text-sm text-gray-600 mt-1">
+          <span>2 (bara ni)</span>
+          <span id="guest-display" class="font-semibold text-teal-600">8 personer</span>
+          <span>50 (stor grupp)</span>
+        </div>
+      </div>
+
+      <!-- Trip Length -->
+      <div class="input-group">
+        <label for="trip-length" class="block text-sm font-semibold text-gray-800 mb-3">
+          📅 Längd på resan:
+        </label>
+        <select id="trip-length" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500" onchange="updateEstimate()">
+          <option value="4">4 dagar (helg)</option>
+          <option value="7">1 vecka</option>
+          <option value="10">10 dagar (utökad)</option>
+          <option value="14">2 veckor (bröllopsresa)</option>
+        </select>
+      </div>
+
+      <!-- Budget Level -->
+      <div class="input-group">
+        <label for="budget-level" class="block text-sm font-semibold text-gray-800 mb-3">
+          💎 Ambitionsnivå:
+        </label>
+        <select id="budget-level" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500" onchange="updateEstimate()">
+          <option value="budget">Budget - Enkelt och prisvärt</option>
+          <option value="standard">Standard - Bra kvalitet och komfort</option>
+          <option value="luxury">Lyx - Premium upplevelse</option>
+        </select>
+      </div>
+
+      <!-- Season -->
+      <div class="input-group">
+        <label for="season" class="block text-sm font-semibold text-gray-800 mb-3">
+          🌞 Säsong:
+        </label>
+        <select id="season" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500" onchange="updateEstimate()">
+          <option value="high">Högsäsong (sommar)</option>
+          <option value="shoulder">Mellansäsong (vår/höst)</option>
+          <option value="low">Lågsäsong (vinter)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results Display -->
+    <div class="results bg-gradient-to-r from-teal-100 to-emerald-100 rounded-lg p-6 mt-6">
+      <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+        <span class="text-2xl mr-2">💸</span>
+        Beräknad totalkostnad:
+      </h4>
+
+      <div class="cost-breakdown space-y-3">
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">✈️ Flyg & Transport</h5>
+            <span class="font-bold text-blue-600" id="flight-cost">45,000 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="flight-details">
+            8 personer × 5,625 kr per person i genomsnitt
+          </div>
+        </div>
+
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">🏨 Boende</h5>
+            <span class="font-bold text-green-600" id="accommodation-cost">42,000 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="accommodation-details">
+            4 rum × 7 nätter × 1,500 kr per rum/natt
+          </div>
+        </div>
+
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">💒 Vigsel & Ceremoni</h5>
+            <span class="font-bold text-purple-600" id="ceremony-cost">20,000 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="ceremony-details">
+            Vigsel, fotograf, blomsterdekorationer
+          </div>
+        </div>
+
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">🍽️ Mat & Aktiviteter</h5>
+            <span class="font-bold text-orange-600" id="activities-cost">35,000 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="activities-details">
+            Middagar, utflykter, bröllopsdag-fest
+          </div>
+        </div>
+
+        <div class="cost-category bg-white rounded-lg p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h5 class="font-semibold text-gray-800">📋 Juridiska Kostnader</h5>
+            <span class="font-bold text-red-600" id="legal-cost">8,000 kr</span>
+          </div>
+          <div class="cost-details text-sm text-gray-600" id="legal-details">
+            Dokument, översättningar, ambassadavgifter
+          </div>
+        </div>
+
+        <div class="total-cost bg-gradient-to-r from-teal-200 to-emerald-200 rounded-lg p-4 mt-4 border-2 border-teal-300">
+          <div class="flex justify-between items-center">
+            <h5 class="text-lg font-bold text-teal-800">Total uppskattad kostnad:</h5>
+            <span class="text-xl font-bold text-teal-800" id="total-cost">150,000 kr</span>
+          </div>
+          <div class="text-sm text-teal-700 mt-1" id="per-person-cost">
+            Ca 18,750 kr per person som reser
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Breakdown Chart -->
+      <div class="cost-chart bg-white rounded-lg p-4 mt-4">
+        <h5 class="font-semibold text-gray-800 mb-3">📊 Kostnadsfördelning:</h5>
+        <div class="chart-bars space-y-2">
+          <div class="bar-item">
+            <div class="flex justify-between text-sm mb-1">
+              <span>Flyg & Transport</span>
+              <span id="flight-percentage">30%</span>
+            </div>
+            <div class="bar bg-gray-200 rounded-full h-2">
+              <div class="bar-fill bg-blue-500 h-2 rounded-full" id="flight-bar" style="width: 30%"></div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="flex justify-between text-sm mb-1">
+              <span>Boende</span>
+              <span id="accommodation-percentage">28%</span>
+            </div>
+            <div class="bar bg-gray-200 rounded-full h-2">
+              <div class="bar-fill bg-green-500 h-2 rounded-full" id="accommodation-bar" style="width: 28%"></div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="flex justify-between text-sm mb-1">
+              <span>Mat & Aktiviteter</span>
+              <span id="activities-percentage">23%</span>
+            </div>
+            <div class="bar bg-gray-200 rounded-full h-2">
+              <div class="bar-fill bg-orange-500 h-2 rounded-full" id="activities-bar" style="width: 23%"></div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="flex justify-between text-sm mb-1">
+              <span>Vigsel & Ceremoni</span>
+              <span id="ceremony-percentage">13%</span>
+            </div>
+            <div class="bar bg-gray-200 rounded-full h-2">
+              <div class="bar-fill bg-purple-500 h-2 rounded-full" id="ceremony-bar" style="width: 13%"></div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="flex justify-between text-sm mb-1">
+              <span>Juridiska kostnader</span>
+              <span id="legal-percentage">5%</span>
+            </div>
+            <div class="bar bg-gray-200 rounded-full h-2">
+              <div class="bar-fill bg-red-500 h-2 rounded-full" id="legal-bar" style="width: 5%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cost-tips bg-blue-50 border-l-4 border-blue-400 p-4 mt-6">
+    <h4 class="font-semibold text-blue-800 mb-2">💡 Spartips för utlandsbröllop:</h4>
+    <ul class="text-sm text-blue-700 space-y-1">
+      <li>• <strong>Lågsäsong:</strong> Välj vinter eller tidig vår för 20-40% lägre kostnader</li>
+      <li>• <strong>Mindre grupp:</strong> Bara närmaste familj kan halvera totalkostnaden</li>
+      <li>• <strong>All-inclusive:</strong> Ofta bättre värde än att boka allt separat</li>
+      <li>• <strong>Närliggande destinationer:</strong> Europa istället för Asien/Amerika sparar mycket på flyg</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const destinationData = {
+  cyprus: { flight: 4500, accommodation: 1200, ceremony: 15000, legal: 5000, name: "Cypern" },
+  italy: { flight: 3000, accommodation: 1800, ceremony: 30000, legal: 8000, name: "Italien" },
+  thailand: { flight: 8000, accommodation: 800, ceremony: 20000, legal: 12000, name: "Thailand" },
+  vegas: { flight: 8500, accommodation: 1000, ceremony: 10000, legal: 6000, name: "Las Vegas" },
+  hawaii: { flight: 12000, accommodation: 2500, ceremony: 40000, legal: 8000, name: "Hawaii" },
+  france: { flight: 2500, accommodation: 1600, ceremony: 25000, legal: 7000, name: "Frankrike" },
+  denmark: { flight: 1500, accommodation: 1400, ceremony: 12000, legal: 4000, name: "Danmark" },
+  caribbean: { flight: 9000, accommodation: 2200, ceremony: 35000, legal: 10000, name: "Karibien" }
+};
+
+const budgetMultipliers = {
+  budget: { accommodation: 0.7, ceremony: 0.6, activities: 0.7 },
+  standard: { accommodation: 1.0, ceremony: 1.0, activities: 1.0 },
+  luxury: { accommodation: 1.8, ceremony: 2.0, activities: 1.6 }
+};
+
+const seasonMultipliers = {
+  low: 0.7,
+  shoulder: 0.9,
+  high: 1.2
+};
+
+function updateEstimate() {
+  const destination = document.getElementById('destination').value;
+  const guestCount = parseInt(document.getElementById('guest-count').value);
+  const tripLength = parseInt(document.getElementById('trip-length').value);
+  const budgetLevel = document.getElementById('budget-level').value;
+  const season = document.getElementById('season').value;
+
+  // Update guest display
+  document.getElementById('guest-display').textContent = `${guestCount} personer`;
+
+  const destData = destinationData[destination];
+  const budgetMult = budgetMultipliers[budgetLevel];
+  const seasonMult = seasonMultipliers[season];
+
+  // Calculate costs
+  const flightCost = destData.flight * guestCount * seasonMult;
+  const rooms = Math.ceil(guestCount / 2);
+  const accommodationCost = destData.accommodation * rooms * tripLength * budgetMult.accommodation * seasonMult;
+  const ceremonyCost = destData.ceremony * budgetMult.ceremony;
+  const activitiesCost = (800 * guestCount * tripLength * budgetMult.activities);
+  const legalCost = destData.legal;
+
+  const totalCost = flightCost + accommodationCost + ceremonyCost + activitiesCost + legalCost;
+
+  // Update displays
+  document.getElementById('flight-cost').textContent = `${Math.round(flightCost).toLocaleString('sv-SE')} kr`;
+  document.getElementById('accommodation-cost').textContent = `${Math.round(accommodationCost).toLocaleString('sv-SE')} kr`;
+  document.getElementById('ceremony-cost').textContent = `${Math.round(ceremonyCost).toLocaleString('sv-SE')} kr`;
+  document.getElementById('activities-cost').textContent = `${Math.round(activitiesCost).toLocaleString('sv-SE')} kr`;
+  document.getElementById('legal-cost').textContent = `${Math.round(legalCost).toLocaleString('sv-SE')} kr`;
+  document.getElementById('total-cost').textContent = `${Math.round(totalCost).toLocaleString('sv-SE')} kr`;
+  document.getElementById('per-person-cost').textContent = `Ca ${Math.round(totalCost / guestCount).toLocaleString('sv-SE')} kr per person som reser`;
+
+  // Update details
+  document.getElementById('flight-details').textContent =
+    `${guestCount} personer × ${Math.round(flightCost / guestCount).toLocaleString('sv-SE')} kr per person till ${destData.name}`;
+  document.getElementById('accommodation-details').textContent =
+    `${rooms} rum × ${tripLength} nätter × ${Math.round(accommodationCost / (rooms * tripLength)).toLocaleString('sv-SE')} kr per rum/natt`;
+  document.getElementById('ceremony-details').textContent =
+    `${budgetLevel === 'budget' ? 'Enkel' : budgetLevel === 'luxury' ? 'Lyxig' : 'Standard'} vigselcermoni i ${destData.name}`;
+  document.getElementById('activities-details').textContent =
+    `Mat, utflykter och aktiviteter för ${tripLength} dagar`;
+  document.getElementById('legal-details').textContent =
+    `Dokument, översättningar, avgifter för ${destData.name}`;
+
+  // Update chart
+  const costs = [flightCost, accommodationCost, activitiesCost, ceremonyCost, legalCost];
+  const percentages = costs.map(cost => Math.round((cost / totalCost) * 100));
+
+  document.getElementById('flight-percentage').textContent = `${percentages[0]}%`;
+  document.getElementById('accommodation-percentage').textContent = `${percentages[1]}%`;
+  document.getElementById('activities-percentage').textContent = `${percentages[2]}%`;
+  document.getElementById('ceremony-percentage').textContent = `${percentages[3]}%`;
+  document.getElementById('legal-percentage').textContent = `${percentages[4]}%`;
+
+  document.getElementById('flight-bar').style.width = `${percentages[0]}%`;
+  document.getElementById('accommodation-bar').style.width = `${percentages[1]}%`;
+  document.getElementById('activities-bar').style.width = `${percentages[2]}%`;
+  document.getElementById('ceremony-bar').style.width = `${percentages[3]}%`;
+  document.getElementById('legal-bar').style.width = `${percentages[4]}%`;
+}
+
+// Initialize calculation on page load
+document.addEventListener('DOMContentLoaded', function() {
+  updateEstimate();
+});
+</script>
+
+<style>
+  .cost-estimator {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #14b8a6;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #14b8a6;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .cost-category {
+    transition: all 0.2s ease;
+  }
+
+  .cost-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bar-fill {
+    transition: width 0.5s ease;
+  }
+
+  select {
+    transition: all 0.2s ease;
+  }
+
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+  }
+</style>

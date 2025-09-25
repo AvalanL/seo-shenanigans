@@ -1,0 +1,363 @@
+{
+  "title": "Allégården Kastlösa Bröllop - Festlokal för Bröllop",
+  "h1": "Allégården Kastlösa",
+  "url": "https://xn--brllopslokaler-wpb.nu/brollop-och-festlokaler/allegarden-kastlosa/",
+  "structure": {
+    "title": {
+      "selector": "h1",
+      "text": "Allégården Kastlösa",
+      "outerHTML": "<h1>Allégården Kastlösa</h1>"
+    },
+    "address": {
+      "selector": "[class*=\"address\"]",
+      "text": "Allégården Kastlösa Hotell, Kastlösa bygata 2, Mörbylånga, Sverige\n\nVägbeskrivning",
+      "outerHTML": "<div class=\"contact_widget_address\">\n<i class=\"fa fa-map-marker contact_widget_address_icon\"></i>Allégården Kastlösa Hotell, Kastlösa bygata 2, Mörbylånga, Sverige<br>\n<a href=\"//maps.google.com/maps?daddr=56.459295,16.42846499999996\" class=\"listing-address-directions\" target=\"_blank\">\nVägbeskrivnin"
+    },
+    "images": {
+      "total": 0,
+      "samples": []
+    },
+    "contentAreas": [
+      {
+        "selector": "section",
+        "textLength": 1698,
+        "preview": "KalmarPosted 3 år agoBröllopHär finns möjligheter att göra er fest till ett oförglömligt minne. Ni k...",
+        "classes": "listing_post_main_content gt3_listing_preview_post"
+      },
+      {
+        "selector": "[class*=\"content\"]",
+        "textLength": 119,
+        "preview": "Allégården Kastlösa\nAllégården Kastlösa Hotell, Kastlösa bygata 2, Mörbylånga, Sverige0485-42175\nSha...",
+        "classes": "listing_single_top_content"
+      },
+      {
+        "selector": "[class*=\"content\"]",
+        "textLength": 119,
+        "preview": "Allégården Kastlösa\nAllégården Kastlösa Hotell, Kastlösa bygata 2, Mörbylånga, Sverige0485-42175\nSha...",
+        "classes": "listing_single_top_content_inner"
+      },
+      {
+        "selector": "[class*=\"content\"]",
+        "textLength": 1736,
+        "preview": "Spara lokalenKontakta Lokalen Direkt\n\nKalmarPosted 3 år agoBröllopHär finns möjligheter att göra er ...",
+        "classes": "content-container span8"
+      },
+      {
+        "selector": "[class*=\"content\"]",
+        "textLength": 1698,
+        "preview": "KalmarPosted 3 år agoBröllopHär finns möjligheter att göra er fest till ett oförglömligt minne. Ni k...",
+        "classes": "listing_post_main_content gt3_listing_preview_post"
+      },
+      {
+        "selector": "[class*=\"content\"]",
+        "textLength": 65,
+        "preview": "Spara lokalenVapenmagasinet\nHalland, Jönköping, Kalmar, Kronoberg...",
+        "classes": "featured_posts_content card--listing"
+      },
+      {
+        "selector": "[class*=\"description\"]",
+        "textLength": 1698,
+        "preview": "KalmarPosted 3 år agoBröllopHär finns möjligheter att göra er fest till ett oförglömligt minne. Ni k...",
+        "classes": "single_job_description"
+      },
+      {
+        "selector": "[class*=\"description\"]",
+        "textLength": 1677,
+        "preview": "BröllopHär finns möjligheter att göra er fest till ett oförglömligt minne. Ni kan hyra festlokalen S...",
+        "classes": "job_description"
+      }
+    ],
+    "contacts": [
+      {
+        "type": "email",
+        "href": "mailto:info@kastlosa.se",
+        "text": "info@kastlosa.se",
+        "classes": ""
+      },
+      {
+        "type": "phone",
+        "href": "tel:0485-42175",
+        "text": "0485-42175",
+        "classes": ""
+      },
+      {
+        "type": "phone",
+        "href": "tel:0485-42175",
+        "text": "0485-42175",
+        "classes": ""
+      },
+      {
+        "type": "other",
+        "href": "https://xn--brllopslokaler-wpb.nu/brollop-och-festlokaler/skaftekarr-hotell/",
+        "text": "",
+        "classes": "listing_featured_posts_image"
+      },
+      {
+        "type": "other",
+        "href": "https://xn--brllopslokaler-wpb.nu/brollop-och-festlokaler/skaftekarr-hotell/",
+        "text": "Skäftekärr Hotell",
+        "classes": "card__link"
+      },
+      {
+        "type": "other",
+        "href": "https://xn--brllopslokaler-wpb.nu/brollop-och-festlokaler/skaftekarr-hotell/",
+        "text": "",
+        "classes": "listing_featured_posts_image"
+      },
+      {
+        "type": "other",
+        "href": "https://xn--brllopslokaler-wpb.nu/brollop-och-festlokaler/skaftekarr-hotell/",
+        "text": "Skäftekärr Hotell",
+        "classes": "card__link"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "widget gt3_custom_contact_button"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Kontakta Lokalen Direkt",
+        "classes": "gt3_custom_mobile_contact_direct"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "widget gt3_custom_contact_button"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Allégården Kastlösa Hotell, Kastlösa bygata 2, Mörbylånga, Sverige\n\nVägbeskrivning\n\n0485-42175\ninfo@kastlosa.se",
+        "classes": "widget gt3_widget gt3_widget_box widget_gt3_static_contact_widget"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Allégården Kastlösa Hotell, Kastlösa bygata 2, Mörbylånga, Sverige\n\nVägbeskrivning\n\n0485-42175\ninfo@kastlosa.se",
+        "classes": "contact_widget_wrapper listing_widget_wrapper"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_widget_map"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Allégården Kastlösa Hotell, Kastlösa bygata 2, Mörbylånga, Sverige\n\nVägbeskrivning",
+        "classes": "contact_widget_address"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "fa fa-map-marker contact_widget_address_icon"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "0485-42175",
+        "classes": "contact_widget_phone"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "info@kastlosa.se",
+        "classes": "contact_widget_email"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "Spara lokalen",
+        "classes": "gt3_custom_contact_check"
+      },
+      {
+        "type": "other",
+        "href": "",
+        "text": "",
+        "classes": "contact_check"
+      }
+    ],
+    "capacity": [
+      "90 gäster",
+      "90 gäster",
+      "8 platser"
+    ],
+    "prices": [],
+    "meta": {
+      "MobileOptimized": "width",
+      "HandheldFriendly": "true",
+      "generator": "Drupal 8 (https://www.drupal.org)",
+      "viewport": "width=device-width, initial-scale=1, maximum-scale=1",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "description": "Allégården Kastlösa Bröllop - Ha ert bröllop hos oss på Allégården Kastlösa. Se vår fina Bröllopslokal. Skicka gärna en förfrågan så hjälper vi Er!",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Allégården Kastlösa Bröllop - Festlokal för Bröllop",
+      "twitter:description": "Allégården Kastlösa Bröllop - Ha ert bröllop hos oss på Allégården Kastlösa. Se vår fina Bröllopslokal. Skicka gärna en förfrågan så hjälper vi Er!",
+      "twitter:image": "https://xn--brllopslokaler-wpb.nu/storage/2019/04/Allegarden-Kastlosa-festlokal-oland-brollopslokal-brollop-1-_Custom_.webp",
+      "framework": "Redux 4.3.2",
+      "msapplication-TileImage": "https://xn--brllopslokaler-wpb.nu/storage/2020/09/cropped-brollopslokaler_festlokal_ico-450x450.png"
+    }
+  }
+}

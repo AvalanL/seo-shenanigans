@@ -1,0 +1,521 @@
+---
+// Interactive Groom Style Matcher Component
+---
+
+<div class="groom-style-matcher bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    🤵 Hitta din perfekta brudgum-stil 2025
+  </h3>
+
+  <div class="matcher-container bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Svara på några frågor så matchar vi dig med den perfekta outfit-stilen för din stora dag!
+    </p>
+
+    <div class="matcher-content">
+      <div class="questions-section" id="groom-questions">
+
+        <!-- Question 1: Wedding Type -->
+        <div class="question active" data-question="1">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">1. Vilken typ av bröllop planerar ni?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="formal" onclick="selectGroomAnswer(this, 1)">
+              ⛪ Formellt kyrkbröllop med reception
+            </button>
+            <button class="answer-btn" data-value="outdoor" onclick="selectGroomAnswer(this, 1)">
+              🌳 Utomhusbröllop i naturen
+            </button>
+            <button class="answer-btn" data-value="casual" onclick="selectGroomAnswer(this, 1)">
+              🏡 Intimt hem- eller mindre bröllop
+            </button>
+            <button class="answer-btn" data-value="destination" onclick="selectGroomAnswer(this, 1)">
+              ✈️ Destination wedding eller strand
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 2: Personal Style -->
+        <div class="question" data-question="2">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">2. Hur skulle du beskriva din vardagsstil?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="classic" onclick="selectGroomAnswer(this, 2)">
+              👔 Klassisk business - gillar tidlösa stilar
+            </button>
+            <button class="answer-btn" data-value="modern" onclick="selectGroomAnswer(this, 2)">
+              📱 Modern minimalist - clean och enkelt
+            </button>
+            <button class="answer-btn" data-value="creative" onclick="selectGroomAnswer(this, 2)">
+              🎨 Kreativ och unik - vågar experimentera
+            </button>
+            <button class="answer-btn" data-value="relaxed" onclick="selectGroomAnswer(this, 2)">
+              👕 Avslappnad casual - komfort först
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 3: Color Preference -->
+        <div class="question" data-question="3">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">3. Vilken färgpalett tilltalar dig mest?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="traditional" onclick="selectGroomAnswer(this, 3)">
+              🖤 Traditionell - svart, marinblå, grått
+            </button>
+            <button class="answer-btn" data-value="earth" onclick="selectGroomAnswer(this, 3)">
+              🌿 Jordnära - beige, sage, terracotta
+            </button>
+            <button class="answer-btn" data-value="statement" onclick="selectGroomAnswer(this, 3)">
+              🍷 Statement - burgundy, forest green, navy
+            </button>
+            <button class="answer-btn" data-value="neutral" onclick="selectGroomAnswer(this, 3)">
+              🤍 Neutral - cremevit, ljusgrå, champagne
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 4: Budget -->
+        <div class="question" data-question="4">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">4. Vilken budget har du för din outfit?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="budget" onclick="selectGroomAnswer(this, 4)">
+              💰 Under 7,000 kr - smart shopping
+            </button>
+            <button class="answer-btn" data-value="mid" onclick="selectGroomAnswer(this, 4)">
+              💳 7,000-15,000 kr - kvalitet och stil
+            </button>
+            <button class="answer-btn" data-value="premium" onclick="selectGroomAnswer(this, 4)">
+              💎 15,000-25,000 kr - premium-investering
+            </button>
+            <button class="answer-btn" data-value="luxury" onclick="selectGroomAnswer(this, 4)">
+              👑 25,000+ kr - skräddarsytt perfection
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 5: Bride's Style -->
+        <div class="question" data-question="5">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">5. Hur skulle du beskriva brudens stil?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="elegant" onclick="selectGroomAnswer(this, 5)">
+              👰 Elegant klassisk - ballklänning/A-linje
+            </button>
+            <button class="answer-btn" data-value="minimalist" onclick="selectGroomAnswer(this, 5)">
+              💫 Minimalistisk modern - clean lines
+            </button>
+            <button class="answer-btn" data-value="romantic" onclick="selectGroomAnswer(this, 5)">
+              💕 Romantisk feminin - spets och detaljer
+            </button>
+            <button class="answer-btn" data-value="boho" onclick="selectGroomAnswer(this, 5)">
+              🌸 Boho natural - flowy och naturlig
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Results Section -->
+      <div class="results-section hidden" id="groom-results">
+        <div class="result-card bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg p-6">
+          <h4 class="text-xl font-bold text-blue-800 mb-4 text-center" id="groom-result-title">
+            Din perfekta brudgum-stil är...
+          </h4>
+
+          <div class="result-content" id="groom-result-content">
+            <!-- Results will be populated by JavaScript -->
+          </div>
+
+          <div class="result-actions mt-6 text-center">
+            <button class="restart-btn" onclick="restartGroomMatcher()">
+              🔄 Gör om matchningen
+            </button>
+            <button class="save-btn ml-4" onclick="saveGroomResult()">
+              💾 Spara mitt resultat
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="groom-navigation mt-6 flex justify-between">
+        <button class="nav-btn hidden" id="groom-prev-btn" onclick="previousGroomQuestion()">
+          ← Föregående
+        </button>
+        <div class="progress-indicator flex space-x-2">
+          <span class="progress-dot active" data-step="1"></span>
+          <span class="progress-dot" data-step="2"></span>
+          <span class="progress-dot" data-step="3"></span>
+          <span class="progress-dot" data-step="4"></span>
+          <span class="progress-dot" data-step="5"></span>
+        </div>
+        <button class="nav-btn" id="groom-next-btn" onclick="nextGroomQuestion()" disabled>
+          Nästa →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentGroomQuestion = 1;
+let groomAnswers = {};
+
+const groomStyleResults = {
+  classic: {
+    title: "Modern Classic Gentleman 👔",
+    description: "Du är den tidlöse gentlemannen som värdesätter kvalitet, elegans och proven stilar. Din look ska vara impeccable men aldrig flashig.",
+    recommendations: [
+      "Marinblå eller charcoal kostym i slim-fit",
+      "Klassisk vit skjorta med diskreta detaljer",
+      "Silkeslips i kompletterande färg",
+      "Svarta oxford-skor i äkta läder",
+      "Minimala men exklusiva accessoarer"
+    ],
+    budget: "8,000-15,000 kr för perfekt balans",
+    stores: ["NK Herr", "Tiger of Sweden", "Oscar Jacobson", "Brothers & Sons"],
+    styling: "Clean shave eller vältrimmad skägg, klassisk hårklippning, diskret cologne",
+    perfect_match: "Passar perfekt med elegant eller romantisk brud"
+  },
+
+  minimalist: {
+    title: "Scandinavian Minimalist 💫",
+    description: "Du representerar nordisk design-filosofi - mindre är mer, kvalitet över kvantitet, och tidlös elegans genom simplicity.",
+    recommendations: [
+      "Kostym i naturliga toner (beige, ljusgrå, sage)",
+      "Strukturerade tyger som linne-blend eller textured ull",
+      "Knapp-näsduk istället för traditionell slips",
+      "Minimalistiska läder-accessoarer",
+      "Clean geometric manschettknappar eller inga alls"
+    ],
+    budget: "10,000-18,000 kr för premium materials",
+    stores: ["Filippa K Men", "COS", "Arket", "Local Swedish tailors"],
+    styling: "Natural grooming, clean lines, understated confidence",
+    perfect_match: "Harmonierar vackert med minimalistisk eller boho brud"
+  },
+
+  statement: {
+    title: "Statement Formal 🍷",
+    description: "Du vågar sticka ut och vill att din outfit ska berätta en historia. Confident, kreativ och memorable utan att vara over-the-top.",
+    recommendations: [
+      "Kostym i bold colors (burgundy, forest green, midnight navy)",
+      "Sammets-lapels eller texture-kontraster",
+      "Statement bow tie eller designer-slips",
+      "Unika skor (monks, brogues, colored oxfords)",
+      "Personliga accessoarer som berättar din story"
+    ],
+    budget: "12,000-25,000 kr för designer touches",
+    stores: ["NK Herr luxury brands", "Custom tailors", "International designers"],
+    styling: "Bold but refined, confident accessories, personal flair",
+    perfect_match: "Kompletterar dramatic eller creative brudar perfekt"
+  },
+
+  relaxed: {
+    title: "Boho Luxe Gentleman 🌿",
+    description: "Du värdesätter komfort och naturlig elegans. Din stil är relaxed men sophisticated, perfect för moderna naturliga bröllop.",
+    recommendations: [
+      "Separates - blazer och byxor i kompletterande färger",
+      "Naturmaterial som linne, bomull-silk, lätt tweed",
+      "Jordnära färgpalett (terracotta, sage, cream)",
+      "Avslappnade men eleganta skor (loafers, desert boots)",
+      "Naturliga accessoarer med organiska former"
+    ],
+    budget: "6,000-14,000 kr fokus på quality basics",
+    stores: ["Sustainable brands", "Vintage stores", "Scandinavian designers"],
+    styling: "Natural textures, relaxed but polished, earthy confidence",
+    perfect_match: "Perfect harmony med boho eller natural brudar"
+  }
+};
+
+function selectGroomAnswer(button, questionNum) {
+  const questionDiv = document.querySelector(`[data-question="${questionNum}"]`);
+  questionDiv.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('active'));
+
+  button.classList.add('active');
+  groomAnswers[questionNum] = button.getAttribute('data-value');
+
+  document.getElementById('groom-next-btn').disabled = false;
+}
+
+function nextGroomQuestion() {
+  if (currentGroomQuestion < 5) {
+    document.querySelector(`[data-question="${currentGroomQuestion}"]`).classList.remove('active');
+    document.querySelector(`[data-step="${currentGroomQuestion}"]`).classList.add('completed');
+
+    currentGroomQuestion++;
+    document.querySelector(`[data-question="${currentGroomQuestion}"]`).classList.add('active');
+    document.querySelector(`[data-step="${currentGroomQuestion}"]`).classList.add('active');
+
+    document.getElementById('groom-prev-btn').classList.remove('hidden');
+    document.getElementById('groom-next-btn').disabled = !groomAnswers[currentGroomQuestion];
+
+    if (currentGroomQuestion === 5) {
+      document.getElementById('groom-next-btn').textContent = 'Se min stil';
+      document.getElementById('groom-next-btn').onclick = showGroomResults;
+    }
+  }
+}
+
+function previousGroomQuestion() {
+  if (currentGroomQuestion > 1) {
+    document.querySelector(`[data-question="${currentGroomQuestion}"]`).classList.remove('active');
+    document.querySelector(`[data-step="${currentGroomQuestion}"]`).classList.remove('active');
+
+    currentGroomQuestion--;
+    document.querySelector(`[data-question="${currentGroomQuestion}"]`).classList.add('active');
+
+    if (currentGroomQuestion === 1) {
+      document.getElementById('groom-prev-btn').classList.add('hidden');
+    }
+
+    document.getElementById('groom-next-btn').textContent = 'Nästa →';
+    document.getElementById('groom-next-btn').onclick = nextGroomQuestion;
+    document.getElementById('groom-next-btn').disabled = !groomAnswers[currentGroomQuestion];
+  }
+}
+
+function showGroomResults() {
+  // Calculate style based on answers
+  const styleScores = {
+    classic: 0,
+    minimalist: 0,
+    statement: 0,
+    relaxed: 0
+  };
+
+  // Scoring algorithm
+  const scoringMatrix = {
+    1: { // Wedding type
+      formal: { classic: 3, statement: 2, minimalist: 1, relaxed: 0 },
+      outdoor: { relaxed: 3, minimalist: 2, classic: 1, statement: 1 },
+      casual: { minimalist: 2, relaxed: 3, classic: 1, statement: 0 },
+      destination: { relaxed: 3, minimalist: 2, statement: 1, classic: 1 }
+    },
+    2: { // Personal style
+      classic: { classic: 3, minimalist: 1, statement: 1, relaxed: 0 },
+      modern: { minimalist: 3, classic: 1, statement: 2, relaxed: 1 },
+      creative: { statement: 3, minimalist: 1, relaxed: 2, classic: 0 },
+      relaxed: { relaxed: 3, minimalist: 2, classic: 0, statement: 1 }
+    },
+    3: { // Colors
+      traditional: { classic: 3, statement: 1, minimalist: 1, relaxed: 0 },
+      earth: { relaxed: 3, minimalist: 2, statement: 1, classic: 0 },
+      statement: { statement: 3, classic: 1, minimalist: 0, relaxed: 1 },
+      neutral: { minimalist: 3, classic: 2, relaxed: 2, statement: 0 }
+    }
+  };
+
+  // Calculate scores
+  Object.keys(groomAnswers).forEach(questionNum => {
+    const answer = groomAnswers[questionNum];
+    if (scoringMatrix[questionNum] && scoringMatrix[questionNum][answer]) {
+      Object.keys(styleScores).forEach(style => {
+        if (scoringMatrix[questionNum][answer][style]) {
+          styleScores[style] += scoringMatrix[questionNum][answer][style];
+        }
+      });
+    }
+  });
+
+  // Find highest scoring style
+  const primaryStyle = Object.keys(styleScores).reduce((a, b) =>
+    styleScores[a] > styleScores[b] ? a : b
+  );
+
+  displayGroomResult(primaryStyle);
+}
+
+function displayGroomResult(style) {
+  const result = groomStyleResults[style];
+
+  document.getElementById('groom-questions').classList.add('hidden');
+  document.getElementById('groom-results').classList.remove('hidden');
+  document.querySelector('.groom-navigation').classList.add('hidden');
+
+  document.getElementById('groom-result-title').textContent = result.title;
+
+  const resultHTML = `
+    <div class="result-description mb-4">
+      <p class="text-gray-700 text-center mb-4">${result.description}</p>
+    </div>
+
+    <div class="recommendations grid md:grid-cols-2 gap-4 mb-4">
+      <div class="rec-section">
+        <h5 class="font-semibold text-blue-700 mb-2">👔 Din perfekta outfit:</h5>
+        <ul class="text-sm text-gray-600">
+          ${result.recommendations.map(rec => `<li>• ${rec}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="rec-section">
+        <h5 class="font-semibold text-blue-700 mb-2">🛍️ Rekommenderade butiker:</h5>
+        <ul class="text-sm text-gray-600">
+          ${result.stores.map(store => `<li>• ${store}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+
+    <div class="additional-info grid md:grid-cols-2 gap-4">
+      <div class="budget-info bg-green-50 rounded p-3">
+        <h5 class="font-semibold text-green-700 mb-1">💰 Rekommenderad budget:</h5>
+        <p class="text-sm text-green-600">${result.budget}</p>
+      </div>
+
+      <div class="styling-info bg-purple-50 rounded p-3">
+        <h5 class="font-semibold text-purple-700 mb-1">✨ Styling-tips:</h5>
+        <p class="text-sm text-purple-600">${result.styling}</p>
+      </div>
+    </div>
+
+    <div class="match-info bg-pink-50 rounded p-3 mt-4">
+      <h5 class="font-semibold text-pink-700 mb-1">💕 Koordinering med brud:</h5>
+      <p class="text-sm text-pink-600">${result.perfect_match}</p>
+    </div>
+  `;
+
+  document.getElementById('groom-result-content').innerHTML = resultHTML;
+}
+
+function restartGroomMatcher() {
+  currentGroomQuestion = 1;
+  groomAnswers = {};
+
+  document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+  document.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.progress-dot').forEach(dot => {
+    dot.classList.remove('active', 'completed');
+  });
+
+  document.querySelector('[data-question="1"]').classList.add('active');
+  document.querySelector('[data-step="1"]').classList.add('active');
+
+  document.getElementById('groom-prev-btn').classList.add('hidden');
+  document.getElementById('groom-next-btn').textContent = 'Nästa →';
+  document.getElementById('groom-next-btn').onclick = nextGroomQuestion;
+  document.getElementById('groom-next-btn').disabled = true;
+
+  document.getElementById('groom-questions').classList.remove('hidden');
+  document.getElementById('groom-results').classList.add('hidden');
+  document.querySelector('.groom-navigation').classList.remove('hidden');
+}
+
+function saveGroomResult() {
+  const resultTitle = document.getElementById('groom-result-title').textContent;
+  const saveText = `Min brudgum-stil för 2025: ${resultTitle}\n\nHitta din stil också på vår hemsida! 🤵✨`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Min brudgum-stil 2025',
+      text: saveText,
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(saveText).then(() => {
+      alert('Resultat sparat! Dela gärna med din partner 💕');
+    });
+  }
+}
+</script>
+
+<style>
+.groom-style-matcher {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.question {
+  display: none;
+}
+
+.question.active {
+  display: block;
+}
+
+.answer-btn {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.answer-btn:hover {
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.answer-btn.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.nav-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d1d5db;
+  transition: all 0.2s ease;
+}
+
+.progress-dot.active {
+  background: #3b82f6;
+}
+
+.progress-dot.completed {
+  background: #10b981;
+}
+
+.restart-btn, .save-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.restart-btn:hover, .save-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.result-card {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

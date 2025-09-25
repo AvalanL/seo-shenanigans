@@ -1,0 +1,456 @@
+---
+// Document Planner Tool for International Wedding Planning
+---
+
+<div class="document-planner bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    📋 Personlig dokumentplanerare
+  </h3>
+
+  <div class="planner-container bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Få en skräddarsydd plan för vilka dokument ni behöver och när:
+    </p>
+
+    <!-- Configuration Section -->
+    <div class="configuration-section mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-4">🎯 Berätta om er situation:</h4>
+
+      <div class="config-grid grid md:grid-cols-2 gap-6">
+        <div class="config-group">
+          <label class="block text-sm font-semibold text-gray-800 mb-2">
+            🌍 Destination:
+          </label>
+          <select id="destination-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" onchange="updatePlan()">
+            <option value="italy">Italien</option>
+            <option value="cyprus">Cypern</option>
+            <option value="thailand">Thailand</option>
+            <option value="usa">USA</option>
+            <option value="france">Frankrike</option>
+            <option value="denmark">Danmark</option>
+          </select>
+        </div>
+
+        <div class="config-group">
+          <label class="block text-sm font-semibold text-gray-800 mb-2">
+            📅 Månader kvar till vigsel:
+          </label>
+          <select id="timeline-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" onchange="updatePlan()">
+            <option value="18">18+ månader (perfekt tid)</option>
+            <option value="12">12-18 månader (bra tid)</option>
+            <option value="6">6-12 månader (stressigt)</option>
+            <option value="3">3-6 månader (mycket stressigt)</option>
+            <option value="1">Mindre än 3 månader (akut!)</option>
+          </select>
+        </div>
+
+        <div class="config-group">
+          <label class="block text-sm font-semibold text-gray-800 mb-2">
+            👥 Medborgarskap:
+          </label>
+          <select id="citizenship-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" onchange="updatePlan()">
+            <option value="both-swedish">Båda svenska medborgare</option>
+            <option value="mixed">En svensk, en utländsk</option>
+            <option value="both-foreign">Båda utländska medborgare</option>
+          </select>
+        </div>
+
+        <div class="config-group">
+          <label class="block text-sm font-semibold text-gray-800 mb-3">
+            💍 Tidigare äktenskap:
+          </label>
+          <div class="space-y-2">
+            <label class="flex items-center">
+              <input type="checkbox" id="previous-marriage-check" class="mr-2" onchange="updatePlan()">
+              <span class="text-sm">En eller båda har varit gifta tidigare</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline Display -->
+    <div id="timeline-display" class="timeline-section">
+      <h4 class="text-lg font-bold text-purple-800 mb-4 flex items-center">
+        <span class="text-2xl mr-2">⏰</span>
+        Er personliga tidsplan för Italien
+      </h4>
+
+      <div class="timeline-steps space-y-4">
+        <!-- Timeline will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Document Checklist -->
+    <div class="document-checklist mt-8">
+      <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+        <span class="text-2xl mr-2">📄</span>
+        Era dokument-checklista
+      </h4>
+
+      <div id="document-list" class="document-categories space-y-6">
+        <!-- Documents will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="progress-section bg-gray-50 rounded-lg p-4 mt-6">
+      <h4 class="font-semibold text-gray-800 mb-3">📊 Er framsteg:</h4>
+      <div class="progress-bar bg-gray-200 rounded-full h-4 mb-2">
+        <div class="progress-fill bg-purple-500 h-4 rounded-full transition-all duration-300" id="progress-bar" style="width: 0%"></div>
+      </div>
+      <div class="progress-text text-sm text-gray-600">
+        <span id="progress-count">0</span> av <span id="progress-total">0</span> dokument klara
+      </div>
+    </div>
+
+    <!-- Urgent Tasks Alert -->
+    <div id="urgent-alert" class="urgent-tasks bg-red-50 border-l-4 border-red-400 rounded-lg p-4 mt-6 hidden">
+      <h4 class="font-semibold text-red-800 mb-2 flex items-center">
+        <span class="text-xl mr-2">🚨</span>
+        AKUTA ÅTGÄRDER KRÄVS!
+      </h4>
+      <div id="urgent-list" class="text-sm text-red-700">
+        <!-- Urgent tasks will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const destinationRequirements = {
+  italy: {
+    name: "Italien",
+    documents: [
+      { name: "Nulla Osta från svenska myndigheter", deadline: 16, urgent: true },
+      { name: "Svensk hindersprövning", deadline: 14, urgent: true },
+      { name: "Personbevis (max 6 mån gammalt)", deadline: 12 },
+      { name: "Apostillering av alla svenska dokument", deadline: 10, urgent: true },
+      { name: "Auktoriserad italiensk översättning", deadline: 8, urgent: true },
+      { name: "Anmälan till italiensk kommun", deadline: 6, urgent: true },
+      { name: "Bekräftelse av vigselbokning", deadline: 4 }
+    ],
+    complexity: "hög"
+  },
+  cyprus: {
+    name: "Cypern",
+    documents: [
+      { name: "Giltiga pass (minst 6 mån)", deadline: 12 },
+      { name: "Singel-certifikat från Sverige", deadline: 10 },
+      { name: "Apostillering av svenska dokument", deadline: 8 },
+      { name: "Auktoriserad engelsk översättning", deadline: 6 },
+      { name: "Vigselbokning hos lokal myndighet", deadline: 4 },
+      { name: "Ankomst 3 dagar före vigsel", deadline: 1 }
+    ],
+    complexity: "låg"
+  },
+  thailand: {
+    name: "Thailand",
+    documents: [
+      { name: "Affidavit från svenska ambassaden", deadline: 16, urgent: true },
+      { name: "Äktenskapsduglighetsbevis", deadline: 14, urgent: true },
+      { name: "Apostillering av alla dokument", deadline: 12, urgent: true },
+      { name: "Auktoriserad thailändsk översättning", deadline: 10, urgent: true },
+      { name: "Registrering hos thailändska myndigheter", deadline: 8 },
+      { name: "Vigselbokning", deadline: 6 },
+      { name: "Visum och reseplanering", deadline: 2 }
+    ],
+    complexity: "mycket hög"
+  },
+  usa: {
+    name: "USA",
+    documents: [
+      { name: "ESTA-visum eller B2-turistvisum", deadline: 12 },
+      { name: "Giltiga pass", deadline: 10 },
+      { name: "Äktenskapslicens från aktuell delstat", deadline: 4 },
+      { name: "ID-dokument för vittnen", deadline: 2 },
+      { name: "Vigselförrättare-bokning", deadline: 6 }
+    ],
+    complexity: "medel"
+  },
+  france: {
+    name: "Frankrike",
+    documents: [
+      { name: "Certifikat de célibat från Sverige", deadline: 14 },
+      { name: "Personbevis apostillerat", deadline: 12 },
+      { name: "Auktoriserad fransk översättning", deadline: 10 },
+      { name: "Publikation des bans (lysning)", deadline: 8, urgent: true },
+      { name: "Vigselbokning hos Mairie", deadline: 6 }
+    ],
+    complexity: "hög"
+  },
+  denmark: {
+    name: "Danmark",
+    documents: [
+      { name: "Giltiga pass eller ID", deadline: 8 },
+      { name: "Personbevis från Sverige", deadline: 6 },
+      { name: "Prøvelsesattest (danska hindersprövning)", deadline: 4 },
+      { name: "Vigselbokning", deadline: 2 }
+    ],
+    complexity: "låg"
+  }
+};
+
+function updatePlan() {
+  const destination = document.getElementById('destination-select').value;
+  const timeline = parseInt(document.getElementById('timeline-select').value);
+  const citizenship = document.getElementById('citizenship-select').value;
+  const previousMarriage = document.getElementById('previous-marriage-check').checked;
+
+  const destData = destinationRequirements[destination];
+
+  // Update timeline display
+  document.querySelector('#timeline-display h4').innerHTML = `
+    <span class="text-2xl mr-2">⏰</span>
+    Er personliga tidsplan för ${destData.name}
+  `;
+
+  // Create timeline steps
+  const timelineSteps = createTimelineSteps(destData, timeline);
+  document.querySelector('.timeline-steps').innerHTML = timelineSteps;
+
+  // Create document checklist
+  const documentList = createDocumentList(destData, citizenship, previousMarriage, timeline);
+  document.getElementById('document-list').innerHTML = documentList;
+
+  // Update progress tracker
+  updateProgressTracker();
+
+  // Check for urgent tasks
+  checkUrgentTasks(destData, timeline);
+}
+
+function createTimelineSteps(destData, monthsLeft) {
+  let steps = '';
+
+  if (monthsLeft >= 12) {
+    steps += `
+      <div class="step bg-green-50 rounded-lg p-4 border-l-4 border-green-400">
+        <div class="flex justify-between items-center mb-2">
+          <h5 class="font-semibold text-gray-800">Nu - 12 månader kvar</h5>
+          <span class="text-sm text-green-600 font-semibold">Perfekt tid</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-1">
+          <li>• Bestäm exakt datum och plats</li>
+          <li>• Kontakta svenska ambassaden för kravlista</li>
+          <li>• Börja samla svenska grunddokument</li>
+        </ul>
+      </div>
+    `;
+  }
+
+  if (monthsLeft >= 8) {
+    steps += `
+      <div class="step bg-blue-50 rounded-lg p-4 border-l-4 border-blue-400">
+        <div class="flex justify-between items-center mb-2">
+          <h5 class="font-semibold text-gray-800">8-12 månader kvar</h5>
+          <span class="text-sm text-blue-600 font-semibold">Dokumentfas</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-1">
+          <li>• Ansök om hindersprövning (om krävs)</li>
+          <li>• Beställ alla svenska dokument</li>
+          <li>• Börja apostilleringsprocessen</li>
+        </ul>
+      </div>
+    `;
+  }
+
+  if (monthsLeft >= 4) {
+    steps += `
+      <div class="step bg-yellow-50 rounded-lg p-4 border-l-4 border-yellow-400">
+        <div class="flex justify-between items-center mb-2">
+          <h5 class="font-semibold text-gray-800">4-8 månader kvar</h5>
+          <span class="text-sm text-yellow-600 font-semibold">Översättningar</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-1">
+          <li>• Auktoriserade översättningar klara</li>
+          <li>• Kontakta lokala myndigheter</li>
+          <li>• Boka vigselförrättare</li>
+        </ul>
+      </div>
+    `;
+  }
+
+  steps += `
+    <div class="step bg-purple-50 rounded-lg p-4 border-l-4 border-purple-400">
+      <div class="flex justify-between items-center mb-2">
+        <h5 class="font-semibold text-gray-800">Sista månaden</h5>
+        <span class="text-sm text-purple-600 font-semibold">Slutförberedelser</span>
+      </div>
+      <ul class="text-sm text-gray-700 space-y-1">
+        <li>• Packa alla dokument säkert</li>
+        <li>• Dubbelkolla alla bokningar</li>
+        <li>• Ha backup-kopior digitalt</li>
+        <li>• Njut av er resa!</li>
+      </ul>
+    </div>
+  `;
+
+  return steps;
+}
+
+function createDocumentList(destData, citizenship, previousMarriage, monthsLeft) {
+  let html = '';
+
+  // Base documents
+  html += `
+    <div class="doc-category bg-blue-50 rounded-lg p-4">
+      <h5 class="font-semibold text-blue-800 mb-3">🇸🇪 Svenska grunddokument:</h5>
+      <div class="documents space-y-2">
+  `;
+
+  destData.documents.forEach((doc, index) => {
+    const urgentClass = (doc.deadline > monthsLeft && doc.urgent) ? 'text-red-600' : '';
+    html += `
+      <label class="document-item flex items-start cursor-pointer">
+        <input type="checkbox" class="mt-1 mr-3 doc-checkbox" onchange="updateProgressTracker()">
+        <div class="flex-grow">
+          <div class="font-medium ${urgentClass}">${doc.name}</div>
+          <div class="text-xs text-gray-600">Deadline: ${doc.deadline} månader före vigsel</div>
+        </div>
+      </label>
+    `;
+  });
+
+  html += `
+      </div>
+    </div>
+  `;
+
+  // Additional documents based on citizenship
+  if (citizenship === 'mixed' || citizenship === 'both-foreign') {
+    html += `
+      <div class="doc-category bg-orange-50 rounded-lg p-4">
+        <h5 class="font-semibold text-orange-800 mb-3">🌍 Utländska medborgare:</h5>
+        <div class="documents space-y-2">
+          <label class="document-item flex items-start cursor-pointer">
+            <input type="checkbox" class="mt-1 mr-3 doc-checkbox" onchange="updateProgressTracker()">
+            <div>
+              <div class="font-medium">Pass och uppehållstillstånd</div>
+              <div class="text-xs text-gray-600">Giltigt minst 6 månader efter hemkomst</div>
+            </div>
+          </label>
+          <label class="document-item flex items-start cursor-pointer">
+            <input type="checkbox" class="mt-1 mr-3 doc-checkbox" onchange="updateProgressTracker()">
+            <div>
+              <div class="font-medium">Äktenskapsduglighetsbevis från hemlandet</div>
+              <div class="text-xs text-gray-600">Apostillerat och översatt</div>
+            </div>
+          </label>
+        </div>
+      </div>
+    `;
+  }
+
+  // Previous marriage documents
+  if (previousMarriage) {
+    html += `
+      <div class="doc-category bg-red-50 rounded-lg p-4">
+        <h5 class="font-semibold text-red-800 mb-3">💔 Tidigare äktenskap:</h5>
+        <div class="documents space-y-2">
+          <label class="document-item flex items-start cursor-pointer">
+            <input type="checkbox" class="mt-1 mr-3 doc-checkbox" onchange="updateProgressTracker()">
+            <div>
+              <div class="font-medium">Äktenskapsskillnad eller dödsbevis</div>
+              <div class="text-xs text-gray-600">Apostillerat och översatt</div>
+            </div>
+          </label>
+        </div>
+      </div>
+    `;
+  }
+
+  return html;
+}
+
+function updateProgressTracker() {
+  const checkboxes = document.querySelectorAll('.doc-checkbox');
+  const checkedBoxes = document.querySelectorAll('.doc-checkbox:checked');
+
+  const total = checkboxes.length;
+  const completed = checkedBoxes.length;
+  const percentage = total > 0 ? (completed / total) * 100 : 0;
+
+  document.getElementById('progress-bar').style.width = `${percentage}%`;
+  document.getElementById('progress-count').textContent = completed;
+  document.getElementById('progress-total').textContent = total;
+}
+
+function checkUrgentTasks(destData, monthsLeft) {
+  const urgentTasks = destData.documents.filter(doc =>
+    doc.deadline >= monthsLeft && doc.urgent
+  );
+
+  const urgentAlert = document.getElementById('urgent-alert');
+  const urgentList = document.getElementById('urgent-list');
+
+  if (urgentTasks.length > 0) {
+    urgentAlert.classList.remove('hidden');
+    urgentList.innerHTML = `
+      <p class="mb-2">Med ${monthsLeft} månader kvar måste ni OMEDELBART börja med:</p>
+      <ul class="space-y-1">
+        ${urgentTasks.map(task =>
+          `<li>• <strong>${task.name}</strong> (deadline: ${task.deadline} mån före)</li>`
+        ).join('')}
+      </ul>
+    `;
+  } else {
+    urgentAlert.classList.add('hidden');
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  updatePlan();
+});
+</script>
+
+<style>
+  .document-planner {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .document-item {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .document-item:hover {
+    background-color: #f9fafb;
+  }
+
+  input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .progress-fill {
+    transition: width 0.5s ease;
+  }
+
+  select {
+    transition: all 0.2s ease;
+  }
+
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+  }
+
+  .step {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

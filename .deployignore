@@ -12,3 +12,4 @@ test-programmatic-seo.html
 # Development dependencies that require system packages
 node_modules/puppeteer/
 node_modules/playwright/
+

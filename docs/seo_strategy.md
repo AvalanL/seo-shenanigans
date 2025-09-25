@@ -18,7 +18,8 @@
    - Mikrosidor (300–600 ord) för lokala sökningar (`Bröllopsfotograf i Malmö`), FAQ och definierade termer.
 
 2. **Innehållsformat**
-   - Steg-för-steg-guider, checklistor, priskalkyler, intervjuer med experter, templates (nedladdningsbara PDF/Google Sheets), jämförelser av leverantörer, listicles ("101 frågor att ställa..."), interaktiva verktyg.
+ - Steg-för-steg-guider, checklistor, priskalkyler, intervjuer med experter, templates (nedladdningsbara PDF/Google Sheets), jämförelser av leverantörer, listicles ("101 frågor att ställa..."), interaktiva verktyg.
+  - Flaggskepp: **Budgetkalkylatorn** med export (CSV/Excel/PDF), delningsfunktion och scenario-presets som driver länkar och återvändande trafik.
    - Kortare svar i FAQ-format för AI och People Also Ask.
 
 3. **Språk & Ton**

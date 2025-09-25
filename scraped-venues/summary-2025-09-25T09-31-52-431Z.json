@@ -1,0 +1,28 @@
+{
+  "totalVenues": 75,
+  "successful": 75,
+  "errors": 0,
+  "withImages": 75,
+  "withContact": 73,
+  "withCapacity": 40,
+  "cities": [
+    "Göteborg",
+    "Sverige",
+    "Stockholm",
+    "Växjö",
+    "Visby",
+    "Linköping",
+    "Trelleborg",
+    "Lund",
+    "Solna",
+    "Uppsala",
+    "Uddevalla",
+    "Helsingborg",
+    "Norrköping",
+    "Jönköping",
+    "Malmö",
+    "Västerås"
+  ],
+  "totalImages": 596,
+  "scrapedAt": "2025-09-25T09:31:52.444Z"
+}

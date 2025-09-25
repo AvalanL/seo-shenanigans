@@ -1,0 +1,12 @@
+{
+  "listingPage": {
+    "venueLinks": "a[href*=\"/brollop-och-festlokaler/\"]",
+    "scrollMethod": "infinite-scroll"
+  },
+  "venuePage": {
+    "title": "h1",
+    "address": "[class*=\"address\"]",
+    "images": "img[src]",
+    "contentAreas": "section, .content, [class*=\"content\"]"
+  }
+}

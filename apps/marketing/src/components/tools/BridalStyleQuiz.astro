@@ -1,0 +1,515 @@
+---
+// Interactive Bridal Style Quiz Component
+---
+
+<div class="bridal-style-quiz bg-gradient-to-r from-pink-50 to-rose-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    👗 Hitta din perfekta brudklänningsstil
+  </h3>
+
+  <div class="quiz-container bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Svara på några snabba frågor så hjälper vi dig hitta din drömstil för 2025!
+    </p>
+
+    <div class="quiz-content">
+      <div class="question-section" id="questions">
+
+        <!-- Question 1 -->
+        <div class="question active" data-question="1">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">1. Hur skulle du beskriva din personliga stil?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="minimalist" onclick="selectAnswer(this, 1)">
+              ✨ Minimalistisk och clean - mindre är mer
+            </button>
+            <button class="answer-btn" data-value="romantic" onclick="selectAnswer(this, 1)">
+              💕 Romantisk och feminin - spets och volanger
+            </button>
+            <button class="answer-btn" data-value="dramatic" onclick="selectAnswer(this, 1)">
+              👑 Dramatisk och glamorös - vill sticka ut
+            </button>
+            <button class="answer-btn" data-value="boho" onclick="selectAnswer(this, 1)">
+              🌸 Boho och naturlig - frihet och kreativitet
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question" data-question="2">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">2. Vad är viktigast för dig på bröllopssdagen?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="comfort" onclick="selectAnswer(this, 2)">
+              🤗 Komfort - kunna röra mig fritt hela dagen
+            </button>
+            <button class="answer-btn" data-value="photos" onclick="selectAnswer(this, 2)">
+              📸 Fantastiska foton - klänningen ska vara fotogenisk
+            </button>
+            <button class="answer-btn" data-value="tradition" onclick="selectAnswer(this, 2)">
+              💒 Tradition - klassisk brudklänning som förväntat
+            </button>
+            <button class="answer-btn" data-value="unique" onclick="selectAnswer(this, 2)">
+              ⭐ Unik look - ingen annan ska ha samma stil
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question" data-question="3">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">3. Vilken kroppsform vill du framhäva mest?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="waist" onclick="selectAnswer(this, 3)">
+              ⏳ Midjan - vill skapa timglas-silhuett
+            </button>
+            <button class="answer-btn" data-value="legs" onclick="selectAnswer(this, 3)">
+              🦵 Benen - kortare kjol eller slits
+            </button>
+            <button class="answer-btn" data-value="shoulders" onclick="selectAnswer(this, 3)">
+              💪 Axlar och armar - vill visa off-shoulder
+            </button>
+            <button class="answer-btn" data-value="overall" onclick="selectAnswer(this, 3)">
+              👗 Hela silhuetten - helhetslook är viktigast
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question" data-question="4">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">4. Vilken typ av bröllop planerar du?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="church" onclick="selectAnswer(this, 4)">
+              ⛪ Kyrkbröllop - traditionell och formell ceremony
+            </button>
+            <button class="answer-btn" data-value="outdoor" onclick="selectAnswer(this, 4)">
+              🌳 Utomhusbröllop - natur och avslappnat
+            </button>
+            <button class="answer-btn" data-value="venue" onclick="selectAnswer(this, 4)">
+              🏰 Slott/Manor - elegant och sofistikerat
+            </button>
+            <button class="answer-btn" data-value="destination" onclick="selectAnswer(this, 4)">
+              ✈️ Destination wedding - strand eller utomlands
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question" data-question="5">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">5. Vad är din budget för brudklänningen?</h4>
+          <div class="answers grid md:grid-cols-2 gap-3">
+            <button class="answer-btn" data-value="budget" onclick="selectAnswer(this, 5)">
+              💰 Under 10,000 kr - söker bra värde
+            </button>
+            <button class="answer-btn" data-value="mid" onclick="selectAnswer(this, 5)">
+              💳 10,000-25,000 kr - vill ha kvalitet och stil
+            </button>
+            <button class="answer-btn" data-value="premium" onclick="selectAnswer(this, 5)">
+              💎 25,000-50,000 kr - investering i dröm-klänning
+            </button>
+            <button class="answer-btn" data-value="luxury" onclick="selectAnswer(this, 5)">
+              👑 50,000+ kr - inga begränsningar för perfektion
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Results Section -->
+      <div class="results-section hidden" id="results">
+        <div class="result-card bg-gradient-to-r from-pink-100 to-rose-100 rounded-lg p-6">
+          <h4 class="text-xl font-bold text-pink-800 mb-4 text-center" id="result-title">
+            Din perfekta brudklänningsstil är...
+          </h4>
+
+          <div class="result-content" id="result-content">
+            <!-- Results will be populated by JavaScript -->
+          </div>
+
+          <div class="result-actions mt-6 text-center">
+            <button class="restart-btn" onclick="restartQuiz()">
+              🔄 Gör om testet
+            </button>
+            <button class="share-btn ml-4" onclick="shareResult()">
+              💕 Dela resultatet
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="quiz-navigation mt-6 flex justify-between">
+        <button class="nav-btn hidden" id="prev-btn" onclick="previousQuestion()">
+          ← Föregående
+        </button>
+        <div class="progress-indicator flex space-x-2">
+          <span class="progress-dot active" data-step="1"></span>
+          <span class="progress-dot" data-step="2"></span>
+          <span class="progress-dot" data-step="3"></span>
+          <span class="progress-dot" data-step="4"></span>
+          <span class="progress-dot" data-step="5"></span>
+        </div>
+        <button class="nav-btn" id="next-btn" onclick="nextQuestion()" disabled>
+          Nästa →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentQuestion = 1;
+let answers = {};
+
+const styleResults = {
+  minimalist: {
+    title: "Minimalistisk Elegans 💫",
+    description: "Du är den moderna bruden som värdesätter ren design och tidlös elegans. Din stil präglas av sofistikering utan överflödiga detaljer.",
+    recommendations: [
+      "Slip dress i silk crepe eller mikado",
+      "A-linje med clean lines och geometric cuts",
+      "Svenska designers som Ida Lanto eller Emelie Janréus",
+      "Neutrala färger: ivory, champagne, soft white"
+    ],
+    budget: "12,000-30,000 kr för rätt kvalitet och cut",
+    stores: ["Stockholm Bridal Studio", "Nordic Wedding", "H&M Conscious Bridal"],
+    styling: "Minimala smycken, sleek håruppsättning, natural makeup"
+  },
+  romantic: {
+    title: "Romantisk Drömmare 💕",
+    description: "Du älskar feminin elegans med detaljer som spets, pärlor och mjuka tyger. Din brudklänning ska kännas som en saga.",
+    recommendations: [
+      "A-linje eller ballklänning med spetsdetaljer",
+      "Off-shoulder eller long sleeves med romantiska ärmar",
+      "Sophie Hallette Stockholm för fransk spets",
+      "Soft ivory, blush pink eller champagne"
+    ],
+    budget: "15,000-40,000 kr för handgjorda detaljer",
+    stores: ["Bröllop & Brudklänningar", "NK Bröllopssalong", "Christina Rohde"],
+    styling: "Pärlsmycken, romantisk håruppsättning, soft glam makeup"
+  },
+  dramatic: {
+    title: "Dramatisk Diva 👑",
+    description: "Du vill ha en klänning som gör statement och skapar wow-effekt. Inget är för mycket på din stora dag.",
+    recommendations: [
+      "Ballklänning med voluminös kjol",
+      "Statement sleeves eller dramatiska trains",
+      "Lyxiga tyger som tulle, organza eller brocade",
+      "Bold färger eller klassisk vit med metalliska accenter"
+    ],
+    budget: "25,000-60,000+ kr för haute couture feeling",
+    stores: ["Luxury bridal boutiques", "Designer imports", "Custom atelier"],
+    styling: "Statement jewelry, dramatic updo, full glam makeup"
+  },
+  boho: {
+    title: "Boho Goddess 🌸",
+    description: "Du är den fria själen som vill ha en klänning lika unik som du själv. Naturlig skönhet och kreativ stil definierar dig.",
+    recommendations: [
+      "Flowy chiffon eller crepe med asymmetriska cuts",
+      "Bishop sleeves eller off-shoulder designs",
+      "Natural waistlines och organic shapes",
+      "Ivory, champagne eller soft earth tones"
+    ],
+    budget: "10,000-30,000 kr för handcrafted elements",
+    stores: ["Vintage Stockholm", "Sustainable Bride Sweden", "Local artisan designers"],
+    styling: "Natural jewelry, loose waves eller braids, dewy makeup"
+  }
+};
+
+function selectAnswer(button, questionNum) {
+  // Remove active class from all buttons in this question
+  const questionDiv = document.querySelector(`[data-question="${questionNum}"]`);
+  questionDiv.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('active'));
+
+  // Add active class to selected button
+  button.classList.add('active');
+
+  // Store answer
+  answers[questionNum] = button.getAttribute('data-value');
+
+  // Enable next button
+  document.getElementById('next-btn').disabled = false;
+}
+
+function nextQuestion() {
+  if (currentQuestion < 5) {
+    // Hide current question
+    document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+
+    // Update progress
+    document.querySelector(`[data-step="${currentQuestion}"]`).classList.add('completed');
+
+    // Show next question
+    currentQuestion++;
+    document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+    document.querySelector(`[data-step="${currentQuestion}"]`).classList.add('active');
+
+    // Update navigation
+    document.getElementById('prev-btn').classList.remove('hidden');
+    document.getElementById('next-btn').disabled = !answers[currentQuestion];
+
+    if (currentQuestion === 5) {
+      document.getElementById('next-btn').textContent = 'Se resultat';
+      document.getElementById('next-btn').onclick = showResults;
+    }
+  }
+}
+
+function previousQuestion() {
+  if (currentQuestion > 1) {
+    // Hide current question
+    document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+    document.querySelector(`[data-step="${currentQuestion}"]`).classList.remove('active');
+
+    // Show previous question
+    currentQuestion--;
+    document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+
+    // Update navigation
+    if (currentQuestion === 1) {
+      document.getElementById('prev-btn').classList.add('hidden');
+    }
+
+    document.getElementById('next-btn').textContent = 'Nästa →';
+    document.getElementById('next-btn').onclick = nextQuestion;
+    document.getElementById('next-btn').disabled = !answers[currentQuestion];
+  }
+}
+
+function showResults() {
+  // Calculate primary style based on answers
+  const styleScores = {
+    minimalist: 0,
+    romantic: 0,
+    dramatic: 0,
+    boho: 0
+  };
+
+  // Score calculation logic
+  const scoringMatrix = {
+    1: { minimalist: 3, romantic: 1, dramatic: 2, boho: 1 },
+    2: { minimalist: 1, romantic: 2, dramatic: 3, boho: 2 },
+    3: { minimalist: 2, romantic: 1, dramatic: 3, boho: 2 },
+    4: { minimalist: 2, romantic: 2, dramatic: 1, boho: 3 },
+    5: { minimalist: 2, romantic: 2, dramatic: 3, boho: 1 }
+  };
+
+  // Calculate scores
+  Object.keys(answers).forEach(questionNum => {
+    const answer = answers[questionNum];
+    const weights = scoringMatrix[questionNum];
+
+    // Add weighted scores
+    Object.keys(styleScores).forEach(style => {
+      if (weights[answer]) {
+        styleScores[style] += weights[answer];
+      }
+    });
+  });
+
+  // Find highest scoring style
+  const primaryStyle = Object.keys(styleScores).reduce((a, b) =>
+    styleScores[a] > styleScores[b] ? a : b
+  );
+
+  // Display results
+  displayResult(primaryStyle);
+}
+
+function displayResult(style) {
+  const result = styleResults[style];
+
+  // Hide questions, show results
+  document.getElementById('questions').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  document.querySelector('.quiz-navigation').classList.add('hidden');
+
+  // Populate result content
+  document.getElementById('result-title').textContent = result.title;
+
+  const resultHTML = `
+    <div class="result-description mb-4">
+      <p class="text-gray-700 text-center mb-4">${result.description}</p>
+    </div>
+
+    <div class="recommendations grid md:grid-cols-2 gap-4 mb-4">
+      <div class="rec-section">
+        <h5 class="font-semibold text-pink-700 mb-2">🎨 Rekommenderade stilar:</h5>
+        <ul class="text-sm text-gray-600">
+          ${result.recommendations.map(rec => `<li>• ${rec}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="rec-section">
+        <h5 class="font-semibold text-pink-700 mb-2">🛍️ Var du ska shoppa:</h5>
+        <ul class="text-sm text-gray-600">
+          ${result.stores.map(store => `<li>• ${store}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+
+    <div class="budget-styling grid md:grid-cols-2 gap-4">
+      <div class="budget-info bg-green-50 rounded p-3">
+        <h5 class="font-semibold text-green-700 mb-1">💰 Budget:</h5>
+        <p class="text-sm text-green-600">${result.budget}</p>
+      </div>
+
+      <div class="styling-info bg-blue-50 rounded p-3">
+        <h5 class="font-semibold text-blue-700 mb-1">✨ Styling-tips:</h5>
+        <p class="text-sm text-blue-600">${result.styling}</p>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('result-content').innerHTML = resultHTML;
+}
+
+function restartQuiz() {
+  // Reset all variables
+  currentQuestion = 1;
+  answers = {};
+
+  // Reset UI
+  document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+  document.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.progress-dot').forEach(dot => {
+    dot.classList.remove('active', 'completed');
+  });
+
+  // Show first question
+  document.querySelector('[data-question="1"]').classList.add('active');
+  document.querySelector('[data-step="1"]').classList.add('active');
+
+  // Reset navigation
+  document.getElementById('prev-btn').classList.add('hidden');
+  document.getElementById('next-btn').textContent = 'Nästa →';
+  document.getElementById('next-btn').onclick = nextQuestion;
+  document.getElementById('next-btn').disabled = true;
+
+  // Show quiz, hide results
+  document.getElementById('questions').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.querySelector('.quiz-navigation').classList.remove('hidden');
+}
+
+function shareResult() {
+  const resultTitle = document.getElementById('result-title').textContent;
+  const shareText = `Jag gjorde ett brudklänningstest och fick resultatet: ${resultTitle}! Gör testet du också på vår hemsida! 💕`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Min brudklänningsstil 2025',
+      text: shareText,
+      url: window.location.href
+    });
+  } else {
+    // Fallback: copy to clipboard
+    navigator.clipboard.writeText(shareText).then(() => {
+      alert('Resultat kopierat! Dela det i sociala medier 💕');
+    });
+  }
+}
+</script>
+
+<style>
+.bridal-style-quiz {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.question {
+  display: none;
+}
+
+.question.active {
+  display: block;
+}
+
+.answer-btn {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.answer-btn:hover {
+  border-color: #ec4899;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+}
+
+.answer-btn.active {
+  border-color: #ec4899;
+  background: #fdf2f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+}
+
+.nav-btn {
+  background: #ec4899;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: #db2777;
+  transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d1d5db;
+  transition: all 0.2s ease;
+}
+
+.progress-dot.active {
+  background: #ec4899;
+}
+
+.progress-dot.completed {
+  background: #10b981;
+}
+
+.restart-btn, .share-btn {
+  background: #ec4899;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.restart-btn:hover, .share-btn:hover {
+  background: #db2777;
+  transform: translateY(-1px);
+}
+
+.result-card {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

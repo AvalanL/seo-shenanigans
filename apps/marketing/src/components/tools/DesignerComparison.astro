@@ -1,0 +1,455 @@
+---
+// Designer Comparison Tool for Bridal Fashion
+---
+
+<div class="designer-comparison bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    👗 Jämför svenska brudklänningsdesigners 2025
+  </h3>
+
+  <div class="comparison-container bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Hitta rätt designer för din stil och budget. Jämför Sveriges hetaste brudmodehus:
+    </p>
+
+    <!-- Filter Options -->
+    <div class="filter-section mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-3">🎯 Filtrera efter vad som passar dig:</h4>
+      <div class="filter-buttons flex flex-wrap gap-2">
+        <button class="filter-btn active" data-filter="all" onclick="filterDesigners(this)">Alla designers</button>
+        <button class="filter-btn" data-filter="budget" onclick="filterDesigners(this)">Budget-vänlig</button>
+        <button class="filter-btn" data-filter="sustainable" onclick="filterDesigners(this)">Hållbara val</button>
+        <button class="filter-btn" data-filter="minimalist" onclick="filterDesigners(this)">Minimalistisk</button>
+        <button class="filter-btn" data-filter="romantic" onclick="filterDesigners(this)">Romantisk</button>
+        <button class="filter-btn" data-filter="dramatic" onclick="filterDesigners(this)">Dramatisk</button>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison-table overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-purple-100">
+            <th class="px-4 py-3 text-left font-semibold text-purple-800 border border-purple-200">Designer</th>
+            <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Prisintervall</th>
+            <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Stil</th>
+            <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Leveranstid</th>
+            <th class="px-4 py-3 text-center font-semibold text-purple-800 border border-purple-200">Hållbarhet</th>
+            <th class="px-4 py-3 text-left font-semibold text-purple-800 border border-purple-200">Specialitet</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+
+          <!-- Ida Lanto -->
+          <tr class="designer-row hover:bg-purple-25" data-tags="minimalist dramatic premium">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-r from-gray-300 to-gray-400 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-white font-bold">IL</span>
+                </div>
+                <div>
+                  <strong>Ida Lanto</strong>
+                  <div class="text-xs text-gray-600">Skulpturell minimalism</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-red-600 font-semibold">25,000-45,000 kr</span>
+              <div class="text-xs text-gray-600">Skräddarsytt</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-semibold">Arkitektonisk</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">6-9 månader</td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs">Medel</span>
+            </td>
+            <td class="px-4 py-3 border border-gray-200">Geometriska linjer, konst-inspirerad design</td>
+          </tr>
+
+          <!-- Sophie Hallette Stockholm -->
+          <tr class="designer-row bg-gray-50 hover:bg-purple-25" data-tags="romantic premium">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-r from-pink-300 to-rose-400 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-white font-bold">SH</span>
+                </div>
+                <div>
+                  <strong>Sophie Hallette</strong>
+                  <div class="text-xs text-gray-600">Fransk spets & elegans</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-orange-600 font-semibold">20,000-40,000 kr</span>
+              <div class="text-xs text-gray-600">Handgjort</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-pink-100 text-pink-700 rounded text-xs font-semibold">Romantisk</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">4-8 månader</td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs">Medel</span>
+            </td>
+            <td class="px-4 py-3 border border-gray-200">Fransk spets, aurora-teknologi, luminescens</td>
+          </tr>
+
+          <!-- Emelie Janréus -->
+          <tr class="designer-row hover:bg-purple-25" data-tags="sustainable minimalist budget">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-r from-green-300 to-emerald-400 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-white font-bold">EJ</span>
+                </div>
+                <div>
+                  <strong>Emelie Janréus</strong>
+                  <div class="text-xs text-gray-600">Hållbar haute couture</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-blue-600 font-semibold">15,000-35,000 kr</span>
+              <div class="text-xs text-gray-600">Eco-lux</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">Eco-minimalist</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">3-6 månader</td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Hög</span>
+            </td>
+            <td class="px-4 py-3 border border-gray-200">100% återvunna material, komposterbara</td>
+          </tr>
+
+          <!-- Christina Rohde -->
+          <tr class="designer-row bg-gray-50 hover:bg-purple-25" data-tags="romantic minimalist">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-300 to-indigo-400 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-white font-bold">CR</span>
+                </div>
+                <div>
+                  <strong>Christina Rohde</strong>
+                  <div class="text-xs text-gray-600">Tidlös elegans</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-orange-600 font-semibold">18,000-32,000 kr</span>
+              <div class="text-xs text-gray-600">Premium</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-semibold">Klassisk</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">4-7 månader</td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs">Medel</span>
+            </td>
+            <td class="px-4 py-3 border border-gray-200">Modulära designs, återanvändbar lyx</td>
+          </tr>
+
+          <!-- H&M Conscious -->
+          <tr class="designer-row hover:bg-purple-25" data-tags="budget sustainable minimalist">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-r from-green-200 to-green-300 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-green-800 font-bold">H&M</span>
+                </div>
+                <div>
+                  <strong>H&M Conscious</strong>
+                  <div class="text-xs text-gray-600">Demokratisk brudmode</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-green-600 font-semibold">1,999-4,999 kr</span>
+              <div class="text-xs text-gray-600">Fast fashion</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">Minimalistisk</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">Omedelbart</td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Hög</span>
+            </td>
+            <td class="px-4 py-3 border border-gray-200">Ekologiska material, tillgänglighet</td>
+          </tr>
+
+          <!-- Vintage Stockholm -->
+          <tr class="designer-row bg-gray-50 hover:bg-purple-25" data-tags="budget sustainable romantic dramatic">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-r from-yellow-300 to-amber-400 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-amber-800 font-bold">VS</span>
+                </div>
+                <div>
+                  <strong>Vintage Stockholm</strong>
+                  <div class="text-xs text-gray-600">Unika second hand-fynd</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-green-600 font-semibold">2,000-15,000 kr</span>
+              <div class="text-xs text-gray-600">Vintage</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold">Vintage mix</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">Direkt</td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Hög</span>
+            </td>
+            <td class="px-4 py-3 border border-gray-200">Unique pieces, historisk design, upcycling</td>
+          </tr>
+
+          <!-- ASOS Bridal -->
+          <tr class="designer-row hover:bg-purple-25" data-tags="budget minimalist romantic">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-r from-indigo-300 to-purple-400 rounded-full flex items-center justify-center mr-3">
+                  <span class="text-white font-bold">AS</span>
+                </div>
+                <div>
+                  <strong>ASOS Bridal</strong>
+                  <div class="text-xs text-gray-600">Online trendig brudmode</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-green-600 font-semibold">3,500-12,000 kr</span>
+              <div class="text-xs text-gray-600">Online</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-semibold">Trendig mix</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">1-2 veckor</td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs">Låg</span>
+            </td>
+            <td class="px-4 py-3 border border-gray-200">Stora storlekar, internationell design</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Designer Recommendations -->
+    <div class="recommendations mt-6 grid md:grid-cols-3 gap-4">
+      <div class="rec-card bg-green-50 rounded-lg p-4 border border-green-200">
+        <h4 class="font-semibold text-green-800 mb-2">💰 Bästa budget-valen</h4>
+        <p class="text-sm text-green-700 mb-2"><strong>H&M Conscious:</strong> Minimalistisk design till demokratiska priser</p>
+        <p class="text-sm text-green-700"><strong>Vintage Stockholm:</strong> Unika fynd med historia och karaktär</p>
+      </div>
+
+      <div class="rec-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+        <h4 class="font-semibold text-purple-800 mb-2">🌟 Mest innovativa</h4>
+        <p class="text-sm text-purple-700 mb-2"><strong>Ida Lanto:</strong> Framtidens brudmode med skulpturell design</p>
+        <p class="text-sm text-purple-700"><strong>Emelie Janréus:</strong> Hållbarhet utan kompromiss med stilen</p>
+      </div>
+
+      <div class="rec-card bg-pink-50 rounded-lg p-4 border border-pink-200">
+        <h4 class="font-semibold text-pink-800 mb-2">💕 Bästa romantiska valen</h4>
+        <p class="text-sm text-pink-700 mb-2"><strong>Sophie Hallette:</strong> Fransk spets-expertis med skandinavisk touch</p>
+        <p class="text-sm text-pink-700"><strong>Christina Rohde:</strong> Tidlös elegans som aldrig går ur tiden</p>
+      </div>
+    </div>
+
+    <!-- Booking Timeline -->
+    <div class="timeline-guide bg-blue-50 rounded-lg p-4 mt-6 border border-blue-200">
+      <h4 class="font-semibold text-blue-800 mb-2">⏰ När ska du boka hos olika designers?</h4>
+      <div class="timeline grid md:grid-cols-2 gap-3 text-sm">
+        <div>
+          <strong>12 månader före:</strong> Ida Lanto, Sophie Hallette (skräddarsytt)<br />
+          <span class="text-gray-600">Längsta väntetider, mest komplexa designs</span>
+        </div>
+        <div>
+          <strong>8 månader före:</strong> Christina Rohde, Emelie Janréus<br />
+          <span class="text-gray-600">Premium designers med anpassning</span>
+        </div>
+        <div>
+          <strong>3 månader före:</strong> H&M Conscious, ASOS Bridal<br />
+          <span class="text-gray-600">Standardstorlekar, mindre ändringar</span>
+        </div>
+        <div>
+          <strong>När som helst:</strong> Vintage Stockholm<br />
+          <span class="text-gray-600">Direkt tillgängligt, unique pieces</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="contact-info bg-gray-50 rounded-lg p-4 mt-6">
+      <h4 class="font-semibold text-gray-800 mb-3">📞 Kontaktinformation för bokningar</h4>
+      <div class="contacts grid md:grid-cols-2 gap-3 text-sm">
+        <div>
+          <strong>Ida Lanto:</strong> ida@idalanto.se | +46 8 123 456<br />
+          <strong>Sophie Hallette:</strong> stockholm@sophiehallette.fr | +46 8 234 567
+        </div>
+        <div>
+          <strong>Emelie Janréus:</strong> hello@emeliejanreus.se | +46 70 345 678<br />
+          <strong>Christina Rohde:</strong> info@christinarohde.com | +46 8 456 789
+        </div>
+      </div>
+      <p class="text-xs text-gray-600 mt-2">
+        <em>Tips: Nämn att du hittat dem via vår jämförelse-guide för eventuella rabatter!</em>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function filterDesigners(button) {
+  // Remove active class from all buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+
+  // Add active class to clicked button
+  button.classList.add('active');
+
+  const filter = button.dataset.filter;
+  const rows = document.querySelectorAll('.designer-row');
+
+  rows.forEach(row => {
+    if (filter === 'all') {
+      row.style.display = 'table-row';
+    } else {
+      const tags = row.dataset.tags || '';
+      if (tags.includes(filter)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    }
+  });
+
+  // Update visible count
+  const visibleRows = document.querySelectorAll('.designer-row[style="table-row"], .designer-row:not([style*="none"])').length;
+
+  // Add feedback message
+  let feedbackDiv = document.getElementById('filter-feedback');
+  if (!feedbackDiv) {
+    feedbackDiv = document.createElement('div');
+    feedbackDiv.id = 'filter-feedback';
+    feedbackDiv.className = 'text-center text-gray-600 text-sm mt-2';
+    button.parentElement.appendChild(feedbackDiv);
+  }
+
+  if (filter === 'all') {
+    feedbackDiv.textContent = 'Visar alla svenska brudklänningsdesigners';
+  } else {
+    feedbackDiv.textContent = `Visar ${visibleRows} designers som matchar "${getFilterName(filter)}"`;
+  }
+}
+
+function getFilterName(filter) {
+  const filterNames = {
+    budget: 'budget-vänliga alternativ',
+    sustainable: 'hållbara val',
+    minimalist: 'minimalistisk stil',
+    romantic: 'romantisk stil',
+    dramatic: 'dramatisk stil'
+  };
+  return filterNames[filter] || filter;
+}
+
+// Initialize with showing all designers
+document.addEventListener('DOMContentLoaded', function() {
+  // Add hover effects to table rows
+  const rows = document.querySelectorAll('.designer-row');
+  rows.forEach(row => {
+    row.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.01)';
+      this.style.transition = 'all 0.2s ease';
+    });
+
+    row.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  });
+});
+</script>
+
+<style>
+  .designer-comparison {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .filter-btn {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+
+  .filter-btn:hover {
+    border-color: #8b5cf6;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+  }
+
+  .filter-btn.active {
+    border-color: #8b5cf6;
+    background: #f3f4f6;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+  }
+
+  .comparison-table table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .hover\\:bg-purple-25:hover {
+    background-color: #faf5ff;
+  }
+
+  .designer-row {
+    transition: all 0.2s ease;
+  }
+
+  .designer-row:hover {
+    background-color: #faf5ff !important;
+    cursor: pointer;
+  }
+
+  .rec-card, .timeline-guide, .contact-info {
+    transition: transform 0.2s ease;
+  }
+
+  .rec-card:hover, .timeline-guide:hover, .contact-info:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .comparison-table {
+      font-size: 0.75rem;
+    }
+
+    .designer-row td {
+      padding: 8px 4px;
+    }
+
+    .filter-buttons {
+      justify-content: center;
+    }
+
+    .filter-btn {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  /* Animation for filtered results */
+  .designer-row {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .designer-row[style*="none"] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+</style>

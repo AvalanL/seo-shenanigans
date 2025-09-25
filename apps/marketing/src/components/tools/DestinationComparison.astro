@@ -1,0 +1,312 @@
+---
+// Destination Comparison Tool for International Weddings
+---
+
+<div class="destination-comparison bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-6 my-8">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+    🌍 Jämför populära vigselsdestinationer
+  </h3>
+
+  <div class="comparison-container bg-white rounded-lg p-6 shadow-sm">
+    <p class="text-gray-700 mb-6 text-center">
+      Jämför de mest populära destinationerna för svenska par som vill gifta sig utomlands:
+    </p>
+
+    <!-- Filter Options -->
+    <div class="filter-section mb-6">
+      <h4 class="text-lg font-semibold text-gray-800 mb-3">🎯 Filtrera efter vad som är viktigast för er:</h4>
+      <div class="filter-buttons flex flex-wrap gap-2">
+        <button class="filter-btn active" data-filter="all" onclick="filterDestinations(this)">Alla destinationer</button>
+        <button class="filter-btn" data-filter="budget" onclick="filterDestinations(this)">Budget-vänliga</button>
+        <button class="filter-btn" data-filter="easy" onclick="filterDestinations(this)">Enkla krav</button>
+        <button class="filter-btn" data-filter="romantic" onclick="filterDestinations(this)">Mest romantiska</button>
+        <button class="filter-btn" data-filter="short-flight" onclick="filterDestinations(this)">Kort flygtid</button>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison-table overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-blue-100">
+            <th class="px-4 py-3 text-left font-semibold text-blue-800 border border-blue-200">Destination</th>
+            <th class="px-4 py-3 text-center font-semibold text-blue-800 border border-blue-200">Kostnad</th>
+            <th class="px-4 py-3 text-center font-semibold text-blue-800 border border-blue-200">Komplexitet</th>
+            <th class="px-4 py-3 text-center font-semibold text-blue-800 border border-blue-200">Flygtid</th>
+            <th class="px-4 py-3 text-center font-semibold text-blue-800 border border-blue-200">Bästa tid</th>
+            <th class="px-4 py-3 text-left font-semibold text-blue-800 border border-blue-200">Specialitet</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <tr class="destination-row hover:bg-blue-25" data-tags="budget easy short-flight">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <span class="text-2xl mr-2">🇨🇾</span>
+                <div>
+                  <strong>Cypern</strong>
+                  <div class="text-xs text-gray-600">EU-medlemskap</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-green-600 font-semibold">8,000-25,000 kr</span>
+              <div class="text-xs text-gray-600">Vigsel</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">Enkel</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">4,5h</td>
+            <td class="px-4 py-3 text-center border border-gray-200">Året runt</td>
+            <td class="px-4 py-3 border border-gray-200">Stränder, engelsk service, EU-fördelar</td>
+          </tr>
+
+          <tr class="destination-row bg-gray-50 hover:bg-blue-25" data-tags="romantic">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <span class="text-2xl mr-2">🇮🇹</span>
+                <div>
+                  <strong>Italien</strong>
+                  <div class="text-xs text-gray-600">Populärast bland svenskar</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-orange-600 font-semibold">15,000-50,000 kr</span>
+              <div class="text-xs text-gray-600">Vigsel</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold">Medel</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">2-3h</td>
+            <td class="px-4 py-3 text-center border border-gray-200">Maj-Okt</td>
+            <td class="px-4 py-3 border border-gray-200">Toscana, Amalfi, historisk romantik</td>
+          </tr>
+
+          <tr class="destination-row hover:bg-blue-25" data-tags="romantic">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <span class="text-2xl mr-2">🇹🇭</span>
+                <div>
+                  <strong>Thailand</strong>
+                  <div class="text-xs text-gray-600">Exotiska paradis</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-blue-600 font-semibold">10,000-30,000 kr</span>
+              <div class="text-xs text-gray-600">Vigsel</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-semibold">Komplex</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">11-13h</td>
+            <td class="px-4 py-3 text-center border border-gray-200">Nov-Apr</td>
+            <td class="px-4 py-3 border border-gray-200">Tropiska stränder, solnedgångar</td>
+          </tr>
+
+          <tr class="destination-row bg-gray-50 hover:bg-blue-25" data-tags="easy short-flight">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <span class="text-2xl mr-2">🇺🇸</span>
+                <div>
+                  <strong>USA (Las Vegas)</strong>
+                  <div class="text-xs text-gray-600">24/7 tillgängligt</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-green-600 font-semibold">5,000-15,000 kr</span>
+              <div class="text-xs text-gray-600">Vigsel</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">Enkel</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">11-12h</td>
+            <td class="px-4 py-3 text-center border border-gray-200">Året runt</td>
+            <td class="px-4 py-3 border border-gray-200">Inga väntetider, teman, snabbt</td>
+          </tr>
+
+          <tr class="destination-row hover:bg-blue-25" data-tags="romantic">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <span class="text-2xl mr-2">🇺🇸</span>
+                <div>
+                  <strong>USA (Hawaii)</strong>
+                  <div class="text-xs text-gray-600">Ultimata paradis</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-red-600 font-semibold">20,000-60,000 kr</span>
+              <div class="text-xs text-gray-600">Vigsel</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold">Medel</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">15-17h</td>
+            <td class="px-4 py-3 text-center border border-gray-200">Apr-Okt</td>
+            <td class="px-4 py-3 border border-gray-200">Vulkaner, stränder, tropisk lyx</td>
+          </tr>
+
+          <tr class="destination-row bg-gray-50 hover:bg-blue-25" data-tags="romantic short-flight">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <span class="text-2xl mr-2">🇫🇷</span>
+                <div>
+                  <strong>Frankrike</strong>
+                  <div class="text-xs text-gray-600">Elegans och stil</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-orange-600 font-semibold">12,000-35,000 kr</span>
+              <div class="text-xs text-gray-600">Vigsel</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold">Medel</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">2-2,5h</td>
+            <td class="px-4 py-3 text-center border border-gray-200">Maj-Sep</td>
+            <td class="px-4 py-3 border border-gray-200">Slott, vingårdar, Rivieran</td>
+          </tr>
+
+          <tr class="destination-row hover:bg-blue-25" data-tags="budget easy short-flight">
+            <td class="px-4 py-3 border border-gray-200">
+              <div class="flex items-center">
+                <span class="text-2xl mr-2">🇩🇰</span>
+                <div>
+                  <strong>Danmark</strong>
+                  <div class="text-xs text-gray-600">Närmsta grannen</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="text-green-600 font-semibold">6,000-18,000 kr</span>
+              <div class="text-xs text-gray-600">Vigsel</div>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">
+              <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">Enkel</span>
+            </td>
+            <td class="px-4 py-3 text-center border border-gray-200">1-1,5h</td>
+            <td class="px-4 py-3 text-center border border-gray-200">Maj-Sep</td>
+            <td class="px-4 py-3 border border-gray-200">Kort resa, skandinavisk stil</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Detail Cards -->
+    <div class="detail-cards mt-6 grid md:grid-cols-3 gap-4">
+      <div class="tip-card bg-green-50 rounded-lg p-4 border border-green-200">
+        <h4 class="font-semibold text-green-800 mb-2">💰 Budgettips</h4>
+        <p class="text-sm text-green-700">Cypern och Danmark erbjuder bästa värdet. Italien och Hawaii är dyrare men ger mer unik upplevelse.</p>
+      </div>
+
+      <div class="tip-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+        <h4 class="font-semibold text-blue-800 mb-2">⏰ Tidstips</h4>
+        <p class="text-sm text-blue-700">Starta planeringen 12-18 månader i förväg för Italien och Thailand. Cypern och Vegas kan planeras snabbare.</p>
+      </div>
+
+      <div class="tip-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+        <h4 class="font-semibold text-purple-800 mb-2">📋 Komplexitetstips</h4>
+        <p class="text-sm text-purple-700">Cypern och Vegas är enklast för första gången. Italien kräver mest dokumentation men ger bäst upplevelse.</p>
+      </div>
+    </div>
+
+    <!-- Popular Combos -->
+    <div class="popular-combos bg-yellow-50 rounded-lg p-4 mt-6 border border-yellow-200">
+      <h4 class="font-semibold text-yellow-800 mb-2">🌟 Populära kombinationer bland svenska par:</h4>
+      <div class="combos grid md:grid-cols-2 gap-3 text-sm">
+        <div>
+          <strong>Italien + Grekland:</strong><br />
+          <span class="text-gray-600">Vigsel i Italien, bröllopsresa till grekiska öar</span>
+        </div>
+        <div>
+          <strong>Thailand + Singapore:</strong><br />
+          <span class="text-gray-600">Exotiskt bröllop + lyxig storstadupplevelse</span>
+        </div>
+        <div>
+          <strong>Las Vegas + Västkusten USA:</strong><br />
+          <span class="text-gray-600">Snabb vigsel + roadtrip genom Kalifornien</span>
+        </div>
+        <div>
+          <strong>Cypern + Turkiet:</strong><br />
+          <span class="text-gray-600">Enkel vigsel + historia och kultur</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function filterDestinations(button) {
+  // Remove active class from all buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+
+  // Add active class to clicked button
+  button.classList.add('active');
+
+  const filter = button.dataset.filter;
+  const rows = document.querySelectorAll('.destination-row');
+
+  rows.forEach(row => {
+    if (filter === 'all') {
+      row.style.display = 'table-row';
+    } else {
+      const tags = row.dataset.tags || '';
+      if (tags.includes(filter)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    }
+  });
+}
+</script>
+
+<style>
+  .destination-comparison {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .filter-btn {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+
+  .filter-btn:hover {
+    border-color: #3b82f6;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+  }
+
+  .filter-btn.active {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+  }
+
+  .comparison-table table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .hover\\:bg-blue-25:hover {
+    background-color: #f0f9ff;
+  }
+
+  .tip-card {
+    transition: transform 0.2s ease;
+  }
+
+  .tip-card:hover {
+    transform: translateY(-2px);
+  }
+</style>

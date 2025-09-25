@@ -175,7 +175,10 @@ const insightsRanges = [
       <button type="button" data-action="save">Spara i webbläsaren</button>
       <button type="button" data-action="load">Återställ sparade värden</button>
       <button type="button" data-action="reset" class="secondary">Återställ grundvärden</button>
-      <button type="button" data-action="export" class="secondary">Exportera som CSV</button>
+      <button type="button" data-action="export" class="secondary">Exportera CSV</button>
+      <button type="button" data-action="excel" class="secondary">Exportera Excel</button>
+      <button type="button" data-action="print" class="ghost">Skriv ut / PDF</button>
+      <button type="button" data-action="share" class="ghost">Dela</button>
       <button type="button" data-action="clear" class="ghost">Rensa sparat</button>
     </div>
   </form>
@@ -212,7 +215,7 @@ const insightsRanges = [
     const guestInput = root.querySelector('input[name="guests"]');
     const categoryList = root.querySelector("[data-category-list]");
     const scenarioButtons = Array.from(root.querySelectorAll("[data-scenario]"));
-    const template = root.querySelector(`#${CSS.escape(rootId)}-category-template`);
+    const template = document.getElementById(`${rootId}-category-template`);
 
     const totalEl = root.querySelector("[data-total]");
     const perGuestEl = root.querySelector("[data-per-guest]");
@@ -396,6 +399,99 @@ const insightsRanges = [
       URL.revokeObjectURL(url);
     };
 
+    const exportExcel = () => {
+      const state = getState();
+      const total = state.categories.reduce((sum, item) => sum + item.value, 0);
+      const buffer = Math.round(total * 0.1);
+      const perGuest = state.guests > 0 ? Math.round(total / state.guests) : 0;
+
+      const tableRows = state.categories
+        .map(
+          (item) =>
+            `<tr><td>${item.label.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</td><td style="text-align:right">${item.value}</td></tr>`
+        )
+        .join("");
+
+      const totals = `
+        <tr><td>Antal gäster</td><td style="text-align:right">${state.guests}</td></tr>
+        <tr><td>Total</td><td style="text-align:right">${total}</td></tr>
+        <tr><td>Buffert 10%</td><td style="text-align:right">${buffer}</td></tr>
+        <tr><td>Per gäst</td><td style="text-align:right">${perGuest}</td></tr>
+      `;
+
+      const html = `<!DOCTYPE html>
+        <html lang="sv">
+          <head>
+            <meta charset="utf-8" />
+            <title>Bröllopsbudget</title>
+            <style>
+              table { border-collapse: collapse; }
+              th, td { border: 1px solid #999; padding: 6px 10px; }
+              th { background: #f0f0f0; text-align: left; }
+            </style>
+          </head>
+          <body>
+            <table>
+              <thead>
+                <tr><th>Kategori</th><th>Belopp (kr)</th></tr>
+              </thead>
+              <tbody>
+                ${tableRows}
+                ${totals}
+              </tbody>
+            </table>
+          </body>
+        </html>`;
+
+      const blob = new Blob([html], { type: 'application/vnd.ms-excel' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'brollopsbudget.xls';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    };
+
+    const shareBudget = async () => {
+      const state = getState();
+      const total = state.categories.reduce((sum, item) => sum + item.value, 0);
+      const buffer = Math.round(total * 0.1);
+      const perGuest = state.guests > 0 ? Math.round(total / state.guests) : 0;
+      const shareText = `Vår bröllopsbudget: ${numberFormatter.format(total)} kr total, ${numberFormatter.format(perGuest)} kr per gäst, buffert ${numberFormatter.format(buffer)} kr.`;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Bröllopsbudget',
+            text: shareText,
+            url: window.location.href
+          });
+          return;
+        } catch (error) {
+          if (error?.name === 'AbortError') return;
+        }
+      }
+
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
+          root.dataset.toast = 'Länk kopierad till urklipp';
+          setTimeout(() => delete root.dataset.toast, 2000);
+          return;
+        } catch (error) {
+          // Fortsätt till alert nedan
+        }
+      }
+
+      alert('Kopiera länken manuellt:\n' + window.location.href);
+    };
+
+    const printBudget = () => {
+      window.print();
+    };
+
     const applyScenario = (scenarioId) => {
       if (scenarioId === "custom") {
         scenarioButtons.forEach((btn) => btn.classList.remove("is-active"));
@@ -482,6 +578,15 @@ const insightsRanges = [
             break;
           case "export":
             exportCsv();
+            break;
+          case "excel":
+            exportExcel();
+            break;
+          case "print":
+            printBudget();
+            break;
+          case "share":
+            shareBudget();
             break;
         }
         return;
@@ -804,6 +909,20 @@ const insightsRanges = [
     box-shadow: 0 12px 24px rgba(15, 9, 0, 0.1);
   }
 
+  .budget-tool[data-toast]::before {
+    content: attr(data-toast);
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(31, 28, 20, 0.88);
+    color: #fff;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+  }
+
   .visually-hidden {
     position: absolute;
     width: 1px;
@@ -890,6 +1009,30 @@ const insightsRanges = [
     .actions button.ghost {
       color: rgba(231, 225, 245, 0.7);
       border-color: rgba(195, 183, 255, 0.25);
+    }
+
+    .budget-tool[data-toast]::before {
+      background: rgba(210, 185, 255, 0.9);
+      color: #170f24;
+    }
+  }
+
+  @media print {
+    body {
+      background: #fff !important;
+    }
+
+    .budget-tool {
+      box-shadow: none !important;
+      border: none;
+      padding: 0;
+    }
+
+    .scenario-bar,
+    .actions,
+    .add-row,
+    .insights {
+      display: none !important;
     }
   }
 </style>
