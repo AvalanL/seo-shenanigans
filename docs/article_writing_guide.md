@@ -2,7 +2,7 @@
 
 *Definitiva guiden för att skapa högrankande bröllopsinnehåll som dominerar Google och AI-sökresultat*
 
-## Grundprinciper
+## Grundprinciper test test
 
 ### 1. AI-först-struktur
 Moderna söksystem (ChatGPT, Claude, Gemini) prioriterar:

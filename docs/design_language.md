@@ -1,7 +1,7 @@
 # Design- och varumärkesriktning
 
 ## Positionering
-- Namnförslag: **Svenska Bröllopsakademien** – inger expertis, trovärdighet och lokal förankring.
+- Namnförslag: **Bröllopssidan.se** – inger expertis, trovärdighet och lokal förankring.
 - Ton: varm, kunnig och inkluderande. Förmedla trygghet snarare än sälj.
 
 ## Färgpalett

@@ -11,7 +11,7 @@ secondaryKeywords:
 schemaType: "Article"  # Article | HowTo | FAQPage | ItemList
 publishedAt: 2025-01-XX
 updatedAt: 2025-01-XX
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "draft"  # draft | in-review | published | refresh
 evergreen: true
 heroImage: "/images/[kategori]/[slug]-hero.webp"
@@ -307,7 +307,7 @@ semanticEntities:
 
 ---
 
-**Relaterade verktyg från Svenska Bröllopsakademien:**
+**Relaterade verktyg från Bröllopssidan.se:**
 - [Mall/verktyg 1]: [Kort beskrivning] - [intern länk]
 - [Checklista]: [Specifik användning] - [intern länk]
 - [Kalkylator]: [Beräkningsändamål] - [intern länk]

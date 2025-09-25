@@ -17,7 +17,7 @@ priceRange: "20000-70000"
 supplierCount: 23
 publishedAt: 2025-09-24
 updatedAt: 2025-09-24
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "published"
 schemaType: "LocalBusiness"
 evergreen: true

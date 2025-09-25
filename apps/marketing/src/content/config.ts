@@ -112,7 +112,7 @@ const programmaticSchema = z.object({
   supplierCount: z.number(),
   publishedAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
-  author: z.string().default("Svenska Bröllopsakademien"),
+  author: z.string().default("Bröllopssidan.se"),
   status: z
     .enum(["draft", "in-review", "published", "refresh"])
     .default("published"),
@@ -153,6 +153,9 @@ const leverantorer = defineCollection({ type: "content", schema: baseSchema });
 const venues = defineCollection({ type: "content", schema: venueSchema });
 const suppliers = defineCollection({ type: "content", schema: supplierSchema });
 const traditioner = defineCollection({ type: "content", schema: baseSchema });
+const mode = defineCollection({ type: "content", schema: baseSchema });
+const juridik = defineCollection({ type: "content", schema: baseSchema });
+const planering = defineCollection({ type: "content", schema: baseSchema });
 const programmatic = defineCollection({ type: "content", schema: programmaticSchema });
 const shared = defineCollection({ type: "data" });
 
@@ -165,6 +168,9 @@ export const collections = {
   venues,
   suppliers,
   traditioner,
+  mode,
+  juridik,
+  planering,
   programmatic,
   shared,
 };

@@ -37,7 +37,7 @@ aiOptimization:
 publishedAt: 2025-01-XX
 updatedAt: 2025-01-XX
 nextReview: 2025-04-XX  # Kvartalsgranskning
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 expertReviewer: "[Namn], [Titel/Certifiering]"
 legalReviewer: "[Jurist namn vid juridiska ämnen]"
 status: "draft"  # draft | expert-review | legal-review | published | refresh
@@ -197,12 +197,12 @@ monitoring:
   "description": "[Description från frontmatter]",
   "author": {
     "@type": "Organization",
-    "name": "Svenska Bröllopsakademien",
+    "name": "Bröllopssidan.se",
     "url": "https://[domain]"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Svenska Bröllopsakademien"
+    "name": "Bröllopssidan.se"
   },
   "datePublished": "[publishedAt datum]",
   "dateModified": "[updatedAt datum]",

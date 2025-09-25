@@ -75,11 +75,20 @@ Varje steg i PDF:en har kryssrutor och trefärgskodad status (Påbörjad, Pågå
 
 ## Vanliga frågor
 
-**Hur hanterar vi sena OSA-svar?** Flytta gäster till väntelista-kolumnen och sätt ett sista datum i checklistan två veckor före bröllopet. Kontakta sena gäster via både mejl och telefon.
+<details>
+<summary>Hur hanterar vi sena OSA-svar?</summary>
+<p>Flytta gäster till väntelista-kolumnen och sätt ett sista datum i checklistan två veckor före bröllopet. Kontakta sena gäster via både mejl och telefon.</p>
+</details>
 
-**Vad händer om vigselförrättaren blir sjuk?** Lägg in reservekontakt i checklistan (kommunens vigselförrättare eller annan präst). Ha ett färdigt schema om ni behöver byta tid.
+<details>
+<summary>Vad händer om vigselförrättaren blir sjuk?</summary>
+<p>Lägg in reservekontakt i checklistan (kommunens vigselförrättare eller annan präst). Ha ett färdigt schema om ni behöver byta tid.</p>
+</details>
 
-**Vilka dokument ska sparas?** Arkivera avtal, kvitton, hindersprövning och försäkringsunderlag i samma mapp som PDF-checklistan – märk dem efter kategori för snabb överblick.
+<details>
+<summary>Vilka dokument ska sparas?</summary>
+<p>Arkivera avtal, kvitton, hindersprövning och försäkringsunderlag i samma mapp som PDF-checklistan – märk dem efter kategori för snabb överblick.</p>
+</details>
 
 ## 6. CTA – Ladda ner checklistan
 

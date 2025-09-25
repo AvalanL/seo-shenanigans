@@ -147,3 +147,7 @@ env/
 # Generated files
 sitemap*.xml
 
+
+# AI image outputs
+generated-images/
+

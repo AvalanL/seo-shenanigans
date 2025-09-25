@@ -1,4 +1,4 @@
-# ULTIMATE SEO & AI Optimeringsguide för Svenska Bröllopsakademien
+# ULTIMATE SEO & AI Optimeringsguide för Bröllopssidan.se
 
 *Den mest avancerade artikelstrategin för att dominera Google, ChatGPT, Claude och framtida AI-system*
 

@@ -15,10 +15,18 @@
     "prebuild": "npm --prefix apps/marketing run prebuild",
     "generate:directory": "npm --prefix apps/marketing run generate:directory",
     "scrape:venues": "npm --prefix apps/marketing run scrape:venues",
-    "scrape:instagram": "node instagram-scraper.js"
+    "scrape:instagram": "node instagram-scraper.js",
+    "generate:image": "node scripts/generate-google-image.js",
+    "generate:image:ts": "tsx scripts/generate-google-image.ts"
   },
   "devDependencies": {
+    "@types/node": "^20.14.2",
     "gray-matter": "^4.0.3",
-    "puppeteer": "^24.22.3"
+    "puppeteer": "^24.22.3",
+    "tsx": "^4.7.0"
+  },
+  "dependencies": {
+    "@google/genai": "^0.5.0",
+    "mime": "^4.0.1"
   }
 }

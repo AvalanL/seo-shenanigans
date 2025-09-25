@@ -8,7 +8,7 @@
 
 ## 2. Översikt
 - **Produktnamn:** Interaktiv bröllopsbudgetkalkylator
-- **Ägare:** Svenska Bröllopsakademien – Produkt & Innehåll
+- **Ägare:** Bröllopssidan.se – Produkt & Innehåll
 - **Mål:** Hjälpa svenska bröllopspar att skapa, uppdatera och dela en komplett budget med lokal prisdata och rekommendationer.
 - **Lanseringsfönster:** Q3 2024 (beta i juli, publik release augusti)
 

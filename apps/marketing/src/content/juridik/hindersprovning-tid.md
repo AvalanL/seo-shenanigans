@@ -10,7 +10,7 @@ secondaryKeywords:
 schemaType: "Article"
 publishedAt: 2024-06-09
 updatedAt: 2024-06-09
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "published"
 evergreen: true
 ctaLabel: "Ladda ner tidslinjen för bröllopet"
@@ -72,14 +72,20 @@ Planerar ni destinationbröllop utomlands? Kontrollera om intyget behöver apost
 
 ## Vanliga frågor inför prövningen
 
-**Vad händer om intyget går ut?**
-Ni måste ansöka igen. Lämna det gamla intyget till vigselförrättaren och komplettera med det nya så snart det kommit.
+<details>
+<summary>Vad händer om intyget går ut?</summary>
+<p>Ni måste ansöka igen. Lämna det gamla intyget till vigselförrättaren och komplettera med det nya så snart det kommit.</p>
+</details>
 
-**Kan vi boka vigsel innan intyget är klart?**
-Ja, men säkra en marginal. Kyrkan eller kommunen kan avboka om intyget saknas en vecka före vigseln.
+<details>
+<summary>Kan vi boka vigsel innan intyget är klart?</summary>
+<p>Ja, men säkra en marginal. Kyrkan eller kommunen kan avboka om intyget saknas en vecka före vigseln.</p>
+</details>
 
-**Måste båda vara folkbokförda i Sverige?**
-Nej, men minst en person ska vara folkbokförd eller svensk medborgare för att använda Skatteverkets e-tjänst. Alternativt ansöker ni via blankett.
+<details>
+<summary>Måste båda vara folkbokförda i Sverige?</summary>
+<p>Nej, men minst en person ska vara folkbokförd eller svensk medborgare för att använda Skatteverkets e-tjänst. Alternativt ansöker ni via blankett.</p>
+</details>
 
 ## Nästa steg
 

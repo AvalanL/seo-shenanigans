@@ -5,7 +5,7 @@
  * Shows what we've built and the expansion potential
  */
 
-console.log('🎯 Svenska Bröllopsakademien - Programmatic SEO Implementation\n');
+console.log('🎯 Bröllopssidan.se - Programmatic SEO Implementation\n');
 
 console.log('✅ COMPLETED IMPLEMENTATION:');
 console.log('├─ 📄 Content Templates: Dynamic content generation for city + service combinations');

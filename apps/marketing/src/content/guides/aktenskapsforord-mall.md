@@ -73,11 +73,20 @@ Tänk på att inte skriva in villkor som strider mot tvingande lag, exempelvis v
 
 ## Vanliga frågor
 
-**Kan vi skriva äktenskapsförord efter vigseln?** Ja, avtalet kan upprättas före eller under äktenskapet. Det får verkan först efter registrering hos Skatteverket.
+<details>
+<summary>Kan vi skriva äktenskapsförord efter vigseln?</summary>
+<p>Ja, avtalet kan upprättas före eller under äktenskapet. Det får verkan först efter registrering hos Skatteverket.</p>
+</details>
 
-**Vad händer om vi skiljer oss utan avtal?** Allt giftorättsgods delas lika efter avdrag för skulder. Ett äktenskapsförord kan begränsa delningen till enskilda tillgångar.
+<details>
+<summary>Vad händer om vi skiljer oss utan avtal?</summary>
+<p>Allt giftorättsgods delas lika efter avdrag för skulder. Ett äktenskapsförord kan begränsa delningen till enskilda tillgångar.</p>
+</details>
 
-**Hur gör vi ändringar?** Skapa ett nytt avtal som ersätter det gamla, signera båda två och registrera på nytt. Ange att tidigare avtal upphör att gälla.
+<details>
+<summary>Hur gör vi ändringar?</summary>
+<p>Skapa ett nytt avtal som ersätter det gamla, signera båda två och registrera på nytt. Ange att tidigare avtal upphör att gälla.</p>
+</details>
 
 ## 6. CTA – Ladda ner mallen
 

@@ -10,7 +10,7 @@ secondaryKeywords:
 schemaType: "Article"
 publishedAt: 2024-07-01
 updatedAt: 2024-07-01
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "published"
 evergreen: true
 ctaLabel: "Starta kalkylatorn"

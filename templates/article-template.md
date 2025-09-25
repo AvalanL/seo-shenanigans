@@ -11,7 +11,7 @@ secondaryKeywords:
 schemaType: "Article"  # Article | HowTo | FAQPage | ItemList
 publishedAt: 2025-01-XX
 updatedAt: 2025-01-XX
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "draft"  # draft | in-review | published | refresh
 evergreen: true
 heroImage: "/images/[category]/[slug]-hero.webp"

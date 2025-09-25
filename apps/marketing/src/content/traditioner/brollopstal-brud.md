@@ -10,7 +10,7 @@ secondaryKeywords:
 schemaType: "Article"
 publishedAt: 2024-06-09
 updatedAt: 2024-06-09
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "published"
 evergreen: true
 ctaLabel: "Utforska svenska vigseltraditioner"

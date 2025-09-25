@@ -1,4 +1,4 @@
-# Svenska Bröllopsakademien – SEO-projekt
+# Bröllopssidan.se – SEO-projekt
 
 En Astro-baserad innehållsportal för att dominera svenska bröllopsrelaterade sökningar och AI-svar.
 

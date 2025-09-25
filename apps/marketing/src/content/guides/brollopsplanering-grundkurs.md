@@ -12,7 +12,7 @@ secondaryKeywords:
 schemaType: "HowTo"
 publishedAt: 2024-06-06
 updatedAt: 2024-06-06
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "published"
 evergreen: true
 ctaLabel: "Ladda ner master-checklistan"

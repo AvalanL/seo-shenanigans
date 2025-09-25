@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Toftastrand – Villa Vik",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:32.035Z"
+  },
+  {
+    "name": "Bellman",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:33.538Z"
+  },
+  {
+    "name": "Åmåls Stadshotell",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:35.040Z"
+  },
+  {
+    "name": "Stugan i Stadsparken",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:36.543Z"
+  },
+  {
+    "name": "Äleby Gård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:38.045Z"
+  },
+  {
+    "name": "Enskede Värdshus",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:39.548Z"
+  },
+  {
+    "name": "Roddarnas",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:41.054Z"
+  },
+  {
+    "name": "Villa Tottebo",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:42.557Z"
+  },
+  {
+    "name": "Bångbro Herrgård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:44.059Z"
+  },
+  {
+    "name": "Frimis Visby",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:45.561Z"
+  },
+  {
+    "name": "Pilkrogs gästgivaregård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:47.063Z"
+  },
+  {
+    "name": "Labbsand",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:48.585Z"
+  },
+  {
+    "name": "Stadsvakten",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:50.087Z"
+  },
+  {
+    "name": "Restaurang Richard Sångkock",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:51.589Z"
+  },
+  {
+    "name": "Taxinge Slott",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:53.092Z"
+  },
+  {
+    "name": "Eriksberg",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:54.682Z"
+  },
+  {
+    "name": "Restaurang Kärranäs",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:56.187Z"
+  },
+  {
+    "name": "Tjörns Havspensionat",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:57.689Z"
+  },
+  {
+    "name": "Hotell Högland",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:56:59.191Z"
+  },
+  {
+    "name": "Tylebäck Hotell & Konferens",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:00.694Z"
+  },
+  {
+    "name": "Wikners i persåsen",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:02.195Z"
+  },
+  {
+    "name": "Badhotellet",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:03.701Z"
+  },
+  {
+    "name": "Stora Gåsemora Gård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:05.204Z"
+  },
+  {
+    "name": "Örnvik Hotell & Konferens",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:06.706Z"
+  },
+  {
+    "name": "Hotell Sommarhagen",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:08.208Z"
+  },
+  {
+    "name": "Nyköpingshus Konferens",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:09.713Z"
+  },
+  {
+    "name": "Odalgården Kurs- & Konferensgård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:11.215Z"
+  },
+  {
+    "name": "Hälleviks Havsbad",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:12.717Z"
+  },
+  {
+    "name": "Halvegården",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:14.219Z"
+  },
+  {
+    "name": "Södertuna Slott",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:15.722Z"
+  },
+  {
+    "name": "Bergby Herrgård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:17.224Z"
+  },
+  {
+    "name": "Domnarvsgården",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:18.728Z"
+  },
+  {
+    "name": "Vidinge Gård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:20.237Z"
+  },
+  {
+    "name": "Bläsinge Gård",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:21.738Z"
+  },
+  {
+    "name": "Margareta Paviljongen",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:23.240Z"
+  },
+  {
+    "name": "Yxnerum hotel & conference",
+    "error": "Protocol error (Page.navigate): Invalid parameters Failed to deserialize params.url - BINDINGS: mandatory field missing at position 50",
+    "timestamp": "2025-09-25T12:57:24.742Z"
+  }
+]

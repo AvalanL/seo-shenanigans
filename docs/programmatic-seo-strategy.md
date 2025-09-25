@@ -1,4 +1,4 @@
-# Programmatisk SEO-strategi: Svenska Bröllopsakademien
+# Programmatisk SEO-strategi: Bröllopssidan.se
 
 ## Analys av möjligheter
 

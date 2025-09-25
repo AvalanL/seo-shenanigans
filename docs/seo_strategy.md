@@ -58,6 +58,13 @@
 - Arbetsflöde: Keyword research → Brief → Utkast → Faktakontroll → SEO-check → Publicering.
 - Standardiserade mallar för metadata (title, meta description, OG-data) i `templates/`.
 
+## Programmatisk SEO – Content Brief Plan
+- **Status**: 18 landningssidor aktiva (10 tjänst×stad, 2 tjänstekategorier, 6 stadssidor) bygger på `data/cities.json` med färdiga mallar för metadata och layouter.
+- **Batch-planering**: Dela upp återstående ~120 kombinationer i sprintar om 12–15 briefs och prioritera högst sökvolym enligt `searchVolume`-fältet i `data/cities.json`.
+- **Brief-innehåll**: Varje brief ska specificera primärt nyckelord, 2–3 varianter, lokal statistik (prisintervall, leverantörer, sökvolym), unik H1/ingress, CTA-copy, FAQ-frågor samt interna länkar till relaterade stad/tjänst-sidor.
+- **Produktionsflöde**: Förbered copy blocks i `content/briefs/` (YAML/MDX) som konsumeras av Astro-sidorna; nyttja `skipStaticGeneration`-fallback för saknade datapunkter under QA.
+- **Kvalitetssäkring**: Kör spot-checks på 1 sida per batch (Lighthouse + schema-validator) och uppdatera `content/calendar.csv` efter publicering för att säkerställa spårbarhet.
+
 ## Kommande steg
 1. Fastställ teknisk stack (Astro + Markdown + CMS-integration via Content Collections).
 2. Sätt upp repo-struktur för innehåll och data + pipeline för generation.

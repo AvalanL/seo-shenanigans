@@ -179,7 +179,7 @@ priceRange: "${cityData.pricing[service].min}-${cityData.pricing[service].max}"
 supplierCount: ${cityData.supplierCounts[service]}
 publishedAt: ${new Date().toISOString().split('T')[0]}
 updatedAt: ${new Date().toISOString().split('T')[0]}
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "published"
 schemaType: "LocalBusiness"
 evergreen: true

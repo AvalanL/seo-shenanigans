@@ -8,7 +8,7 @@ secondaryKeywords:
 schemaType: "Article"
 publishedAt: 2024-06-10
 updatedAt: 2024-06-10
-author: "Svenska Bröllopsakademien"
+author: "Bröllopssidan.se"
 status: "published"
 evergreen: true
 ctaLabel: "Planera florabudgeten"

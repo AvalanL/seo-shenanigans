@@ -100,11 +100,20 @@ Koppla varje kostnadspost till en uppgift i [Checklista för bröllopsbudget](/c
 
 ## Vanliga frågor
 
-**Hur hanterar vi förändringar i valutakurser?** Ange valutakod (SEK, EUR, USD) i fliken Inställningar. Mallen hämtar en växelkurs som ni manuellt kan uppdatera när ni får fakturor i utländsk valuta.
+<details>
+<summary>Hur hanterar vi förändringar i valutakurser?</summary>
+<p>Ange valutakod (SEK, EUR, USD) i fliken Inställningar. Mallen hämtar en växelkurs som ni manuellt kan uppdatera när ni får fakturor i utländsk valuta.</p>
+</details>
 
-**Hur delar vi budgeten med familj eller toastmaster?** Skapa en delad fil i OneDrive eller Google Drive och använd bläddringsskydd på celler som inte ska ändras. Lägg till en "Kommentar"-kolumn för att delegera uppgifter.
+<details>
+<summary>Hur delar vi budgeten med familj eller toastmaster?</summary>
+<p>Skapa en delad fil i OneDrive eller Google Drive och använd bläddringsskydd på celler som inte ska ändras. Lägg till en "Kommentar"-kolumn för att delegera uppgifter.</p>
+</details>
 
-**Hur ofta ska vi stämma av budgeten?** Vi rekommenderar en veckovis budgetträff. Uppdatera offert- och utfallskolumner och jämför diagrammet för att upptäcka kategorier som sticker iväg.
+<details>
+<summary>Hur ofta ska vi stämma av budgeten?</summary>
+<p>Vi rekommenderar en veckovis budgetträff. Uppdatera offert- och utfallskolumner och jämför diagrammet för att upptäcka kategorier som sticker iväg.</p>
+</details>
 
 ## CTA – Ladda ner mallen
 
