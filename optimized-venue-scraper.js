@@ -5,7 +5,7 @@ const https = require('https');
 const http = require('http');
 
 class OptimizedVenueScraper {
-  constructor() {
+  constructor(options = {}) {
     this.browser = null;
     this.page = null;
     this.venues = [];
@@ -14,6 +14,11 @@ class OptimizedVenueScraper {
     this.outputDir = './scraped-venues';
     this.imagesDir = path.join(this.outputDir, 'images');
     this.errors = [];
+    this.options = {
+      startIndex: Math.max(parseInt(options.startIndex, 10) || 0, 0),
+      maxScrollAttempts: Math.max(parseInt(options.maxScrollAttempts, 10) || 40, 1),
+      scrollDelayMs: Math.max(parseInt(options.scrollDelayMs, 10) || 3000, 250)
+    };
   }
 
   async init() {
@@ -71,7 +76,7 @@ class OptimizedVenueScraper {
     // Optimized infinite scroll based on analysis findings
     let previousCount = 0;
     let scrollAttempts = 0;
-    const maxAttempts = 20;
+    const maxAttempts = this.options.maxScrollAttempts;
 
     while (scrollAttempts < maxAttempts) {
       // Get current venue count
@@ -95,7 +100,7 @@ class OptimizedVenueScraper {
       });
 
       // Wait for new content
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      await new Promise(resolve => setTimeout(resolve, this.options.scrollDelayMs));
       scrollAttempts++;
     }
 
@@ -633,7 +638,8 @@ ${venue.localImages?.map((img, index) =>
       withCapacity: this.venues.filter(v => v.capacity?.length > 0).length,
       cities: [...new Set(this.venues.filter(v => !v.error).map(v => this.extractCity(v)))],
       totalImages: this.venues.reduce((sum, v) => sum + (v.localImages?.length || 0), 0),
-      scrapedAt: new Date().toISOString()
+      scrapedAt: new Date().toISOString(),
+      startIndex: this.options.startIndex
     };
 
     const summaryFile = path.join(this.outputDir, `summary-${timestamp}.json`);
@@ -645,6 +651,9 @@ ${venue.localImages?.map((img, index) =>
     try {
       console.log('🎯 Starting Optimized Swedish Venue Scraper...');
       console.log('Target: 363 venues from bröllopslokaler.nu');
+      if (this.options.startIndex > 0) {
+        console.log(`⏩ Resuming from listing index ${this.options.startIndex}`);
+      }
 
       await this.init();
 
@@ -652,17 +661,26 @@ ${venue.localImages?.map((img, index) =>
       const venueListings = await this.scrapeVenueListingsOptimized();
       console.log(`📋 Phase 1 complete: ${venueListings.length} venues extracted from listings`);
 
+      if (this.options.startIndex >= venueListings.length) {
+        console.log(`ℹ️  Start index ${this.options.startIndex} is beyond available listings (${venueListings.length}). Nothing to process.`);
+        return;
+      }
+
       // Step 2: Scrape detailed information for each venue
       console.log('🏰 Phase 2: Scraping detailed venue information...');
 
+      const listingsToProcess = venueListings.slice(this.options.startIndex);
+      const totalToProcess = listingsToProcess.length;
+
       let processed = 0;
-      for (const venue of venueListings) {
+      for (const [offset, venue] of listingsToProcess.entries()) {
         const detailedVenue = await this.scrapeVenueDetailsOptimized(venue);
         this.venues.push(detailedVenue);
 
         processed++;
-        const progress = ((processed / venueListings.length) * 100).toFixed(1);
-        console.log(`✅ Progress: ${processed}/${venueListings.length} (${progress}%) - ${venue.name || 'Unknown'}`);
+        const progress = ((processed / totalToProcess) * 100).toFixed(1);
+        const absoluteIndex = this.options.startIndex + offset + 1;
+        console.log(`✅ Progress: ${absoluteIndex}/${venueListings.length} (${progress}%) - ${venue.name || 'Unknown'}`);
 
         // Rate limiting and progress saving
         await new Promise(resolve => setTimeout(resolve, 1500)); // 1.5s delay
