@@ -1,10 +1,14 @@
+[variables]
+NODE_ENV = "production"
+
 [phases.install]
-cmds = ["npm install", "cd apps/marketing && npm install"]
+cmds = [
+  "npm install",
+  "cd apps/marketing && npm install"
+]
 
 [phases.build]
 cmds = ["npm run build:production"]
 
 [start]
 cmd = "cd apps/marketing && npx serve dist -s -n -L -p $PORT"
-
-# Force deployment trigger
