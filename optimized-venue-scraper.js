@@ -14,6 +14,9 @@ class OptimizedVenueScraper {
     this.outputDir = './scraped-venues';
     this.imagesDir = path.join(this.outputDir, 'images');
     this.errors = [];
+    this.chromeProfileDir = path.join(this.outputDir, '.chrome-profile');
+    this.puppeteerHome = path.join(this.outputDir, '.puppeteer-home');
+    this.originalHome = process.env.HOME;
     this.options = {
       startIndex: Math.max(parseInt(options.startIndex, 10) || 0, 0),
       maxScrollAttempts: Math.max(parseInt(options.maxScrollAttempts, 10) || 40, 1),
@@ -26,15 +29,20 @@ class OptimizedVenueScraper {
 
     await this.ensureDirectories();
 
+    process.env.HOME = this.puppeteerHome;
+
     this.browser = await puppeteer.launch({
-      headless: false, // Set to true for production
+      headless: 'new',
       defaultViewport: { width: 1920, height: 1080 },
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-blink-features=AutomationControlled',
-        '--disable-dev-shm-usage'
-      ]
+        '--disable-dev-shm-usage',
+        '--disable-crash-reporter',
+        '--no-crashpad'
+      ],
+      userDataDir: this.chromeProfileDir
     });
 
     this.page = await this.browser.newPage();
@@ -56,6 +64,9 @@ class OptimizedVenueScraper {
       await fs.mkdir(this.outputDir, { recursive: true });
       await fs.mkdir(this.imagesDir, { recursive: true });
       await fs.mkdir(path.join(this.outputDir, 'mdx-files'), { recursive: true });
+      await fs.mkdir(this.chromeProfileDir, { recursive: true });
+      await fs.mkdir(this.puppeteerHome, { recursive: true });
+      await fs.mkdir(path.join(this.puppeteerHome, 'Library/Application Support/Google/Chrome for Testing/Crashpad'), { recursive: true });
     } catch (error) {
       console.log('📁 Directories created successfully');
     }
@@ -710,14 +721,51 @@ ${venue.localImages?.map((img, index) =>
       if (this.browser) {
         await this.browser.close();
       }
+      if (this.originalHome !== undefined) {
+        process.env.HOME = this.originalHome;
+      }
     }
   }
 }
 
 // Run the scraper
 if (require.main === module) {
-  const scraper = new OptimizedVenueScraper();
+  const cliOptions = parseCliOptions(process.argv.slice(2));
+  const scraper = new OptimizedVenueScraper(cliOptions);
   scraper.run().catch(console.error);
 }
 
 module.exports = OptimizedVenueScraper;
+
+function parseCliOptions(argv) {
+  const options = {};
+
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+
+    if (!arg.startsWith('--')) continue;
+
+    let key;
+    let value;
+
+    const eqIndex = arg.indexOf('=');
+    if (eqIndex !== -1) {
+      key = arg.slice(2, eqIndex);
+      value = arg.slice(eqIndex + 1);
+    } else {
+      key = arg.slice(2);
+      const next = argv[i + 1];
+      if (next && !next.startsWith('--')) {
+        value = next;
+        i++;
+      } else {
+        value = 'true';
+      }
+    }
+
+    key = key.replace(/-([a-z])/g, (_, chr) => chr.toUpperCase());
+    options[key] = value;
+  }
+
+  return options;
+}

@@ -1,0 +1,12 @@
+{
+  "totalVenues": 0,
+  "successful": 0,
+  "errors": 0,
+  "withImages": 0,
+  "withContact": 0,
+  "withCapacity": 0,
+  "cities": [],
+  "totalImages": 0,
+  "scrapedAt": "2025-09-26T15:53:29.509Z",
+  "startIndex": 400
+}
