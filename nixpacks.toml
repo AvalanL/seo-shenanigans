@@ -6,3 +6,5 @@ cmds = ["npm run build:production"]
 
 [start]
 cmd = "cd apps/marketing && npx serve dist -s -n -L -p $PORT"
+
+# Force deployment trigger
