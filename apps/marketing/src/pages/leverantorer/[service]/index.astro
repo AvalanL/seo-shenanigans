@@ -260,7 +260,7 @@ try {
           </thead>
           <tbody>
             {availableCities
-              .sort(([,a], [,b]) => a.pricing[service].avg - b.pricing[service].avg)
+              .sort(([,a], [,b]) => a.pricing[dataKey].avg - b.pricing[dataKey].avg)
               .map(([cityKey, cityData]) => (
                 <tr>
                   <td>
