@@ -5,10 +5,12 @@ nixPkgs = ["nodejs-20_x", "npm-9_x"]
 [phases.build]
 cmds = [
   "npm config set cache /tmp/.npm",
-  "npm config set fund false",
+  "npm config set fund false", 
   "npm config set audit false",
-  "npm install --production=false",
-  "cd apps/marketing && npm install --production=false",
+  "rm -rf package-lock.json node_modules || true",
+  "npm install",
+  "cd apps/marketing && rm -rf package-lock.json node_modules || true",
+  "cd apps/marketing && npm install",
   "cd apps/marketing && npm run prebuild",
   "cd apps/marketing && npm run build"
 ]
