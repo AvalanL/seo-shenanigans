@@ -1,0 +1,232 @@
+---
+// Renders the interactive ultimate wedding checklist with local storage persistence.
+---
+
+<div class="ultimate-checklist" data-storage-key="ultimate-brollopschecklista-v1">
+  <header class="checklist-intro">
+    <div>
+      <h2>Startläge och snabbstatus</h2>
+      <p>Samla all grunddata innan ni går in i tidslinjen. De här punkterna ger er budget, gästlista och prioriteringar på plats.</p>
+    </div>
+    <div class="progress" aria-live="polite">
+      <strong>Avklarat:</strong> <span data-progress-completed>0</span> av <span data-progress-total>0</span> uppgifter
+    </div>
+    <button type="button" class="reset" data-reset>Rensa sparade kryss</button>
+  </header>
+
+  <slot name="sections" />
+</div>
+
+<script>
+  if (typeof window !== "undefined") {
+    const scriptEl = document.currentScript;
+    const possibleRoot = scriptEl ? scriptEl.previousElementSibling : null;
+    if (!(possibleRoot instanceof HTMLElement)) {
+      console.warn('Kunde inte initialisera bröllopschecklistan.');
+    } else {
+      const checklistRoot = possibleRoot;
+      const storageKey = checklistRoot.getAttribute('data-storage-key');
+
+      const readState = () => {
+        try {
+          if (!storageKey) return {};
+          const storedValue = localStorage.getItem(storageKey);
+          return storedValue ? JSON.parse(storedValue) : {};
+        } catch (error) {
+          console.warn('Kunde inte läsa sparad checklista', error);
+          return {};
+        }
+      };
+
+      /** @param {Record<string, boolean>} nextState */
+      const writeState = (nextState) => {
+        if (!storageKey) return;
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(nextState));
+        } catch (error) {
+          console.warn('Kunde inte spara checklista', error);
+        }
+      };
+
+      const clearState = () => {
+        if (!storageKey) return;
+        try {
+          localStorage.removeItem(storageKey);
+        } catch (error) {
+          console.warn('Kunde inte rensa sparad checklista', error);
+        }
+      };
+
+      const updateProgress = () => {
+        const boxes = checklistRoot.querySelectorAll('input[type="checkbox"][data-id]');
+        const completed = Array.from(boxes).filter((box) => box instanceof HTMLInputElement && box.checked).length;
+        const total = boxes.length;
+        const completedEl = checklistRoot.querySelector('[data-progress-completed]');
+        const totalEl = checklistRoot.querySelector('[data-progress-total]');
+        if (completedEl) completedEl.textContent = String(completed);
+        if (totalEl) totalEl.textContent = String(total);
+      };
+
+      if (storageKey && typeof localStorage !== "undefined") {
+        const savedState = readState();
+        const checkboxes = checklistRoot.querySelectorAll('input[type="checkbox"][data-id]');
+
+        checkboxes.forEach((checkbox) => {
+          if (!(checkbox instanceof HTMLInputElement)) return;
+          const key = checkbox.dataset.id;
+          if (!key) return;
+          if (savedState[key]) {
+            checkbox.checked = true;
+          }
+
+          checkbox.addEventListener('change', () => {
+            const nextState = readState();
+            nextState[key] = checkbox.checked;
+            writeState(nextState);
+            updateProgress();
+          });
+        });
+
+        updateProgress();
+
+        const resetButton = checklistRoot.querySelector('[data-reset]');
+        if (resetButton instanceof HTMLButtonElement) {
+          resetButton.addEventListener('click', () => {
+            clearState();
+            checkboxes.forEach((checkbox) => {
+              if (checkbox instanceof HTMLInputElement) checkbox.checked = false;
+            });
+            updateProgress();
+          });
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  .ultimate-checklist {
+    display: grid;
+    gap: 2.5rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 247, 234, 0.85), rgba(243, 229, 213, 0.9));
+    border: 1px solid rgba(178, 109, 74, 0.2);
+  }
+
+  .ultimate-checklist .checklist-intro {
+    display: grid;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(178, 109, 74, 0.1);
+  }
+
+  .ultimate-checklist .checklist-intro h2 {
+    margin: 0;
+  }
+
+  .ultimate-checklist .progress {
+    font-weight: 600;
+    color: #5a3c2d;
+  }
+
+  .ultimate-checklist .reset {
+    justify-self: start;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    border: none;
+    background: #b26d4a;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .ultimate-checklist .reset:hover {
+    background: #9a5d3d;
+  }
+
+  .ultimate-checklist .checklist-section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .ultimate-checklist .checklist-section h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #3c2f26;
+  }
+
+  .ultimate-checklist .checklist-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .ultimate-checklist .checklist-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 1rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(178, 109, 74, 0.15);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .ultimate-checklist .checklist-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(178, 109, 74, 0.2);
+  }
+
+  .ultimate-checklist .checklist-item input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: 0.15rem;
+    accent-color: #b26d4a;
+  }
+
+  .ultimate-checklist .checklist-item strong {
+    display: block;
+    font-size: 1.05rem;
+    color: #1f1c14;
+  }
+
+  .ultimate-checklist .checklist-item em {
+    display: block;
+    font-style: normal;
+    color: rgba(31, 28, 20, 0.7);
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  .ultimate-checklist .pro-tip {
+    padding: 1rem 1.25rem;
+    border-left: 4px solid #b26d4a;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 0.75rem;
+    color: #3c2f26;
+  }
+
+  .ultimate-checklist .pro-tip strong {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+  @media (min-width: 720px) {
+    .ultimate-checklist .checklist-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ultimate-checklist .checklist-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

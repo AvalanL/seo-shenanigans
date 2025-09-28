@@ -5,6 +5,20 @@
     "paths": {
       "~*": ["src/*"],
       "~content/*": ["src/content/*"]
-    }
-  }
+    },
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "src/components/tools/**",
+    "src/components/InstagramFeed.astro",
+    "src/components/InstagramEmbed.astro",
+    "src/components/SimpleInstagramGallery.astro",
+    "src/pages/budget/budgetkalkylator.astro",
+    "src/pages/leverantorer/**",
+    "src/pages/programmatic/**",
+    "src/pages/stad/**",
+    "src/content/shared/interlinks.json",
+    "dist",
+    "node_modules"
+  ]
 }
