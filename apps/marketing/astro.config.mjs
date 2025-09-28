@@ -9,6 +9,10 @@ export default defineConfig({
   markdown: {
     drafts: true,
   },
+  server: {
+    host: true,
+    port: process.env.PORT || 4321,
+  },
   vite: {
     resolve: {
       alias: {
@@ -18,19 +22,11 @@ export default defineConfig({
     build: {
       chunkSizeWarningLimit: 600,
     },
-    server: {
-      host: true,
-      port: process.env.PORT || 4321,
-    },
     preview: {
-      host: true,
+      host: "0.0.0.0",
       port: process.env.PORT || 4321,
-      allowedHosts: [
-        "seo-shenanigans-production.up.railway.app",
-        ".railway.app",
-        "localhost",
-        "127.0.0.1"
-      ]
+      strictPort: true,
+      allowedHosts: "all"
     },
   },
 });
