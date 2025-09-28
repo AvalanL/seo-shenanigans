@@ -18,5 +18,19 @@ export default defineConfig({
     build: {
       chunkSizeWarningLimit: 600,
     },
+    server: {
+      host: true,
+      port: process.env.PORT || 4321,
+    },
+    preview: {
+      host: true,
+      port: process.env.PORT || 4321,
+      allowedHosts: [
+        "seo-shenanigans-production.up.railway.app",
+        ".railway.app",
+        "localhost",
+        "127.0.0.1"
+      ]
+    },
   },
 });

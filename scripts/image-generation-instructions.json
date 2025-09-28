@@ -1,0 +1,171 @@
+[
+  {
+    "category": "bartender",
+    "label": "Bartender",
+    "filename": "bartender-00.png",
+    "prompt": "Elegant wedding bartender crafting signature cocktails at outdoor reception bar, crystal glassware catching soft light, floral garlands draped around bar setup, vintage bottles, Swedish garden wedding setting. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "catering",
+    "label": "Catering",
+    "filename": "catering-00.png",
+    "prompt": "Sophisticated wedding banquet table with elegant plated dishes, delicate porcelain, silverware gleaming, fresh floral centerpieces, guests dining in background, Swedish wedding feast. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "festfixare",
+    "label": "Festfixare",
+    "filename": "festfixare-00.png",
+    "prompt": "Wedding event coordinator arranging ceremony decorations, flowing silk drapes, hanging floral installations, candle arrangements, romantic venue transformation in progress, Swedish celebration setup. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "florist",
+    "label": "Florist",
+    "filename": "florist-00.png",
+    "prompt": "Stunning bridal bouquet with peonies, garden roses, eucalyptus and baby's breath, silk ribbon trailing, florist's hands arranging delicate stems, Swedish summer garden flowers, morning dew. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "fotobas",
+    "label": "Fotobås",
+    "filename": "fotobas-00.png",
+    "prompt": "Charming vintage photo booth with floral backdrop, elegant props like vintage frames and silk flowers, guests laughing and posing, Polaroid camera, Swedish wedding celebration moment. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "fotograf",
+    "label": "Fotograf",
+    "filename": "fotograf-00.png",
+    "prompt": "Wedding photographer with vintage camera capturing couple's romantic moment, soft focus background of Swedish ceremony, professional yet artistic composition, golden hour lighting, intimate wedding photography. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "har-och-smink",
+    "label": "Hår & smink",
+    "filename": "har-och-smink-00.png",
+    "prompt": "Bride receiving elegant hair and makeup styling, makeup artist's delicate brushes, flowers woven into bridal hairstyle, vintage vanity mirror, Swedish wedding morning preparation ritual. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "klanningar",
+    "label": "Klänningar",
+    "filename": "klanningar-00.png",
+    "prompt": "Exquisite wedding gown on vintage dress form, flowing silk with delicate lace details, natural light streaming through boutique window, Swedish bridal salon atmosphere, ethereal fabric movement. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "konfetti",
+    "label": "Konfetti",
+    "filename": "konfetti-00.png",
+    "prompt": "Romantic flower petals and biodegradable confetti falling through air during ceremony celebration, rose petals in soft colors, Swedish wedding tradition moment, joyful celebration atmosphere. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "koordinator",
+    "label": "Koordinator",
+    "filename": "koordinator-00.png",
+    "prompt": "Professional wedding planner with elegant leather portfolio and fresh flowers, coordinating ceremony details, Swedish wedding organization, graceful planning process, sophisticated wedding management. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "musik",
+    "label": "Musik",
+    "filename": "musik-00.png",
+    "prompt": "Elegant string quartet performing at outdoor ceremony, violins and cello in soft focus, music sheets fluttering gently, Swedish garden wedding musical performance, classical romantic atmosphere. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "skyltar",
+    "label": "Skyltar",
+    "filename": "skyltar-00.png",
+    "prompt": "Beautiful wedding signage with hand-lettered calligraphy, wooden welcome signs adorned with fresh florals, Swedish wedding wayfinding, romantic garden ceremony directions, artistic typography. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  },
+  {
+    "category": "smycken",
+    "label": "Smycken",
+    "filename": "smycken-00.png",
+    "prompt": "Delicate wedding rings and bridal jewelry arranged on vintage lace, pearls and diamonds catching light, heirloom pieces, Swedish wedding accessories display, romantic jewelry collection presentation. Modern wedding illustration in the style of Claude Monet impressionist painting, soft dreamy brushstrokes, pastel color palette with blush pink, sage green, lavender, cream and powder blue, watercolor texture, ethereal lighting, romantic Swedish wedding atmosphere, delicate artistic composition, 4:3 aspect ratio",
+    "specifications": {
+      "size": "1024x768",
+      "aspectRatio": "4:3",
+      "format": "PNG",
+      "style": "Monet impressionist",
+      "colorPalette": "Pastel (blush pink, sage green, lavender, cream, powder blue)"
+    }
+  }
+]
