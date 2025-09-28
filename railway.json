@@ -1,7 +1,7 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "buildCommand": "npm ci --cache /tmp/.npm --prefer-offline --no-audit && cd apps/marketing && npm ci --cache /tmp/.npm --prefer-offline --no-audit && npm run prebuild && npm run build"
+    "buildCommand": "rm -rf node_modules/.cache || true && npm install --omit=dev --cache /tmp/.npm --prefer-offline --no-audit --no-fund && cd apps/marketing && rm -rf node_modules/.cache || true && npm install --omit=dev --cache /tmp/.npm --prefer-offline --no-audit --no-fund && npm run prebuild && npm run build"
   },
   "deploy": {
     "startCommand": "cd apps/marketing && npm run preview -- --host 0.0.0.0 --port $PORT"
