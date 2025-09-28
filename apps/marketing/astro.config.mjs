@@ -22,5 +22,14 @@ export default defineConfig({
     build: {
       chunkSizeWarningLimit: 600,
     },
+    server: {
+      host: "0.0.0.0",
+      port: process.env.PORT || 4321,
+    },
+    preview: {
+      host: "0.0.0.0", 
+      port: process.env.PORT || 4321,
+      allowedHosts: "all"
+    },
   },
 });
