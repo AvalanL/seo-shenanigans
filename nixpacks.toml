@@ -3,7 +3,12 @@
 nixPkgs = ["nodejs-20_x", "npm-9_x"]
 
 [phases.build]
-cmds = ["npm ci", "cd apps/marketing && npm ci", "cd apps/marketing && npm run prebuild", "cd apps/marketing && npm run build"]
+cmds = [
+  "npm ci --cache /tmp/.npm --prefer-offline --no-audit",
+  "cd apps/marketing && npm ci --cache /tmp/.npm --prefer-offline --no-audit", 
+  "cd apps/marketing && npm run prebuild",
+  "cd apps/marketing && npm run build"
+]
 
 [phases.start]
 cmd = "cd apps/marketing && npm run preview -- --host 0.0.0.0 --port $PORT"
