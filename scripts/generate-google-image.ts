@@ -17,7 +17,7 @@ async function saveBinaryFile(filePath: string, content: Buffer): Promise<void> 
 }
 
 async function main(): Promise<void> {
-const service = createServiceFromEnv({ defaultModel: 'gemini-2.5-flash-image' });
+const service = createServiceFromEnv({ defaultModel: 'gemini-2.5-flash-image-preview' });
 
   let imageCount = 0;
 

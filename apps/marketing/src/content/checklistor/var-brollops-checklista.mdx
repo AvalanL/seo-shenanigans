@@ -23,63 +23,154 @@ sources:
 related: ["checklistor/brollop-checklista-pdf", "guides/brollopsplanering-grundkurs", "checklistor/brollopsbudget-checklista"]
 ---
 
-> **Snabbguide 2025:** Vår kompletta bröllopschecklista innehåller 150+ uppgifter fördelade över 12 månader, från förlovning till tackkort. Skriv ut eller använd digitalt med checkboxar för att hålla koll på allt från hindersprövning (4 månader före) till final gästbekräftelse (2 veckor före).
+import UltimateWeddingChecklist from "~/components/checklists/UltimateWeddingChecklist.astro";
+
+<div class="hero-section">
+  <div class="quick-guide">
+    <strong>🎯 Snabbguide 2025:</strong> Vår kompletta bröllopschecklista innehåller 150+ uppgifter fördelade över 12 månader, från förlovning till tackkort. Skriv ut eller använd digitalt med checkboxar för att hålla koll på allt från hindersprövning (4 månader före) till final gästbekräftelse (2 veckor före).
+  </div>
+</div>
 
 # Vår bröllopschecklista 2025 – komplett guide månad för månad
 
 Bröllopsplanering behöver inte vara kaotisk. Med vår detaljerade checklista får ni en strukturerad approach som täcker alla viktiga moment för svenska bröllop. Från juridiska krav som hindersprövning till praktiska detaljer som bordsplacering – här har vi samlat allt ni behöver veta.
 
-**Viktiga siffror för 2025:** Enligt SCB gifter sig cirka 50 000 par årligen i Sverige, varav 60% väljer kyrklig vigsel och 40% borgerlig. Genomsnittlig planeringstid är 14 månader från förlovning till vigsel.
+<div class="stats-box">
+  <h3>📊 Viktiga siffror för 2025</h3>
+  <ul>
+    <li><strong>50 000 par</strong> gifter sig årligen i Sverige (SCB)</li>
+    <li><strong>60%</strong> väljer kyrklig vigsel, <strong>40%</strong> borgerlig</li>
+    <li><strong>14 månader</strong> genomsnittlig planeringstid</li>
+    <li><strong>250 000 kr</strong> genomsnittlig kostnad</li>
+  </ul>
+</div>
 
-## 12 månader före bröllopet – Grundläggning
+<UltimateWeddingChecklist>
+  <div slot="sections">
+    <section class="checklist-section">
+      <h2>🏁 12 månader före bröllopet – Grundläggning</h2>
 
-### ✅ Vision och budget
-- [ ] **Bestäm bröllopsstil och tema**
-  - Romantiskt, rustikt, modernt eller traditionellt svenskt
-  - Färgschema och känsla
-  - Säsong och tid på dagen
-- [ ] **Sätt realistisk budget: 150 000–400 000 kr (genomsnitt 2025)**
-  - 40% lokal och mat
-  - 20% klänning, kostym och skönhet
-  - 15% fotograf och video
-  - 10% blommor och dekoration
-  - 15% musik, transport och övrigt
-- [ ] **Skapa gemensam vision mellan partner**
-  - Diskutera förväntningar och "måsten"
-  - Prioritera de 3 viktigaste elementen
+      <div class="pro-tip">
+        <strong>💡 Pro-tips:</strong> Börja med budget och gästantal – dessa två faktorer styr alla andra beslut. Boka populära leverantörer tidigt, särskilt under maj-september.
+      </div>
 
-### ✅ Första stora bokningar
-- [ ] **Bestäm ungefärligt datum och säsong**
-  - Maj–september: högsäsong, högre priser
-  - Oktober–april: lägre priser, begränsad tillgång
-- [ ] **Researcha bröllopslocaler**
-  - Boka visningar för 5–8 alternativ
-  - Jämför priser, tillgänglighet och vad som ingår
-- [ ] **Preliminary gästlista (ungefärlig siffra)**
-  - A-lista: måste-gäster (familj, närmaste vänner)
-  - B-lista: önskelista om budget och plats tillåter
+      <div class="subsection">
+        <h3>Vision och budget</h3>
+        <div class="checklist-grid">
+          <label class="checklist-item">
+            <input type="checkbox" data-id="style-theme" />
+            <div>
+              <strong>Bestäm bröllopsstil och tema</strong>
+              <em>Romantiskt, rustikt, modernt eller traditionellt svenskt. Inkludera färgschema och känsla.</em>
+            </div>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" data-id="budget-150-400k" />
+            <div>
+              <strong>Sätt realistisk budget: 150 000–400 000 kr</strong>
+              <em>40% lokal/mat, 20% kläder/skönhet, 15% foto/video, 10% dekoration, 15% övrigt</em>
+            </div>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" data-id="shared-vision" />
+            <div>
+              <strong>Skapa gemensam vision mellan partner</strong>
+              <em>Diskutera förväntningar och "måsten". Prioritera de 3 viktigaste elementen.</em>
+            </div>
+          </label>
+        </div>
+      </div>
 
-## 10–11 månader före – Stora avtal
+      <div class="subsection">
+        <h3>Första stora bokningar</h3>
+        <div class="checklist-grid">
+          <label class="checklist-item">
+            <input type="checkbox" data-id="date-season" />
+            <div>
+              <strong>Bestäm ungefärligt datum och säsong</strong>
+              <em>Maj–september: högsäsong, högre priser. Oktober–april: lägre priser, begränsad tillgång.</em>
+            </div>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" data-id="venue-research" />
+            <div>
+              <strong>Researcha bröllopslocaler</strong>
+              <em>Boka visningar för 5–8 alternativ. Jämför priser, tillgänglighet och vad som ingår.</em>
+            </div>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" data-id="guest-list-draft" />
+            <div>
+              <strong>Preliminary gästlista (ungefärlig siffra)</strong>
+              <em>A-lista: måste-gäster (familj, närmaste vänner). B-lista: önskelista om budget tillåter.</em>
+            </div>
+          </label>
+        </div>
+      </div>
+    </section>
 
-### ✅ Lokal och vigselförrättare
-- [ ] **Boka bröllopslokalen**
-  - Läs avtalet noga (avbokningsregler, vad som ingår)
-  - Bekräfta ljudsystem, parkering och tillgänglighet
-  - Fråga om restriktioner (musik, dekor, alkohol)
-- [ ] **Boka vigselförrättare**
-  - Kyrklig: kontakta Svenska kyrkan i er församling
-  - Borgerlig: kommunens vigselförrättare eller legitimerad celebrant
-  - Boka förberedelsesamtal (krävs för kyrklig vigsel)
-- [ ] **Spara datumet med nära familj och vittnen**
+    <section class="checklist-section">
+      <h2>📋 10–11 månader före – Stora avtal</h2>
 
-### ✅ Grundläggande planering
-- [ ] **Bestäm stilnivå för klädsel**
-  - White tie, black tie, mörk kostym eller smart casual
-  - Kommunicera dresscode till gäster
-- [ ] **Researcha cateringalternativ**
-  - 3-rätters middag: 450–800 kr/person
-  - Buffé: 350–600 kr/person
-  - Cocktailmingel: 250–450 kr/person
+      <div class="price-alert">
+        <strong>💰 Prisindikation:</strong> Boka tidigt för bästa priser. Populära lokaler och fotografer kan kosta 20-30% mer om ni väntar till sista året.
+      </div>
+
+      <div class="subsection">
+        <h3>Lokal och vigselförrättare</h3>
+        <div class="checklist-grid">
+          <label class="checklist-item">
+            <input type="checkbox" data-id="book-venue" />
+            <div>
+              <strong>Boka bröllopslokalen</strong>
+              <em>Läs avtalet noga (avbokningsregler, vad som ingår). Bekräfta ljudsystem, parkering och tillgänglighet.</em>
+            </div>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" data-id="book-officiant" />
+            <div>
+              <strong>Boka vigselförrättare</strong>
+              <em>Kyrklig: Svenska kyrkan i er församling. Borgerlig: kommunens vigselförrättare eller legitimerad celebrant.</em>
+            </div>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" data-id="save-date-family" />
+            <div>
+              <strong>Spara datumet med nära familj och vittnen</strong>
+              <em>Informera tidigt så de kan planera. Boka förberedelsesamtal (krävs för kyrklig vigsel).</em>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Grundläggande planering</h3>
+        <div class="price-table">
+          <h4>🍽️ Cateringpriser 2025 (per person)</h4>
+          <table>
+            <tr><td>3-rätters middag</td><td>450–800 kr</td></tr>
+            <tr><td>Buffé</td><td>350–600 kr</td></tr>
+            <tr><td>Cocktailmingel</td><td>250–450 kr</td></tr>
+          </table>
+        </div>
+        <div class="checklist-grid">
+          <label class="checklist-item">
+            <input type="checkbox" data-id="dress-code" />
+            <div>
+              <strong>Bestäm stilnivå för klädsel</strong>
+              <em>White tie, black tie, mörk kostym eller smart casual. Kommunicera dresscode till gäster.</em>
+            </div>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" data-id="catering-research" />
+            <div>
+              <strong>Researcha cateringalternativ</strong>
+              <em>Jämför priser och menyer. Tänk på allergier och specialkost redan nu.</em>
+            </div>
+          </label>
+        </div>
+      </div>
+    </section>
 
 ## 8–9 månader före – Leverantörer
 

@@ -12,7 +12,7 @@ if (!API_KEY) {
 }
 
 const prompt = process.argv.filter((arg, index) => index > 1).join(' ').trim() || 'Nano Banano brand illustration, vibrant, vector art';
-const model = process.env.GOOGLE_IMAGEN_MODEL || process.env.GOOGLE_GENAI_MODEL || 'imagen-3.0-generate-001';
+const model = process.env.GOOGLE_IMAGEN_MODEL || process.env.GOOGLE_GENAI_MODEL || 'gemini-2.5-flash-image-preview';
 const outDir = process.env.GOOGLE_IMAGE_OUTPUT_DIR || path.join(process.cwd(), 'generated-images');
 const outFile = path.join(outDir, `${Date.now()}-${model.replace(/[^a-z0-9.-]+/gi, '')}.png`);
 

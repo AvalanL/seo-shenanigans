@@ -1,10 +1,12 @@
 [variables]
 NODE_ENV = "production"
+NPM_CONFIG_PLATFORM = "linux"
+NPM_CONFIG_TARGET_PLATFORM = "linux"
 
 [phases.install]
 cmds = [
-  "npm install",
-  "cd apps/marketing && npm install"
+  "npm install --platform=linux --target-platform=linux",
+  "cd apps/marketing && npm install --platform=linux --target-platform=linux"
 ]
 
 [phases.build]
