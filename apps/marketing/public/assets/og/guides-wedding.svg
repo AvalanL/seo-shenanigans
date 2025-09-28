@@ -1,0 +1,53 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="guideBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f6f0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ede8dc;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#guideBg)"/>
+  
+  <!-- Book/Guide illustration -->
+  <rect x="80" y="120" width="500" height="390" fill="white" rx="15" filter="url(#shadow)"/>
+  <rect x="100" y="140" width="460" height="50" fill="#b26d4a" rx="8"/>
+  <text x="330" y="170" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="bold">BRÖLLOPGUIDE</text>
+  
+  <!-- Guide content lines -->
+  <rect x="120" y="220" width="300" height="8" fill="#e8c5a6" rx="4"/>
+  <rect x="120" y="250" width="400" height="6" fill="#f3d4c2" rx="3"/>
+  <rect x="120" y="280" width="350" height="6" fill="#f3d4c2" rx="3"/>
+  <rect x="120" y="310" width="320" height="6" fill="#f3d4c2" rx="3"/>
+  <rect x="120" y="340" width="380" height="6" fill="#f3d4c2" rx="3"/>
+  
+  <!-- Checkmarks -->
+  <text x="450" y="235" fill="#b26d4a" font-family="Arial, sans-serif" font-size="16">✓</text>
+  <text x="450" y="265" fill="#b26d4a" font-family="Arial, sans-serif" font-size="16">✓</text>
+  <text x="450" y="295" fill="#b26d4a" font-family="Arial, sans-serif" font-size="16">✓</text>
+  
+  <!-- Right side content -->
+  <text x="650" y="200" fill="#1f1c14" font-family="Arial, sans-serif" font-size="42" font-weight="bold">
+    Expertguider för
+  </text>
+  <text x="650" y="250" fill="#1f1c14" font-family="Arial, sans-serif" font-size="42" font-weight="bold">
+    ert bröllop
+  </text>
+  
+  <text x="650" y="300" fill="#3c372b" font-family="Arial, sans-serif" font-size="20">
+    Steg-för-steg instruktioner från
+  </text>
+  <text x="650" y="330" fill="#3c372b" font-family="Arial, sans-serif" font-size="20">
+    svenska bröllopexperter
+  </text>
+  
+  <!-- Features -->
+  <text x="650" y="380" fill="#5a5449" font-family="Arial, sans-serif" font-size="16">📋 Detaljerade checklistor</text>
+  <text x="650" y="410" fill="#5a5449" font-family="Arial, sans-serif" font-size="16">💡 Praktiska tips &amp; tricks</text>
+  <text x="650" y="440" fill="#5a5449" font-family="Arial, sans-serif" font-size="16">🇸🇪 Anpassat för Sverige</text>
+  
+  <!-- Brand -->
+  <text x="1050" y="580" text-anchor="end" fill="#b26d4a" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Bröllopssidan.se</text>
+</svg>

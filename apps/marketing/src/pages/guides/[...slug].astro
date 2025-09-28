@@ -2,6 +2,7 @@
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import RelatedArticles from "~/components/RelatedArticles.astro";
 import { getCollection } from "astro:content";
+import { getOpenGraphImage } from "~/utils/openGraph";
 
 export async function getStaticPaths() {
   const entries = await getCollection("guides", ({ data }) => data.status !== "draft");
@@ -26,12 +27,18 @@ if (!entry) {
 }
 
 const { Content, headings } = await entry.render();
+
+// Generate Open Graph image - use hero image if available, otherwise default guide image
+const ogImage = entry.data.heroImage 
+  ? { src: entry.data.heroImage.src, alt: entry.data.heroAlt || entry.data.title }
+  : getOpenGraphImage('guide', { title: entry.data.title });
 ---
 <BaseLayout
   title={entry.data.title}
   description={entry.data.description}
   publishedTime={entry.data.publishedAt?.toISOString()}
   modifiedTime={entry.data.updatedAt?.toISOString()}
+  image={ogImage}
   schema={{
     "@context": "https://schema.org",
     "@type": entry.data.schemaType,

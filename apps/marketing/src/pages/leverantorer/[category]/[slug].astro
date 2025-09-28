@@ -3,6 +3,7 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 import InstagramGallery from "~/components/InstagramGallery.astro";
 import SimpleInstagramGallery from "~/components/SimpleInstagramGallery.astro";
 import { getCollection } from "astro:content";
+import { getOpenGraphImage } from "~/utils/openGraph";
 
 export async function getStaticPaths() {
   const suppliers = await getCollection("suppliers");
@@ -29,10 +30,16 @@ if (!entry) {
 const category = categoryParam;
 const slug = slugParam;
 const { Content } = await entry.render();
+
+// Generate Open Graph image - use supplier image if available
+const ogImage = entry.data.image 
+  ? { src: entry.data.image, alt: `${entry.data.title} - ${entry.data.category}` }
+  : getOpenGraphImage('supplier', { title: entry.data.title, category: entry.data.category });
 ---
 <BaseLayout
   title={`${entry.data.title} – ${entry.data.category}`}
   description={entry.data.description}
+  image={ogImage}
   schema={{
     "@context": "https://schema.org",
     "@type": "Organization",

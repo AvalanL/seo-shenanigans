@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { getOpenGraphImage } from "~/utils/openGraph";
 
 const [guides, checklistor, budget, inspiration] = await Promise.all([
   getCollection("guides"),
@@ -10,10 +11,14 @@ const [guides, checklistor, budget, inspiration] = await Promise.all([
 ]);
 
 const maxPerSection = 3;
+const ogImage = getOpenGraphImage('homepage', { 
+  title: 'Planera ert drömbröllop med svenska experter' 
+});
 ---
 <BaseLayout
   title="Planera ert bröllop med expertstöd"
   description="Bröllopssidan.se guidar er genom varje steg från förlovning till fest med data, checklistor och budgetmallar."
+  image={ogImage}
 >
   <section class="hero">
     <p class="eyebrow">Bröllopssidan.se</p>

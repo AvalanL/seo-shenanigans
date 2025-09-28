@@ -59,17 +59,17 @@ export function getOpenGraphImage(
 
   // Default images based on page type
   const imageMap: Record<PageType, string> = {
-    homepage: '/assets/og/homepage-wedding.jpg',
-    guide: '/assets/og/guides-wedding.jpg', 
-    checklist: '/assets/og/checklist-wedding.jpg',
-    budget: '/assets/og/budget-wedding.jpg',
-    supplier: '/assets/og/supplier-wedding.jpg',
-    venue: '/assets/og/venue-wedding.jpg',
-    inspiration: '/assets/og/inspiration-wedding.jpg',
-    tradition: '/assets/og/tradition-wedding.jpg',
-    city: '/assets/og/city-wedding.jpg',
-    service: '/assets/og/service-wedding.jpg',
-    programmatic: '/assets/og/programmatic-wedding.jpg'
+    homepage: '/assets/og/homepage-wedding.svg',
+    guide: '/assets/og/guides-wedding.svg', 
+    checklist: '/assets/og/checklist-wedding.svg',
+    budget: '/assets/og/budget-wedding.svg',
+    supplier: '/assets/og/supplier-wedding.svg',
+    venue: '/assets/og/venue-wedding.svg',
+    inspiration: '/assets/og/inspiration-wedding.svg',
+    tradition: '/assets/og/tradition-wedding.svg',
+    city: '/assets/og/city-wedding.svg',
+    service: '/assets/og/service-wedding.svg',
+    programmatic: '/assets/og/programmatic-wedding.svg'
   };
 
   const imagePath = imageMap[pageType] || imageMap.homepage;

@@ -1,0 +1,51 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fffdf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5f1e8;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="60" fill="#f3d4c2" opacity="0.3"/>
+  <circle cx="1100" cy="530" r="80" fill="#e8c5a6" opacity="0.2"/>
+  
+  <!-- Main content area -->
+  <rect x="80" y="140" width="1040" height="350" fill="white" rx="20" filter="url(#shadow)"/>
+  
+  <!-- Logo/Brand area -->
+  <rect x="100" y="160" width="200" height="60" fill="#b26d4a" rx="8"/>
+  <text x="200" y="195" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Bröllopssidan.se</text>
+  
+  <!-- Main heading -->
+  <text x="600" y="250" text-anchor="middle" fill="#1f1c14" font-family="Arial, sans-serif" font-size="48" font-weight="bold">
+    Planera ert drömbröllop
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="300" text-anchor="middle" fill="#3c372b" font-family="Arial, sans-serif" font-size="24">
+    Med svenska experter och beprövade råd
+  </text>
+  
+  <!-- Feature points -->
+  <text x="300" y="360" text-anchor="middle" fill="#5a5449" font-family="Arial, sans-serif" font-size="18">✓ Guider &amp; Checklistor</text>
+  <text x="600" y="360" text-anchor="middle" fill="#5a5449" font-family="Arial, sans-serif" font-size="18">✓ Leverantörer</text>
+  <text x="900" y="360" text-anchor="middle" fill="#5a5449" font-family="Arial, sans-serif" font-size="18">✓ Budgetverktyg</text>
+  
+  <!-- CTA area -->
+  <rect x="450" y="400" width="300" height="50" fill="#b26d4a" rx="25"/>
+  <text x="600" y="430" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="600">
+    Kom igång idag →
+  </text>
+  
+  <!-- Decorative hearts -->
+  <text x="200" y="550" fill="#e8c5a6" font-family="Arial, sans-serif" font-size="40">♥</text>
+  <text x="1000" y="120" fill="#f3d4c2" font-family="Arial, sans-serif" font-size="30">♥</text>
+</svg>
