@@ -45,13 +45,13 @@ related:
 
 ## Förberedelser i fem steg
 
-| Steg | Aktivitet                          | Deadline | Tips |
-| ---- | ---------------------------------- | -------- | ---- |
-| 1    | Idéstorm och minnesbank            | 2 månader före | Samla foton, meddelanden, nyckelord |
-| 2    | Första utkast                      | 6 veckor före  | Skriv utan att censurera, fokus på känslor |
-| 3    | Finputs & struktur                 | 4 veckor före  | Koppla ihop historierna med röd tråd |
-| 4    | Repetition                         | 2 veckor före  | Öva högt med timer, filma dig själv |
-| 5    | Talarkort & mental förberedelse    | 1 vecka före   | Skriv stödord på kort, planera andningspauser |
+| Steg | Aktivitet                       | Deadline       | Tips                                          |
+| ---- | ------------------------------- | -------------- | --------------------------------------------- |
+| 1    | Idéstorm och minnesbank         | 2 månader före | Samla foton, meddelanden, nyckelord           |
+| 2    | Första utkast                   | 6 veckor före  | Skriv utan att censurera, fokus på känslor    |
+| 3    | Finputs & struktur              | 4 veckor före  | Koppla ihop historierna med röd tråd          |
+| 4    | Repetition                      | 2 veckor före  | Öva högt med timer, filma dig själv           |
+| 5    | Talarkort & mental förberedelse | 1 vecka före   | Skriv stödord på kort, planera andningspauser |
 
 ## Mall: Personligt men strukturerat
 
@@ -74,7 +74,7 @@ Använd "du" när du talar till partnern och "ni" när du vänder dig till gäst
 ## Exempelpassager
 
 **Humoristisk öppning:**
-"När Johan friade i köket trodde jag först att han tappat något – tills jag såg att han faktiskt hittat det finaste: modet att fråga." 
+"När Johan friade i köket trodde jag först att han tappat något – tills jag såg att han faktiskt hittat det finaste: modet att fråga."
 
 **Romantisk del:**
 "Du har lärt mig att lugn inte är att sitta still, utan att veta att vi står på samma sida, även när livet stormar."

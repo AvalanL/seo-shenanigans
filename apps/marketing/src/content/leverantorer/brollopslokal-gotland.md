@@ -39,23 +39,23 @@ related:
 
 ## Prisnivåer och kapacitet
 
-| Lokaltyp               | Kapacitet | Prisnivå       | Kommentar |
-| ---------------------- | --------- | -------------- | --------- |
-| Visby innerstad (ruiner, Kronhuset) | 80–150 | 50 000–70 000 kr | Historisk miljö, kräver tillstånd |
-| Lador/gårdar (t.ex. Ihre Kvarn)     | 90–180 | 35 000–55 000 kr | Flexibelt men kräver hyrmöbler |
-| Hotell & resort (Clarion, Novi)     | 60–140 | 55 000–75 000 kr | Boende på plats, helhetslösning |
-| Strand & tält                        | 40–120 | 25 000–40 000 kr | Tillstånd + dubbel plan B |
-| Gårdshotell (Stelor, Grå Gåsen)      | 40–100 | 45 000–65 000 kr | Weekendpaket, mat ingår ofta |
+| Lokaltyp                            | Kapacitet | Prisnivå         | Kommentar                         |
+| ----------------------------------- | --------- | ---------------- | --------------------------------- |
+| Visby innerstad (ruiner, Kronhuset) | 80–150    | 50 000–70 000 kr | Historisk miljö, kräver tillstånd |
+| Lador/gårdar (t.ex. Ihre Kvarn)     | 90–180    | 35 000–55 000 kr | Flexibelt men kräver hyrmöbler    |
+| Hotell & resort (Clarion, Novi)     | 60–140    | 55 000–75 000 kr | Boende på plats, helhetslösning   |
+| Strand & tält                       | 40–120    | 25 000–40 000 kr | Tillstånd + dubbel plan B         |
+| Gårdshotell (Stelor, Grå Gåsen)     | 40–100    | 45 000–65 000 kr | Weekendpaket, mat ingår ofta      |
 
 ## Lokaler att kika på (icke-sponsrat)
 
-| Lokal                | Stil             | Fördelar                          | Notering |
-| -------------------- | ---------------- | --------------------------------- | -------- |
-| S:t Nicolai ruin     | Historisk        | Dramatiskt altare, centralt       | Kräver vädersäker plan |
-| Ihre Kvarn           | Rustik lada      | Möjlighet till tält, nära havet   | Begränsad värme – hyr värmare |
-| Grå Gåsen            | Boutiquehotell   | Boende, mat, trädgård             | Kapacitet upp till 90 |
-| Fridhem (Högklint)   | Havsutsikt       | Solnedgångsvy, vigselplats        | Boende i stugor |
-| Fabriken Furillen    | Industriell      | Fotovänligt, designhotell         | Kräver helgpaket |
+| Lokal              | Stil           | Fördelar                        | Notering                      |
+| ------------------ | -------------- | ------------------------------- | ----------------------------- |
+| S:t Nicolai ruin   | Historisk      | Dramatiskt altare, centralt     | Kräver vädersäker plan        |
+| Ihre Kvarn         | Rustik lada    | Möjlighet till tält, nära havet | Begränsad värme – hyr värmare |
+| Grå Gåsen          | Boutiquehotell | Boende, mat, trädgård           | Kapacitet upp till 90         |
+| Fridhem (Högklint) | Havsutsikt     | Solnedgångsvy, vigselplats      | Boende i stugor               |
+| Fabriken Furillen  | Industriell    | Fotovänligt, designhotell       | Kräver helgpaket              |
 
 ## Logistikchecklista
 

@@ -57,10 +57,15 @@ import VenueFilter from "~/components/tools/VenueFilter.astro";
 <div className="hero-banner bg-gradient-to-r from-purple-50 via-pink-50 to-rose-50 rounded-xl p-8 mb-8 border border-purple-100">
   <div className="flex items-center mb-4">
     <span className="text-4xl mr-3">🏰</span>
-    <h2 className="text-2xl font-bold text-gray-800">Sveriges bästa bröllopslokaler</h2>
+    <h2 className="text-2xl font-bold text-gray-800">
+      Sveriges bästa bröllopslokaler
+    </h2>
   </div>
   <p className="text-lg text-gray-700 leading-relaxed">
-    Från <strong>majestätiska slott</strong> till <strong>intima skärgårdslokaler</strong> – Sverige erbjuder drömplatser för alla typer av bröllop och budgetar. Hitta er perfekta lokal med vår omfattande guide.
+    Från <strong>majestätiska slott</strong> till{" "}
+    <strong>intima skärgårdslokaler</strong> – Sverige erbjuder drömplatser för
+    alla typer av bröllop och budgetar. Hitta er perfekta lokal med vår
+    omfattande guide.
   </p>
 </div>
 
@@ -139,6 +144,7 @@ Den ultimata drömmen för många par – magisk atmosfär med sekelgammal histo
         <li>• Transport kan bli komplicerat</li>
       </ul>
     </div>
+
   </div>
 
   <div className="examples bg-white rounded-lg p-4 mt-4">
@@ -196,6 +202,7 @@ Den populäraste valet för svenska par – professionell service, god mat och p
         <li>• Mindre kontroll över detaljer</li>
       </ul>
     </div>
+
   </div>
 
   <div className="price-ranges bg-white rounded-lg p-4 mt-4">
@@ -253,6 +260,7 @@ För er som vill gifta er under öppna himmel med Sveriges vackra natur som bakg
         <li>• Backup-platser nödvändiga</li>
       </ul>
     </div>
+
   </div>
 
   <div className="outdoor-types bg-white rounded-lg p-4 mt-4">
@@ -373,6 +381,7 @@ Att förstå prissättningen för bröllopslokaler är avgörande för er budget
         <li>• Överhattning och städning</li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -411,6 +420,7 @@ Att förstå prissättningen för bröllopslokaler är avgörande för er budget
       </div>
       <p className="text-purple-700 text-sm mt-2">Stora familjer och vänkretsar</p>
     </div>
+
   </div>
 </div>
 
@@ -485,6 +495,7 @@ Sverige erbjuder olika möjligheter beroende på region. Här är vad som känne
         <li>• Stress och stressig miljö</li>
       </ul>
     </div>
+
   </div>
 
   <div className="stockholm-highlights bg-white rounded-lg p-4 mt-4">
@@ -520,20 +531,24 @@ Sverige erbjuder olika möjligheter beroende på region. Här är vad som känne
     Göteborg & Västkusten: Havets närhet och avslappnad atmosfär
   </h4>
 
-  <div className="goteborg-features grid md:grid-cols-3 gap-4 text-sm">
-    <div className="bg-white rounded-lg p-4">
-      <h5 className="font-semibold text-gray-800 mb-2">🌊 Havsromantik</h5>
-      <p className="text-gray-600">Unik västkustmiljö, färsk skaldjur, solnedgångar över havet</p>
-    </div>
-    <div className="bg-white rounded-lg p-4">
-      <h5 className="font-semibold text-gray-800 mb-2">💰 Bättre priser</h5>
-      <p className="text-gray-600">På riksnivå, mindre konkurrens än Stockholm</p>
-    </div>
-    <div className="bg-white rounded-lg p-4">
-      <h5 className="font-semibold text-gray-800 mb-2">🎭 Kulturell rik</h5>
-      <p className="text-gray-600">Göteborgs Konstmuseum, Operan, unika teaterlokaler</p>
-    </div>
+<div className="goteborg-features grid md:grid-cols-3 gap-4 text-sm">
+  <div className="bg-white rounded-lg p-4">
+    <h5 className="font-semibold text-gray-800 mb-2">🌊 Havsromantik</h5>
+    <p className="text-gray-600">
+      Unik västkustmiljö, färsk skaldjur, solnedgångar över havet
+    </p>
   </div>
+  <div className="bg-white rounded-lg p-4">
+    <h5 className="font-semibold text-gray-800 mb-2">💰 Bättre priser</h5>
+    <p className="text-gray-600">På riksnivå, mindre konkurrens än Stockholm</p>
+  </div>
+  <div className="bg-white rounded-lg p-4">
+    <h5 className="font-semibold text-gray-800 mb-2">🎭 Kulturell rik</h5>
+    <p className="text-gray-600">
+      Göteborgs Konstmuseum, Operan, unika teaterlokaler
+    </p>
+  </div>
+</div>
 
   <div className="goteborg-recommendations bg-white rounded-lg p-4 mt-4">
     <h5 className="font-semibold text-gray-800 mb-2">🏆 Rekommenderade lokaltyper:</h5>
@@ -578,6 +593,7 @@ Sverige erbjuder olika möjligheter beroende på region. Här är vad som känne
         <li>• Dansk-svenska hybrid-mat</li>
       </ul>
     </div>
+
   </div>
 
   <div className="skane-castles bg-white rounded-lg p-4 mt-4">
@@ -609,27 +625,39 @@ Sverige erbjuder olika möjligheter beroende på region. Här är vad som känne
     Norrland: Unik miljö som garanterat imponerar
   </h4>
 
-  <div className="norrland-magic bg-white rounded-lg p-4">
-    <h5 className="font-semibold text-gray-800 mb-2">✨ Norrlands unika möjligheter:</h5>
-    <div className="grid md:grid-cols-2 gap-4 text-sm">
-      <div>
-        <strong>Sommarbröllop:</strong><br />
-        <span className="text-gray-600">Midnattssol, Vita Havet, fjälltoppar</span>
-      </div>
-      <div>
-        <strong>Vinterbröllop:</strong><br />
-        <span className="text-gray-600">Norrsken, snöslott, hundsläde-transport</span>
-      </div>
-      <div>
-        <strong>Prisfördelar:</strong><br />
-        <span className="text-gray-600">Lägre leverantörskostnader, mindre konkurrens</span>
-      </div>
-      <div>
-        <strong>Upplevelser:</strong><br />
-        <span className="text-gray-600">Renskötsel, samisk kultur, ishotell</span>
-      </div>
+<div className="norrland-magic bg-white rounded-lg p-4">
+  <h5 className="font-semibold text-gray-800 mb-2">
+    ✨ Norrlands unika möjligheter:
+  </h5>
+  <div className="grid md:grid-cols-2 gap-4 text-sm">
+    <div>
+      <strong>Sommarbröllop:</strong>
+      <br />
+      <span className="text-gray-600">
+        Midnattssol, Vita Havet, fjälltoppar
+      </span>
+    </div>
+    <div>
+      <strong>Vinterbröllop:</strong>
+      <br />
+      <span className="text-gray-600">
+        Norrsken, snöslott, hundsläde-transport
+      </span>
+    </div>
+    <div>
+      <strong>Prisfördelar:</strong>
+      <br />
+      <span className="text-gray-600">
+        Lägre leverantörskostnader, mindre konkurrens
+      </span>
+    </div>
+    <div>
+      <strong>Upplevelser:</strong>
+      <br />
+      <span className="text-gray-600">Renskötsel, samisk kultur, ishotell</span>
     </div>
   </div>
+</div>
 
   <div className="norrland-considerations bg-red-50 rounded-lg p-4 mt-4 border border-red-200">
     <h5 className="font-semibold text-red-800 mb-2">⚠️ Viktigt att tänka på:</h5>
@@ -707,6 +735,7 @@ Att välja bröllopslokal är ett komplext beslut. Här är vår expertguide fö
         </li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -745,6 +774,7 @@ Att välja bröllopslokal är ett komplext beslut. Här är vår expertguide fö
         <li>• Kolla vad som händer vid force majeure</li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -792,6 +822,7 @@ Att välja bröllopslokal är ett komplext beslut. Här är vår expertguide fö
         <li>▢ "Wow-faktor"</li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -824,6 +855,7 @@ Att välja bröllopslokal är ett komplext beslut. Här är vår expertguide fö
         <li>• <strong>Boka utan backup-plan:</strong> Vad händer vid problem?</li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -873,6 +905,7 @@ Att välja bröllopslokal är ett komplext beslut. Här är vår expertguide fö
       <p className="text-sm text-gray-700 mb-2"><strong>Vad händer:</strong> Obehagliga överraskningar och extra kostnader</p>
       <p className="text-sm text-green-700"><strong>Lösning:</strong> Läs ALLT och ställ frågor om det ni inte förstår</p>
     </div>
+
   </div>
 </div>
 
@@ -961,6 +994,7 @@ Baserat på hundratals bröllop vi följt, här är våra topp-rekommendationer:
         <li>• Buffé istället för serverat</li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -1000,6 +1034,7 @@ Baserat på hundratals bröllop vi följt, här är våra topp-rekommendationer:
         <li>• Fatta beslut och boka er favorit!</li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -1035,6 +1070,7 @@ Baserat på hundratals bröllop vi följt, här är våra topp-rekommendationer:
         <li>• [Bröllopslokaler Malmö](/leverantorer/brollopslokal-malmo)</li>
       </ul>
     </div>
+
   </div>
 </div>
 
@@ -1047,11 +1083,23 @@ Att hitta rätt bröllopslokal är en av era viktigaste beslut - den sätter ton
 <div className="conclusion-summary bg-gradient-to-r from-purple-50 via-pink-50 to-rose-50 rounded-xl p-6 mb-8 border border-purple-100">
   <h4 className="text-lg font-bold text-gray-800 mb-4">🎯 Kom ihåg:</h4>
   <ul className="text-gray-700 space-y-2">
-    <li>• <strong>Börja tidigt:</strong> 15-18 månader för populära datum</li>
-    <li>• <strong>Budget realistiskt:</strong> 1,500-2,000 kr per gäst för lokal + mat</li>
-    <li>• <strong>Prioritera rätt:</strong> Funktion före form, men båda är viktiga</li>
-    <li>• <strong>Ha backup-planer:</strong> Väder och problem kan inträffa</li>
-    <li>• <strong>Lita på känslan:</strong> Rätt plats kommer kännas rätt</li>
+    <li>
+      • <strong>Börja tidigt:</strong> 15-18 månader för populära datum
+    </li>
+    <li>
+      • <strong>Budget realistiskt:</strong> 1,500-2,000 kr per gäst för lokal +
+      mat
+    </li>
+    <li>
+      • <strong>Prioritera rätt:</strong> Funktion före form, men båda är
+      viktiga
+    </li>
+    <li>
+      • <strong>Ha backup-planer:</strong> Väder och problem kan inträffa
+    </li>
+    <li>
+      • <strong>Lita på känslan:</strong> Rätt plats kommer kännas rätt
+    </li>
   </ul>
 </div>
 
@@ -1059,4 +1107,4 @@ Att hitta rätt bröllopslokal är en av era viktigaste beslut - den sätter ton
 
 ---
 
-*Uppdaterad senast: 2024-09-24. Denna guide uppdateras regelbundet med nya lokaler, prisutveckling och trendspaningar. Har ni tips eller erfarenheter att dela? [Kontakta oss](/kontakt/) - vi älskar att höra från verkliga brudpar!*
+_Uppdaterad senast: 2024-09-24. Denna guide uppdateras regelbundet med nya lokaler, prisutveckling och trendspaningar. Har ni tips eller erfarenheter att dela? [Kontakta oss](/kontakt/) - vi älskar att höra från verkliga brudpar!_

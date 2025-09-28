@@ -44,13 +44,13 @@ Skillnaden mot samboavtal? Sambor regleras av sambolagen och delar främst bosta
 
 ## 2. Så fungerar processen – steg för steg
 
-| Steg | Vad ska göras | Tidslinje |
-| ---- | ------------- | --------- |
-| 1. Förbered | Lista tillgångar/skulder, diskutera mål, bestäm vad som ska vara enskilt | 2–4 veckor före vigsel |
-| 2. Skriv avtal | Använd mallen, fyll i personuppgifter, beskriv egendom, signera båda parter | Samma dag eller innan vigsel |
-| 3. Registrera | Skicka original till Skatteverket, betala 275 kr avgift via bankgiro 5050-1055 | Direkt efter underskrift |
-| 4. Arkivera | Spara kvitto på avgift och registrerat exemplar, uppdatera budget och försäkringar | När registreringen bekräftats |
-| 5. Revidera | Uppdatera om ni säljer/köper egendom eller startar företag | Vid förändring |
+| Steg           | Vad ska göras                                                                      | Tidslinje                     |
+| -------------- | ---------------------------------------------------------------------------------- | ----------------------------- |
+| 1. Förbered    | Lista tillgångar/skulder, diskutera mål, bestäm vad som ska vara enskilt           | 2–4 veckor före vigsel        |
+| 2. Skriv avtal | Använd mallen, fyll i personuppgifter, beskriv egendom, signera båda parter        | Samma dag eller innan vigsel  |
+| 3. Registrera  | Skicka original till Skatteverket, betala 275 kr avgift via bankgiro 5050-1055     | Direkt efter underskrift      |
+| 4. Arkivera    | Spara kvitto på avgift och registrerat exemplar, uppdatera budget och försäkringar | När registreringen bekräftats |
+| 5. Revidera    | Uppdatera om ni säljer/köper egendom eller startar företag                         | Vid förändring                |
 
 Vår mall innehåller en ingress med personuppgifter, definition av enskild egendom, uppgift om tillämpning vid skilsmässa/dödsfall samt underskriftsdel. Ni kan även lägga till villkor om ersättning om en part gjort större kontantinsats i bostaden.
 

@@ -48,13 +48,13 @@ Skapa ett projektark med ansvarig person, deadline och förvaringsplats för var
 
 ## Budget & tidsåtgång per DIY-projekt
 
-| Projekt                           | Materialkostnad* | Tidsåtgång | Tips |
-| --------------------------------- | ---------------- | ---------- | ---- |
-| Björkportal med tygdrapering      | 1 200 kr         | 6 h        | Använd kvistar från skogsägare + återbrukade gardiner |
-| Bordslöpare av linne + ljusslingor| 700 kr           | 3 h        | Köp restbitar av linne, kombinera med LED-ljusslingor |
-| Skyltar i plywood och kalkfärg    | 450 kr           | 4 h        | Hyra laserskärare på makerspace för snygg text |
-| Flaskvaser med säsongsblommor     | 900 kr           | 5 h        | Samla flaskor från vänner, fyll med lokala snittblommor |
-| Placeringskort av handgjort papper| 350 kr           | 4 h        | Återvinn tidningar via papperstunna, använd stämplar |
+| Projekt                            | Materialkostnad\* | Tidsåtgång | Tips                                                    |
+| ---------------------------------- | ----------------- | ---------- | ------------------------------------------------------- |
+| Björkportal med tygdrapering       | 1 200 kr          | 6 h        | Använd kvistar från skogsägare + återbrukade gardiner   |
+| Bordslöpare av linne + ljusslingor | 700 kr            | 3 h        | Köp restbitar av linne, kombinera med LED-ljusslingor   |
+| Skyltar i plywood och kalkfärg     | 450 kr            | 4 h        | Hyra laserskärare på makerspace för snygg text          |
+| Flaskvaser med säsongsblommor      | 900 kr            | 5 h        | Samla flaskor från vänner, fyll med lokala snittblommor |
+| Placeringskort av handgjort papper | 350 kr            | 4 h        | Återvinn tidningar via papperstunna, använd stämplar    |
 
 \*Prisuppskattning baseras på svenska byggvaruhus, Panduro och återbruk (maj 2025). Anpassa efter antal gäster och bordsplacering.
 

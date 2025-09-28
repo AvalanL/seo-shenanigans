@@ -64,13 +64,13 @@ Om ni använder blanketten SKV 7880: skriv tydligt med blå eller svart penna, s
 
 ## Tidslinje som fungerar i praktiken
 
-| Vecka | Aktivitet                          | Ansvarig | Anteckning |
-| ----- | --------------------------------- | -------- | ---------- |
-| -16   | Förbered dokument, boka tid       | Partner A | Kontrollera pass/skilsmässodomar |
-| -15   | Skicka in ansökan                 | Partner B | Logga ansökan i bröllopskalkylbladet |
-| -14   | Påminnelse om handläggning        | Toastmaster | Säkerställ backup vid komplettering |
-| -13   | Hämta intyg och scanna kopior     | Partner A | Spara i Drive + fysisk pärm |
-| -12   | Lämna intyg till vigselförrättare | Koordinator | Få kvittens på mottagandet |
+| Vecka | Aktivitet                         | Ansvarig    | Anteckning                           |
+| ----- | --------------------------------- | ----------- | ------------------------------------ |
+| -16   | Förbered dokument, boka tid       | Partner A   | Kontrollera pass/skilsmässodomar     |
+| -15   | Skicka in ansökan                 | Partner B   | Logga ansökan i bröllopskalkylbladet |
+| -14   | Påminnelse om handläggning        | Toastmaster | Säkerställ backup vid komplettering  |
+| -13   | Hämta intyg och scanna kopior     | Partner A   | Spara i Drive + fysisk pärm          |
+| -12   | Lämna intyg till vigselförrättare | Koordinator | Få kvittens på mottagandet           |
 
 Planerar ni att gifta er utomlands? Boka tid hos Notarius Publicus senast fyra veckor innan för apostille på intygen.
 

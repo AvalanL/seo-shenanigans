@@ -60,12 +60,12 @@ related:
 
 ## Kostnad och bemanning
 
-| Element              | Rekommendation                         | Kommentar |
-| -------------------- | --------------------------------------- | ---------- |
-| Matbudget per gäst   | 750–950 kr (serverad) / 450–650 (buffé) | Inkludera råvaror, personal, transporter |
-| Dryck                | ½ flaska vin + 1 glas bubbel per gäst   | Ha alkoholfritt alternativ redo |
-| Personal             | 1 servitör per 20 gäster                | Lägg till barpersonal vid fri bar |
-| Buffert              | +10 %                                   | Täcker råvarusvängningar |
+| Element            | Rekommendation                          | Kommentar                                |
+| ------------------ | --------------------------------------- | ---------------------------------------- |
+| Matbudget per gäst | 750–950 kr (serverad) / 450–650 (buffé) | Inkludera råvaror, personal, transporter |
+| Dryck              | ½ flaska vin + 1 glas bubbel per gäst   | Ha alkoholfritt alternativ redo          |
+| Personal           | 1 servitör per 20 gäster                | Lägg till barpersonal vid fri bar        |
+| Buffert            | +10 %                                   | Täcker råvarusvängningar                 |
 
 ## Menyexempel att använda i projektplanen
 

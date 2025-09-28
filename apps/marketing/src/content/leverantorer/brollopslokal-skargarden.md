@@ -39,13 +39,13 @@ related:
 
 ## Välj rätt ö och lokal
 
-| Område         | Resa från city | Lokaltyper                     | Kommentar |
-| -------------- | -------------- | ------------------------------ | --------- |
-| Vaxholm & Resarö | 40 min båt/bil | Herrgårdar, villor, hotell     | Kort restid, många boenden |
-| Sandhamn        | 1 h 45 min båt  | Hotell, seglarrestaurang       | Kräver övernattning för majoriteten |
-| Möja & Nämdö    | 1 h 30 min båt  | Loge, bygdegård, tältbrygga    | Passar rustika bröllop, planera el |
-| Utö & Nåttarö   | 1 h 20 min båt  | Gruvstallet, värdshus, tält    | Cykeltransfer, bra badstränder |
-| Grinda & Svartsö | 1 h 15 min båt | Sommarrestaurang, logi         | Begränsat antal platser, boka hel weekend |
+| Område           | Resa från city | Lokaltyper                  | Kommentar                                 |
+| ---------------- | -------------- | --------------------------- | ----------------------------------------- |
+| Vaxholm & Resarö | 40 min båt/bil | Herrgårdar, villor, hotell  | Kort restid, många boenden                |
+| Sandhamn         | 1 h 45 min båt | Hotell, seglarrestaurang    | Kräver övernattning för majoriteten       |
+| Möja & Nämdö     | 1 h 30 min båt | Loge, bygdegård, tältbrygga | Passar rustika bröllop, planera el        |
+| Utö & Nåttarö    | 1 h 20 min båt | Gruvstallet, värdshus, tält | Cykeltransfer, bra badstränder            |
+| Grinda & Svartsö | 1 h 15 min båt | Sommarrestaurang, logi      | Begränsat antal platser, boka hel weekend |
 
 Kontrollera kapacitet, om kök finns och hur sena tider lokalen erbjuder – många öar har ljudrestriktion efter kl. 01.00.
 
@@ -65,13 +65,13 @@ Kontrollera kapacitet, om kök finns och hur sena tider lokalen erbjuder – må
 
 ## Lokaler att kika på (icke-sponsrat)
 
-| Lokal                 | Kapacitet | Fördelar                             | Kommentar |
-| --------------------- | --------- | ------------------------------------ | ---------- |
-| Sandhamn Seglarhotell | 120       | Helhetslösning med logi och festlokal| Kräver övernattning |
-| Grinda Wärdshus       | 90        | Eget kök, sjöglimt, bastu            | Begränsat sena tider |
-| Vaxholms Kastell      | 180       | Historisk miljö, skyttelbåt ingår    | Ljudrestriktion efter 01 |
-| Utö Värdshus Loge     | 150       | Rustik loge inkl. boende             | Transport via färja + lastbil |
-| Svartsö Logi          | 100       | Glamping och naturfokus              | Kräver extra tält för större sällskap |
+| Lokal                 | Kapacitet | Fördelar                              | Kommentar                             |
+| --------------------- | --------- | ------------------------------------- | ------------------------------------- |
+| Sandhamn Seglarhotell | 120       | Helhetslösning med logi och festlokal | Kräver övernattning                   |
+| Grinda Wärdshus       | 90        | Eget kök, sjöglimt, bastu             | Begränsat sena tider                  |
+| Vaxholms Kastell      | 180       | Historisk miljö, skyttelbåt ingår     | Ljudrestriktion efter 01              |
+| Utö Värdshus Loge     | 150       | Rustik loge inkl. boende              | Transport via färja + lastbil         |
+| Svartsö Logi          | 100       | Glamping och naturfokus               | Kräver extra tält för större sällskap |
 
 ## Väder och plan B
 

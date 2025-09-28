@@ -46,14 +46,14 @@ related:
 
 ## Tidslinje för toastmastern
 
-| Tidpunkt | Aktivitet | Leverabler |
-| -------- | --------- | ---------- |
-| -8 veckor | Skicka informationsbrev till talare | Mall med tidsram, deadline och tips |
-| -6 veckor | Säkerställa talordning | Slutlista + preliminärt schema |
-| -4 veckor | Teknik- och logistikmöte | Lista över mikrofoner, ljud, presentationer |
-| -2 veckor | Generalrepetition | Genomgång med kök, serveringspersonal, DJ |
-| Bröllopsdagen | Briefing 2 h före, genomföra middagen | Körschema minut för minut, backup-planer |
-| Veckan efter | Skicka tack och dela material | Tackbrev, länkar till foto/video |
+| Tidpunkt      | Aktivitet                             | Leverabler                                  |
+| ------------- | ------------------------------------- | ------------------------------------------- |
+| -8 veckor     | Skicka informationsbrev till talare   | Mall med tidsram, deadline och tips         |
+| -6 veckor     | Säkerställa talordning                | Slutlista + preliminärt schema              |
+| -4 veckor     | Teknik- och logistikmöte              | Lista över mikrofoner, ljud, presentationer |
+| -2 veckor     | Generalrepetition                     | Genomgång med kök, serveringspersonal, DJ   |
+| Bröllopsdagen | Briefing 2 h före, genomföra middagen | Körschema minut för minut, backup-planer    |
+| Veckan efter  | Skicka tack och dela material         | Tackbrev, länkar till foto/video            |
 
 ## Talordning – svensk standard
 

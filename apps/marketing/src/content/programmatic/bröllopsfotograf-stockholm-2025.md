@@ -47,18 +47,17 @@ programmaticData:
   competitionLevel: "medium"
 ---
 
-
 # Bröllopsfotograf Stockholm 2025
 
 > **Snabbguide 2025:** I Stockholm kostar bröllopsfotograf 25 000-85 000 kr med genomsnitt på 45 000 kr.
 
 ## Priser och paket 2025
 
-| Prisnivå | Omfattning | Pris Stockholm | Vad som ingår |
-|----------|------------|-------------------|---------------|
-| **Budget** | 6-8 timmar | 25 000 - 35 000 kr | Grundpaket, digital leverans |
-| **Standard** | 10-12 timmar | 40 000 - 55 000 kr | Heldag, online-galleri, USB |
-| **Premium** | Hela dagen + extra | 55 000 - 85 000+ kr | Två fotografer, album, video |
+| Prisnivå     | Omfattning         | Pris Stockholm      | Vad som ingår                |
+| ------------ | ------------------ | ------------------- | ---------------------------- |
+| **Budget**   | 6-8 timmar         | 25 000 - 35 000 kr  | Grundpaket, digital leverans |
+| **Standard** | 10-12 timmar       | 40 000 - 55 000 kr  | Heldag, online-galleri, USB  |
+| **Premium**  | Hela dagen + extra | 55 000 - 85 000+ kr | Två fotografer, album, video |
 
 ### Särskilda förhållanden i Stockholm
 
@@ -79,11 +78,13 @@ Vi har identifierat 47+ professionella bröllopsfotografer i Stockholm. Här är
 ## Logistik för bröllopsfoto i Stockholm
 
 **Transport och tillgänglighet:**
+
 - Arlanda - 45 min för utomregionala fotografer
 - Tunnelbana, bussar, pendeltåg för rörelse mellan lokaler
 - Begränsad i innerstan
 
 **Bästa fotoplatserna:**
+
 - **Hesselby Slott**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Winterviken**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Nacka Strand**: Perfekt för [specifik stil] med [unika egenskaper]
@@ -96,14 +97,17 @@ Ljusa sommarnätter populära
 ## Vanliga frågor
 
 ### Vad kostar bröllopsfotograf i Stockholm 2025?
+
 Priserna varierar mellan 25 000 kr och 85 000 kr beroende på paket och fotograf. Genomsnittet ligger på 45 000 kr.
 
 ### Hur många fotografer finns det i Stockholm?
+
 Vi har kartlagt 47 professionella bröllopsfotografer i Stockholm med olika specialiteter och prisklasser.
 
 ### När ska man boka?
+
 Boka minst 8-12 månader i förväg för maj-september. För övriga månader räcker ofta 4-6 månader.
 
 ---
 
-*Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 47 leverantörer i Stockholm.*
+_Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 47 leverantörer i Stockholm._

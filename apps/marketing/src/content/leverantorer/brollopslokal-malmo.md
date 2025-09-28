@@ -40,23 +40,23 @@ related:
 
 ## Prisnivåer och kapacitet
 
-| Lokaltyp                  | Kapacitet | Prisnivå       | Kommentar |
-| ------------------------- | --------- | -------------- | --------- |
-| Stadshotell / festvåning  | 60–150    | 32 000–48 000 kr | Helhetslösning, kort logistik |
-| Industrilokal (Lokstallarna, Slagthuset) | 120–250 | 35 000–55 000 kr | Kräver egen catering och teknik |
-| Herrgård / slott (Skåne)  | 80–180    | 45 000–75 000 kr | Boende på plats, större tomter |
-| Strand / paviljong        | 40–120    | 18 000–35 000 kr | Tillstånd + vädersäker plan |
-| Gårdsbröllop / lada       | 80–150    | 30 000–50 000 kr | Flexibelt men kräver hyrmöbler |
+| Lokaltyp                                 | Kapacitet | Prisnivå         | Kommentar                       |
+| ---------------------------------------- | --------- | ---------------- | ------------------------------- |
+| Stadshotell / festvåning                 | 60–150    | 32 000–48 000 kr | Helhetslösning, kort logistik   |
+| Industrilokal (Lokstallarna, Slagthuset) | 120–250   | 35 000–55 000 kr | Kräver egen catering och teknik |
+| Herrgård / slott (Skåne)                 | 80–180    | 45 000–75 000 kr | Boende på plats, större tomter  |
+| Strand / paviljong                       | 40–120    | 18 000–35 000 kr | Tillstånd + vädersäker plan     |
+| Gårdsbröllop / lada                      | 80–150    | 30 000–50 000 kr | Flexibelt men kräver hyrmöbler  |
 
 ## Lokaler att överväga (icke-sponsrat)
 
-| Lokal                 | Typ           | Styrkor                           | Notering |
-| --------------------- | ------------- | --------------------------------- | -------- |
-| Slagthuset MMX        | Industri      | Högt i tak, nära station          | Kräver professionell ljudtekniker |
-| Lokstallarna          | Industri      | Tegel, stora ytor, flexibilitet   | Egen catering krävs |
-| Katrinetorp Landeri   | Herrgård      | Romantiska trädgårdar             | Utomhusvigsel + orangeri |
-| Torup Slott           | Herrgård      | Skogsmiljö, möjlighet till tält   | Begränsat med boende |
-| Malmö Live Skybox     | Stadshotell   | Utsikt över city, modern design   | Sluttid 01.00 |
+| Lokal               | Typ         | Styrkor                         | Notering                          |
+| ------------------- | ----------- | ------------------------------- | --------------------------------- |
+| Slagthuset MMX      | Industri    | Högt i tak, nära station        | Kräver professionell ljudtekniker |
+| Lokstallarna        | Industri    | Tegel, stora ytor, flexibilitet | Egen catering krävs               |
+| Katrinetorp Landeri | Herrgård    | Romantiska trädgårdar           | Utomhusvigsel + orangeri          |
+| Torup Slott         | Herrgård    | Skogsmiljö, möjlighet till tält | Begränsat med boende              |
+| Malmö Live Skybox   | Stadshotell | Utsikt över city, modern design | Sluttid 01.00                     |
 
 ## Logistik och boende
 

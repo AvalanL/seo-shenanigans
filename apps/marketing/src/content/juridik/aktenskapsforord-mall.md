@@ -56,12 +56,12 @@ related:
 
 ## Kostnader och tidsplan
 
-| Moment                              | Kostnad (kr) | Tidsåtgång            | Kommentar |
-| ----------------------------------- | -------------| --------------------- | ---------- |
-| Registreringsavgift Skatteverket    | 275          | 1–2 veckor handläggning | Betalas via bankgiro eller Swish |
-| Juristkonsultation (frivilligt)     | 2 000–6 000  | 1–2 möten             | Högre pris vid bolag/fastigheter |
-| Uppdaterat personbevis              | 0            | Direkt via e-tjänst   | Beställs på skatteverket.se |
-| Värdering av bostad/företag (vid behov) | 0–5 000     | 1–3 veckor            | Bank- eller mäklarintyg |
+| Moment                                  | Kostnad (kr) | Tidsåtgång              | Kommentar                        |
+| --------------------------------------- | ------------ | ----------------------- | -------------------------------- |
+| Registreringsavgift Skatteverket        | 275          | 1–2 veckor handläggning | Betalas via bankgiro eller Swish |
+| Juristkonsultation (frivilligt)         | 2 000–6 000  | 1–2 möten               | Högre pris vid bolag/fastigheter |
+| Uppdaterat personbevis                  | 0            | Direkt via e-tjänst     | Beställs på skatteverket.se      |
+| Värdering av bostad/företag (vid behov) | 0–5 000      | 1–3 veckor              | Bank- eller mäklarintyg          |
 
 Planera in registreringen minst en månad före vigseln om ni vill ha avtalet på plats innan namnbyte, bostadsköp eller större investeringar.
 

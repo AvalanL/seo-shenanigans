@@ -40,23 +40,23 @@ related:
 
 ## Prisnivåer och kapacitet
 
-| Lokaltyp                    | Kapacitet | Prisnivå       | Kommentar |
-| --------------------------- | --------- | -------------- | --------- |
-| Stadshotell / festvåning    | 70–160    | 32 000–52 000 kr | Central logistik, mat ingår |
-| Industrilokal (Auktionsverket, Kajskjul 8) | 120–250 | 40 000–65 000 kr | Kräver egen teknik/catering |
-| Herrgård / slott (Hällsnäs, Bjertorp) | 80–180 | 50 000–80 000 kr | Boende och helhetslösning |
-| Skärgård (Styrsö, Marstrand)| 60–140    | 45 000–70 000 kr | Båttransporter, väderplan |
-| Natur & loge (Tjolöholm, Gunnebo lada) | 90–150 | 35 000–55 000 kr | Kräver hyrmöbler, plan B |
+| Lokaltyp                                   | Kapacitet | Prisnivå         | Kommentar                   |
+| ------------------------------------------ | --------- | ---------------- | --------------------------- |
+| Stadshotell / festvåning                   | 70–160    | 32 000–52 000 kr | Central logistik, mat ingår |
+| Industrilokal (Auktionsverket, Kajskjul 8) | 120–250   | 40 000–65 000 kr | Kräver egen teknik/catering |
+| Herrgård / slott (Hällsnäs, Bjertorp)      | 80–180    | 50 000–80 000 kr | Boende och helhetslösning   |
+| Skärgård (Styrsö, Marstrand)               | 60–140    | 45 000–70 000 kr | Båttransporter, väderplan   |
+| Natur & loge (Tjolöholm, Gunnebo lada)     | 90–150    | 35 000–55 000 kr | Kräver hyrmöbler, plan B    |
 
 ## Lokaler att överväga (icke-sponsrat)
 
-| Lokal               | Typ            | Fördelar                            | Notering |
-| ------------------- | -------------- | ----------------------------------- | -------- |
-| Auktionsverket Kulturarena | Industri | Högt i tak, nära centralstation     | Kräver professionell ljudteknik |
-| Kajskjul 8          | Skeppshus      | Havsutsikt, stor scen               | Parkering i närliggande garage |
-| Hällsnäs Konferens  | Herrgård       | Sjöutsikt, spa, övernattning        | Kapacitet 140 gäster |
-| Nääs Fabriker       | Industri + hotell | Designhotell, flera lokaler      | Boka minst 12 månader i förväg |
-| Villa Vanahem (Marstrand) | Skärgård | Historisk villa, närhet till hamn   | Kräver båttransfer |
+| Lokal                      | Typ               | Fördelar                          | Notering                        |
+| -------------------------- | ----------------- | --------------------------------- | ------------------------------- |
+| Auktionsverket Kulturarena | Industri          | Högt i tak, nära centralstation   | Kräver professionell ljudteknik |
+| Kajskjul 8                 | Skeppshus         | Havsutsikt, stor scen             | Parkering i närliggande garage  |
+| Hällsnäs Konferens         | Herrgård          | Sjöutsikt, spa, övernattning      | Kapacitet 140 gäster            |
+| Nääs Fabriker              | Industri + hotell | Designhotell, flera lokaler       | Boka minst 12 månader i förväg  |
+| Villa Vanahem (Marstrand)  | Skärgård          | Historisk villa, närhet till hamn | Kräver båttransfer              |
 
 ## Logistik och transport
 

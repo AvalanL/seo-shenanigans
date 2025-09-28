@@ -80,7 +80,11 @@ main table caption {
 }
 
 main table thead th {
-  background: linear-gradient(135deg, var(--table-header), var(--table-header-accent));
+  background: linear-gradient(
+    135deg,
+    var(--table-header),
+    var(--table-header-accent)
+  );
   color: var(--table-header-text);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -91,7 +95,9 @@ main table thead th {
 }
 
 main table tbody tr {
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 main table tbody tr:nth-child(even) {

@@ -47,18 +47,17 @@ programmaticData:
   competitionLevel: "medium"
 ---
 
-
 # Bröllopsfotograf Uppsala 2025
 
 > **Snabbguide 2025:** I Uppsala kostar bröllopsfotograf 18 000-65 000 kr med genomsnitt på 32 000 kr.
 
 ## Priser och paket 2025
 
-| Prisnivå | Omfattning | Pris Uppsala | Vad som ingår |
-|----------|------------|-------------------|---------------|
-| **Budget** | 6-8 timmar | 18 000 - 22 000 kr | Grundpaket, digital leverans |
-| **Standard** | 10-12 timmar | 27 000 - 42 000 kr | Heldag, online-galleri, USB |
-| **Premium** | Hela dagen + extra | 42 000 - 65 000+ kr | Två fotografer, album, video |
+| Prisnivå     | Omfattning         | Pris Uppsala        | Vad som ingår                |
+| ------------ | ------------------ | ------------------- | ---------------------------- |
+| **Budget**   | 6-8 timmar         | 18 000 - 22 000 kr  | Grundpaket, digital leverans |
+| **Standard** | 10-12 timmar       | 27 000 - 42 000 kr  | Heldag, online-galleri, USB  |
+| **Premium**  | Hela dagen + extra | 42 000 - 65 000+ kr | Två fotografer, album, video |
 
 ### Särskilda förhållanden i Uppsala
 
@@ -79,11 +78,13 @@ Vi har identifierat 18+ professionella bröllopsfotografer i Uppsala. Här är n
 ## Logistik för bröllopsfoto i Uppsala
 
 **Transport och tillgänglighet:**
+
 - Arlanda - 35 min för utomregionala fotografer
 - Pendeltåg till Stockholm, lokala bussar för rörelse mellan lokaler
 - Relativt tillgänglig
 
 **Bästa fotoplatserna:**
+
 - **Uppsala Domkyrka**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Linnéträdgården**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Uppsala Slott**: Perfekt för [specifik stil] med [unika egenskaper]
@@ -96,14 +97,17 @@ Student-påverkat schema, undvik tentaveckor
 ## Vanliga frågor
 
 ### Vad kostar bröllopsfotograf i Uppsala 2025?
+
 Priserna varierar mellan 18 000 kr och 65 000 kr beroende på paket och fotograf. Genomsnittet ligger på 32 000 kr.
 
 ### Hur många fotografer finns det i Uppsala?
+
 Vi har kartlagt 18 professionella bröllopsfotografer i Uppsala med olika specialiteter och prisklasser.
 
 ### När ska man boka?
+
 Boka minst 8-12 månader i förväg för maj-september. För övriga månader räcker ofta 4-6 månader.
 
 ---
 
-*Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 18 leverantörer i Uppsala.*
+_Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 18 leverantörer i Uppsala._

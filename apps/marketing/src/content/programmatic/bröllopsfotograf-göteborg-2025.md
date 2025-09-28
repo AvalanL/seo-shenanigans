@@ -47,18 +47,17 @@ programmaticData:
   competitionLevel: "medium"
 ---
 
-
 # Bröllopsfotograf Göteborg 2025
 
 > **Snabbguide 2025:** I Göteborg kostar bröllopsfotograf 22 000-75 000 kr med genomsnitt på 38 000 kr.
 
 ## Priser och paket 2025
 
-| Prisnivå | Omfattning | Pris Göteborg | Vad som ingår |
-|----------|------------|-------------------|---------------|
-| **Budget** | 6-8 timmar | 22 000 - 28 000 kr | Grundpaket, digital leverans |
-| **Standard** | 10-12 timmar | 33 000 - 48 000 kr | Heldag, online-galleri, USB |
-| **Premium** | Hela dagen + extra | 48 000 - 75 000+ kr | Två fotografer, album, video |
+| Prisnivå     | Omfattning         | Pris Göteborg       | Vad som ingår                |
+| ------------ | ------------------ | ------------------- | ---------------------------- |
+| **Budget**   | 6-8 timmar         | 22 000 - 28 000 kr  | Grundpaket, digital leverans |
+| **Standard** | 10-12 timmar       | 33 000 - 48 000 kr  | Heldag, online-galleri, USB  |
+| **Premium**  | Hela dagen + extra | 48 000 - 75 000+ kr | Två fotografer, album, video |
 
 ### Särskilda förhållanden i Göteborg
 
@@ -79,11 +78,13 @@ Vi har identifierat 31+ professionella bröllopsfotografer i Göteborg. Här är
 ## Logistik för bröllopsfoto i Göteborg
 
 **Transport och tillgänglighet:**
+
 - Landvetter - 30 min för utomregionala fotografer
 - Spårvagn, bussar för rörelse mellan lokaler
 - Begränsad i centrum
 
 **Bästa fotoplatserna:**
+
 - **Liseberg**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Göteborgs Konsthall**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Älvsjö Gård**: Perfekt för [specifik stil] med [unika egenskaper]
@@ -96,14 +97,17 @@ Västkustväder påverkar outdoor-bröllop
 ## Vanliga frågor
 
 ### Vad kostar bröllopsfotograf i Göteborg 2025?
+
 Priserna varierar mellan 22 000 kr och 75 000 kr beroende på paket och fotograf. Genomsnittet ligger på 38 000 kr.
 
 ### Hur många fotografer finns det i Göteborg?
+
 Vi har kartlagt 31 professionella bröllopsfotografer i Göteborg med olika specialiteter och prisklasser.
 
 ### När ska man boka?
+
 Boka minst 8-12 månader i förväg för juni-augusti. För övriga månader räcker ofta 4-6 månader.
 
 ---
 
-*Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 31 leverantörer i Göteborg.*
+_Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 31 leverantörer i Göteborg._

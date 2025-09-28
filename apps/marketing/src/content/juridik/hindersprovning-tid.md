@@ -52,14 +52,14 @@ Hindersprövningen är Skatteverkets kontroll av att ni uppfyller lagens krav f�
 
 ## Tidslinje och viktiga datum
 
-| Moment                                   | Rekommenderad tidpunkt | Kommentar |
-| ---------------------------------------- | ---------------------- | ---------- |
-| Starta ansökan                           | 4 månader före vigsel  | Ansök inte tidigare – intyget hinner annars gå ut |
-| Påminnelse om komplettering (vid behov)  | +5 arbetsdagar         | Kontrollera e-post och Mina sidor |
-| Handläggningstid digital ansökan         | 5–10 arbetsdagar       | Längre under juni–augusti |
-| Handläggningstid pappersansökan          | 10–15 arbetsdagar      | Postgång + manuell registrering |
-| Hämta/lämna intyg                        | Senast 2 veckor före   | Lämna direkt till vigselförrättaren |
-| Giltighetstid för intyget                | 4 månader              | Förnya vid datumskifte eller flytt |
+| Moment                                  | Rekommenderad tidpunkt | Kommentar                                         |
+| --------------------------------------- | ---------------------- | ------------------------------------------------- |
+| Starta ansökan                          | 4 månader före vigsel  | Ansök inte tidigare – intyget hinner annars gå ut |
+| Påminnelse om komplettering (vid behov) | +5 arbetsdagar         | Kontrollera e-post och Mina sidor                 |
+| Handläggningstid digital ansökan        | 5–10 arbetsdagar       | Längre under juni–augusti                         |
+| Handläggningstid pappersansökan         | 10–15 arbetsdagar      | Postgång + manuell registrering                   |
+| Hämta/lämna intyg                       | Senast 2 veckor före   | Lämna direkt till vigselförrättaren               |
+| Giltighetstid för intyget               | 4 månader              | Förnya vid datumskifte eller flytt                |
 
 Planerar ni destinationbröllop utomlands? Kontrollera om intyget behöver apostille via Notarius Publicus.
 

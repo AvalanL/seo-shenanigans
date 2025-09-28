@@ -54,29 +54,29 @@ Tipset är att börja med totalbudget och gästlista. Fyll sedan i prioriteringa
 
 ## 3. Vad ingår i Excel-mallen?
 
-| Flik | Funktion | Viktiga formler |
-| ---- | -------- | --------------- |
-| Inställningar | Sätt totalbudget, prioriteringar, antal gäster | `=SUMMA(TabellKostnader[Budget])` |
-| Kostnader | Lista poster, offert, budget och utfall | `=IF([@Utfall]>[@Budget];"ÖVER";"OK")` |
-| Diagram | Visualiserar fördelning och trend | Dynamiska pivottabeller |
-| Betalplan | Deposition, delbetalningar och påminnelser | `=DATO(ÅR($B$2);MÅNAD($B$2)-1;DAG($B$2))` |
-| Gästlista | Importera namn, RSVP, specialkost | Dataverifiering + villkorsstyrd formatering |
+| Flik          | Funktion                                       | Viktiga formler                             |
+| ------------- | ---------------------------------------------- | ------------------------------------------- |
+| Inställningar | Sätt totalbudget, prioriteringar, antal gäster | `=SUMMA(TabellKostnader[Budget])`           |
+| Kostnader     | Lista poster, offert, budget och utfall        | `=IF([@Utfall]>[@Budget];"ÖVER";"OK")`      |
+| Diagram       | Visualiserar fördelning och trend              | Dynamiska pivottabeller                     |
+| Betalplan     | Deposition, delbetalningar och påminnelser     | `=DATO(ÅR($B$2);MÅNAD($B$2)-1;DAG($B$2))`   |
+| Gästlista     | Importera namn, RSVP, specialkost              | Dataverifiering + villkorsstyrd formatering |
 
 Flikarna är sammankopplade via Excel-tabeller. För att lägga till en ny kostnadspost, skriv i raden under den sista posten så expanderar tabellen automatiskt. Diagrammen uppdateras utan att ni behöver göra något.
 
 ## 4. Rekommenderad kostnadsstruktur 2025
 
-| Kostnadspost | Rek. andel | Kommentar |
-| ------------- | ---------- | --------- |
-| Lokal & hyra | 20–28 % | Regionala skillnader; i Stockholm addera +15 %. |
-| Mat & dryck | 25–30 % | Inkludera serveringspersonal och provsmakning. |
-| Foto & film | 8–12 % | Använd kolumnen för delbetalningar (bokning + leverans). |
-| Blommor & dekor | 6–10 % | Kombinera köp, hyra och DIY för att hålla nivån. |
-| Kläder & styling | 8–12 % | För in både klädinköp och skräddare. |
-| Underhållning | 5–10 % | Lägg till liveband, DJ, ljudteknik separat. |
-| Transport & logi | 4–8 % | Räkna in reseersättningar för leverantörer. |
-| Övrigt | 5–10 % | T.ex. trycksaker, ringar, presenter. |
-| Buffert | Minst 10 % | Mallen varnar om bufferten understiger 8 %. |
+| Kostnadspost     | Rek. andel | Kommentar                                                |
+| ---------------- | ---------- | -------------------------------------------------------- |
+| Lokal & hyra     | 20–28 %    | Regionala skillnader; i Stockholm addera +15 %.          |
+| Mat & dryck      | 25–30 %    | Inkludera serveringspersonal och provsmakning.           |
+| Foto & film      | 8–12 %     | Använd kolumnen för delbetalningar (bokning + leverans). |
+| Blommor & dekor  | 6–10 %     | Kombinera köp, hyra och DIY för att hålla nivån.         |
+| Kläder & styling | 8–12 %     | För in både klädinköp och skräddare.                     |
+| Underhållning    | 5–10 %     | Lägg till liveband, DJ, ljudteknik separat.              |
+| Transport & logi | 4–8 %      | Räkna in reseersättningar för leverantörer.              |
+| Övrigt           | 5–10 %     | T.ex. trycksaker, ringar, presenter.                     |
+| Buffert          | Minst 10 % | Mallen varnar om bufferten understiger 8 %.              |
 
 För mer detaljer och prisexempel – jämför med [Bröllopsbudget 2025](/budget/brollopsbudget-2025/), där vi bryter ned tre budgetnivåer och regionpriser.
 

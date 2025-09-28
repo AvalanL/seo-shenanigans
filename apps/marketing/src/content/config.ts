@@ -35,7 +35,7 @@ const baseSchema = ({ image }: { image: ImageFunction }) =>
         z.object({
           label: z.string(),
           url: z.string().url(),
-          credibility: z.string().optional()
+          credibility: z.string().optional(),
         }),
       )
       .default([]),
@@ -131,18 +131,20 @@ const programmaticSchema = z.object({
       z.object({
         label: z.string(),
         url: z.string().url(),
-        credibility: z.string().optional()
+        credibility: z.string().optional(),
       }),
     )
     .default([]),
   related: z.array(z.string()).default([]),
-  programmaticData: z.object({
-    generated: z.boolean().default(true),
-    template: z.string(),
-    city: z.string(),
-    searchIntent: z.string(),
-    competitionLevel: z.string(),
-  }).optional(),
+  programmaticData: z
+    .object({
+      generated: z.boolean().default(true),
+      template: z.string(),
+      city: z.string(),
+      searchIntent: z.string(),
+      competitionLevel: z.string(),
+    })
+    .optional(),
 });
 
 const guides = defineCollection({ type: "content", schema: baseSchema });
@@ -156,7 +158,10 @@ const traditioner = defineCollection({ type: "content", schema: baseSchema });
 const mode = defineCollection({ type: "content", schema: baseSchema });
 const juridik = defineCollection({ type: "content", schema: baseSchema });
 const planering = defineCollection({ type: "content", schema: baseSchema });
-const programmatic = defineCollection({ type: "content", schema: programmaticSchema });
+const programmatic = defineCollection({
+  type: "content",
+  schema: programmaticSchema,
+});
 const shared = defineCollection({ type: "data" });
 
 export const collections = {

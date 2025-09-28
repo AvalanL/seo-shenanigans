@@ -39,12 +39,12 @@ related:
 
 ## Paket och prisnivåer
 
-| Paket               | Innehåll                                   | Prisintervall |
-| ------------------- | ------------------------------------------ | ------------- |
-| **Dagkoordinator**  | 1 planeringsmöte, tidslinje, 10–12 h på dagen | 12 000–18 000 kr |
-| **Delplanering**    | Leverantörsförslag, budgetstöd, 3 möten + dag | 20 000–30 000 kr |
-| **Fullservice**     | Koncept, leverantörshantering, styling, dag | 38 000–55 000 kr |
-| **Destination/Skärgård** | Fullservice + transportlogistik       | 45 000–65 000 kr |
+| Paket                    | Innehåll                                      | Prisintervall    |
+| ------------------------ | --------------------------------------------- | ---------------- |
+| **Dagkoordinator**       | 1 planeringsmöte, tidslinje, 10–12 h på dagen | 12 000–18 000 kr |
+| **Delplanering**         | Leverantörsförslag, budgetstöd, 3 möten + dag | 20 000–30 000 kr |
+| **Fullservice**          | Koncept, leverantörshantering, styling, dag   | 38 000–55 000 kr |
+| **Destination/Skärgård** | Fullservice + transportlogistik               | 45 000–65 000 kr |
 
 Reseersättning (45–55 kr/mil) och logi kan tillkomma för bröllop utanför staden eller vid sena sluttider.
 
@@ -57,13 +57,13 @@ Reseersättning (45–55 kr/mil) och logi kan tillkomma för bröllop utanför s
 
 ## Rekommenderade koordinatorer (icke-sponsrat)
 
-| Företag / Koordinator     | Profil                    | Paketnivå | Notering |
-| ------------------------- | ------------------------- | --------- | -------- |
-| West Coast Weddings       | Fullservice + design      | Premium   | Erfarenhet av skärgård och industrilokaler |
-| Studio Celebrations       | Modern, hållbar planering | Mellan    | Arbetar ofta med creative direction |
-| A Match Made Events       | Dagkoordinering           | Budget    | Specialiserade på 50–90 gäster |
-| Bröllopsfabriken Göteborg | Hybrid (planering + styling) | Mellan | Egen dekorstudio, erbjuder hyrpaket |
-| Nordic Wedding Planner    | Destination               | Premium   | Flerspråkig, internationella gäster |
+| Företag / Koordinator     | Profil                       | Paketnivå | Notering                                   |
+| ------------------------- | ---------------------------- | --------- | ------------------------------------------ |
+| West Coast Weddings       | Fullservice + design         | Premium   | Erfarenhet av skärgård och industrilokaler |
+| Studio Celebrations       | Modern, hållbar planering    | Mellan    | Arbetar ofta med creative direction        |
+| A Match Made Events       | Dagkoordinering              | Budget    | Specialiserade på 50–90 gäster             |
+| Bröllopsfabriken Göteborg | Hybrid (planering + styling) | Mellan    | Egen dekorstudio, erbjuder hyrpaket        |
+| Nordic Wedding Planner    | Destination                  | Premium   | Flerspråkig, internationella gäster        |
 
 Be om referenser, portfölj och tydlig leveransbeskrivning innan bokning.
 

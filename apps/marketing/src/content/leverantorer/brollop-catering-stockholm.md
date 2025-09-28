@@ -40,13 +40,13 @@ related:
 
 ## Prisnivåer och paket
 
-| Modell                 | Innehåll                                       | Pris per gäst (kr) | Passar |
-| ---------------------- | ---------------------------------------------- | ------------------ | ------ |
-| **Buffé**              | Delikatesser, sallader, varm rätt, personal    | 650–850            | Avslappnad fest, >80 gäster |
-| **Familystyle**        | Delade fat vid bordet, 2 servitörer/30 gäster  | 750–950            | Långa bord, social middag |
-| **Tre-rätters serverad** | Förrätt, huvudrätt, dessert + köksteam       | 950–1 250          | Klassiska slotts- och herrgårdsbröllop |
-| **Fine dining / tasting** | 5–7 rätter, sommelier, amuse-bouche        | 1 400–1 900        | Intima bröllop 40–70 gäster |
-| **Foodtruck-kombo**    | Två foodtrucks + dessertstation               | 450–700            | Stadshus, industriell lokal |
+| Modell                    | Innehåll                                      | Pris per gäst (kr) | Passar                                 |
+| ------------------------- | --------------------------------------------- | ------------------ | -------------------------------------- |
+| **Buffé**                 | Delikatesser, sallader, varm rätt, personal   | 650–850            | Avslappnad fest, >80 gäster            |
+| **Familystyle**           | Delade fat vid bordet, 2 servitörer/30 gäster | 750–950            | Långa bord, social middag              |
+| **Tre-rätters serverad**  | Förrätt, huvudrätt, dessert + köksteam        | 950–1 250          | Klassiska slotts- och herrgårdsbröllop |
+| **Fine dining / tasting** | 5–7 rätter, sommelier, amuse-bouche           | 1 400–1 900        | Intima bröllop 40–70 gäster            |
+| **Foodtruck-kombo**       | Två foodtrucks + dessertstation               | 450–700            | Stadshus, industriell lokal            |
 
 Tillkommande kostnader: provsmakning (ofta 1 000–1 500 kr), serveringspersonal (350–450 kr/h), porslin och glas (60–90 kr/pers), transport (från 800 kr).
 
@@ -61,13 +61,13 @@ Tillkommande kostnader: provsmakning (ofta 1 000–1 500 kr), serveringspers
 
 ## Rekommenderade leverantörer (icke-sponsrat)
 
-| Leverantör            | Profil                      | Prisnivå | Notering |
-| --------------------- | --------------------------- | -------- | -------- |
-| Lux Dag för Dag       | Fine dining                  | Premium  | Samarbete med sommelier |
-| Björns Kök            | Svensk säsongsmeny           | Mellan   | Egen konditor, nattmatsbuffé |
-| Spira Foodtruck Co.   | Foodtruck + street food      | Budget   | Kombinerar grill + veganska bowls |
-| Mat & Event           | Helhetslösning               | Mellan   | Tar med porslin, personal och bar |
-| Paul Taylor Catering  | Hållbar gastronomi           | Premium  | Lokalproducerade råvaror, veganska menyer |
+| Leverantör           | Profil                  | Prisnivå | Notering                                  |
+| -------------------- | ----------------------- | -------- | ----------------------------------------- |
+| Lux Dag för Dag      | Fine dining             | Premium  | Samarbete med sommelier                   |
+| Björns Kök           | Svensk säsongsmeny      | Mellan   | Egen konditor, nattmatsbuffé              |
+| Spira Foodtruck Co.  | Foodtruck + street food | Budget   | Kombinerar grill + veganska bowls         |
+| Mat & Event          | Helhetslösning          | Mellan   | Tar med porslin, personal och bar         |
+| Paul Taylor Catering | Hållbar gastronomi      | Premium  | Lokalproducerade råvaror, veganska menyer |
 
 Boka provsmakning 4 månader innan och se till att toastmaster eller koordinator deltar för att förstå upplägget.
 

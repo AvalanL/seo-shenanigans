@@ -40,13 +40,13 @@ related:
 
 ## Prisnivåer och paket
 
-| Paket                     | Innehåll                                        | Prisintervall |
-| ------------------------- | ----------------------------------------------- | ------------- |
-| **Kvällspaket (4–5 h)**   | DJ, grundljud (2 tops + sub), mikrofon          | 12 000–16 000 kr |
-| **Heldag (8 h)**          | Ceremoni + middag + fest, två ljudriggar        | 18 000–22 000 kr |
-| **Premium**               | DJ-duo, ljusrigg, konfetti, MC                  | 20 000–26 000 kr |
-| **Afterparty add-on**     | +2 h efter kl. 01.00                            | +1 500–2 500 kr/timme |
-| **Extra utrustning**      | Ljuspelare, fotobås, gnistfontän                 | 1 500–5 000 kr |
+| Paket                   | Innehåll                                 | Prisintervall         |
+| ----------------------- | ---------------------------------------- | --------------------- |
+| **Kvällspaket (4–5 h)** | DJ, grundljud (2 tops + sub), mikrofon   | 12 000–16 000 kr      |
+| **Heldag (8 h)**        | Ceremoni + middag + fest, två ljudriggar | 18 000–22 000 kr      |
+| **Premium**             | DJ-duo, ljusrigg, konfetti, MC           | 20 000–26 000 kr      |
+| **Afterparty add-on**   | +2 h efter kl. 01.00                     | +1 500–2 500 kr/timme |
+| **Extra utrustning**    | Ljuspelare, fotobås, gnistfontän         | 1 500–5 000 kr        |
 
 Transport inom tullarna ingår ofta; för skärgård eller längre resor tillkommer reseersättning och eventuell färjeavgift.
 
@@ -60,13 +60,13 @@ Transport inom tullarna ingår ofta; för skärgård eller längre resor tillkom
 
 ## Rekommenderade DJ:s i Stockholm (icke-sponsrat)
 
-| DJ / Företag          | Stil                       | Prisnivå | Notering |
-| --------------------- | -------------------------- | -------- | -------- |
+| DJ / Företag          | Stil                       | Prisnivå | Notering                  |
+| --------------------- | -------------------------- | -------- | ------------------------- |
 | Stockholm Wedding DJs | Allround + live percussion | Premium  | Erbjuder saxofon + DJ-duo |
-| DJ Sthlm Collective   | House & pop                | Mellan   | Inkluderar grundljus |
-| Vibes by Valerie      | RnB, disco, queer friendly | Mellan   | Personlig konsultation |
-| Norrsken Events       | Svenskt + internationellt  | Budget   | Paket med fotobås |
-| DJ Johan Åberg        | 80-/90-tal & schlager      | Mellan   | Erfaren toastmaster |
+| DJ Sthlm Collective   | House & pop                | Mellan   | Inkluderar grundljus      |
+| Vibes by Valerie      | RnB, disco, queer friendly | Mellan   | Personlig konsultation    |
+| Norrsken Events       | Svenskt + internationellt  | Budget   | Paket med fotobås         |
+| DJ Johan Åberg        | 80-/90-tal & schlager      | Mellan   | Erfaren toastmaster       |
 
 Begär referenser och liveklipp innan ni bokar. Kombinera gärna med liveinslag under mingel (saxofon, fiol) för att skapa dynamik.
 

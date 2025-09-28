@@ -48,12 +48,12 @@ related:
 
 ## Kostnad per gäst – riktvärden 2025
 
-| Nivå                  | Innehåll                                | Pris per gäst (kr) | Passar |
-| --------------------- | --------------------------------------- | ------------------ | ------ |
-| Budget                | Säsongsbuffé + egen dryck               | 450–650            | Mindre bröllop, landsbygd |
-| Mellan                | Tre-rätters serverad + vinpaket         | 750–950            | 50–100 gäster |
-| Premium               | Fyrarätters + matched dryck + nattmat   | 1 100–1 400        | Stadshotell, slottsbröllop |
-| Fine dining           | Tastingmeny + sommelier + cocktails     | 1 500–2 000        | Exklusivt citybröllop |
+| Nivå        | Innehåll                              | Pris per gäst (kr) | Passar                     |
+| ----------- | ------------------------------------- | ------------------ | -------------------------- |
+| Budget      | Säsongsbuffé + egen dryck             | 450–650            | Mindre bröllop, landsbygd  |
+| Mellan      | Tre-rätters serverad + vinpaket       | 750–950            | 50–100 gäster              |
+| Premium     | Fyrarätters + matched dryck + nattmat | 1 100–1 400        | Stadshotell, slottsbröllop |
+| Fine dining | Tastingmeny + sommelier + cocktails   | 1 500–2 000        | Exklusivt citybröllop      |
 
 Prisnivåerna baseras på offerter från Stockholmsområdet, Göteborg och Skåne våren 2025. Jämför alltid lokala leverantörer.
 

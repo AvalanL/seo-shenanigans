@@ -39,12 +39,12 @@ related:
 
 ## Paket och priser
 
-| Paket                  | Innehåll                                        | Prisintervall |
-| ---------------------- | ----------------------------------------------- | ------------- |
-| **Dagkoordinering**    | 1 planeringsmöte, tidslinje, 10 h närvaro       | 11 000–15 000 kr |
-| **Delplanering**       | Leverantörslänkar, budgetstyrning, dag          | 18 000–26 000 kr |
-| **Fullservice**        | Koncept, styling, leverantörsbokning            | 35 000–50 000 kr |
-| **Destination Öresund**| Fullservice + gränslogistik, tolkar             | 45 000–65 000 kr |
+| Paket                   | Innehåll                                  | Prisintervall    |
+| ----------------------- | ----------------------------------------- | ---------------- |
+| **Dagkoordinering**     | 1 planeringsmöte, tidslinje, 10 h närvaro | 11 000–15 000 kr |
+| **Delplanering**        | Leverantörslänkar, budgetstyrning, dag    | 18 000–26 000 kr |
+| **Fullservice**         | Koncept, styling, leverantörsbokning      | 35 000–50 000 kr |
+| **Destination Öresund** | Fullservice + gränslogistik, tolkar       | 45 000–65 000 kr |
 
 Tillkommande kostnader: broavgifter, tåg, logi i Köpenhamn, eventuella valutafakturor.
 
@@ -56,13 +56,13 @@ Tillkommande kostnader: broavgifter, tåg, logi i Köpenhamn, eventuella valutaf
 
 ## Rekommenderade koordinatorer (icke-sponsrat)
 
-| Koordinator / Företag      | Profil                       | Paketnivå | Notering |
-| -------------------------- | ---------------------------- | --------- | -------- |
-| Öresund Weddings           | Destination & flerspråkig    | Premium   | Van vid Köpenhamn + Malmö |
-| Southern Love Events       | Modern + hållbar             | Mellan    | Arbetar med lokala odlingar |
-| Bröllop i Skåne            | Dagkoordinator               | Budget    | Passar 50–90 gäster |
-| White Orchid Planner       | Fullservice design           | Premium   | Egen dekorstudio |
-| The Scandinavian Planner   | Internationella par          | Premium   | Hybridplanering digitalt + på plats |
+| Koordinator / Företag    | Profil                    | Paketnivå | Notering                            |
+| ------------------------ | ------------------------- | --------- | ----------------------------------- |
+| Öresund Weddings         | Destination & flerspråkig | Premium   | Van vid Köpenhamn + Malmö           |
+| Southern Love Events     | Modern + hållbar          | Mellan    | Arbetar med lokala odlingar         |
+| Bröllop i Skåne          | Dagkoordinator            | Budget    | Passar 50–90 gäster                 |
+| White Orchid Planner     | Fullservice design        | Premium   | Egen dekorstudio                    |
+| The Scandinavian Planner | Internationella par       | Premium   | Hybridplanering digitalt + på plats |
 
 ## Frågor att ta upp
 

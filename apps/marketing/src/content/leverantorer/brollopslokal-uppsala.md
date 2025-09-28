@@ -40,23 +40,23 @@ related:
 
 ## Prisnivåer och kapacitet
 
-| Lokaltyp               | Kapacitet | Prisnivå       | Kommentar |
-| ---------------------- | --------- | -------------- | --------- |
-| Studentnationer        | 80–180    | 25 000–40 000 kr | Centralt, kräver ibland medlemskap |
-| Herrgårdar nära Uppsala| 70–150    | 45 000–65 000 kr | Ofta boende och parkläge |
-| Slott (t.ex. Wiks slott)| 100–180  | 55 000–75 000 kr | Inkluderar personal och möbler |
-| Landsbygdslador        | 80–140    | 30 000–50 000 kr | Kräver extra logistik för catering |
-| Hotell & konferens     | 60–120    | 28 000–45 000 kr | Enklare logistik, inomhusplan B |
+| Lokaltyp                 | Kapacitet | Prisnivå         | Kommentar                          |
+| ------------------------ | --------- | ---------------- | ---------------------------------- |
+| Studentnationer          | 80–180    | 25 000–40 000 kr | Centralt, kräver ibland medlemskap |
+| Herrgårdar nära Uppsala  | 70–150    | 45 000–65 000 kr | Ofta boende och parkläge           |
+| Slott (t.ex. Wiks slott) | 100–180   | 55 000–75 000 kr | Inkluderar personal och möbler     |
+| Landsbygdslador          | 80–140    | 30 000–50 000 kr | Kräver extra logistik för catering |
+| Hotell & konferens       | 60–120    | 28 000–45 000 kr | Enklare logistik, inomhusplan B    |
 
 ## Lokaler att kika på (icke-sponsrat)
 
-| Lokal              | Typ           | Styrkor                           | Notering |
-| ------------------ | ------------- | --------------------------------- | -------- |
-| Norrlands nation   | Nation        | Stora festsalen + bar, centralt   | Tillgång kräver kontakt med nationen |
-| Gästrike-Hälsinge nation | Nation | Balkong mot Fyrisån               | Begränsad höjd för dekor |
-| Wiks slott         | Slott         | Slottsrum, övernattning, brygga   | 15 min utanför stan |
-| Krusenberg Herrgård| Herrgård      | Sjöläge, spa, helhetslösning      | Kapacitet 110 gäster |
-| Viksta Lada        | Loge          | Rustik charm, flexibel dekoration | Kräver catering + hyrmöbler |
+| Lokal                    | Typ      | Styrkor                           | Notering                             |
+| ------------------------ | -------- | --------------------------------- | ------------------------------------ |
+| Norrlands nation         | Nation   | Stora festsalen + bar, centralt   | Tillgång kräver kontakt med nationen |
+| Gästrike-Hälsinge nation | Nation   | Balkong mot Fyrisån               | Begränsad höjd för dekor             |
+| Wiks slott               | Slott    | Slottsrum, övernattning, brygga   | 15 min utanför stan                  |
+| Krusenberg Herrgård      | Herrgård | Sjöläge, spa, helhetslösning      | Kapacitet 110 gäster                 |
+| Viksta Lada              | Loge     | Rustik charm, flexibel dekoration | Kräver catering + hyrmöbler          |
 
 ## Logistik och boende
 

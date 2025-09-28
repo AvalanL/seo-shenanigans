@@ -49,13 +49,13 @@ Malmö lockar med danskinfluerad design, urbana industri-lokaler och närhet til
 
 ## Prisnivåer och paket i Malmö
 
-| Paket                     | Innehåll                                           | Prisintervall (2025) |
-| ------------------------- | -------------------------------------------------- | -------------------- |
-| Brudbukett + boutonnière | Handbunden bukett + knapphål i valfri stil        | 4 500–6 000 kr       |
-| Mindre följe             | Brudbukett, 2 tärnor, 2 corsage, hårblommor        | 8 500–11 500 kr      |
-| Ceremony & middag        | Altardekor, gånginstallation, 6 bordscenterpiece   | 12 000–18 000 kr     |
-| Helhetskoncept           | Designmöte, moodboard, montering, florister på plats | 18 000–28 000 kr  |
-| Installation + flytt     | Blomsterbåge eller moln, inkl. flytt till middag   | 6 000–9 500 kr       |
+| Paket                    | Innehåll                                             | Prisintervall (2025) |
+| ------------------------ | ---------------------------------------------------- | -------------------- |
+| Brudbukett + boutonnière | Handbunden bukett + knapphål i valfri stil           | 4 500–6 000 kr       |
+| Mindre följe             | Brudbukett, 2 tärnor, 2 corsage, hårblommor          | 8 500–11 500 kr      |
+| Ceremony & middag        | Altardekor, gånginstallation, 6 bordscenterpiece     | 12 000–18 000 kr     |
+| Helhetskoncept           | Designmöte, moodboard, montering, florister på plats | 18 000–28 000 kr     |
+| Installation + flytt     | Blomsterbåge eller moln, inkl. flytt till middag     | 6 000–9 500 kr       |
 
 **Tips:** Begär separata rader för hyra av vaser/stativ, transport från verkstad till lokal, extra arbetstid efter midnatt samt eventuella tull/arbetshandlingar vid import från Danmark eller Holland.
 

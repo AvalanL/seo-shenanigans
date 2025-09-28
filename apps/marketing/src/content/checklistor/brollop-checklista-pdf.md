@@ -46,15 +46,15 @@ Checklistan är framtagen för svenska förhållanden: helger med begränsad til
 
 ## 2. Checklista fas för fas
 
-| Tidsperiod | Fokus | Nyckeluppgifter |
-| ---------- | ----- | --------------- |
-| 12–9 månader | Vision & grundbokningar | Sätt budget, boka lokal och vigselförrättare, gör gästlista, planera tema |
-| 9–6 månader | Leverantörer & logistik | Boka fotograf, catering, underhållning; skicka "save the date" |
-| 6–3 månader | Detaljer | Prova kläder, beställ ringar, planera dekor, reservera transport |
-| 3–1 månader | Finjustering | Skicka in vigselprogram till präst, gör bordsplacering, stäm av leverantörer |
-| Veckan innan | Genrep | Packa nöd-kit, konfirmera tider, dela final tidsplan med toastmaster |
-| Bröllopsdagen | Genomförande | Följ körschema, koordinera leverantörer, ha kontaktlista nära till hands |
-| Efter bröllopet | Uppföljning | Skicka tackkort, betala slutfakturor, samla foto & video, återlämna hyrd rekvisita |
+| Tidsperiod      | Fokus                   | Nyckeluppgifter                                                                    |
+| --------------- | ----------------------- | ---------------------------------------------------------------------------------- |
+| 12–9 månader    | Vision & grundbokningar | Sätt budget, boka lokal och vigselförrättare, gör gästlista, planera tema          |
+| 9–6 månader     | Leverantörer & logistik | Boka fotograf, catering, underhållning; skicka "save the date"                     |
+| 6–3 månader     | Detaljer                | Prova kläder, beställ ringar, planera dekor, reservera transport                   |
+| 3–1 månader     | Finjustering            | Skicka in vigselprogram till präst, gör bordsplacering, stäm av leverantörer       |
+| Veckan innan    | Genrep                  | Packa nöd-kit, konfirmera tider, dela final tidsplan med toastmaster               |
+| Bröllopsdagen   | Genomförande            | Följ körschema, koordinera leverantörer, ha kontaktlista nära till hands           |
+| Efter bröllopet | Uppföljning             | Skicka tackkort, betala slutfakturor, samla foto & video, återlämna hyrd rekvisita |
 
 Varje steg i PDF:en har kryssrutor och trefärgskodad status (Påbörjad, Pågående, Klar). Lägg till egna rader för unika traditioner eller specialmoment. Checklistan innehåller även en koll på [100 frågor inför bröllopet](/checklistor/100-fragor-infor-brollopet/) så att ni kan fånga upp detaljer ni inte tänkt på.
 

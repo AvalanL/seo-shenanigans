@@ -82,17 +82,13 @@
     "budget/brollopsbudget-2025",
     "guides/brollopsplanering-grundkurs"
   ],
-  "leverantorer/brollopsflorist-malmo": [
-    "budget/brollopsbudget-2025"
-  ],
+  "leverantorer/brollopsflorist-malmo": ["budget/brollopsbudget-2025"],
   "leverantorer/brollopslokal-stockholm": [
     "budget/brollopsbudget-2025",
     "guides/brollopsplanering-grundkurs",
     "guides/detaljer-alla-brollopsplanerare-missar"
   ],
-  "leverantorer/brollopslokal-goteborg": [
-    "budget/brollopsbudget-2025"
-  ],
+  "leverantorer/brollopslokal-goteborg": ["budget/brollopsbudget-2025"],
   "leverantorer/brollopslokal-skargarden": [
     "guides/detaljer-alla-brollopsplanerare-missar",
     "budget/brollopsbudget-2025"
@@ -111,19 +107,13 @@
     "budget/brollopsbudget-2025",
     "guides/brollopsplanering-grundkurs"
   ],
-  "traditioner/brollopstal-brud": [
-    "traditioner/svenska-vigseltraditioner"
-  ],
+  "traditioner/brollopstal-brud": ["traditioner/svenska-vigseltraditioner"],
   "traditioner/toastmaster-guide": [
     "traditioner/svenska-vigseltraditioner",
     "guides/detaljer-alla-brollopsplanerare-missar"
   ],
-  "guides/hindersprovning-tid": [
-    "guides/brollopsplanering-grundkurs"
-  ],
-  "guides/aktenskapsforord-mall": [
-    "budget/brollopsbudget-2025"
-  ],
+  "guides/hindersprovning-tid": ["guides/brollopsplanering-grundkurs"],
+  "guides/aktenskapsforord-mall": ["budget/brollopsbudget-2025"],
   "budget/brollopsbudget-excel": [
     "budget/brollopsbudget-2025",
     "checklistor/brollopsbudget-checklista"

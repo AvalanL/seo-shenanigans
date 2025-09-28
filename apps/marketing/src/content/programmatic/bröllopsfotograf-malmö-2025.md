@@ -47,18 +47,17 @@ programmaticData:
   competitionLevel: "medium"
 ---
 
-
 # Bröllopsfotograf Malmö 2025
 
 > **Snabbguide 2025:** I Malmö kostar bröllopsfotograf 20 000-70 000 kr med genomsnitt på 35 000 kr.
 
 ## Priser och paket 2025
 
-| Prisnivå | Omfattning | Pris Malmö | Vad som ingår |
-|----------|------------|-------------------|---------------|
-| **Budget** | 6-8 timmar | 20 000 - 25 000 kr | Grundpaket, digital leverans |
-| **Standard** | 10-12 timmar | 30 000 - 45 000 kr | Heldag, online-galleri, USB |
-| **Premium** | Hela dagen + extra | 45 000 - 70 000+ kr | Två fotografer, album, video |
+| Prisnivå     | Omfattning         | Pris Malmö          | Vad som ingår                |
+| ------------ | ------------------ | ------------------- | ---------------------------- |
+| **Budget**   | 6-8 timmar         | 20 000 - 25 000 kr  | Grundpaket, digital leverans |
+| **Standard** | 10-12 timmar       | 30 000 - 45 000 kr  | Heldag, online-galleri, USB  |
+| **Premium**  | Hela dagen + extra | 45 000 - 70 000+ kr | Två fotografer, album, video |
 
 ### Särskilda förhållanden i Malmö
 
@@ -79,11 +78,13 @@ Vi har identifierat 23+ professionella bröllopsfotografer i Malmö. Här är n�
 ## Logistik för bröllopsfoto i Malmö
 
 **Transport och tillgänglighet:**
+
 - Kastrup (Köpenhamn) - 30 min för utomregionala fotografer
 - Bussar, tåg till Köpenhamn för rörelse mellan lokaler
 - Relativt tillgänglig
 
 **Bästa fotoplatserna:**
+
 - **Malmö Konsthall**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Ribersborg**: Perfekt för [specifik stil] med [unika egenskaper]
 - **Turning Torso**: Perfekt för [specifik stil] med [unika egenskaper]
@@ -96,14 +97,17 @@ Dansk påverkan, många destination weddings
 ## Vanliga frågor
 
 ### Vad kostar bröllopsfotograf i Malmö 2025?
+
 Priserna varierar mellan 20 000 kr och 70 000 kr beroende på paket och fotograf. Genomsnittet ligger på 35 000 kr.
 
 ### Hur många fotografer finns det i Malmö?
+
 Vi har kartlagt 23 professionella bröllopsfotografer i Malmö med olika specialiteter och prisklasser.
 
 ### När ska man boka?
+
 Boka minst 8-12 månader i förväg för maj-september. För övriga månader räcker ofta 4-6 månader.
 
 ---
 
-*Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 23 leverantörer i Malmö.*
+_Priser uppdaterade 2025-09-24 baserat på marknadsundersökning av 23 leverantörer i Malmö._

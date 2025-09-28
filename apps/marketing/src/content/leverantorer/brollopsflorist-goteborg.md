@@ -40,12 +40,12 @@ related:
 
 ## Prisnivåer och paket
 
-| Paket                | Innehåll                                           | Prisintervall |
-| -------------------- | -------------------------------------------------- | ------------- |
-| **Bas**              | Brudbukett, knapphål, tärnbukett                   | 5 500–7 500 kr |
-| **Standard**         | Bas + 8 bordsdekorationer + altardetalj           | 12 000–16 000 kr |
-| **Premium**          | Statement-installation, gångdekorationer, båge    | 18 000–24 000 kr |
-| **Full styling**     | Premium + lounge, fotovägg, nattfestblommor       | 25 000–35 000 kr |
+| Paket            | Innehåll                                       | Prisintervall    |
+| ---------------- | ---------------------------------------------- | ---------------- |
+| **Bas**          | Brudbukett, knapphål, tärnbukett               | 5 500–7 500 kr   |
+| **Standard**     | Bas + 8 bordsdekorationer + altardetalj        | 12 000–16 000 kr |
+| **Premium**      | Statement-installation, gångdekorationer, båge | 18 000–24 000 kr |
+| **Full styling** | Premium + lounge, fotovägg, nattfestblommor    | 25 000–35 000 kr |
 
 Tillkommande kostnader: transport (500–1 200 kr), uthyrning av urnor/ställningar, assistent för nedmontering.
 
@@ -58,13 +58,13 @@ Tillkommande kostnader: transport (500–1 200 kr), uthyrning av urnor/ställn
 
 ## Rekommenderade florister (icke-sponsrat)
 
-| Floriststudio        | Stil                        | Prisnivå | Notering |
-| -------------------- | --------------------------- | -------- | -------- |
+| Floriststudio        | Stil                         | Prisnivå | Notering                            |
+| -------------------- | ---------------------------- | -------- | ----------------------------------- |
 | Floristen i Fabriken | Bold installations, färg     | Premium  | Specialister på industriella venues |
-| Wild Flora Studio    | Naturromantisk, säsongsodlat | Mellan   | Egen odling strax utanför stan |
-| Linnégatans Florist  | Klassisk elegans             | Mellan   | Kort varsel, centralt läge |
-| Blomrum              | Minimalistiskt och stilrent  | Mellan   | Samarbetar med Världskulturmuseet |
-| Bloom by Lisa        | Bohemisk, torkat + färskt    | Budget   | Perfekt för logar och lador |
+| Wild Flora Studio    | Naturromantisk, säsongsodlat | Mellan   | Egen odling strax utanför stan      |
+| Linnégatans Florist  | Klassisk elegans             | Mellan   | Kort varsel, centralt läge          |
+| Blomrum              | Minimalistiskt och stilrent  | Mellan   | Samarbetar med Världskulturmuseet   |
+| Bloom by Lisa        | Bohemisk, torkat + färskt    | Budget   | Perfekt för logar och lador         |
 
 ## Logistik för Göteborgs venues
 
