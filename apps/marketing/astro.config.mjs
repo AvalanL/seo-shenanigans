@@ -10,7 +10,7 @@ export default defineConfig({
     drafts: true,
   },
   server: {
-    host: true,
+    host: "0.0.0.0",
     port: process.env.PORT || 4321,
   },
   vite: {
@@ -21,12 +21,6 @@ export default defineConfig({
     },
     build: {
       chunkSizeWarningLimit: 600,
-    },
-    preview: {
-      host: "0.0.0.0",
-      port: process.env.PORT || 4321,
-      strictPort: true,
-      allowedHosts: "all"
     },
   },
 });
