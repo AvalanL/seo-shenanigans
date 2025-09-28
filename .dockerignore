@@ -1,0 +1,7 @@
+# Prevent host-specific artifacts from entering Docker context
+.git
+node_modules
+apps/marketing/node_modules
+packages/*/node_modules
+.DS_Store
+npm-debug.log*
