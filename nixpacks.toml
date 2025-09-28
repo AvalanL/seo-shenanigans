@@ -3,8 +3,8 @@ NODE_ENV = "production"
 
 [phases.install]
 cmds = [
-  "npm install",
-  "cd apps/marketing && npm install"
+  "npm ci --include=dev",
+  "cd apps/marketing && npm ci --include=dev"
 ]
 
 [phases.build]
