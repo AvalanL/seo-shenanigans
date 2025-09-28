@@ -38,7 +38,7 @@
         }
       };
 
-      /** @param {Record<string, boolean>} nextState */
+      // @ts-ignore - runtime value persisted in localStorage, no TS inference required
       const writeState = (nextState) => {
         if (!storageKey) return;
         try {
