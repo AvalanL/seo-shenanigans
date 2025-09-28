@@ -7,10 +7,10 @@ cmds = [
   "npm config set cache /tmp/.npm",
   "npm config set fund false", 
   "npm config set audit false",
-  "rm -rf package-lock.json node_modules || true",
-  "npm install",
-  "cd apps/marketing && rm -rf package-lock.json node_modules || true",
-  "cd apps/marketing && npm install",
+  "find . -name 'package-lock.json' -delete || true",
+  "find . -name 'node_modules' -type d -exec rm -rf {} + 2>/dev/null || true",
+  "npm install --force",
+  "cd apps/marketing && npm install --force",
   "cd apps/marketing && npm run prebuild",
   "cd apps/marketing && npm run build"
 ]
