@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const mime = require('mime');
 
 const API_KEY = process.env.GOOGLE_AI_STUDIO_API_KEY || process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
@@ -11,11 +12,27 @@ if (!API_KEY) {
 }
 
 const prompt = process.argv.filter((arg, index) => index > 1).join(' ').trim() || 'Nano Banano brand illustration, vibrant, vector art';
-const model = process.env.GOOGLE_IMAGEN_MODEL || 'imagen-3.0-generate-001';
+const model = process.env.GOOGLE_IMAGEN_MODEL || process.env.GOOGLE_GENAI_MODEL || 'imagen-3.0-generate-001';
 const outDir = process.env.GOOGLE_IMAGE_OUTPUT_DIR || path.join(process.cwd(), 'generated-images');
 const outFile = path.join(outDir, `${Date.now()}-${model.replace(/[^a-z0-9.-]+/gi, '')}.png`);
 
 async function main() {
+  const isGemini = model.startsWith('gemini');
+
+  if (isGemini) {
+    await generateWithGemini();
+    return;
+  }
+
+  await generateWithImagen();
+}
+
+main().catch((error) => {
+  console.error('Unexpected failure while calling Google AI Studio:', error);
+  process.exit(1);
+});
+
+async function generateWithImagen() {
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateImage?key=${API_KEY}`;
   const body = {
     prompt: {
@@ -29,7 +46,6 @@ async function main() {
     },
   };
 
-  // Remove undefined keys so the API payload stays clean
   Object.keys(body).forEach((key) => body[key] === undefined && delete body[key]);
 
   const response = await fetch(endpoint, {
@@ -57,7 +73,56 @@ async function main() {
   console.log(`Image written to ${outFile}`);
 }
 
-main().catch((error) => {
-  console.error('Unexpected failure while calling Google AI Studio:', error);
-  process.exit(1);
-});
+async function generateWithGemini() {
+  const { GoogleGenAI } = await import('@google/genai');
+  const client = new GoogleGenAI({ apiKey: API_KEY });
+
+  const stream = await client.models.generateContentStream({
+    model,
+    config: {
+      responseModalities: ['IMAGE', 'TEXT'],
+    },
+    contents: [
+      {
+        role: 'user',
+        parts: [{ text: prompt }],
+      },
+    ],
+  });
+
+  const images = [];
+  const texts = [];
+
+  for await (const chunk of stream) {
+    const candidates = chunk?.candidates || [];
+    for (const candidate of candidates) {
+      const parts = candidate?.content?.parts || [];
+      for (const part of parts) {
+        if (part?.inlineData?.data) {
+          images.push(part.inlineData);
+        }
+        if (typeof part?.text === 'string' && part.text.trim().length > 0) {
+          texts.push(part.text.trim());
+        }
+      }
+    }
+  }
+
+  texts.forEach((text) => console.log(text));
+
+  if (images.length === 0) {
+    console.error('No image data found in Gemini response.');
+    process.exit(1);
+  }
+
+  fs.mkdirSync(outDir, { recursive: true });
+
+  images.forEach((inlineData, index) => {
+    const fileExtension = mime.getExtension(inlineData.mimeType || 'image/png') || 'png';
+    const filePath = index === 0 && images.length === 1
+      ? outFile
+      : path.join(outDir, `${Date.now()}-${index}.${fileExtension}`);
+    fs.writeFileSync(filePath, Buffer.from(inlineData.data, 'base64'));
+    console.log(`Image written to ${filePath}`);
+  });
+}
