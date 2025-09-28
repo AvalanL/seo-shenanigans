@@ -14,7 +14,7 @@ author: "Bröllopssidan.se"
 status: "published"
 evergreen: true
 ctaLabel: "Läs huvudguiden om koordinatorer"
-ctaUrl: "/leverantorer/brollopskoordinator-pris-och-guide"
+ctaUrl: "/leverantörer/brollopskoordinator-pris-och-guide"
 faq:
   - question: "Vad kostar en bröllopskoordinator i Göteborg 2025?"
     answer: "Dagkoordinering startar kring 12 000–16 000 kr. Delplanering ligger på 20 000–30 000 kr och fullservice 38 000–65 000 kr beroende på gästantal och komplexitet."
@@ -95,8 +95,8 @@ De har ofta favoritlistor men ska vara leverantörsoberoende. Fråga om provisio
 
 ## Nästa steg
 
-- Läs huvudguiden [Bröllopskoordinator: pris och guide](/leverantorer/brollopskoordinator-pris-och-guide/).
+- Läs huvudguiden [Bröllopskoordinator: pris och guide](/leverantörer/brollopskoordinator-pris-och-guide/).
 - Lägg koordinatorn i projektplanen och definiera ansvarsområden för vänner/familj.
 - Boka introduktionsmöte digitalt eller på café i Göteborg för att känna personkemin.
 
-> **CTA:** [Läs huvudguiden om koordinatorer](/leverantorer/brollopskoordinator-pris-och-guide)
+> **CTA:** [Läs huvudguiden om koordinatorer](/leverantörer/brollopskoordinator-pris-och-guide)

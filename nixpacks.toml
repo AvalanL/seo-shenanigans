@@ -4,10 +4,11 @@ nixPkgs = ["nodejs-20_x", "npm-9_x"]
 
 [phases.build]
 cmds = [
-  "rm -rf node_modules/.cache || true",
-  "npm install --omit=dev --cache /tmp/.npm --prefer-offline --no-audit --no-fund",
-  "cd apps/marketing && rm -rf node_modules/.cache || true",
-  "cd apps/marketing && npm install --omit=dev --cache /tmp/.npm --prefer-offline --no-audit --no-fund", 
+  "npm config set cache /tmp/.npm",
+  "npm config set fund false",
+  "npm config set audit false",
+  "npm install --production=false",
+  "cd apps/marketing && npm install --production=false",
   "cd apps/marketing && npm run prebuild",
   "cd apps/marketing && npm run build"
 ]

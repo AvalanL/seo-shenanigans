@@ -26,7 +26,7 @@ const description = `Filtrera och hitta ${category} för ert bröllop.`;
 ---
 <BaseLayout title={title} description={description}>
   <section class="intro">
-    <p class="breadcrumbs"><a href="/leverantorer">← Alla kategorier</a></p>
+    <p class="breadcrumbs"><a href="/leverantörer">← Alla kategorier</a></p>
     <h1>{title}</h1>
     <p>
       Filtrera på stad och startpris för att hitta rätt leverantör. Klicka för detaljer och kontakta dem direkt via webb eller e-post.
@@ -51,7 +51,7 @@ const description = `Filtrera och hitta ${category} för ert bröllop.`;
         city={entry.data.city}
         startPrice={entry.data.startPrice}
         image={entry.data.image}
-        href={`/leverantorer/${category}/${slug}`}
+        href={`/leverantörer/${category}/${slug}`}
         categoryLabel={entry.data.serviceArea}
       />
     ))}

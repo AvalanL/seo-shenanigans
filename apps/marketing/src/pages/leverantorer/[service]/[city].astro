@@ -98,8 +98,8 @@ const Content = programmaticEntry ? (await programmaticEntry.render()).Content :
   <nav aria-label="breadcrumb" class="breadcrumb">
     <ol>
       <li><a href="/">Hem</a></li>
-      <li><a href="/leverantorer">Leverantörer</a></li>
-      <li><a href={`/leverantorer/${service}`}>{service.charAt(0).toUpperCase() + service.slice(1)}</a></li>
+      <li><a href="/leverantörer">Leverantörer</a></li>
+      <li><a href={`/leverantörer/${service}`}>{service.charAt(0).toUpperCase() + service.slice(1)}</a></li>
       <li aria-current="page">{cityData.name}</li>
     </ol>
   </nav>
@@ -186,7 +186,7 @@ const Content = programmaticEntry ? (await programmaticEntry.render()).Content :
       <h3>Relaterade tjänster i {cityData.name}</h3>
       <ul class="service-links">
         {services.filter(s => s !== service && cityData.pricing[serviceMapping[s]]).map(relatedService => (
-          <li><a href={`/leverantorer/${relatedService}/${cityKey}`}>
+          <li><a href={`/leverantörer/${relatedService}/${cityKey}`}>
             {relatedService.charAt(0).toUpperCase() + relatedService.slice(1)} {cityData.name}
           </a></li>
         ))}
@@ -198,7 +198,7 @@ const Content = programmaticEntry ? (await programmaticEntry.render()).Content :
           .filter(([key, data]) => key !== cityKey && data.pricing[dataKey])
           .slice(0, 4)
           .map(([key, data]) => (
-            <li><a href={`/leverantorer/${service}/${key}`}>
+            <li><a href={`/leverantörer/${service}/${key}`}>
               {service.charAt(0).toUpperCase() + service.slice(1)} {data.name}
             </a></li>
           ))
@@ -211,7 +211,7 @@ const Content = programmaticEntry ? (await programmaticEntry.render()).Content :
       <h2>Planerar ni bröllop i {cityData.name}?</h2>
       <p>Använd våra verktyg för att jämföra leverantörer och planera er budget.</p>
         <div class="cta-buttons">
-          <a href="/budget/budgetkalkylator?ref=leverantorer-city" class="btn primary">Skapa budget</a>
+          <a href="/budget/budgetkalkylator?ref=leverantörer-city" class="btn primary">Skapa budget</a>
         <a href="/guides/brollopsplanering-grundkurs" class="btn secondary">Planerings-guide</a>
       </div>
     </section>

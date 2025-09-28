@@ -151,7 +151,7 @@ const guides = defineCollection({ type: "content", schema: baseSchema });
 const checklistor = defineCollection({ type: "content", schema: baseSchema });
 const budget = defineCollection({ type: "content", schema: baseSchema });
 const inspiration = defineCollection({ type: "content", schema: baseSchema });
-const leverantorer = defineCollection({ type: "content", schema: baseSchema });
+const leverantörer = defineCollection({ type: "content", schema: baseSchema });
 const venues = defineCollection({ type: "content", schema: venueSchema });
 const suppliers = defineCollection({ type: "content", schema: supplierSchema });
 const traditioner = defineCollection({ type: "content", schema: baseSchema });
@@ -169,7 +169,7 @@ export const collections = {
   checklistor,
   budget,
   inspiration,
-  leverantorer,
+  leverantörer,
   venues,
   suppliers,
   traditioner,

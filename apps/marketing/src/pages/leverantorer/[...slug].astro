@@ -4,7 +4,7 @@ import RelatedArticles from "~/components/RelatedArticles.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("leverantorer", ({ data }) => data.status !== "draft");
+  const entries = await getCollection("leverantörer", ({ data }) => data.status !== "draft");
   return entries.map((entry) => ({
     params: { slug: entry.slug }
   }));
@@ -18,7 +18,7 @@ if (!slug) {
   throw new Error("Slug saknas");
 }
 
-const entries = await getCollection("leverantorer", ({ data }) => data.status !== "draft");
+const entries = await getCollection("leverantörer", ({ data }) => data.status !== "draft");
 const entry = entries.find((item) => item.slug === slug);
 
 if (!entry) {
@@ -38,7 +38,7 @@ const { Content, headings } = await entry.render();
     headline: entry.data.title,
     description: entry.data.description,
     inLanguage: "sv-SE",
-    url: `${Astro.site}leverantorer/${entry.slug}`,
+    url: `${Astro.site}leverantörer/${entry.slug}`,
     author: {
       "@type": "Person",
       name: entry.data.author
@@ -95,7 +95,7 @@ const { Content, headings } = await entry.render();
       </section>
     )}
   </article>
-  <RelatedArticles currentSlug={`leverantorer/${entry.slug}`} related={entry.data.related} />
+  <RelatedArticles currentSlug={`leverantörer/${entry.slug}`} related={entry.data.related} />
 </BaseLayout>
 
 <style>

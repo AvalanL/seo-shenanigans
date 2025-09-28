@@ -14,7 +14,7 @@ author: "Bröllopssidan.se"
 status: "published"
 evergreen: true
 ctaLabel: "Fördjupa dig i koordinatorguiden"
-ctaUrl: "/leverantorer/brollopskoordinator-pris-och-guide"
+ctaUrl: "/leverantörer/brollopskoordinator-pris-och-guide"
 faq:
   - question: "Vad kostar en bröllopskoordinator i Malmö 2025?"
     answer: "Dagkoordinering kostar 11 000–15 000 kr. Delplanering 18 000–26 000 kr och fullservice 35 000–55 000 kr. Destination Öresund (med Köpenhamn) kan ligga upp till 65 000 kr inklusive resor."
@@ -92,8 +92,8 @@ Ja, vissa studios erbjuder styling. Jämför kostnader med fristående dekorför
 
 ## Nästa steg
 
-- Gå vidare till huvudguiden [Bröllopskoordinator: pris och guide](/leverantorer/brollopskoordinator-pris-och-guide/).
+- Gå vidare till huvudguiden [Bröllopskoordinator: pris och guide](/leverantörer/brollopskoordinator-pris-och-guide/).
 - Schemalägg digitalt introduktionsmöte (30 min) med två kandidater.
 - Lägg koordinatorns kostnad och reseposter i budgeten och planeringsverktyget.
 
-> **CTA:** [Fördjupa dig i koordinatorguiden](/leverantorer/brollopskoordinator-pris-och-guide)
+> **CTA:** [Fördjupa dig i koordinatorguiden](/leverantörer/brollopskoordinator-pris-och-guide)

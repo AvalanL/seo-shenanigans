@@ -103,7 +103,7 @@ try {
     "@type": "CollectionPage",
     "name": `${currentServiceData.title} Sverige`,
     "description": `${currentServiceData.description} i hela Sverige`,
-    "url": `https://svenskabrollopsresan.se/leverantorer/${service}`,
+    "url": `https://svenskabrollopsresan.se/leverantörer/${service}`,
     "numberOfItems": totalSuppliers,
     "about": {
       "@type": "Service",
@@ -116,7 +116,7 @@ try {
   <nav aria-label="breadcrumb" class="breadcrumb">
     <ol>
       <li><a href="/">Hem</a></li>
-      <li><a href="/leverantorer">Leverantörer</a></li>
+      <li><a href="/leverantörer">Leverantörer</a></li>
       <li aria-current="page">{currentServiceData.title}</li>
     </ol>
   </nav>
@@ -186,7 +186,7 @@ try {
 
       <div class="city-cards">
         {availableCities.map(([cityKey, cityData]) => (
-          <a href={`/leverantorer/${service}/${cityKey}`} class="city-card">
+          <a href={`/leverantörer/${service}/${cityKey}`} class="city-card">
             <div class="city-header">
               <h3>{cityData.name}</h3>
               <span class="city-region">{cityData.region}</span>
@@ -222,7 +222,7 @@ try {
 
         <div class="supplier-grid">
           {actualSuppliers.map(supplier => (
-            <a href={`/leverantorer/${supplier.data.category}/${supplier.slug.split('/').pop()}`} class="supplier-card">
+            <a href={`/leverantörer/${supplier.data.category}/${supplier.slug.split('/').pop()}`} class="supplier-card">
               {supplier.data.image && (
                 <img src={supplier.data.image} alt={supplier.data.title} loading="lazy" />
               )}
@@ -237,7 +237,7 @@ try {
         </div>
 
         <div class="view-all">
-          <a href={`/leverantorer/${service === 'bröllopsfotograf' ? 'fotograf' : service.replace('bröllops', '')}`} class="btn secondary">
+          <a href={`/leverantörer/${service === 'bröllopsfotograf' ? 'fotograf' : service.replace('bröllops', '')}`} class="btn secondary">
             Se alla {currentServiceData.title.toLowerCase()}
           </a>
         </div>
@@ -264,7 +264,7 @@ try {
               .map(([cityKey, cityData]) => (
                 <tr>
                   <td>
-                    <a href={`/leverantorer/${service}/${cityKey}`} class="city-link">
+                    <a href={`/leverantörer/${service}/${cityKey}`} class="city-link">
                       {cityData.name}
                     </a>
                   </td>
@@ -312,7 +312,7 @@ try {
       <h2>Hitta rätt {service} för ert bröllop</h2>
       <p>Använd våra verktyg för att jämföra leverantörer och planera er budget.</p>
       <div class="cta-buttons">
-        <a href="/budget/budgetkalkylator?ref=leverantorer-service" class="btn primary">Planera budget</a>
+        <a href="/budget/budgetkalkylator?ref=leverantörer-service" class="btn primary">Planera budget</a>
         <a href="/guides/brollopsplanering-grundkurs" class="btn secondary">Läs planeringsguide</a>
       </div>
     </section>
