@@ -2,6 +2,9 @@ import { defineConfig } from "astro/config";
 import { fileURLToPath } from "node:url";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { getAllowedHosts } from "./config/allowed-hosts.mjs";
+
+const allowedHosts = getAllowedHosts();
 
 export default defineConfig({
   site: "https://www.erabrollopsajt.se", // TODO: uppdatera till produktionsdomän
@@ -10,7 +13,7 @@ export default defineConfig({
     drafts: true,
   },
   server: {
-    host: "0.0.0.0",
+    host: true,
     port: process.env.PORT || 4321,
   },
   vite: {
@@ -23,14 +26,14 @@ export default defineConfig({
       chunkSizeWarningLimit: 600,
     },
     server: {
-      host: "0.0.0.0",
+      host: true,
       port: process.env.PORT || 4321,
-      allowedHosts: true
+      allowedHosts
     },
     preview: {
-      host: "0.0.0.0", 
+      host: true,
       port: process.env.PORT || 4321,
-      allowedHosts: true
+      allowedHosts
     },
   },
 });
