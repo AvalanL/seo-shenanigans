@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
-const baseAllowedHosts = ['localhost', '127.0.0.1', '0.0.0.0'];
+const baseAllowedHosts = ['localhost', '127.0.0.1', '0.0.0.0', '.up.railway.app'];
 
 const envAllowedHosts = [
   process.env.RAILWAY_STATIC_URL,
@@ -40,17 +40,18 @@ const normaliseHosts = (values) => {
   return Array.from(hosts);
 };
 
-const allowedHosts = normaliseHosts(envAllowedHosts);
+const derivedAllowedHosts = normaliseHosts(envAllowedHosts);
+const allowAllHosts = process.env.VITE_STRICT_ALLOWED_HOSTS === 'true' ? derivedAllowedHosts : true;
 
 export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: process.env.PORT || 4321,
-    allowedHosts
+    allowedHosts: allowAllHosts
   },
   preview: {
     host: '0.0.0.0',
     port: process.env.PORT || 4321,
-    allowedHosts
+    allowedHosts: allowAllHosts
   }
 });
