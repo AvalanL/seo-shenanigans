@@ -4,11 +4,112 @@ import DirectoryCard from "~/components/directory/DirectoryCard.astro";
 import VenueMap from "~/components/directory/VenueMap.astro";
 import { getCollection } from "astro:content";
 
-const venues = await getCollection("venues");
-const cities = Array.from(new Set(venues.map((entry) => entry.data.city))).sort();
-const styles = Array.from(new Set(venues.map((entry) => entry.data.style))).sort();
-const maxPrice = Math.max(...venues.map((entry) => Number(entry.data.startPrice) || 0));
-const maxCapacity = Math.max(...venues.map((entry) => Number(entry.data.capacity) || 0));
+const normalizeWhitespace = (value: string) =>
+  value
+    .replace(/\s+/g, " ")
+    .trim();
+
+const removePostalPrefix = (value: string) =>
+  value
+    .replace(/\b\d{2,}\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const splitLocationFragments = (value?: string | null) => {
+  if (!value) return [] as string[];
+  return value
+    .split(/[\n,/]/)
+    .map((part) => normalizeWhitespace(removePostalPrefix(part)))
+    .filter(
+      (part) =>
+        part.length > 0 &&
+        !/vägbeskrivning/i.test(part) &&
+        !/^sverige$/i.test(part) &&
+        !/^se$/i.test(part),
+    );
+};
+
+const titleCase = (value: string) =>
+  value
+    .split("-")
+    .map((segment) =>
+      segment
+        .split(" ")
+        .map((word) =>
+          word
+            ? word[0].toLocaleUpperCase("sv-SE") + word.slice(1).toLocaleLowerCase("sv-SE")
+            : word,
+        )
+        .join(" "),
+    )
+    .join("-")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const dedupeCaseInsensitive = (values: string[]) => {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const value of values) {
+    const key = value.toLocaleLowerCase("sv-SE");
+    if (!seen.has(key)) {
+      seen.add(key);
+      result.push(value);
+    }
+  }
+  return result;
+};
+
+const rawVenues = await getCollection("venues");
+
+const normalizedVenues = rawVenues.map((entry) => {
+  const cityFragments = splitLocationFragments(entry.data.city);
+  const regionFragments = splitLocationFragments(entry.data.region);
+
+  const rawCity = cityFragments.length > 0
+    ? cityFragments[cityFragments.length - 1]
+    : regionFragments.length > 0
+      ? regionFragments[regionFragments.length - 1]
+      : "Okänd";
+
+  const formattedCity = titleCase(rawCity);
+
+  const rawRegionCandidate = regionFragments.length > 0
+    ? regionFragments[regionFragments.length - 1]
+    : formattedCity !== "Okänd"
+      ? formattedCity
+      : "Sverige";
+
+  const formattedRegion = titleCase(rawRegionCandidate);
+
+  const startPrice = Number(entry.data.startPrice) || 0;
+  const capacity = Number(entry.data.capacity) || 0;
+
+  return {
+    ...entry,
+    data: {
+      ...entry.data,
+      city: formattedCity,
+      region: formattedRegion,
+      startPrice,
+      capacity,
+    },
+  };
+});
+
+const cities = dedupeCaseInsensitive(
+  normalizedVenues
+    .map((entry) => entry.data.city)
+    .filter((city) => city && city !== "Okänd"),
+).sort((a, b) => a.localeCompare(b, "sv-SE"));
+
+const styles = dedupeCaseInsensitive(
+  normalizedVenues
+    .map((entry) => entry.data.style)
+    .filter((style) => style && style.toLowerCase() !== "okänd"),
+).sort((a, b) => a.localeCompare(b, "sv-SE"));
+
+const maxPrice = Math.max(...normalizedVenues.map((entry) => entry.data.startPrice || 0));
+const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capacity || 0));
 ---
 <BaseLayout
   title="Bröllopslokaler i Sverige"
@@ -56,17 +157,17 @@ const maxCapacity = Math.max(...venues.map((entry) => Number(entry.data.capacity
     </label>
   </section>
 
-  <VenueMap venues={venues} />
+  <VenueMap venues={normalizedVenues} />
 
   <section class="grid" data-directory-grid>
-    {venues.map((venue) => (
+    {normalizedVenues.map((venue) => (
       <DirectoryCard
         title={venue.data.title}
         summary={venue.data.summary}
         city={venue.data.city}
         region={venue.data.region}
-        startPrice={Number(venue.data.startPrice) || 0}
-        capacity={Number(venue.data.capacity) || 0}
+        startPrice={venue.data.startPrice || 0}
+        capacity={venue.data.capacity || 0}
         image={venue.data.image}
         style={venue.data.style}
         href={`/lokaler/${venue.slug}`}

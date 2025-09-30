@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopslokal pris stockholm"
   - "bröllopslokal kostnad Stockholm"
   - "bästa bröllopslokal stockholm"
-category: "leverantörer"
+category: "leverantorer"
 city: "Stockholm"
 region: "Stockholms län"
 searchVolume: 4400

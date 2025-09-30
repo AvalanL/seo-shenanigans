@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopsfotograf pris göteborg"
   - "bröllopsfotograf kostnad Göteborg"
   - "bästa bröllopsfotograf göteborg"
-category: "leverantörer"
+category: "leverantorer"
 city: "Göteborg"
 region: "Västra Götalands län"
 searchVolume: 1300

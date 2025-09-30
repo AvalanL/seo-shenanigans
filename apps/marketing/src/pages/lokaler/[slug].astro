@@ -22,9 +22,246 @@ if (!entry) {
 const { Content } = await entry.render();
 
 // Generate Open Graph image - use venue image if available
-const ogImage = entry.data.image 
+const ogImage = entry.data.image
   ? { src: entry.data.image, alt: `${entry.data.title} - Bröllopslokal` }
   : getOpenGraphImage('venue', { title: entry.data.title, city: entry.data.city });
+
+const numberFormatter = new Intl.NumberFormat('sv-SE');
+const dateFormatter = new Intl.DateTimeFormat('sv-SE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const cleanLabel = (value) => {
+  if (!value) return 'Uppgift saknas';
+  const trimmed = value.trim();
+  return trimmed && trimmed.toLowerCase() !== 'okänd' ? trimmed : 'Uppgift saknas';
+};
+
+const splitLocation = (value) => {
+  if (!value) return [];
+  return value
+    .split(/[,/]/)
+    .map((part) => cleanLabel(part))
+    .filter((part) => part && part !== 'Uppgift saknas' && part.toLowerCase() !== 'sverige');
+};
+
+const dedupeCaseInsensitive = (values) => {
+  const result = [];
+  const seen = new Set();
+  for (const value of values) {
+    const normalized = value.toLowerCase();
+    if (!seen.has(normalized)) {
+      seen.add(normalized);
+      result.push(value);
+    }
+  }
+  return result;
+};
+
+const capacityLabel = entry.data.capacity > 0
+  ? `${numberFormatter.format(entry.data.capacity)} gäster`
+  : 'Uppgift saknas';
+
+const startPriceLabel = entry.data.startPrice > 0
+  ? `${numberFormatter.format(entry.data.startPrice)} kr`
+  : 'Pris enligt offert';
+
+const citySegments = splitLocation(entry.data.city);
+const regionSegments = splitLocation(entry.data.region);
+
+const cityLabel = citySegments[0] || cleanLabel(entry.data.city);
+const regionLabel = regionSegments[0] || cleanLabel(entry.data.region);
+const coordinatesLabel = entry.data.latitude && entry.data.longitude
+  ? `${entry.data.latitude}, ${entry.data.longitude}`
+  : 'Uppgift saknas';
+
+const locationPartsRaw = [...citySegments, ...regionSegments];
+
+const categoryMatch = entry.data.notes?.match(/Kategorier:\s*(.+)/i);
+const categories = (categoryMatch ? categoryMatch[1].split(',') : [])
+  .map((item) => item.trim())
+  .filter((item) => item.length > 0);
+
+if (entry.data.style && entry.data.style.toLowerCase() !== 'okänd' && !categories.includes(entry.data.style)) {
+  categories.unshift(entry.data.style);
+}
+
+const uniqueCategories = Array.from(new Set(categories)).filter(
+  (category) => category && category.toLowerCase() !== 'okänd'
+);
+
+let websiteDisplay = '';
+let showWebsite = false;
+if (entry.data.website) {
+  try {
+    const url = new URL(entry.data.website);
+    const host = url.hostname.replace(/^www\./, '');
+    if (!host.includes('brllopslokaler-wpb.nu')) {
+      showWebsite = true;
+      websiteDisplay = host + (url.pathname && url.pathname !== '/' ? url.pathname : '');
+    }
+  } catch {
+    // ignore invalid
+  }
+}
+
+const contactDetails = [
+  { label: 'Webb', value: websiteDisplay, type: 'web' },
+  { label: 'E-post', value: entry.data.email?.trim(), type: 'email' },
+  { label: 'Telefon', value: entry.data.phone?.trim(), type: 'phone' },
+]
+  .filter(({ value }) => Boolean(value && value.length > 0))
+  .filter(({ type }) => (type === 'web' ? showWebsite : true));
+
+const noteStamp = entry.data.notes?.split('|')[0]?.trim();
+
+const isGenerated = entry.data.notes?.toLowerCase().includes('genererad från bröllopslokaler.nu');
+
+const normalizeScrapedText = (text = '') =>
+  text
+    .replace(/Posted\s+\d+\s+\w+\s+ago/gi, '')
+    .replace(/Se\s+vår\s+fina[^.]+\.?/gi, '')
+    .replace(/Skicka\s+gärna\s+en\s+förfrågan\s+så\s+hjälper\s+vi\s+er!?/gi, '')
+    .replace(/Läs\s+mer[^.]+\.?/gi, '')
+    .replace(/\s+/g, ' ')
+    .replace(/([a-zåäö])([A-ZÅÄÖ])/g, '$1 $2')
+    .replace(/(Bröllop|Festlokal|Konferens)(?=[A-ZÅÄÖ])/g, '$1: ')
+    .replace(/\s([,.!?:;])/g, '$1')
+    .replace(/[•●]/g, '-')
+    .trim();
+
+const formatList = (items) => {
+  if (items.length === 0) return '';
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} och ${items[1]}`;
+  return `${items.slice(0, -1).join(', ')} och ${items[items.length - 1]}`;
+};
+
+const toReadableCategory = (label) =>
+  label
+    .replace(/\s*&\s*/g, ' och ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const descriptorRewrites = {
+  'slott och herrgård': 'herrgårdskänsla',
+  'lantlig idyll': 'lantlig idyll',
+  'kust och skärgård': 'kust- och skärgårdsmiljö',
+  'lokal med boende': 'boende på plats',
+  'bröllopslokal vid vatten': 'miljö vid vatten',
+  'stort bröllop': 'plats för stora sällskap',
+  'egen mat och dryck': 'egen mat och dryck',
+  'loge': 'loge med rustik karaktär',
+  'stadslokaler': 'stadsläge',
+  'stadslokaler och terrass': 'stadsläge',
+  'stadslokaler och terrasser': 'stadsläge',
+  'stad': 'stadsläge',
+  'stadsläge': 'stadsläge',
+  'annorlunda och unikt': 'unik miljö',
+  'annorlunda & unikt': 'unik miljö',
+  'brunch och dagsfest': 'dagsevenemang',
+};
+
+const toDescriptor = (label) => {
+  const normalized = toReadableCategory(label).toLocaleLowerCase('sv-SE');
+  return descriptorRewrites[normalized] || normalized;
+};
+
+const extractDate = (stamp) => {
+  if (!stamp) return '';
+  const match = stamp.match(/(\d{4}-\d{2}-\d{2})/);
+  if (!match) return '';
+  try {
+    const date = new Date(match[1]);
+    return dateFormatter.format(date);
+  } catch {
+    return '';
+  }
+};
+
+const formattedNoteDate = extractDate(noteStamp);
+const noteStampText = formattedNoteDate ? `Data verifierad ${formattedNoteDate}.` : '';
+
+const formatContactPhrase = ({ type, value }) => {
+  if (type === 'web') return `webbplatsen ${value}`;
+  if (type === 'email') return `e-post ${value}`;
+  if (type === 'phone') return `telefon ${value}`;
+  return value;
+};
+
+const normalizedSummary = normalizeScrapedText(entry.data.summary);
+
+const buildGeneratedStory = () => {
+  if (!isGenerated) {
+    return { paragraphs: [], summary: '', locationText: '', highlights: '' };
+  }
+
+  const paragraphs = [];
+
+  const uniqueLocationParts = locationPartsRaw.length
+    ? dedupeCaseInsensitive(locationPartsRaw)
+    : [];
+  const locationText = uniqueLocationParts.length
+    ? formatList(uniqueLocationParts)
+    : 'Sverige';
+
+  const descriptorList = uniqueCategories
+    .map((category) => toDescriptor(category))
+    .filter((descriptor) => descriptor && descriptor !== 'okänd');
+  const highlightDescriptors = descriptorList.length
+    ? dedupeCaseInsensitive(descriptorList).slice(0, 3)
+    : ['en personlig bröllopsmiljö'];
+  const highlights = formatList(highlightDescriptors);
+
+  const openingSentence = `${entry.data.title} i ${locationText} välkomnar er som drömmer om ${highlights}.`;
+  paragraphs.push(openingSentence);
+
+  const capacitySentence = entry.data.capacity > 0
+    ? `Lokalen rymmer upp till ${numberFormatter.format(entry.data.capacity)} gäster.`
+    : 'Lokalen anpassas efter er gästlista.';
+  const priceSentence = entry.data.startPrice > 0
+    ? `Planera för ett startpris runt ${numberFormatter.format(entry.data.startPrice)} kr.`
+    : 'Be om offert för en prisbild som matchar ert upplägg.';
+  paragraphs.push(`${capacitySentence} ${priceSentence}`.trim());
+
+  if (contactDetails.length) {
+    const contactPhrases = contactDetails.map(formatContactPhrase);
+    paragraphs.push(`Teamet nås via ${formatList(contactPhrases)}.`);
+  }
+
+  if (formattedNoteDate) {
+    paragraphs.push(`Uppgifterna senast verifierade ${formattedNoteDate}.`);
+  }
+
+  return { paragraphs, summary: openingSentence, locationText, highlights };
+};
+
+const { paragraphs: generatedStory, summary: generatedSummary } = buildGeneratedStory();
+
+const displaySummary = (
+  generatedSummary
+    || normalizedSummary
+    || entry.data.summary
+    || `${entry.data.title} – bröllopslokal i ${cityLabel !== 'Uppgift saknas' ? cityLabel : 'Sverige'}`
+).trim();
+
+let mapEmbedUrl = '';
+if (entry.data.latitude && entry.data.longitude) {
+  const lat = parseFloat(entry.data.latitude);
+  const lng = parseFloat(entry.data.longitude);
+  if (!Number.isNaN(lat) && !Number.isNaN(lng)) {
+    const delta = 0.01;
+    const bbox = [
+      (lng - delta).toFixed(6),
+      (lat - delta).toFixed(6),
+      (lng + delta).toFixed(6),
+      (lat + delta).toFixed(6),
+    ].join('%2C');
+    mapEmbedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat.toFixed(6)}%2C${lng.toFixed(6)}`;
+  }
+}
 ---
 <BaseLayout
   title={entry.data.title}
@@ -53,35 +290,94 @@ const ogImage = entry.data.image
   }}
 >
   <article class="venue">
-    <header>
-      <p class="breadcrumbs"><a href="/lokaler">← Tillbaka till lokallistan</a></p>
-      <h1>{entry.data.title}</h1>
-      <p class="summary">{entry.data.summary}</p>
-      <div class="meta">
-        <span><strong>Plats:</strong> {entry.data.city}, {entry.data.region}</span>
-        <span><strong>Kapacitet:</strong> {entry.data.capacity} gäster</span>
-        <span><strong>Startpris:</strong> {entry.data.startPrice} kr</span>
+    <header class="venue-header">
+      <div class="intro">
+        <div class="intro-copy">
+          <p class="breadcrumbs"><a href="/lokaler">← Tillbaka till lokallistan</a></p>
+          <h1>{entry.data.title}</h1>
+          <p class="summary">{displaySummary}</p>
+
+          {uniqueCategories.length > 0 && (
+            <ul class="tag-list">
+          {uniqueCategories.map((category) => (
+            <li>{toReadableCategory(category)}</li>
+          ))}
+        </ul>
+      )}
+
+          <dl class="fact-grid">
+            <div>
+              <dt>Stad</dt>
+              <dd>{cityLabel}</dd>
+            </div>
+            <div>
+              <dt>Region</dt>
+              <dd>{regionLabel}</dd>
+            </div>
+            <div>
+              <dt>Kapacitet</dt>
+              <dd>{capacityLabel}</dd>
+            </div>
+            <div>
+              <dt>Startpris</dt>
+              <dd>{startPriceLabel}</dd>
+            </div>
+            <div>
+              <dt>Koordinater</dt>
+              <dd>{coordinatesLabel}</dd>
+            </div>
+          </dl>
+
+          {noteStampText && <p class="note">{noteStampText}</p>}
+        </div>
+
+        <div class="visuals">
+          {entry.data.image && (
+            <figure class="hero">
+              <img src={entry.data.image} alt={entry.data.title} loading="lazy" />
+            </figure>
+          )}
+
+          {mapEmbedUrl && (
+            <div class="map-frame">
+              <iframe
+                src={mapEmbedUrl}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title={`Karta för ${entry.data.title}`}
+              ></iframe>
+            </div>
+          )}
+        </div>
       </div>
     </header>
 
-    {entry.data.image && (
-      <figure class="hero">
-        <img src={entry.data.image} alt={entry.data.title} loading="lazy" />
-      </figure>
-    )}
-
-    <div class="content">
-      <Content />
-
-      <section class="contact">
-        <h2>Kontakt</h2>
-        <ul>
-          <li><strong>Webb:</strong> <a href={entry.data.website}>{entry.data.website}</a></li>
-          <li><strong>E-post:</strong> <a href={`mailto:${entry.data.email}`}>{entry.data.email}</a></li>
-          <li><strong>Telefon:</strong> <a href={`tel:${entry.data.phone}`}>{entry.data.phone}</a></li>
-        </ul>
-        <a class="cta" href="/templates/lokal-checklista">Ladda ner lokalchecklistan</a>
+    <div class="content-grid">
+      <section class="story">
+        <div class="prose">
+          {generatedStory.length > 0 ? (
+            generatedStory.map((paragraph) => <p>{paragraph}</p>)
+          ) : (
+            <Content />
+          )}
+        </div>
       </section>
+
+      <aside class="contact">
+        <h2>Kontakt</h2>
+        {contactDetails.length > 0 ? (
+          <ul>
+            {contactDetails.map(({ label, value }) => (
+              <li>
+                <strong>{label}:</strong> <span>{value}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="contact-empty">Kontaktuppgifter kommer snart.</p>
+        )}
+        <a class="cta" href="/templates/lokal-checklista">Ladda ner lokalchecklistan</a>
+      </aside>
     </div>
   </article>
 </BaseLayout>
@@ -89,12 +385,65 @@ const ogImage = entry.data.image
 <style>
   .venue {
     display: grid;
-    gap: 2rem;
+    gap: 2.5rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding-bottom: 3rem;
   }
 
-  header {
+  .venue-header {
     display: grid;
-    gap: 0.8rem;
+    gap: 1.25rem;
+  }
+
+  .intro {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    .intro {
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
+      align-items: start;
+      gap: 2.5rem;
+    }
+  }
+
+  .intro-copy {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .visuals {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .visuals {
+      position: sticky;
+      top: 6rem;
+    }
+  }
+
+  .visuals::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    background: linear-gradient(145deg, rgba(178, 109, 74, 0.12), rgba(178, 109, 74, 0));
+    z-index: -1;
+  }
+
+  .visuals > * {
+    border-radius: 1.1rem;
+    overflow: hidden;
+  }
+
+  .hero {
+    margin: 0;
   }
 
   .breadcrumbs a {
@@ -104,40 +453,165 @@ const ogImage = entry.data.image
 
   .summary {
     font-size: 1.1rem;
+    line-height: 1.6;
     color: rgba(31, 28, 20, 0.75);
   }
 
-  .meta {
+  .tag-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    color: rgba(31, 28, 20, 0.7);
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .tag-list li {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(178, 109, 74, 0.12);
+    color: #6b3d28;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .fact-grid {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: #fffdf5;
+    border: 1px solid rgba(31, 28, 20, 0.08);
+  }
+
+  .fact-grid dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(31, 28, 20, 0.55);
+    margin-bottom: 0.25rem;
+  }
+
+  .fact-grid dd {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(31, 28, 20, 0.9);
   }
 
   .hero img {
     width: 100%;
-    border-radius: 1.5rem;
+    max-height: 420px;
+    border-radius: 1.25rem;
     object-fit: cover;
+    box-shadow: 0 24px 60px -32px rgba(31, 28, 20, 0.35);
   }
 
-  .content {
+  .content-grid {
     display: grid;
     gap: 2rem;
   }
 
+  @media (min-width: 960px) {
+    .content-grid {
+      grid-template-columns: minmax(0, 1fr) 280px;
+      align-items: start;
+      gap: 2.5rem;
+    }
+  }
+
+  .story {
+    display: grid;
+    gap: 2.25rem;
+  }
+
+  .prose {
+    display: grid;
+    gap: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(31, 28, 20, 0.88);
+  }
+
+  .prose h2,
+  .prose h3 {
+    margin-top: 2rem;
+  }
+
+  .prose ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .map-frame {
+    position: relative;
+    width: 100%;
+    padding-bottom: 65%;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 18px 48px -40px rgba(31, 28, 20, 0.6);
+  }
+
+  .map-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
   .contact {
     border: 1px solid rgba(0, 0, 0, 0.12);
-    padding: 1.5rem;
+    padding: 1.75rem;
     border-radius: 1.25rem;
     background: #fffef9;
+    display: grid;
+    gap: 1.25rem;
+    position: sticky;
+    top: 6rem;
   }
 
   .contact ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 1rem;
+    margin: 0;
     display: grid;
-    gap: 0.5rem;
+    gap: 0.65rem;
+    font-size: 0.95rem;
+  }
+
+  .contact li {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .contact li strong {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(31, 28, 20, 0.55);
+  }
+
+  .contact li span {
+    font-weight: 600;
+    color: rgba(31, 28, 20, 0.88);
+    word-break: break-word;
+  }
+
+  .contact-empty {
+    font-size: 0.95rem;
+    color: rgba(31, 28, 20, 0.6);
+  }
+
+  .note {
+    font-size: 0.85rem;
+    color: rgba(31, 28, 20, 0.55);
   }
 
   .cta {
@@ -148,5 +622,6 @@ const ogImage = entry.data.image
     color: #fff;
     text-decoration: none;
     font-weight: 600;
+    justify-self: start;
   }
 </style>

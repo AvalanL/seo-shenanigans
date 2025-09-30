@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopslokal pris göteborg"
   - "bröllopslokal kostnad Göteborg"
   - "bästa bröllopslokal göteborg"
-category: "leverantörer"
+category: "leverantorer"
 city: "Göteborg"
 region: "Västra Götalands län"
 searchVolume: 2400

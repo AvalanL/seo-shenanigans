@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopsfotograf pris stockholm"
   - "bröllopsfotograf kostnad Stockholm"
   - "bästa bröllopsfotograf stockholm"
-category: "leverantörer"
+category: "leverantorer"
 city: "Stockholm"
 region: "Stockholms län"
 searchVolume: 1900

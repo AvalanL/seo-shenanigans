@@ -7,7 +7,7 @@ const collections = await Promise.all([
   getCollection("checklistor"),
   getCollection("budget"),
   getCollection("inspiration"),
-  getCollection("leverantörer"),
+  getCollection("leverantorer"),
   getCollection("traditioner"),
   getCollection("venues"),
   getCollection("suppliers")
@@ -38,7 +38,7 @@ const entries = collections
     const url = entry.collection === "venues"
       ? `/lokaler/${entry.slug}`
       : entry.collection === "suppliers"
-      ? `/leverantörer/${category}/${entry.slug.split("/").pop() ?? entry.slug}`
+      ? `/leverantorer/${category}/${entry.slug.split("/").pop() ?? entry.slug}`
       : `/${entry.collection}/${entry.slug}`;
     return {
       title: data.title as string,

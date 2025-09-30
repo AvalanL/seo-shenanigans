@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopsfotograf pris uppsala"
   - "bröllopsfotograf kostnad Uppsala"
   - "bästa bröllopsfotograf uppsala"
-category: "leverantörer"
+category: "leverantorer"
 city: "Uppsala"
 region: "Uppsala län"
 searchVolume: 500

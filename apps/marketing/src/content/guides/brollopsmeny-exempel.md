@@ -115,6 +115,6 @@ Arbeta med portionerade tallrikar, erbjuda "doggy bags" till familj eller planer
 
 - Lägg in menyvalen i [Bröllopsplanering: Grundkurs](/guides/brollopsplanering-grundkurs/).
 - Matcha kostnaderna mot [Bröllopsbudget 2025](/budget/brollopsbudget-2025/).
-- Kontakta minst tre cateringleverantörer för offerter och referenser (se [Bröllop catering Stockholm](/leverantörer/brollop-catering-stockholm/)).
+- Kontakta minst tre cateringleverantörer för offerter och referenser (se [Bröllop catering Stockholm](/leverantorer/brollop-catering-stockholm/)).
 
 > **CTA:** [Räkna på matbudgeten i budgetkalkylatorn](/budget/budgetkalkylator?ref=cta)

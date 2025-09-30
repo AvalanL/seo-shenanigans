@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopslokal pris malmö"
   - "bröllopslokal kostnad Malmö"
   - "bästa bröllopslokal malmö"
-category: "leverantörer"
+category: "leverantorer"
 city: "Malmö"
 region: "Skåne län"
 searchVolume: 1800

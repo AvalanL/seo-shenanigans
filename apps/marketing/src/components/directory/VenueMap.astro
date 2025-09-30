@@ -6,23 +6,35 @@ export interface Props {
 }
 
 const { venues } = Astro.props;
+
 const markers = venues
-  .map((entry) => ({
-    title: entry.data.title,
-    city: entry.data.city,
-    startPrice: entry.data.startPrice,
-    url: `/lokaler/${entry.slug}`,
-    latitude: Number(entry.data.latitude ?? 0),
-    longitude: Number(entry.data.longitude ?? 0),
-  }))
-  .filter((marker) => marker.latitude && marker.longitude);
+  .map((entry) => {
+    const latitude = Number.parseFloat(entry.data.latitude ?? "");
+    const longitude = Number.parseFloat(entry.data.longitude ?? "");
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      return null;
+    }
+    return {
+      title: entry.data.title,
+      city: entry.data.city,
+      startPrice: entry.data.startPrice,
+      url: `/lokaler/${entry.slug}`,
+      latitude,
+      longitude,
+    };
+  })
+  .filter((marker): marker is Exclude<typeof marker, null> => Boolean(marker));
 
 const mapId = `venue-map-${Math.random().toString(36).slice(2)}`;
+const dataId = `${mapId}-markers`;
 ---
 {markers.length > 0 ? (
   <section class="map-section">
     <h2>Visa lokaler på karta</h2>
-    <div id={mapId} class="map" data-markers={JSON.stringify(markers)}></div>
+    <div id={mapId} class="map"></div>
+    <script type="application/json" id={dataId}>
+      {JSON.stringify(markers)}
+    </script>
   </section>
 ) : null}
 
@@ -43,7 +55,9 @@ const mapId = `venue-map-${Math.random().toString(36).slice(2)}`;
 </style>
 
 <script is:inline>
-  const el = document.getElementById("{mapId}");
+  const mapElementId = ${JSON.stringify(mapId)};
+  const dataElementId = ${JSON.stringify(dataId)};
+  const el = document.getElementById(mapElementId);
   if (el) {
     const ensureLeaflet = async () => {
       if (!document.getElementById("leaflet-css")) {
@@ -53,28 +67,58 @@ const mapId = `venue-map-${Math.random().toString(36).slice(2)}`;
         link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
         document.head.appendChild(link);
       }
-      if (!(window).L) {
+      if (!window.L) {
         await import("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js");
       }
       return window.L;
     };
 
     ensureLeaflet().then((L) => {
-      const markers = JSON.parse(el.dataset.markers || "[]");
-      const map = L.map(el).setView([markers[0].latitude, markers[0].longitude], 11);
+      const dataScript = document.getElementById(dataElementId);
+      const markers = dataScript ? JSON.parse(dataScript.textContent || "[]") : [];
+      if (dataScript) {
+        dataScript.remove();
+      }
+      if (!markers.length) return;
+
+      const map = L.map(el, {
+        scrollWheelZoom: markers.length <= 100,
+        maxZoom: 17,
+        zoomControl: true,
+      }).setView([markers[0].latitude, markers[0].longitude], 7);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: "© OpenStreetMap",
       }).addTo(map);
 
-      markers.forEach((marker) => {
-        const price = marker.startPrice ? `${new Intl.NumberFormat('sv-SE').format(marker.startPrice)} kr` : "";
-        const popup = `<strong>${marker.title}</strong><br/>${marker.city}${price ? `<br/>Startpris: ${price}` : ''}<br/><a href="${marker.url}">Visa detaljer</a>`;
-        L.marker([marker.latitude, marker.longitude]).addTo(map).bindPopup(popup);
+      const formatter = new Intl.NumberFormat('sv-SE');
+      const icon = L.icon({
+        iconUrl: '/assets/directories/map-pin-amber.svg',
+        iconSize: [28, 36],
+        iconAnchor: [14, 36],
+        popupAnchor: [0, -36],
       });
 
-      const bounds = L.latLngBounds(markers.map((m) => [m.latitude, m.longitude]));
-      map.fitBounds(bounds, { padding: [24, 24] });
+      markers.forEach((marker) => {
+        const price = marker.startPrice
+          ? `${formatter.format(marker.startPrice)} kr`
+          : 'Pris enligt offert';
+        const popup = `
+          <div class="map-popup">
+            <strong>${marker.title}</strong>
+            <p>${marker.city || 'Ort saknas'}</p>
+            <p>${price}</p>
+            <p><a href="${marker.url}">Visa detaljer »</a></p>
+          </div>
+        `;
+
+        L.marker([marker.latitude, marker.longitude], { icon }).addTo(map).bindPopup(popup);
+      });
+
+      if (markers.length > 1) {
+        const bounds = L.latLngBounds(markers.map((m) => [m.latitude, m.longitude]));
+        map.fitBounds(bounds, { padding: [32, 32] });
+      }
     });
   }
 </script>

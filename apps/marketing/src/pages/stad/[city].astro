@@ -163,7 +163,7 @@ try {
         {availableServices.map(({ service, pricing, supplierCount, searchVolume }) => {
           const info = serviceInfo[service];
           return info ? (
-            <a href={`/leverantörer/${service}/${cityKey}`} class="service-card">
+            <a href={`/leverantorer/${service}/${cityKey}`} class="service-card">
               <div class="service-header">
                 <span class="service-icon">{info.icon}</span>
                 <div>
@@ -222,7 +222,7 @@ try {
 
         <div class="suppliers-grid">
           {actualSuppliers.map(supplier => (
-            <a href={`/leverantörer/${supplier.data.category}/${supplier.slug.split('/').pop()}`} class="supplier-card">
+            <a href={`/leverantorer/${supplier.data.category}/${supplier.slug.split('/').pop()}`} class="supplier-card">
               {supplier.data.image && (
                 <img src={supplier.data.image} alt={supplier.data.title} loading="lazy" />
               )}
@@ -299,7 +299,7 @@ try {
               return info ? (
                 <tr>
                   <td>
-                    <a href={`/leverantörer/${service}/${cityKey}`} class="service-link">
+                    <a href={`/leverantorer/${service}/${cityKey}`} class="service-link">
                       {info.icon} {info.title}
                     </a>
                   </td>

@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopslokal pris uppsala"
   - "bröllopslokal kostnad Uppsala"
   - "bästa bröllopslokal uppsala"
-category: "leverantörer"
+category: "leverantorer"
 city: "Uppsala"
 region: "Uppsala län"
 searchVolume: 1200

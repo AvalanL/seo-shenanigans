@@ -8,7 +8,7 @@ secondaryKeywords:
   - "bröllopsfotograf pris malmö"
   - "bröllopsfotograf kostnad Malmö"
   - "bästa bröllopsfotograf malmö"
-category: "leverantörer"
+category: "leverantorer"
 city: "Malmö"
 region: "Skåne län"
 searchVolume: 900

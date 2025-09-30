@@ -105,8 +105,19 @@ const ogImage = getOpenGraphImage('checklist', { title: entry.data.title });
 
 <style>
   .article {
-    display: grid;
-    gap: 1.5rem;
+    display: block;
+  }
+
+  .article > header {
+    margin-bottom: 2rem;
+  }
+
+  .article > .toc {
+    margin-bottom: 2rem;
+  }
+
+  .article > section {
+    margin-top: 2.5rem;
   }
 
   .category {
