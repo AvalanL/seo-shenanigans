@@ -59,6 +59,136 @@ const dedupeCaseInsensitive = (values: string[]) => {
   return result;
 };
 
+const stripDiacritics = (value: string) =>
+  value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+const normalizeCountyKey = (value: string) =>
+  stripDiacritics(value || '')
+    .toLowerCase()
+    .replace(/län|lan|county|region|kommun|stad/g, '')
+    .replace(/[^a-z\s-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const CANONICAL_COUNTIES = [
+  'Blekinge län',
+  'Dalarnas län',
+  'Gotlands län',
+  'Gävleborgs län',
+  'Hallands län',
+  'Jämtlands län',
+  'Jönköpings län',
+  'Kalmar län',
+  'Kronobergs län',
+  'Norrbottens län',
+  'Skåne län',
+  'Stockholms län',
+  'Södermanlands län',
+  'Uppsala län',
+  'Värmlands län',
+  'Västerbottens län',
+  'Västernorrlands län',
+  'Västmanlands län',
+  'Västra Götalands län',
+  'Örebro län',
+  'Östergötlands län',
+];
+
+const DEFAULT_COUNTY = 'Övriga län';
+
+const countyAliasMap = new Map<string, string>();
+
+const registerCountyAlias = (alias: string, county: string) => {
+  const key = normalizeCountyKey(alias);
+  if (key) {
+    countyAliasMap.set(key, county);
+  }
+};
+
+CANONICAL_COUNTIES.forEach((county) => {
+  registerCountyAlias(county, county);
+  registerCountyAlias(county.replace(/ län$/i, ''), county);
+});
+
+[
+  ['Skåne', 'Skåne län'],
+  ['Malmö', 'Skåne län'],
+  ['Lund', 'Skåne län'],
+  ['Staffanstorp', 'Skåne län'],
+  ['Svalöv', 'Skåne län'],
+  ['Kivik', 'Skåne län'],
+  ['Hjärnarp', 'Skåne län'],
+  ['Södermanland', 'Södermanlands län'],
+  ['Stockholm', 'Stockholms län'],
+  ['Sundbyberg', 'Stockholms län'],
+  ['Nacka', 'Stockholms län'],
+  ['Östermalm', 'Stockholms län'],
+  ['Göteborg', 'Västra Götalands län'],
+  ['Västra Götaland', 'Västra Götalands län'],
+  ['Säve', 'Västra Götalands län'],
+  ['Borås', 'Västra Götalands län'],
+  ['Halland', 'Hallands län'],
+  ['Varberg', 'Hallands län'],
+  ['Tvååker', 'Hallands län'],
+  ['Rolfstorp', 'Hallands län'],
+  ['Mellbystrand', 'Hallands län'],
+  ['Blekinge', 'Blekinge län'],
+  ['Kalmar', 'Kalmar län'],
+  ['Djurkälla', 'Kalmar län'],
+  ['Kronoberg', 'Kronobergs län'],
+  ['Jönköping', 'Jönköpings län'],
+  ['Östergötland', 'Östergötlands län'],
+  ['Stugan i Stadsparken', 'Östergötlands län'],
+  ['Sturefors', 'Östergötlands län'],
+  ['Bjärka-Säby', 'Östergötlands län'],
+  ['Uppsala', 'Uppsala län'],
+  ['Älvkarleby', 'Uppsala län'],
+  ['Gävleborg', 'Gävleborgs län'],
+  ['Örebro', 'Örebro län'],
+  ['Dalarna', 'Dalarnas län'],
+  ['Jämtland', 'Jämtlands län'],
+  ['Gotland', 'Gotlands län'],
+  ['Ljugarn', 'Gotlands län'],
+  ['Bjärka Säby', 'Östergötlands län'],
+  ['Köpmanholmen', 'Västernorrlands län'],
+  ['Västernorrland', 'Västernorrlands län'],
+  ['Västerbotten', 'Västerbottens län'],
+  ['Norrbotten', 'Norrbottens län'],
+  ['Västmanland', 'Västmanlands län'],
+  ['Skultuna', 'Västmanlands län'],
+  ['Västerås', 'Västmanlands län'],
+  ['Sverige', DEFAULT_COUNTY],
+  ['Flexibelt', DEFAULT_COUNTY],
+  ['Eldsberga', 'Hallands län'],
+  ['Hjärnarp', 'Skåne län'],
+  ['Säve', 'Västra Götalands län'],
+].forEach(([alias, county]) => registerCountyAlias(alias, county));
+
+const mapToCounty = (candidates: string[], fallbackCity: string) => {
+  const extendedCandidates = dedupeCaseInsensitive([
+    ...candidates,
+    ...candidates.flatMap((candidate) => candidate.split(' ')),
+    fallbackCity,
+  ]);
+
+  for (const candidate of extendedCandidates) {
+    const normalized = normalizeCountyKey(candidate);
+    if (!normalized) continue;
+    const direct = countyAliasMap.get(normalized);
+    if (direct) {
+      return direct;
+    }
+    for (const county of CANONICAL_COUNTIES) {
+      const countyKey = normalizeCountyKey(county);
+      if (countyKey && (normalized === countyKey || countyKey.includes(normalized) || normalized.includes(countyKey))) {
+        return county;
+      }
+    }
+  }
+
+  return DEFAULT_COUNTY;
+};
+
 const rawVenues = await getCollection("venues");
 
 const normalizedVenues = rawVenues.map((entry) => {
@@ -71,15 +201,18 @@ const normalizedVenues = rawVenues.map((entry) => {
       ? regionFragments[regionFragments.length - 1]
       : "Okänd";
 
-  const formattedCity = titleCase(rawCity);
+  const formattedCityRaw = titleCase(rawCity);
+  const formattedCity = formattedCityRaw === "Okänd" ? "Övriga orter" : formattedCityRaw;
 
   const rawRegionCandidate = regionFragments.length > 0
     ? regionFragments[regionFragments.length - 1]
-    : formattedCity !== "Okänd"
+    : formattedCityRaw !== "Okänd"
       ? formattedCity
       : "Sverige";
 
   const formattedRegion = titleCase(rawRegionCandidate);
+
+  const county = mapToCounty([...regionFragments, rawRegionCandidate, formattedCity], formattedCity);
 
   const startPrice = Number(entry.data.startPrice) || 0;
   const capacity = Number(entry.data.capacity) || 0;
@@ -89,18 +222,12 @@ const normalizedVenues = rawVenues.map((entry) => {
     data: {
       ...entry.data,
       city: formattedCity,
-      region: formattedRegion,
+      region: county,
       startPrice,
       capacity,
     },
   };
 });
-
-const cities = dedupeCaseInsensitive(
-  normalizedVenues
-    .map((entry) => entry.data.city)
-    .filter((city) => city && city !== "Okänd"),
-).sort((a, b) => a.localeCompare(b, "sv-SE"));
 
 const styles = dedupeCaseInsensitive(
   normalizedVenues
@@ -108,8 +235,23 @@ const styles = dedupeCaseInsensitive(
     .filter((style) => style && style.toLowerCase() !== "okänd"),
 ).sort((a, b) => a.localeCompare(b, "sv-SE"));
 
-const maxPrice = Math.max(...normalizedVenues.map((entry) => entry.data.startPrice || 0));
-const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capacity || 0));
+const counties = dedupeCaseInsensitive(
+  normalizedVenues
+    .map((entry) => entry.data.region)
+    .filter((region) => region && region !== DEFAULT_COUNTY),
+).sort((a, b) => a.localeCompare(b, "sv-SE"));
+
+const maxPrice = normalizedVenues.reduce(
+  (max, entry) => Math.max(max, entry.data.startPrice || 0),
+  0,
+);
+const maxCapacity = normalizedVenues.reduce(
+  (max, entry) => Math.max(max, entry.data.capacity || 0),
+  0,
+);
+
+const priceSliderMax = maxPrice > 0 ? maxPrice : 100000;
+const capacitySliderMax = maxCapacity > 0 ? maxCapacity : 300;
 ---
 <BaseLayout
   title="Bröllopslokaler i Sverige"
@@ -128,11 +270,11 @@ const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capac
       <input type="search" placeholder="Sök på namn eller beskrivning" data-filter="query" />
     </label>
     <label>
-      Stad
-      <select data-filter="city">
-        <option value="">Alla städer</option>
-        {cities.map((city) => (
-          <option value={city}>{city}</option>
+      Län
+      <select data-filter="county">
+        <option value="">Alla län</option>
+        {[...counties, DEFAULT_COUNTY].map((county) => (
+          <option value={county}>{county}</option>
         ))}
       </select>
     </label>
@@ -147,12 +289,12 @@ const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capac
     </label>
     <label>
       Max startpris (kr)
-      <input type="range" min="0" max={maxPrice} step="1000" data-filter="price" value={maxPrice} />
-      <span class="range-value" data-filter-price-value>{maxPrice.toLocaleString("sv-SE")} kr</span>
+      <input type="range" min="0" max={priceSliderMax} step="1000" data-filter="price" value={priceSliderMax} />
+      <span class="range-value" data-filter-price-value>{priceSliderMax.toLocaleString("sv-SE")} kr</span>
     </label>
     <label>
       Min kapacitet
-      <input type="range" min="0" max={maxCapacity} step="10" data-filter="capacity" value="0" />
+      <input type="range" min="0" max={capacitySliderMax} step="10" data-filter="capacity" value="0" />
       <span class="range-value" data-filter-capacity-value>Alla</span>
     </label>
   </section>
@@ -169,7 +311,7 @@ const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capac
         startPrice={venue.data.startPrice || 0}
         capacity={venue.data.capacity || 0}
         image={venue.data.image}
-        style={venue.data.style}
+        style={venue.data.style && venue.data.style.toLowerCase() !== "okänd" ? venue.data.style : undefined}
         href={`/lokaler/${venue.slug}`}
       />
     ))}
@@ -180,7 +322,7 @@ const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capac
   const root = document.querySelector('[data-filter-root]');
   if (root) {
     const queryInput = root.querySelector('[data-filter="query"]');
-    const citySelect = root.querySelector('[data-filter="city"]');
+    const countySelect = root.querySelector('[data-filter="county"]');
     const styleSelect = root.querySelector('[data-filter="style"]');
     const priceRange = root.querySelector('[data-filter="price"]');
     const capacityRange = root.querySelector('[data-filter="capacity"]');
@@ -192,7 +334,7 @@ const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capac
 
     const applyFilters = () => {
       const query = queryInput?.value.toLowerCase().trim() ?? '';
-      const city = citySelect?.value ?? '';
+      const county = countySelect?.value ?? '';
       const style = styleSelect?.value ?? '';
       const maxPrice = Number(priceRange?.value ?? 0) || 0;
       const minCapacity = Number(capacityRange?.value ?? 0) || 0;
@@ -207,12 +349,12 @@ const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capac
         const capacity = Number(card.dataset.capacity ?? 0);
 
         const matchesQuery = !query || title.includes(query) || summary.includes(query);
-        const matchesCity = !city || cardCity === city || cardRegion === city;
+        const matchesCounty = !county || cardRegion === county;
         const matchesStyle = !style || cardStyle === style;
         const matchesPrice = !maxPrice || startPrice <= maxPrice;
         const matchesCapacity = !minCapacity || capacity >= minCapacity;
 
-        card.classList.toggle('hidden', !(matchesQuery && matchesCity && matchesStyle && matchesPrice && matchesCapacity));
+        card.classList.toggle('hidden', !(matchesQuery && matchesCounty && matchesStyle && matchesPrice && matchesCapacity));
       });
     };
 
@@ -226,7 +368,7 @@ const maxCapacity = Math.max(...normalizedVenues.map((entry) => entry.data.capac
       }
     };
 
-    [queryInput, citySelect, styleSelect, priceRange, capacityRange]
+    [queryInput, countySelect, styleSelect, priceRange, capacityRange]
       .filter(Boolean)
       .forEach((input) => input.addEventListener('input', () => {
         updateRangeLabels();
