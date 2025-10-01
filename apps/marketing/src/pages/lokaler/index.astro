@@ -342,15 +342,15 @@ const capacitySliderMax = maxCapacity > 0 ? maxCapacity : 300;
       cards.forEach((card) => {
         const title = card.dataset.title ?? card.querySelector('h3')?.textContent?.toLowerCase() ?? '';
         const summary = card.querySelector('.summary')?.textContent?.toLowerCase() ?? '';
-        const cardCity = card.dataset.city ?? '';
-        const cardRegion = card.dataset.region ?? '';
-        const cardStyle = card.dataset.style ?? '';
+        const cardCity = (card.dataset.city ?? '').toLowerCase();
+        const cardRegion = (card.dataset.region ?? '').toLowerCase();
+        const cardStyle = (card.dataset.style ?? '').toLowerCase();
         const startPrice = Number(card.dataset.startPrice ?? 0);
         const capacity = Number(card.dataset.capacity ?? 0);
 
         const matchesQuery = !query || title.includes(query) || summary.includes(query);
-        const matchesCounty = !county || cardRegion === county;
-        const matchesStyle = !style || cardStyle === style;
+        const matchesCounty = !county || cardRegion === county.toLowerCase();
+        const matchesStyle = !style || cardStyle === style.toLowerCase();
         const matchesPrice = !maxPrice || startPrice <= maxPrice;
         const matchesCapacity = !minCapacity || capacity >= minCapacity;
 
