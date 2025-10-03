@@ -1,0 +1,155 @@
+---
+export interface Props {
+  message?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  storageKey?: string;
+}
+
+const {
+  message = "Ska du gifta dig 2026? Bygg din bröllopshemsida här!",
+  ctaLabel = "Kom igång",
+  ctaHref = "/guides/brollopsplanering-grundkurs?ref=promo-banner",
+  storageKey = "promoBannerDismissed_v1"
+} = Astro.props satisfies Props;
+---
+<div class="promo-banner" role="region" aria-label="Kampanjmeddelande" data-banner>
+  <div class="container banner-inner">
+    <div class="banner-content">
+      <span class="banner-icon" aria-hidden="true">
+        <!-- Heart icon -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.1 21.35l-1.1-1.02C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41.81 4.5 2.09C12.09 4.81 13.76 4 15.5 4 18 4 20 6 20 8.5c0 3.78-3.4 6.86-8.9 11.83l-1 1.02z"/>
+        </svg>
+      </span>
+      <p class="banner-text">{message}</p>
+    </div>
+    <div class="banner-actions">
+      <a class="banner-cta" href={ctaHref}> {ctaLabel} </a>
+      <button class="banner-close" type="button" aria-label="Stäng meddelande" data-close>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <style>
+    .promo-banner {
+      background: linear-gradient(90deg, #b26d4a 0%, #c98b6c 50%, #b26d4a 100%);
+      color: #fff;
+      padding: 0.75rem 0;
+      font-size: 0.95rem;
+    }
+    .promo-banner .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .banner-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .banner-content {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 0;
+    }
+    .banner-icon {
+      display: inline-flex;
+      width: 20px;
+      height: 20px;
+      color: #fff;
+      opacity: 0.95;
+      flex: 0 0 auto;
+    }
+    .banner-text {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      color: #fff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .banner-cta {
+      background: #fff;
+      color: #7b4b33;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+      white-space: nowrap;
+    }
+    .banner-cta:hover,
+    .banner-cta:focus {
+      background: #f7efe9;
+      outline: none;
+    }
+    .banner-cta:active { transform: translateY(1px); }
+    .banner-close {
+      appearance: none;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.6);
+      color: #fff;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+    .banner-close:hover,
+    .banner-close:focus {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.9);
+      outline: none;
+    }
+    .banner-close:active { transform: translateY(1px); }
+
+    @media (max-width: 720px) {
+      .banner-inner { flex-wrap: wrap; }
+      .banner-actions { width: 100%; justify-content: space-between; }
+      .banner-text { white-space: normal; }
+    }
+  </style>
+
+  <script is:inline>
+    (function(){
+      const KEY = {storageKey: JSON.stringify(storageKey)};
+      function ready(fn){ if(document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+      ready(function(){
+        try {
+          const banner = document.querySelector('[data-banner]');
+          if (!banner) return;
+          if (window.localStorage.getItem(KEY)) {
+            banner.style.display = 'none';
+            return;
+          }
+          const closeBtn = banner.querySelector('[data-close]');
+          if (closeBtn) {
+            function dismiss() {
+              try { window.localStorage.setItem(KEY, '1'); } catch(e) {}
+              banner.style.display = 'none';
+            }
+            closeBtn.addEventListener('click', dismiss);
+            closeBtn.addEventListener('keydown', function(e){
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dismiss(); }
+            });
+          }
+        } catch (e) { /* no-op */ }
+      });
+    })();
+  </script>
+</div>

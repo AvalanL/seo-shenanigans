@@ -1,6 +1,7 @@
 ---
 import "~/styles/base.css";
 import SeoHead from "~/components/SeoHead.astro";
+import PromoBanner from "~/components/PromoBanner.astro";
 
 export interface Props {
   title: string;
@@ -25,6 +26,7 @@ const { title, description, url, image, publishedTime, modifiedTime, schema } = 
     schema={schema}
   />
   <body>
+    <PromoBanner />
     <header class="site-header">
       <div class="container">
         <a class="logo" href="/">Bröllopssidan.se</a>
