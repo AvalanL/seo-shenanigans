@@ -33,7 +33,7 @@ export default defineConfig({
     preview: {
       host: true,
       port: process.env.PORT || 4321,
-      allowedHosts
+      allowedHosts: [...allowedHosts, 'seo-shenanigans-production.up.railway.app']
     },
   },
 });
